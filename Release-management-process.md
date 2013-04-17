@@ -3,7 +3,7 @@
 1. Pull that code into your locally cloned repo (and run the usual steps after the pull, e.g., `source .rvmrc`, `bundle install`, etc.)
 1. Run specs via `bundle exec rake` (assuming they pass, continue), or verify specs are passing on the [CI server](http://travis-ci.org/curationexperts/sufia).
 1. Bump version number in [lib/sufia/version.rb](https://github.com/curationexperts/sufia/blob/master/lib/sufia/version.rb)
-1. Modify [release notes](https://github.com/curationexperts/sufia/blob/master/History.txt) to include changes in the version (which can usually be culled from commit messages)
+1. Modify [release notes](https://github.com/curationexperts/sufia/blob/master/History.md) to include changes in the version (which can usually be culled from commit messages)
 1. Commit and push your local changes (just textual, so another round of spec-checking should not be necessary)
 1. Build the gem: `rake build`
 1. Push the gem to rubygems.org, tag the release, push the finished tagged release to master: `rake release`
