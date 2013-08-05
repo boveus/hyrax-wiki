@@ -27,3 +27,5 @@ FactoryGirl.find_definitions
 ```
 Copy this file into spec/factories/
 https://github.com/projecthydra/sufia/blob/master/spec/factories/users.rb
+
+Now run `rake spec` again.
