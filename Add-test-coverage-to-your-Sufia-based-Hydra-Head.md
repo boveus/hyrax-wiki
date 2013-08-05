@@ -38,6 +38,13 @@ module FactoryGirl
 end
 ```
 
+within the `RSpec.configure do |config|` section, add
+
+```
+  config.include Devise::TestHelpers, :type => :controller
+  config.include EngineRoutes, :type => :controller
+``
+
 Copy this file into `spec/factories/`  
 https://github.com/projecthydra/sufia/blob/master/spec/factories/users.rb
 
