@@ -53,8 +53,15 @@ This is a relatively sophisticated test that attempts to log into your Dashboard
 ### Copy the DashboardController test file from Sufia
 
 Put this test into `spec/controllers/`   
-https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_controller_spec.rb  
-... Then add this before block after the line that reads `describe DashboardController do`: 
+https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_controller_spec.rb 
+
+### Clean up the test
+
+Delete the 2 tests that are marked `pending` in `spec/controllers/dashboard_controller.rb` (lines 10-41).  You don't want them.
+ 
+### Make your test use the routes from Sufia 
+
+The route to dashboard_controller is defined by Sufia.  By default, rspec tests will only know about the routes defined in your application.  To make the tests in this file aware of the Sufia routes, add this before block after the line that reads `describe DashboardController do`: 
 
 ```ruby
   before do
@@ -81,6 +88,3 @@ Now run `rake spec` again.
 
 If you get a Connection Refused error, it's because jetty is not running.
 
-### Clean up the test
-
-Delete the 2 tests that are marked `pending` in `spec/controllers/dashboard_controller.rb` (lines 10-41).  You don't want them.
