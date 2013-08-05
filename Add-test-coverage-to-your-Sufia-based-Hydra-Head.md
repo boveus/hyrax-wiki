@@ -80,3 +80,7 @@ rake jetty:start
 Now run `rake spec` again.
 
 Make sure you have jetty running.  
+
+### Clean up the test
+
+Delete the 2 tests that are marked `pending` in `spec/controllers/dashboard_controller.rb` (lines 10-41).  You don't want them.
