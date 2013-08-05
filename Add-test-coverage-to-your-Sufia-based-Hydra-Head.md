@@ -1,12 +1,15 @@
 After Installing Sufia..
 
-Add rspec-rails and factory-girl to your Gemfile and run bundle install
+Add rspec-rails and factory-girl to your Gemfile 
 ```
   group :development, :test do
     gem "rspec-rails"
     gem "factory_girl_rails"
   end
 ```
+
+Run `bundle install`
+
 Run the rspec generator   
 'rails g rspec'
 
