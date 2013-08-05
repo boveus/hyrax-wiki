@@ -17,17 +17,9 @@ Run `rake spec`
 
 … everything should pass -- 0 tests, 0 failures
 
-Put this test into `spec/controllers/`   
-https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_controller_spec.rb  
-... Then add this before block after the line that reads `describe DashboardController do`: 
+# Add FactoryGirl and Capybara support to your rspec environment
 
-```ruby
-  before do
-    @routes = Sufia::Engine.routes
-  end
-```
-
-In order to run this test, you need to tell rspec to use FactoryGirl and you need to add a convenient find_or_create method to the FactoryGirl module.
+In order to run this type of test, you need to tell rspec to use FactoryGirl and you need to add a convenient find_or_create method to the FactoryGirl module.
 
 Add these lines to your spec/spec_helper.rb
 
@@ -45,7 +37,20 @@ module FactoryGirl
   end
 end
 ```
+
 Copy this file into `spec/factories/`  
 https://github.com/projecthydra/sufia/blob/master/spec/factories/users.rb
+
+# Run your test
+
+Put this test into `spec/controllers/`   
+https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_controller_spec.rb  
+... Then add this before block after the line that reads `describe DashboardController do`: 
+
+```ruby
+  before do
+    @routes = Sufia::Engine.routes
+  end
+```
 
 Now run `rake spec` again.
