@@ -79,7 +79,7 @@ rake jetty:start
 
 Now run `rake spec` again.
 
-Make sure you have jetty running.  
+If you get a Connection Refused error, it's because jetty is not running.
 
 ### Clean up the test
 
