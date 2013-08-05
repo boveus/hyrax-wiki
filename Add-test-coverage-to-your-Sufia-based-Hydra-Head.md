@@ -17,8 +17,7 @@ Run `rake spec`
 … everything should pass -- 0 tests, 0 failures
 
 Put this test into `spec/controllers/` 
-
-https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_controller_spec.rb
+https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_controller_spec.rb  
 ... Then add this before block after the line that reads `describe DashboardController do`: 
 
 ```ruby
