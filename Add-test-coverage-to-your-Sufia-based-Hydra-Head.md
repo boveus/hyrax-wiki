@@ -26,7 +26,7 @@ https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_con
   end
 ```
 
-In order to run this test, you need to:
+In order to run this test, you need to tell rspec to use FactoryGirl and you need to add a convenient find_or_create method to the FactoryGirl module.
 
 Add these lines to your spec/spec_helper.rb
 
