@@ -58,7 +58,7 @@ https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_con
   end
 ```
 
-## Make sure jetty is configured and running
+### Make sure jetty is configured and running
 
 If you have never done it, you might need to push your solr_config into jetty
 ```
