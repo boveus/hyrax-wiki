@@ -4,6 +4,7 @@ Add rspec-rails and factory-girl to your Gemfile
 ```ruby
   group :development, :test do
     gem "rspec-rails"
+    gem "capybara"
     gem "factory_girl_rails"
   end
 ```
@@ -31,6 +32,9 @@ In order to run this test, you need to tell rspec to use FactoryGirl and you nee
 Add these lines to your spec/spec_helper.rb
 
 ```ruby
+require 'capybara/rspec'
+require 'capybara/rails'
+
 FactoryGirl.definition_file_paths = [File.expand_path("../factories", __FILE__)]
 FactoryGirl.find_definitions
 
