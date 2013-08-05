@@ -17,7 +17,9 @@ Run `rake spec`
 
 … everything should pass -- 0 tests, 0 failures
 
-# Add FactoryGirl and Capybara support to your rspec environment
+# Add FactoryGirl, Capybara and Devise support to your rspec environment
+
+Note: This section is closely based on the [spec_helper.rb](https://github.com/projecthydra/sufia/blob/master/spec/spec_helper.rb) in sufia.  You can refer to that file to see how it all fits together.
 
 In order to run this type of test, you need to tell rspec to use FactoryGirl and you need to add a convenient find_or_create method to the FactoryGirl module.
 
