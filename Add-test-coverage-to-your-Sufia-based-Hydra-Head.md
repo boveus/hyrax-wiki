@@ -59,3 +59,15 @@ https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_con
 ```
 
 Now run `rake spec` again.
+
+Make sure you have jetty running.  
+
+```
+rake jetty:start
+```
+If you have never done it, you might need to push your solr_config into jetty
+```
+rake jetty:start
+rake jetty:config
+rake jetty:stop
+```
