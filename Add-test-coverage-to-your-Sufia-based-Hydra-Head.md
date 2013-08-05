@@ -29,9 +29,6 @@ Add these lines to your spec/spec_helper.rb
 require 'capybara/rspec'
 require 'capybara/rails'
 
-FactoryGirl.definition_file_paths = [File.expand_path("../factories", __FILE__)]
-FactoryGirl.find_definitions
-
 module FactoryGirl
   def self.find_or_create(handle, by=:email)
     tmpl = FactoryGirl.build(handle)
