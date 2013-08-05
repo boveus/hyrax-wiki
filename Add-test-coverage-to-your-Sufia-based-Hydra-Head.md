@@ -1,7 +1,7 @@
 After Installing Sufia..
 
 Add rspec-rails and factory-girl to your Gemfile 
-```
+```ruby
   group :development, :test do
     gem "rspec-rails"
     gem "factory_girl_rails"
@@ -21,7 +21,7 @@ Put this test into spec/controllers/
 https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_controller_spec.rb
 ... Then add this before block after the line that reads `describe DashboardController do`: 
 
-```
+```ruby
   before do
     @routes = Sufia::Engine.routes
   end
@@ -31,7 +31,7 @@ In order to run this test, you need to:
 
 Add these lines to your spec/spec_helper.rb
 
-```
+```ruby
 FactoryGirl.definition_file_paths = [File.expand_path("../factories", __FILE__)]
 FactoryGirl.find_definitions
 
