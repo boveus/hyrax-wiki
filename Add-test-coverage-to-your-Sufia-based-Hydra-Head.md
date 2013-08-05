@@ -46,7 +46,11 @@ within the `RSpec.configure do |config|` section, add
 Copy this file into `spec/factories/`  
 https://github.com/projecthydra/sufia/blob/master/spec/factories/users.rb
 
-# Run your test
+# Add your first test and make it pass
+
+This is a relatively sophisticated test that attempts to log into your DashboardController and send a couple requests to it.
+
+### Copy the DashboardController test file from Sufia
 
 Put this test into `spec/controllers/`   
 https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_controller_spec.rb  
