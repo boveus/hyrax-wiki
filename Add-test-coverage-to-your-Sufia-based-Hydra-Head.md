@@ -10,7 +10,7 @@ Add rspec-rails and factory-girl to your Gemfile
 
 Run `bundle install`
 
-Run the rspec generator `rails g rspec`
+Run the rspec generator `rails g rspec:install`
 
 Run `rake spec`
 
