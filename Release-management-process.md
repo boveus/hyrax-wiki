@@ -6,5 +6,5 @@
 1. Commit and push your local changes (which are only textual, so another round of spec-checking should not be necessary -- if you include "[ci skip]" in your commit message, tests will not run in the CI environment).
 1. Release the gem to rubygems.org: `rake all:release`
   * If this is your first time pushing to rubygems.org, you will be prompted for your rubygems.org credentials, in which case do the following: `gem push; rake all:release`
-1. Create [release notes in GitHub](https://github.com/projecthydra/sufia/releases). In the new release, include at least a block with upgrade notes and a block showing the changelog (copy from earlier step). (See [an example](https://github.com/projecthydra/sufia/releases/tag/v3.6.1).)
+1. Create [release notes in GitHub](https://github.com/projecthydra/sufia/releases/new). In the new release, include at least a block with upgrade notes and a block showing the changelog (copy from earlier step). (See [an example](https://github.com/projecthydra/sufia/releases/tag/v3.6.1).)
 1. Send a release message to [hydra-tech](mailto:hydra-tech@googlegroups.com) and [hydra-releases](mailto:hydra-releases@googlegroups.com) describing the changes (which you can copy from the GitHub release).
