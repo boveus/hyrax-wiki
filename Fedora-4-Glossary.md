@@ -6,4 +6,4 @@ pid used to be in the form "sufia:123" and it is now a GUID like "74727f87-1086-
 
 datastream_id is now path
 --------------------------
-Datastream_id used to be a string like "content" or "rels-ext" 
+Datastream_id used to be a string like "content" or "thumbnail" 
