@@ -13,7 +13,7 @@ For more info about setting up Google Analytics, see the
 
 * Clear (or update) your existing cache
 
-  This step is only necessary if you already have the file_view_stats and file_download_stats tables in your database (from the Sufia 4.2.0 release).
+  This step is only necessary if you already have the <code>file_view_stats</code> and <code>file_download_stats</code> tables in your database (from the Sufia 4.2.0 release).
 
   The new migration added by the cached_stats generator will add a user_id column to the file_view_stats and file_download_stats tables.  If you have existing data in those tables, those rows will be missing the user_id, which means that data won't be available for calculating the total number of file views and downloads for a user.
 
@@ -33,7 +33,7 @@ For more info about setting up Google Analytics, see the
 
 * Edit <code>config/analytics.yml</code> as described in the {README}[https://github.com/projecthydra/sufia/blob/master/README.md#analytics]
 
-* Run the rake task to build the cache in the user_stats table, and schedule it as a nightly background job
+* Run the rake task to build the cache in the <code>user_stats</code> table, and schedule it as a nightly background job
 
   * <code>$ rake sufia:stats:user_stats</code>
   * Schedule a nightly job to run that rake task so that user stats will update once a day
