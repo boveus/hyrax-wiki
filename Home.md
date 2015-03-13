@@ -1,8 +1,7 @@
-Welcome to the sufia wiki!
+Welcome to the Sufia wiki!
 
-# Fedora 4
-See the [Fedora 4 Glossary](https://github.com/projecthydra/active_fedora/wiki/Fedora-4-Glossary)
+# Documentation
 
-# Release Management
-
-[[Release management process]]
+ * [[Customizing Metadata]]
+ * [Fedora 4 Glossary](https://github.com/projecthydra/active_fedora/wiki/Fedora-4-Glossary)
+ * [[Release management process]]
