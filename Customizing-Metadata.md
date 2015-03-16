@@ -46,25 +46,31 @@ end
 ```
 
 ### Set the controller to use our presenter
+
+Now we override Sufia's GenericFilesController so that it uses the MyGenericFilePresenter class that we defined rather than the default presenter in Sufia.
+
 ```ruby
 # app/controllers/generic_files_controller.rb
 class GenericFilesController < ApplicationController
   include Sufia::Controller
   include Sufia::FilesControllerBehavior
+
   self.presenter_class = MyGenericFilePresenter
 end
 ```
 
-Now the fields show up in the show view, but we also want them on our edit form too. Let's create an edit form that has our field
+The fields show up in the show view of our app, but we also want them on our edit form too. Let's create an edit form that has our new field.
 
 ### Create forms
-This form will extend the presenter we already created.
+
+Sufia also provides default form classes to control what properties of a model are editable in your app, and in what order they appear. Form classes extend presenter classes to include permissions and required fields, so we can base this work on what we already did with `MyGenericFilePresenter`. We subclass our own custom presenter to pick up the changes we already made there.
 
 ```ruby
 # app/forms/my_file_edit_form.rb
 class MyFileEditForm < MyGenericFilePresenter
   include HydraEditor::Form
   include HydraEditor::Form::Permissions
+
   self.required_fields = [:title, :creator, :tag, :rights]
 end
 ```
