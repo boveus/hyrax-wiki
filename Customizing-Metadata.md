@@ -7,9 +7,9 @@ Table of Contents
     * [Set the controller to use our presenter](#set-the-controller-to-use-our-presenter)
   * [Create edit forms](#create-edit-forms)
     * [Set the controllers to use our forms](#set-the-controllers-to-use-our-forms)
+  * [Labels and help text](#labels-and-help-text)
   * [Required/non-required fields](#requirednon-required-fields)
   * [Field repeatability](#field-repeatability)
-  * [Labels and help text](#labels-and-help-text)
 
 # Override the GenericFile model
 
@@ -136,14 +136,6 @@ class BatchController < ApplicationController
 end
 ```
 
-# Required/non-required fields
-
-`TODO`
-
-# Field repeatability
-
-`TODO`
-
 # Labels and help text
 
 By default the label for the field in the form is taken from the property label, with the initial letter capitalised. Here is an example of customising it, and the associated help text:
@@ -159,4 +151,12 @@ en:
       generic_file:
         alternative: "An alternative name for a file."
 ```
+
+# Required/non-required fields
+
+`TODO`
+
+# Field repeatability
+
+`TODO`
 
