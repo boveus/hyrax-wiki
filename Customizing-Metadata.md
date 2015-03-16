@@ -40,8 +40,8 @@ Sufia provides default presenter classes to control what properties of a model a
 # app/presenters/my_generic_file_presenter.rb
 class MyGenericFilePresenter < Sufia::GenericFilePresenter
   self.terms = [:resource_type, :title, :creator, :contributor, :description,
-                       :tag, :rights, :publisher, :date_created, :subject, :language,
-                       :identifier, :based_near, :related_url, :alternative]
+                :tag, :rights, :publisher, :date_created, :subject, :language,
+                :identifier, :based_near, :related_url, :alternative]
 end
 ```
 
@@ -75,39 +75,50 @@ class MyFileEditForm < MyGenericFilePresenter
 end
 ```
 
-Create a batch form
+On initial upload, Sufia allows users to edit metadata in bulk using a batch edit form, so we need to create a second form to be used by the `BatchController`.
+
 ```ruby
 # app/forms/my_batch_edit_form.rb
 class MyBatchEditForm < MyFileEditForm
 end
 ```
 
-### Set the controller to use our form
+### Set the controllers to use our forms
+
+Now we override Sufia's GenericFilesController and BatchController so that they use our custom edit form classes rather than the defaults in Sufia.
+
 Add the following line to `app/controllers/generic_files_controller.rb`
+
 ```ruby
   self.edit_form_class = MyFileEditForm
 ```
 
 The whole file should look like this:
+
 ```ruby
+# app/controllers/generic_files_controller.rb
 class GenericFilesController < ApplicationController
   include Sufia::Controller
   include Sufia::FilesControllerBehavior
+
   self.presenter_class = MyGenericFilePresenter
   self.edit_form_class = MyFileEditForm
 end
 ```
 
-And add the following line to app/controllers/batch_controller.rb
+And add the following line to `app/controllers/batch_controller.rb`
+
 ```ruby
-  self. edit_form_class = MyFileEditForm
+  self.edit_form_class = MyBatchEditForm
 ```
 
 The whole file should look like this:
+
 ```ruby
 # app/controllers/batch_controller.rb
 class BatchController < ApplicationController
   include Sufia::BatchControllerBehavior
+
   self.edit_form_class = MyBatchEditForm
 end
 ```
@@ -122,7 +133,7 @@ end
 
 # Labels and help text
 
-By default the label for the field in the form is taken from the property label, with the initial letter capitalised.  Here is an example of customising it, and the associated help text:
+By default the label for the field in the form is taken from the property label, with the initial letter capitalised. Here is an example of customising it, and the associated help text:
 
 ```ruby
 # config/locales/sufia.en.yml
@@ -136,4 +147,3 @@ en:
         alternative: "An alternative name for a file."
 ```
 
-`TODO` (I assume there is a different way of handling the label in the batch form?)
