@@ -105,7 +105,7 @@ end
 
 # Labels and help text
 
-By default the label for the fielod in the form is taken from the property label, with the initial letetr capitalised.  Here is an example of customising it, and the associated help text:
+By default the label for the field in the form is taken from the property label, with the initial letetr capitalised.  Here is an example of customising it, and the associated help text:
 
 ```ruby
 # config/locales/sufia.en.yml
