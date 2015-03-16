@@ -1,5 +1,7 @@
-### Create the GenericFile model
-the GenericFile class is typically provided by Sufia, but we want to update the model, so we define it in our app instead. Since Rails finds the class in our local application, it won't load it from Sufia.
+### Override the GenericFile model
+
+The GenericFile class is provided by Sufia, but we want to update the model with our own metadata so we define it in our app to override what Sufia provides. Since Rails finds the class in our local application, it won't load it from Sufia.
+
 ```ruby
 # app/models/generic_file.rb
 class GenericFile < ActiveFedora::Base
