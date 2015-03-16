@@ -1,4 +1,4 @@
-### Override the GenericFile model
+# Override the GenericFile model
 
 The GenericFile class is provided by Sufia, but we want to update the model with our own metadata so we define it in our app to override what Sufia provides. Since Rails finds the class in our local application, it won't load it from Sufia.
 
@@ -9,7 +9,7 @@ class GenericFile < ActiveFedora::Base
 end
 ```
 
-### Add the property
+## Add the property
 
 Add the property declaration into the `GenericFile` class (and pass a block to make sure the property is indexed in Solr):
 
@@ -32,7 +32,7 @@ end
 ```
 
 
-### Extend the presenter
+# Extend the presenter
 
 Sufia provides default presenter classes to control what properties of a model are display in your app, and in what order they appear. We create a subclass of Sufia's presenter adding `alternative` to the list of terms.
 
@@ -45,7 +45,7 @@ class MyGenericFilePresenter < Sufia::GenericFilePresenter
 end
 ```
 
-### Set the controller to use our presenter
+## Set the controller to use our presenter
 
 Now we override Sufia's GenericFilesController so that it uses the MyGenericFilePresenter class that we defined rather than the default presenter in Sufia.
 
@@ -61,7 +61,7 @@ end
 
 The fields show up in the show view of our app, but we also want them on our edit form too. Let's create an edit form that has our new field.
 
-### Create forms
+# Create edit forms
 
 Sufia also provides default form classes to control what properties of a model are editable in your app, and in what order they appear. Form classes extend presenter classes to include permissions and required fields, so we can base this work on what we already did with `MyGenericFilePresenter`. We subclass our own custom presenter to pick up the changes we already made there.
 
@@ -83,7 +83,7 @@ class MyBatchEditForm < MyFileEditForm
 end
 ```
 
-### Set the controllers to use our forms
+## Set the controllers to use our forms
 
 Now we override Sufia's GenericFilesController and BatchController so that they use our custom edit form classes rather than the defaults in Sufia.
 
