@@ -33,7 +33,9 @@ end
 
 
 ### Extend the presenter
-We create a subclass of the presenter adding `alternative` to the list of terms
+
+Sufia provides default presenter classes to control what properties of a model are display in your app, and in what order they appear. We create a subclass of Sufia's presenter adding `alternative` to the list of terms.
+
 ```ruby
 # app/presenters/my_generic_file_presenter.rb
 class MyGenericFilePresenter < Sufia::GenericFilePresenter
