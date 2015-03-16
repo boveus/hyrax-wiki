@@ -103,10 +103,20 @@ end
 
 `TODO`
 
-# Labels
+# Labels and help text
 
-`TODO`
+By default the label for the fielod in the form is taken from the property label, with the initial letetr capitalised.  Here is an example of customising it, and the associated help text:
 
-# Help text
+```ruby
+# config/locales/sufia.en.yml
+en:
+  simple_form:
+    labels:
+      generic_file:
+        alternative: "Alternative Title"
+    metadata_help:
+      generic_file:
+        alternative: "An alternative name for a file."
+```
 
-`TODO`
+`TODO` (I assume there is a different way of handling the label in the batch form?)
