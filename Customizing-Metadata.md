@@ -24,7 +24,10 @@ When you're done the file should look like this:
 # app/models/generic_file.rb
 class GenericFile < ActiveFedora::Base
   include Sufia::GenericFile
-  property :alternative, predicate: ::RDF::DC.alternative
+
+  property :alternative, predicate: ::RDF::DC.alternative do |index|
+    index.as :stored_searchable, :facetable
+  end
 end
 ```
 
