@@ -10,9 +10,13 @@ end
 ```
 
 ### Add the property
-Add the property declaration into the `GenericFile` class:
+
+Add the property declaration into the `GenericFile` class (and pass a block to make sure the property is indexed in Solr):
+
 ```ruby
-  property :alternative, predicate: ::RDF::DC.alternative
+  property :alternative, predicate: ::RDF::DC.alternative do |index|
+    index.as :stored_searchable, :facetable
+  end
 ```
 
 When you're done the file should look like this:
