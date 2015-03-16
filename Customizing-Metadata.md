@@ -1,3 +1,16 @@
+Table of Contents
+=================
+
+  * [Override the GenericFile model](#override-the-genericfile-model)
+    * [Add the property](#add-the-property)
+  * [Extend the presenter](#extend-the-presenter)
+    * [Set the controller to use our presenter](#set-the-controller-to-use-our-presenter)
+  * [Create edit forms](#create-edit-forms)
+    * [Set the controllers to use our forms](#set-the-controllers-to-use-our-forms)
+  * [Required/non-required fields](#requirednon-required-fields)
+  * [Field repeatability](#field-repeatability)
+  * [Labels and help text](#labels-and-help-text)
+
 # Override the GenericFile model
 
 The GenericFile class is provided by Sufia, but we want to update the model with our own metadata so we define it in our app to override what Sufia provides. Since Rails finds the class in our local application, it won't load it from Sufia.
