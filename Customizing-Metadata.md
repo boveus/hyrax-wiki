@@ -3,6 +3,7 @@ Table of Contents
 
   * [Override the GenericFile model](#override-the-genericfile-model)
     * [Add the property](#add-the-property)
+    * [Try the property at the Rails console](#try-the-property-at-the-rails-console)
   * [Extend the presenter](#extend-the-presenter)
     * [Set the controller to use our presenter](#set-the-controller-to-use-our-presenter)
   * [Create edit forms](#create-edit-forms)
@@ -44,6 +45,29 @@ class GenericFile < ActiveFedora::Base
 end
 ```
 
+## Try the property at the Rails console
+
+You can try using the new property at the rails console like this:
+```
+$ **rails c**
+Loading development environment (Rails 4.1.8)
+irb(main):001:0> **f = GenericFile.new(id: 'test-1')**
+  LocalAuthority Load (1.2ms)  SELECT  "local_authorities".* FROM "local_authorities"  WHERE "local_authorities"."name" = 'lc_subjects' LIMIT 1
+  LocalAuthority Load (1.4ms)  SELECT  "local_authorities".* FROM "local_authorities"  WHERE "local_authorities"."name" = 'lexvo_languages' LIMIT 1
+  LocalAuthority Load (1.3ms)  SELECT  "local_authorities".* FROM "local_authorities"  WHERE "local_authorities"."name" = 'lc_genres' LIMIT 1
+ActiveFedora: loading fedora config from /opt/sufia/config/fedora.yml
+ActiveFedora: loading solr config from /opt/sufia/config/solr.yml
+Attempted to init base path `dev`, but it already exists
+=> #<GenericFile id: "test-1", mime_type: "", format_label: [""], file_size: [""], last_modified: [""], filename: [""], original_checksum: [""], rights_basis: [], copyright_basis: [], copyright_note: [], well_formed: [], valid: [""], status_message: [], file_title: [""], file_author: [""], page_count: [""], file_language: [], word_count: [], character_count: [], paragraph_count: [], line_count: [], table_count: [], graphics_count: [], byte_order: [], compression: [], color_space: [], profile_name: [], profile_version: [], orientation: [], color_map: [], image_producer: [], capture_device: [], scanning_software: [], exif_version: [], gps_timestamp: [], latitude: [], longitude: [], character_set: [], markup_basis: [], markup_language: [], bit_depth: [], channels: [], data_format: [], offset: [], frame_rate: [], label: nil, depositor: nil, relative_path: nil, import_url: nil, part_of: [], resource_type: [], title: [], creator: [], contributor: [], description: [], tag: [], rights: [], publisher: [], date_created: [], date_uploaded: nil, date_modified: nil, subject: [], language: [], identifier: [], based_near: [], related_url: [], bibliographic_citation: [], source: [], proxy_depositor: nil, on_behalf_of: nil, alternative: [], batch_id: nil>
+irb(main):002:0> **f.alternative = ["An alternative title"]**
+=> ["An alternative title"]
+irb(main):003:0> **puts f.resource.dump(:ttl)**
+
+<http://127.0.0.1:8983/fedora/rest/dev/te/st/-1/test-1> <http://purl.org/dc/terms/alternative> "An alternative title";
+   <info:fedora/fedora-system:def/model#hasModel> "GenericFile" .
+=> nil
+irb(main):004:0>
+```
 
 # Extend the presenter
 
@@ -159,4 +183,3 @@ en:
 # Field repeatability
 
 `TODO`
-
