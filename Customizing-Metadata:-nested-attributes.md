@@ -1,5 +1,9 @@
 This page parallels the guide to [Customizing Metadata](https://github.com/projecthydra/sufia/wiki/Customizing-Metadata) but attempts to deal with complex RDF metadata, where a nested sub-form will appear when editing.
 
+> This page is probably going about things completely the wrong way. If anyone can correct it and fill in the
+> gaps to produce a working demonstration which can be persisted in the repository and reloaded that would be
+> wonderful.
+
 Table of Contents
 =================
 
