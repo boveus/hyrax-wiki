@@ -8,7 +8,7 @@ rake jetty:download
 rake jetty:start
 
 
-## Upgrading your Sufia 5.x application to use Sufia 6
+## Upgrading your app
 
 * Update your Gemfile to point to the new Sufia 
 * Update your Gemfile to point to rails 4.2.1 (Is this needed?)
