@@ -31,5 +31,7 @@ rake jetty:start
     base_path: /dev
 ```
 
+* Do we need to add `gem 'rsolr', '~> 1.0.6'` to the Gemfile (?)
+
 ## What's next
 [Insert here link to steps to migrate data from Fedora 3 to Fedora 4]
