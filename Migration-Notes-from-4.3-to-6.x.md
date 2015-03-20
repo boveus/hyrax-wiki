@@ -15,9 +15,11 @@ rake jetty:start
 * Run `bundle install`
 * bundle update rails (Is this needed?)
 
-* The old `id_namespace` settings is now called `redis_namespace`. Update your `config/initializers/resque_config.rb` to reflect this change. 
+* Update your `config/initializers/resque_config.rb` to use the new `redis_namespace` setting. This setting replaces the old `id_namespace`. 
 
-```Resque.redis.namespace = "#{Sufia.config.redis_namespace}:#{Rails.env}"```
+```
+  Resque.redis.namespace = "#{Sufia.config.redis_namespace}:#{Rails.env}"
+```
 
 * Update `config/fedora.yml` to include the proper URL for Fedora 4 (don't forget the `/rest` at the end) and add a new setting `base_path` A typical development section would look as follows:
 
