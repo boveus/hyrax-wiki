@@ -1,20 +1,11 @@
 ## Prerequisites
 Make sure you have a running version of Fedora 4. In these instructions we assume that Fedora 4 is running at http://127.0.0.1:8983/fedora/rest
 
-What Jetty should we suggest?
-rake jetty:stop
-rake jetty:clean
-rake jetty:download
-rake jetty:start
-
-
 ## Upgrading your app
-
 * Update your Gemfile to point to the new Sufia 
 * Update your Gemfile to point to rails 4.2.1 (Is this needed?)
 * Run `bundle install`
 * bundle update rails (Is this needed?)
-
 * Update your `config/initializers/resque_config.rb` to use the new `redis_namespace` setting. This setting replaces the old `id_namespace`. 
 
 ```
@@ -35,3 +26,10 @@ rake jetty:start
 
 ## What's next
 [Insert here link to steps to migrate data from Fedora 3 to Fedora 4]
+
+## Jetty. 
+Should we add steps to start Fedora 4? 
+rake jetty:stop
+rake jetty:clean
+rake jetty:download
+rake jetty:start
