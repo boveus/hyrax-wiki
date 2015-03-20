@@ -5,9 +5,7 @@ Make sure you have a running version of Fedora 4. In these instructions we assum
 * Update your Gemfile to point to the new Sufia 
 `gem 'sufia', ' ~> 6.0.0'`
 
-* Update your Gemfile to point to rails 4.2.1 (Is this needed?)
 * Run `bundle install`
-* bundle update rails (Is this needed?)
 
 * Update your `config/initializers/resque_config.rb` to use the new `redis_namespace` setting. This setting replaces the old `id_namespace`. 
 
@@ -23,14 +21,25 @@ development:
   base_path: /dev
 ```
 
+* Update your `app/controllers/catalog_controller.rb` as follows: 
+
+1. Replace line `include Blacklight::Catalog` with `include Hydra::Catalog`
+1. Insert line `config.search_builder_class = Hydra::SearchBuilder` right after `configure_blacklight do |config|`
+
+The basic structure of your controller would look like this: 
+```
+class CatalogController < ApplicationController
+  include Hydra::Catalog
+  [...]
+  configure_blacklight do |config|
+    config.search_builder_class = Hydra::SearchBuilder
+    [...]
+  end
+end
+```
+
 * Do we need to add `gem 'rsolr', '~> 1.0.6'` to the Gemfile (?)
 
 ## What's next
 [Insert here link to steps to migrate data from Fedora 3 to Fedora 4]
 
-## Jetty. 
-Should we add steps to start Fedora 4? 
-rake jetty:stop
-rake jetty:clean
-rake jetty:download
-rake jetty:start
