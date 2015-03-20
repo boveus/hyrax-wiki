@@ -32,7 +32,7 @@ class CatalogController < ApplicationController
   include Hydra::Catalog
   [...]
   configure_blacklight do |config|
-    config.search_builder_class = Hydra::SearchBuilder
+    config.search_builder_class = Sufia::SearchBuilder
     [...]
   end
 end
