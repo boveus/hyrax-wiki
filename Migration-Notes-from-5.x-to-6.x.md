@@ -16,11 +16,11 @@ Make sure you have a running version of Fedora 4. In these instructions we assum
 * Update `config/fedora.yml` to include the proper URL for Fedora 4 (don't forget the `/rest` at the end) and add a new setting `base_path` A typical development section would look as follows:
 
 ```
-  development:
-    user: fedoraAdmin
-    password: fedoraAdmin
-    url: http://127.0.0.1:8983/fedora/rest
-    base_path: /dev
+development:
+  user: fedoraAdmin
+  password: fedoraAdmin
+  url: http://127.0.0.1:8983/fedora/rest
+  base_path: /dev
 ```
 
 * Do we need to add `gem 'rsolr', '~> 1.0.6'` to the Gemfile (?)
