@@ -3,14 +3,15 @@ Make sure you have a running version of Fedora 4. In these instructions we assum
 
 ## Upgrading your app
 * Update your Gemfile to point to the new Sufia 
+`gem 'sufia', ' ~> 6.0.0'`
+
 * Update your Gemfile to point to rails 4.2.1 (Is this needed?)
 * Run `bundle install`
 * bundle update rails (Is this needed?)
+
 * Update your `config/initializers/resque_config.rb` to use the new `redis_namespace` setting. This setting replaces the old `id_namespace`. 
 
-```
-  Resque.redis.namespace = "#{Sufia.config.redis_namespace}:#{Rails.env}"
-```
+```Resque.redis.namespace = "#{Sufia.config.redis_namespace}:#{Rails.env}"```
 
 * Update `config/fedora.yml` to include the proper URL for Fedora 4 (don't forget the `/rest` at the end) and add a new setting `base_path` A typical development section would look as follows:
 
