@@ -23,13 +23,13 @@ rake jetty:clean
 
 * The old `id_namespace` settings is now called `redis_namespace`. Update your `config/initializers/resque_config.rb` to reflect this change. 
 
-  Resque.redis.namespace = "#{Sufia.config.redis_namespace}:#{Rails.env}"
+`Resque.redis.namespace = "#{Sufia.config.redis_namespace}:#{Rails.env}"`
 
-* Update `config/fedora.yml` to include the proper URL for Fedora 4 (don't forget the `/rest` at the end) and add a new setting `base_path`
+* Update `config/fedora.yml` to include the proper URL for Fedora 4 (don't forget the `/rest` at the end) and add a new setting `base_path` A typical development section would look as follows:
 
-    development:
-      user: fedoraAdmin
-      password: fedoraAdmin
-      url: http://127.0.0.1:8983/fedora/rest
-      base_path: /dev
-
+`    development:
+        user: fedoraAdmin
+        password: fedoraAdmin
+        url: http://127.0.0.1:8983/fedora/rest
+        base_path: /dev
+`
