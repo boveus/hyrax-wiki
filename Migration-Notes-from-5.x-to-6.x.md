@@ -52,15 +52,16 @@ end
 ```
 
 ## Migrating to Fedora 4
-1. Add the fedora-migrate gem to your Gemfile and update: `gem 'fedora-migrate'`
-2. Create a `config/fedora3.yml` file which should look exactly like your `config/fedora.yml` from your previous Sufia 5 application
+Note: for testing, you can use the [migrate](https://github.com/projecthydra/hydra-jetty/tree/migrate) branch of the hydra-jetty application, which contains both Fedora 3.8 and Fedora 4.1.
+* Add the fedora-migrate gem to your Gemfile and update: `gem 'fedora-migrate'`
+* Create a `config/fedora3.yml` file which should look exactly like your `config/fedora.yml` from your previous Sufia 5 application
 ``` ruby
 development:
   user: fedoraAdmin
   password: fedoraAdmin
   url: http://127.0.0.1:8983/fedora3
 ```
-3. Create a migration rake task similar to
+* Create a migration rake task similar to
 ``` ruby
 require 'fedora-migrate'
 
@@ -81,7 +82,7 @@ task migrate: :environment do
   Rake::Task["sufia:migrate:audit_logs"].invoke
 end
 ```
-4. Run `rake migrate`
-5. Examine `report.json` for the results
+* Run `rake migrate`
+* Examine `report.json` for the results
 6. Run `rake fedora:migrate:reset` to erase all the Fedora 4 data and try again
 
