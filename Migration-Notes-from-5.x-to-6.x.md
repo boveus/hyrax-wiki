@@ -29,6 +29,7 @@ Update your `app/controllers/catalog_controller.rb` as follows:
 
 1. Remove require statements: any blacklight, parslet, parsing_nesting
 1. Remove include statements: Hydra::Controller::ControllerBehavior, BlacklightAdvancedSearch::ParseBasicQ
+1. Rename `config/solr.yml` to `config/blacklight.yml`
 1. Remove any field name prefixes such as `desc_metadata__`
 1. Replace line `include Blacklight::Catalog` with `include Hydra::Catalog`
 1. Insert line `config.search_builder_class = Sufia::SearchBuilder` right after `configure_blacklight do |config|`
@@ -36,7 +37,7 @@ Update your `app/controllers/catalog_controller.rb` as follows:
 1. Add `:add_advanced_parse_q_to_solr` to CatalogController.search_params_logic
 
 The basic structure of your controller would look like this: 
-```
+``` ruby
 class CatalogController < ApplicationController
   include Hydra::Catalog
   include Sufia::Catalog
@@ -50,6 +51,32 @@ class CatalogController < ApplicationController
 end
 ```
 
-## What's next
-[Insert here link to steps to migrate data from Fedora 3 to Fedora 4]
+## Migrating to Fedora 4
+1. Add the fedora-migrate gem to your Gemfile and update
+    gem 'fedora-migrate'
+1. Create a `config/fedora3.yml` file which should look exactly like your `config/fedora.yml` from your previous Sufia 5 application
+1. Create a migration rake task similar to
+``` ruby
+require 'fedora-migrate'
+
+module FedoraMigrate::Hooks
+  # Apply depositor metadata from Sufia's properties datastream under Fedora 3
+  def before_object_migration
+    xml = Nokogiri::XML(source.datastreams["properties"].content)
+    target.apply_depositor_metadata xml.xpath("//depositor").text
+  end
+end
+
+desc "Migrates all objects in a Sufia-based application"
+task migrate: :environment do
+  migration_options = {convert: "descMetadata", application_creates_versions: true}
+  migrator = FedoraMigrate.migrate_repository(namespace: "sufia", options: migration_options )
+  migrator.report.save
+  Rake::Task["sufia:migrate:proxy_deposits"].invoke
+  Rake::Task["sufia:migrate:audit_logs"].invoke
+end
+```
+1. Run `rake migrate`
+1. Examine `report.json` for the results
+1. Run `rake fedora:migrate:reset` to erase all the Fedora 4 data and try again
 
