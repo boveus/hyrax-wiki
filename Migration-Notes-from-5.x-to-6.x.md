@@ -23,13 +23,14 @@ development:
   base_path: /dev
 ```
 
+* Rename `config/solr.yml` to `config/blacklight.yml`
+
 ### Changes to CatalogController
 
 Update your `app/controllers/catalog_controller.rb` as follows: 
 
 1. Remove require statements: any blacklight, parslet, parsing_nesting
 1. Remove include statements: Hydra::Controller::ControllerBehavior, BlacklightAdvancedSearch::ParseBasicQ
-1. Rename `config/solr.yml` to `config/blacklight.yml`
 1. Remove any field name prefixes such as `desc_metadata__`
 1. Replace line `include Blacklight::Catalog` with `include Hydra::Catalog`
 1. Insert line `config.search_builder_class = Sufia::SearchBuilder` right after `configure_blacklight do |config|`
