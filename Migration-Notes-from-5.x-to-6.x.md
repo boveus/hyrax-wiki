@@ -5,6 +5,8 @@ Make sure you have a running version of Fedora 4. In these instructions we assum
 * Update your Gemfile to point to the new Sufia 
 `gem 'sufia', ' ~> 6.0.0'`
 
+* Add `gem 'rsolr', '~> 1.0.6'` to your Gemfile
+
 * Run `bundle install`
 
 * Update your `config/initializers/resque_config.rb` to use the new `redis_namespace` setting. This setting replaces the old `id_namespace`. 
@@ -25,12 +27,13 @@ development:
 
 Update your `app/controllers/catalog_controller.rb` as follows: 
 
-
-1. Remove require statements
-1. Remove include statements
+1. Remove require statements: any blacklight, parslet, parsing_nesting
+1. Remove include statements: Hydra::Controller::ControllerBehavior, BlacklightAdvancedSearch::ParseBasicQ
 1. Remove any field name prefixes such as `desc_metadata__`
 1. Replace line `include Blacklight::Catalog` with `include Hydra::Catalog`
 1. Insert line `config.search_builder_class = Sufia::SearchBuilder` right after `configure_blacklight do |config|`
+1. Change CatalogController.solr_search_params_logic to CatalogController.search_params_logic
+1. Add `:add_advanced_parse_q_to_solr` to CatalogController.search_params_logic
 
 The basic structure of your controller would look like this: 
 ```
@@ -46,8 +49,6 @@ class CatalogController < ApplicationController
   end
 end
 ```
-
-* Do we need to add `gem 'rsolr', '~> 1.0.6'` to the Gemfile (?)
 
 ## What's next
 [Insert here link to steps to migrate data from Fedora 3 to Fedora 4]
