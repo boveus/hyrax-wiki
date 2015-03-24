@@ -21,8 +21,14 @@ development:
   base_path: /dev
 ```
 
-* Update your `app/controllers/catalog_controller.rb` as follows: 
+### Changes to CatalogController
 
+Update your `app/controllers/catalog_controller.rb` as follows: 
+
+
+1. Remove require statements
+1. Remove include statements
+1. Remove any field name prefixes such as `desc_metadata__`
 1. Replace line `include Blacklight::Catalog` with `include Hydra::Catalog`
 1. Insert line `config.search_builder_class = Sufia::SearchBuilder` right after `configure_blacklight do |config|`
 
@@ -30,6 +36,9 @@ The basic structure of your controller would look like this:
 ```
 class CatalogController < ApplicationController
   include Hydra::Catalog
+  include Sufia::Catalog
+  [...]
+  CatalogController.search_params_logic += [:add_access_controls_to_solr_params, :add_advanced_parse_q_to_solr]
   [...]
   configure_blacklight do |config|
     config.search_builder_class = Sufia::SearchBuilder
