@@ -52,9 +52,14 @@ end
 ```
 
 ## Migrating to Fedora 4
-1. Add the fedora-migrate gem to your Gemfile and update
-    gem 'fedora-migrate'
+1. Add the fedora-migrate gem to your Gemfile and update: `gem 'fedora-migrate'`
 1. Create a `config/fedora3.yml` file which should look exactly like your `config/fedora.yml` from your previous Sufia 5 application
+``` ruby
+development:
+  user: fedoraAdmin
+  password: fedoraAdmin
+  url: http://127.0.0.1:8983/fedora3
+```
 1. Create a migration rake task similar to
 ``` ruby
 require 'fedora-migrate'
