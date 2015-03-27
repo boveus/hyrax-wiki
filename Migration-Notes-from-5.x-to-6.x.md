@@ -25,6 +25,17 @@ development:
 
 * Rename `config/solr.yml` to `config/blacklight.yml`
 
+* Create `app/models/search_builder.rb` with this content:
+
+``` ruby
+class SearchBuilder < Blacklight::SearchBuilder
+  include Blacklight::Solr::SearchBuilderBehavior
+  include Hydra::AccessControlsEnforcement
+  include Sufia::SearchBuilder
+
+end
+```
+
 ### Changes to CatalogController
 
 Update your `app/controllers/catalog_controller.rb` as follows: 
@@ -33,7 +44,6 @@ Update your `app/controllers/catalog_controller.rb` as follows:
 1. Remove include statements: Hydra::Controller::ControllerBehavior, BlacklightAdvancedSearch::ParseBasicQ
 1. Remove any field name prefixes such as `desc_metadata__`
 1. Replace line `include Blacklight::Catalog` with `include Hydra::Catalog`
-1. Insert line `config.search_builder_class = Sufia::SearchBuilder` right after `configure_blacklight do |config|`
 1. Change CatalogController.solr_search_params_logic to CatalogController.search_params_logic
 1. Add `:add_advanced_parse_q_to_solr` to CatalogController.search_params_logic
 
@@ -45,10 +55,6 @@ class CatalogController < ApplicationController
   [...]
   CatalogController.search_params_logic += [:add_access_controls_to_solr_params, :add_advanced_parse_q_to_solr]
   [...]
-  configure_blacklight do |config|
-    config.search_builder_class = Sufia::SearchBuilder
-    [...]
-  end
 end
 ```
 
@@ -86,4 +92,3 @@ end
 * Run `rake migrate`
 * Examine `report.json` for the results
 6. Run `rake fedora:migrate:reset` to erase all the Fedora 4 data and try again
-
