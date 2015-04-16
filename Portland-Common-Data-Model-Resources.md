@@ -9,3 +9,5 @@ A list of resources related to the Portland Common Data Model (PDCM) and its imp
 * Lynette's notes on [GenericWork - GenericFile Model, Design, and Implementation Discussions](https://wiki.duraspace.org/display/FF/GenericWork+-+GenericFile+Model%2C+Design%2C+and+Implementation+Discussions)
 
 * [List of tickets](https://github.com/projecthydra/sufia/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22May+Hydra+PCDM%22) to be worked on during the Sprint in May. You can also look at them via the [Waffle board](https://waffle.io/projecthydra/sufia?milestone=May%20Hydra%20PCDM). 
+
+* The following two documents were created during LDCX in the last week of March. These are very rough notes that people captured during the sessions but they provide some context if you are curious of how the whole thing came together: [PCDM Mappings - Reference Diagrams for Comment](https://wiki.duraspace.org/display/FF/PCDM+Mappings+-+Reference+Diagrams+for+Comment) and [Sufia move to PCDM](https://docs.google.com/document/d/1-TOtzXs87U0yOWjt34xO0dwsvIcRvIniZww5LQEwA6o/edit)
