@@ -6,6 +6,4 @@ A list of resources related to the Portland Common Data Model
 
 * Lynette's notes on [GenericWork - GenericFile Model, Design, and Implementation Discussions](https://wiki.duraspace.org/display/FF/GenericWork+-+GenericFile+Model%2C+Design%2C+and+Implementation+Discussions)
 
-* [List of tickets](https://github.com/projecthydra/sufia/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22May+Hydra+PCDM%22) to be worked on during the Sprint in May. 
-
-* [Waffle board](https://waffle.io/projecthydra/sufia?milestone=May%20Hydra%20PCDM) of those tickets. 
+* [List of tickets](https://github.com/projecthydra/sufia/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22May+Hydra+PCDM%22) to be worked on during the Sprint in May. You can also look at them via the [Waffle board](https://waffle.io/projecthydra/sufia?milestone=May%20Hydra%20PCDM). 
