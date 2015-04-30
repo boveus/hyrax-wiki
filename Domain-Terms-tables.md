@@ -8,7 +8,7 @@ Below is a quick summary of these tables:
 
 * `local_authorities` lists what authorities we have locally (e.g. lc_subjects, lexvo_languages)
 
-* `local_authorities_entries` contains the actual data used in the autocomplete for all authorities` (e.g. you'll find rows with language names and whatever terms are listed in `domain_terms`)
+* `local_authorities_entries` contains the actual data used in the autocomplete for all authorities (e.g. you'll find rows with language names and whatever terms are listed in `domain_terms`)
 
 * `subject_local_authority_entries` is similar to `local_authorities_entries` but it is specific for subjects. See below on why this is handled separately.
 
