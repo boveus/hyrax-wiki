@@ -7,4 +7,4 @@ Welcome to the Sufia wiki!
 * [[Release management process]]
 * [[Migration Notes from 5.x to 6.x]]
 * [[Portland Common Data Model Resources]]
-* [[Domain Terms tables]
+* [[Domain Terms tables]]
