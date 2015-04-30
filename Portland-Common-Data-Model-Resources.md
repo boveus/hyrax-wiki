@@ -4,7 +4,7 @@ A list of resources related to the Portland Common Data Model (PDCM) and its imp
 
 * Initial diagram of the [Sufia PCDM Initial Implementation Model](https://docs.google.com/drawings/d/1uTbg0FPQDoa2zN6p1I37m-M3CFnlx85Mp9CEyRw-rf4)
 
-* Lynette's initial wireframes: https://wiki.duraspace.org/display/FF/Sufia+Sprint+UI+Design
+* Lynette's initial wireframes: https://wiki.duraspace.org/display/hydra/Sufia+Sprint+UI+Design
 
 * Lynette's notes on [GenericWork - GenericFile Model, Design, and Implementation Discussions](https://wiki.duraspace.org/display/FF/GenericWork+-+GenericFile+Model%2C+Design%2C+and+Implementation+Discussions)
 
