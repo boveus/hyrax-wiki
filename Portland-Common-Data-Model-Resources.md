@@ -14,5 +14,5 @@ A list of resources related to the Portland Common Data Model (PDCM) and its imp
 
 * [Architecture diagram](https://docs.google.com/presentation/d/1WvPG7RCRW-o1W_WEMGdi_jE2ZJyewbZxqwPg0aazeJw/edit#slide=id.gaf6fb9983_0_0) of the gems to be created 
 
-* Notes from PCDM [Planning Meeting 1]
+* Notes from [[PCDM Planning Meeting 1]]
 
