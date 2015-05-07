@@ -2,6 +2,8 @@ A list of resources related to the Portland Common Data Model (PDCM) and its imp
 
 * The master document on the PCDM at Duraspace: https://wiki.duraspace.org/display/FF/Portland+Common+Data+Model
 
+* The [Sufia Sprint page](https://wiki.duraspace.org/display/hydra/Sufia+Sprint+-+2015-05-04+thru+05-15) at Duraspace.
+
 * Initial diagram of the [Sufia PCDM Initial Implementation Model](https://docs.google.com/drawings/d/1uTbg0FPQDoa2zN6p1I37m-M3CFnlx85Mp9CEyRw-rf4). An updated version of this diagram is now [here](https://docs.google.com/drawings/d/1-NkkRPpGpZGoTimEpYTaGM1uUPRaT0SamuWDITvtG_8/edit)
 
 * Lynette's initial wireframes: https://wiki.duraspace.org/display/hydra/Sufia+Sprint+UI+Design
