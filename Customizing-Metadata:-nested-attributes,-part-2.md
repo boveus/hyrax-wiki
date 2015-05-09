@@ -196,7 +196,7 @@ Next, create the edit and batch edit forms that will use our presenter:
 class ResourceEditForm < ResourcePresenter
   include HydraEditor::Form
   include HydraEditor::Form::Permissions
-  include NestedAttributes
+  include NestedAuthors
   self.required_fields = [:title]
 end
 ```
@@ -207,3 +207,46 @@ end
 class ResourceBatchEditForm < ResourceEditForm
 end
 ```
+
+What's NestedAuthors, you ask? This is where we get our form to allow the `authors_attributes` method to pass from the controller to the model. Create `app/forms/nested_authors.rb` with:
+
+``` ruby
+module NestedAuthors
+  extend ActiveSupport::Concern
+
+  module ClassMethods
+
+    def build_permitted_params
+      permitted = super
+      permitted << { authors_attributes: permitted_authors_params }
+      permitted
+    end
+
+    def permitted_authors_params
+      [ :id, :_destroy, :first_name, :last_name ]
+    end
+
+  end
+  
+  def authors_attributes= attributes
+    model.authors_attributes= attributes
+  end
+
+end
+```
+
+Last, but certainly not least, we have to tell our controller to use our new ResourcePresenter and forms.
+To do this, create `app/controllers/generic_files_controller.rb` with:
+
+``` ruby
+class GenericFilesController < ApplicationController
+  include Sufia::Controller
+  include Sufia::FilesControllerBehavior
+
+  self.presenter_class = ResourcePresenter
+  self.edit_form_class = ResourceEditForm
+
+end
+```
+
+Now you should be able to rerun your controller spec and have both tests passing.
