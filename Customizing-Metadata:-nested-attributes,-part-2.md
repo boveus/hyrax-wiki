@@ -118,3 +118,92 @@ module FactoryGirl
   end
 end
 ```
+
+Now, let's write our controller test in `spec/controllers/generic_files_controller_spec.rb`
+
+``` ruby
+require 'rails_helper'
+
+describe GenericFilesController do
+  routes { Sufia::Engine.routes }
+  let(:user) { FactoryGirl.find_or_create(:user) }
+  before do
+    allow(controller).to receive(:has_access?).and_return(true)
+    sign_in user
+    allow_any_instance_of(User).to receive(:groups).and_return([])
+    allow_any_instance_of(GenericFile).to receive(:characterize)
+  end
+
+  describe "update" do
+    let(:generic_file) do
+      GenericFile.create do |gf|
+        gf.apply_depositor_metadata(user)
+      end
+    end
+
+    context "when adding a title" do
+      let(:attributes) { { title: ['My Favorite Things'] } }
+      before { post :update, id: generic_file, generic_file: attributes }
+      subject do
+        generic_file.reload
+        generic_file.title.first
+      end
+      it { is_expected.to eql "My Favorite Things"}
+    end
+
+    context "when adding an author" do
+      let(:attributes) do
+        { 
+          title: ['My Favorite Things'], 
+          authors_attributes: [{first_name: 'John', last_name: 'Coltrane'}],
+          permissions_attributes: [{ type: 'person', name: 'archivist1', access: 'edit'}]
+        }
+      end
+
+      before { post :update, id: generic_file, generic_file: attributes }
+      subject { generic_file.reload }
+
+      it "sets the values using the parameters hash" do
+        expect(subject.authors.first.first_name).to eql "John"
+        expect(subject.authors.first.last_name).to eql "Coltrane"
+      end
+    end
+
+  end
+
+end
+```
+
+The first test should pass, but the second will fail.
+
+# Build out your forms and presenters
+
+Sufia builds its forms based on a Presenter. For GenericFile, this is the Sufia::GenericFilePresenter. We need to create our own presenter so we can include the Author class as an attribute.
+
+First, create `app/presenters/resource_presenter.rb`
+
+``` ruby
+class ResourcePresenter < Sufia::GenericFilePresenter
+  self.terms = [:title, :authors]
+end
+```
+
+Next, create the edit and batch edit forms that will use our presenter:
+
+`app/forms/resource_edit_form.rb`
+
+``` ruby
+class ResourceEditForm < ResourcePresenter
+  include HydraEditor::Form
+  include HydraEditor::Form::Permissions
+  include NestedAttributes
+  self.required_fields = [:title]
+end
+```
+
+`app/forms/resource_batch_edit_form.rb`
+
+``` ruby 
+class ResourceBatchEditForm < ResourceEditForm
+end
+```
