@@ -1,6 +1,6 @@
 # Overview
 
-This builds on the Customizing Metadata: nested attributes, part 1 but instead creates each nested attribute as a complete ActiveFedora:::Base object instead of using blank nodes.
+This builds on the [Customizing Metadata: nested attributes, part 1](https://github.com/projecthydra/sufia/wiki/Customizing-Metadata:-nested-attributes,-part-1) but instead creates each nested attribute as a complete ActiveFedora:::Base object instead of using blank nodes.
 
 You have a complex RDF data model that has includes descriptive metadata from one resource included in another. As example, let's say you use Sufia's GenericFile, but with multiple authors, and each author is also its own RDF resource with a first and last name.
 
