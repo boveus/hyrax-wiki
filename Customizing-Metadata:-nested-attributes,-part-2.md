@@ -76,3 +76,45 @@ end
 ```
 
 Run your test again and it should pass. At this point you can add additional nested terms and start expanding your model tests to cover additional needs, but you'll eventually have to wire up some controllers that will allow your forms to pass these nested attributes' values on to your models.
+
+# Build your controllers
+
+First, we test, but in order to test controllers, we need to add a few extras to our testing suite. Since our controller needs to know who is doing these actions, we need to stub out a user. Sufia uses the FactoryGirl gem for this. Add it to your gem file and include it with other gems in your `:development` and `:test` blocks.
+
+``` ruby
+group :development, :test do
+  gem 'factory_girl_rails'
+end
+```
+
+Update your gems:
+
+    bundle exec install
+
+Next, edit `spec/rails_helper.rb` to include test helpers from the Devise gem as well as setup FactoryGirl. You'll want to add the two config lines below to your existing config block
+
+``` ruby
+
+RSpec.configure do |config|
+  config.include Devise::TestHelpers, type: :controller
+  config.include FactoryGirl::Syntax::Methods
+end
+```
+
+Additionally, add these methods to the very end of `spec/rails_helper.rb`
+
+``` ruby
+FactoryGirl.define do
+  factory :user do
+    sequence(:email) { |n| "user#{n}@example.com" }
+    password 'password'
+  end
+end
+
+module FactoryGirl
+  def self.find_or_create(handle, by=:email)
+    tmpl = FactoryGirl.build(handle)
+    tmpl.class.send("find_by_#{by}".to_sym, tmpl.send(by)) || FactoryGirl.create(handle)
+  end
+end
+```
