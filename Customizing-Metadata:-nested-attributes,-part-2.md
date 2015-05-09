@@ -235,6 +235,10 @@ module NestedAuthors
 end
 ```
 
+We have to create the `authors_attributes=` method on the form so that Rails will build the nested forms. ActionView::Helpers is involved [here](  # These are required so that fields_for will draw a nested form.
+  # See ActionView::Helpers#nested_attributes_association?
+  #   https://github.com/rails/rails/blob/a04c0619617118433db6e01b67d5d082eaaa0189/actionview/lib/action_view/helpers/form_helper.rb#L1890)
+
 Last, but certainly not least, we have to tell our controller to use our new ResourcePresenter and forms.
 To do this, create `app/controllers/generic_files_controller.rb` with:
 
