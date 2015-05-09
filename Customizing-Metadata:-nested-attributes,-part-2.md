@@ -4,6 +4,8 @@ This builds on the [Customizing Metadata: nested attributes, part 1](https://git
 
 This example is for implementors who have a complex RDF data model that includes descriptive metadata from one resource referenced in another. As example, let's say you use Sufia's GenericFile, but with multiple authors, and each author is also its own RDF resource with a first and last name. We'll build the models and specs required to test them, as well as the controllers that will pass the attributes from the forms to the model, and the specs required to test them too.
 
+This walkthrough assumes you have a blank Sufia 6.0 installation.
+
 # Test your GenericFile
 
 First, write a test expressing what you want this to look like. If you haven't already, setup your rspec environment:
