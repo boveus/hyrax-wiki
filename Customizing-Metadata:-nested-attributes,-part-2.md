@@ -20,9 +20,8 @@ require 'rails_helper'
 describe GenericFile do
 
   let(:file) do
-    GenericFile.create.tap do |f|
+    GenericFile.create do |f|
       f.apply_depositor_metadata "user"
-      f.save!
     end
   end
 
