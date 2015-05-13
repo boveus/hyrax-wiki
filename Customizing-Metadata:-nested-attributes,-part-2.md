@@ -36,7 +36,6 @@ describe GenericFile do
     subject { file.authors.first }
     it { is_expected.to be_kind_of Author }
   end
-
 end
 ```
 
@@ -51,8 +50,8 @@ class GenericFile < ActiveFedora::Base
   include Sufia::GenericFile
 
   has_and_belongs_to_many :authors, predicate: ::RDF::DC.creator, class_name: "Author", inverse_of: :generic_files
-  accepts_nested_attributes_for :authors
 
+  accepts_nested_attributes_for :authors
 end
 ```
 
@@ -60,7 +59,6 @@ Create `app/models/author.rb`
 
 ``` ruby
 class Author < ActiveFedora::Base
-
   type ::RDF::FOAF.Person
 
   has_many :generic_files, inverse_of: :authors, class_name: "GenericFile"
@@ -72,7 +70,6 @@ class Author < ActiveFedora::Base
   property :last_name, predicate: ::RDF::FOAF.lastName, multiple: false do |index|
     index.as :stored_searchable
   end
-
 end
 ```
 
@@ -80,10 +77,12 @@ Run your test again and it should pass. At this point you can add additional nes
 
 # Build your controllers
 
-First, we test, but in order to test controllers, we need to add a few extras to our testing suite. Since our controller needs to know who is doing these actions, we need to stub out a user. Sufia uses the FactoryGirl gem for this. Add it to your gem file and include it with other gems in your `:development` and `:test` blocks.
+First, we test, but in order to test controllers, we need to add a few extras to our testing suite. Since our controller needs to know who is doing these actions, we need to stub out a user. Sufia uses the FactoryGirl gem for this. Add it to your Gemfile and include it with other gems in your `:development` and `:test` blocks.
 
 ``` ruby
 group :development, :test do
+  # ...
+
   gem 'factory_girl_rails'
 end
 ```
@@ -95,7 +94,6 @@ Update your gems:
 Next, edit `spec/rails_helper.rb` to include test helpers from the Devise gem as well as setup FactoryGirl. You'll want to add the two config lines below to your existing config block
 
 ``` ruby
-
 RSpec.configure do |config|
   #...
 
@@ -165,9 +163,7 @@ describe GenericFilesController do
         expect(subject.authors.first.last_name).to eq "Coltrane"
       end
     end
-
   end
-
 end
 ```
 
