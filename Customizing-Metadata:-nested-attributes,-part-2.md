@@ -90,7 +90,7 @@ end
 
 Update your gems:
 
-    bundle exec install
+    bundle install
 
 Next, edit `spec/rails_helper.rb` to include test helpers from the Devise gem as well as setup FactoryGirl. You'll want to add the two config lines below to your existing config block
 
