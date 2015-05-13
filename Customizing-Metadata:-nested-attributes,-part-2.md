@@ -65,11 +65,11 @@ class Author < ActiveFedora::Base
 
   has_many :generic_files, inverse_of: :authors, class_name: "GenericFile"
 
-  property :first_name, predicate: ::RDF::FOAF.firstName, multiple: false  do |index|
+  property :first_name, predicate: ::RDF::FOAF.firstName, multiple: false do |index|
     index.as :stored_searchable
   end
 
-  property :last_name, predicate: ::RDF::FOAF.lastName, multiple: false  do |index|
+  property :last_name, predicate: ::RDF::FOAF.lastName, multiple: false do |index|
     index.as :stored_searchable
   end
 
@@ -97,6 +97,8 @@ Next, edit `spec/rails_helper.rb` to include test helpers from the Devise gem as
 ``` ruby
 
 RSpec.configure do |config|
+  #...
+
   config.include Devise::TestHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
 end
@@ -128,12 +130,7 @@ require 'rails_helper'
 describe GenericFilesController do
   routes { Sufia::Engine.routes }
   let(:user) { FactoryGirl.find_or_create(:user) }
-  before do
-    allow(controller).to receive(:has_access?).and_return(true)
-    sign_in user
-    allow_any_instance_of(User).to receive(:groups).and_return([])
-    allow_any_instance_of(GenericFile).to receive(:characterize)
-  end
+  before { sign_in user }
 
   describe "update" do
     let(:generic_file) do
@@ -146,17 +143,16 @@ describe GenericFilesController do
       let(:attributes) { { title: ['My Favorite Things'] } }
       before { post :update, id: generic_file, generic_file: attributes }
       subject do
-        generic_file.reload
-        generic_file.title.first
+        generic_file.reload.title
       end
-      it { is_expected.to eql "My Favorite Things"}
+      it { is_expected.to eq ["My Favorite Things"] }
     end
 
     context "when adding an author" do
       let(:attributes) do
         { 
           title: ['My Favorite Things'], 
-          authors_attributes: [{first_name: 'John', last_name: 'Coltrane'}],
+          authors_attributes: [{ first_name: 'John', last_name: 'Coltrane' }],
           permissions_attributes: [{ type: 'person', name: 'archivist1', access: 'edit'}]
         }
       end
@@ -165,8 +161,8 @@ describe GenericFilesController do
       subject { generic_file.reload }
 
       it "sets the values using the parameters hash" do
-        expect(subject.authors.first.first_name).to eql "John"
-        expect(subject.authors.first.last_name).to eql "Coltrane"
+        expect(subject.authors.first.first_name).to eq "John"
+        expect(subject.authors.first.last_name).to eq "Coltrane"
       end
     end
 
@@ -197,8 +193,20 @@ Next, create the edit and batch edit forms that will use our presenter:
 class ResourceEditForm < ResourcePresenter
   include HydraEditor::Form
   include HydraEditor::Form::Permissions
-  include NestedAuthors
+
   self.required_fields = [:title]
+
+  protected
+    def self.build_permitted_params
+      permitted = super
+      permitted.delete({ authors: [] })
+      permitted << { authors_attributes: permitted_authors_params }
+      permitted
+    end
+
+    def self.permitted_authors_params
+      [ :id, :_destroy, :first_name, :last_name ]
+    end
 end
 ```
 
@@ -206,33 +214,6 @@ end
 
 ``` ruby 
 class ResourceBatchEditForm < ResourceEditForm
-end
-```
-
-What's NestedAuthors, you ask? This is where we get our form to allow the `authors_attributes` method to pass from the controller to the model. Create `app/forms/nested_authors.rb` with:
-
-``` ruby
-module NestedAuthors
-  extend ActiveSupport::Concern
-
-  module ClassMethods
-
-    def build_permitted_params
-      permitted = super
-      permitted << { authors_attributes: permitted_authors_params }
-      permitted
-    end
-
-    def permitted_authors_params
-      [ :id, :_destroy, :first_name, :last_name ]
-    end
-
-  end
-  
-  def authors_attributes= attributes
-    model.authors_attributes= attributes
-  end
-
 end
 ```
 
@@ -248,7 +229,6 @@ class GenericFilesController < ApplicationController
 
   self.presenter_class = ResourcePresenter
   self.edit_form_class = ResourceEditForm
-
 end
 ```
 
