@@ -16,8 +16,6 @@ A list of resources related to the Portland Common Data Model (PDCM) and its imp
 
 * The [Sufia Sprint Home page](https://wiki.duraspace.org/display/hydra/Sufia+Sprint+-+2015-05-04+thru+05-15) at Duraspace.
 
-* [Architecture diagram](https://docs.google.com/presentation/d/1WvPG7RCRW-o1W_WEMGdi_jE2ZJyewbZxqwPg0aazeJw/edit#slide=id.gaf6fb9983_0_0) of the gems to be created 
-
 * [Service Objects](https://wiki.duraspace.org/display/hydra/Service+Object+Approach) shows how to encapsulate business logic for `PCDM::Collection`, `Objects`, and `Files` and be able to re-use this logic in other applications.
 
-* [Breaking up Sufia, Worthwhile, Hydra::Works](https://docs.google.com/document/d/1mMIIQCm18Cosk3vfSsTzECGMRi2m-USBWwt-89DxbNE/edit#)
+* [Architecture diagram and Breaking up Sufia, Worthwhile, Hydra::Works](https://docs.google.com/document/d/1mMIIQCm18Cosk3vfSsTzECGMRi2m-USBWwt-89DxbNE/edit#)
