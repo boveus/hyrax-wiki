@@ -160,6 +160,22 @@ class BatchController < ApplicationController
 end
 ```
 
+The batch edits controller was not modified to allow you to set a form the way the batch controller was. (Batch edits are for editing from the dashboard; batch is about uploading groups of files together). So you have to override #terms directly. Add `app/controllers/batch_edits_controller.rb`:
+
+```ruby
+class BatchEditsController < ApplicationController
+  include Hydra::BatchEditBehavior
+  include GenericFileHelper
+  include Sufia::BatchEditsControllerBehavior
+
+  def terms
+    MyBatchEditForm.terms
+  end
+end
+```
+
+It would be nice to make things more consistent here; note this may all be overhauled soon due to pcdm.
+
 # Labels and help text
 
 By default the label for the field in the form is taken from the property label, with the initial letter capitalised. Here is an example of customising it, and the associated help text:
