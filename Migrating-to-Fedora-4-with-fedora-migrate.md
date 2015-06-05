@@ -35,5 +35,5 @@ task migrate: :environment do
 end
 ```
 * Run `rake migrate`
-* Examine `report.json` for the results
+* Examine the `migration_report` folder for the results
 6. Run `rake fedora:migrate:reset` to erase all the Fedora 4 data and try again
