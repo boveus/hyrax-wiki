@@ -8,3 +8,4 @@ Welcome to the Sufia wiki!
 * [[Migration Notes from 5.x to 6.x]]
 * [[Portland Common Data Model Resources]]
 * [[Domain Terms tables]]
+* [[Making Admin Users in Sufia]]
