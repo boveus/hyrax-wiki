@@ -1,4 +1,4 @@
-1. Ensure submitter of pull request is on the [Hydra Project's Contributor License Agreement list](https://wiki.duraspace.org/x/UofvAQ) for Sufia.  If not, ping [Richard Green](mailto:legal@projecthydra.org) and request that this be done. (We must be sure that all code contributed to Hydra components is written by CLA signatories.)
+1. Ensure submitter of pull request is on the [Hydra Project's Contributor License Agreement list](https://wiki.duraspace.org/x/UofvAQ) for Sufia.  If not, ping [Hydra admin](mailto:legal@projecthydra.org) and request that this be done. (We must be sure that all code contributed to Hydra components is written by CLA signatories.)
 1. Merge the pull request via [GitHub](https://github.com/projecthydra/sufia/pulls). (Click the (?) icon for instructions.)
 1. Verify that all specs are passing on the [CI server](http://travis-ci.org/projecthydra/sufia).
 1. Bump version number in [SUFIA_VERSION](https://github.com/projecthydra/sufia/blob/master/SUFIA_VERSION).
