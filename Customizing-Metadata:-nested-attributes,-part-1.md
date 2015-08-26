@@ -35,7 +35,7 @@ We add the property declaration into the `GenericFile` class, and define a furth
 `TODO`: define how the fields are to be indexed in Solr.
 
 ```ruby
-  property :dimensions, predicate: ::RDF::URI('http://example.org/terms/dimensions'), class_name: "Dimensions"
+  property :dimensions, predicate: ::RDF::URI('http://example.org/terms/dimensions'), class_name: "GenericFile::Dimensions"
 
   accepts_nested_attributes_for :dimensions
 
@@ -53,7 +53,7 @@ When you're done the file should look like this:
 class GenericFile < ActiveFedora::Base
   include Sufia::GenericFile
 
-  property :dimensions, predicate: ::RDF::URI('http://example.org/terms/dimensions'), class_name: "Dimensions"
+  property :dimensions, predicate: ::RDF::URI('http://example.org/terms/dimensions'), class_name: "GenericFile::Dimensions"
 
   accepts_nested_attributes_for :dimensions
 
