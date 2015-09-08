@@ -12,4 +12,4 @@ Welcome to the Sufia wiki!
 
 # Test Scripts
 
-* Testing Scripts
+* [[Testing Scripts]]
