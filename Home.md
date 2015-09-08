@@ -9,3 +9,7 @@ Welcome to the Sufia wiki!
 * [[Portland Common Data Model Resources]]
 * [[Domain Terms tables]]
 * [[Making Admin Users in Sufia]]
+
+# Test Scripts
+
+* Testing Scripts
