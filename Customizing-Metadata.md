@@ -5,11 +5,11 @@ Table of Contents
     * [Add the property](#add-the-property)
     * [Try the property at the Rails console](#try-the-property-at-the-rails-console)
   * [Extend the presenter](#extend-the-presenter)
+    * [Required fields](#required-fields)
     * [Set the controller to use our presenter](#set-the-controller-to-use-our-presenter)
   * [Create edit forms](#create-edit-forms)
     * [Set the controllers to use our forms](#set-the-controllers-to-use-our-forms)
   * [Labels and help text](#labels-and-help-text)
-  * [Required/non-required fields](#requirednon-required-fields)
   * [Field repeatability](#field-repeatability)
 
 # Override the GenericFile model
@@ -107,8 +107,6 @@ Sufia also provides default form classes to control what properties of a model a
 class MyFileEditForm < MyGenericFilePresenter
   include HydraEditor::Form
   include HydraEditor::Form::Permissions
-
-  self.required_fields = [:title, :creator, :tag, :rights]
 end
 ```
 
@@ -119,6 +117,22 @@ On initial upload, Sufia allows users to edit metadata in bulk using a batch edi
 class MyBatchEditForm < MyFileEditForm
 end
 ```
+
+## Required fields
+
+We can also give `MyFileEditForm` a different set of required and non-required fields to override what it inherits from Sufia's GenericFilePresenter class:
+
+```ruby
+# app/forms/my_file_edit_form.rb
+class MyFileEditForm < MyGenericFilePresenter
+  include HydraEditor::Form
+  include HydraEditor::Form::Permissions
+
+  self.required_fields = [:title, :alternative, :creator, :tag, :rights]
+end
+```
+
+In theory, we can give `MyBatchEditForm` its own `required_fields` value to override the value it inherits from `MyFileEditForm`, but this might be something to think twice before doing.
 
 ## Set the controllers to use our forms
 
@@ -191,10 +205,6 @@ en:
       generic_file:
         alternative: "An alternative name for a file."
 ```
-
-# Required/non-required fields
-
-`TODO`
 
 # Field repeatability
 
