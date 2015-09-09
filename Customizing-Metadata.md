@@ -216,7 +216,3 @@ en:
       generic_file:
         alternative: "An alternative name for a file."
 ```
-
-# Field repeatability
-
-`TODO`
