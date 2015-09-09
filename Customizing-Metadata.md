@@ -3,6 +3,7 @@ Table of Contents
 
   * [Override the GenericFile model](#override-the-genericfile-model)
     * [Add the property](#add-the-property)
+    * [Field repeatability](#field-repeatability)
     * [Try the property at the Rails console](#try-the-property-at-the-rails-console)
   * [Extend the presenter](#extend-the-presenter)
     * [Required fields](#required-fields)
@@ -10,7 +11,6 @@ Table of Contents
   * [Create edit forms](#create-edit-forms)
     * [Set the controllers to use our forms](#set-the-controllers-to-use-our-forms)
   * [Labels and help text](#labels-and-help-text)
-  * [Field repeatability](#field-repeatability)
 
 # Override the GenericFile model
 
@@ -44,6 +44,17 @@ class GenericFile < ActiveFedora::Base
   end
 end
 ```
+
+## Field repeatability
+
+By default, properties are repeatable.  If you want the property to be single-valued rather than repeatable, then you would add `multiple: false` to its property definition, as follows:
+
+```ruby
+  property :alternative, predicate: ::RDF::DC.alternative, multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+```
+
 
 ## Try the property at the Rails console
 
