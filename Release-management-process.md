@@ -8,6 +8,6 @@
   * If this is your first time pushing to rubygems.org
     * Someone needs to make you an owner of the projecthydra organization
     * Your name needs to be added to some list somewhere via /script/grant_revoke_gem_authority.rb 
-    * You will be prompted for your rubygems.org credentials. Create an account at rubygems.org, then either do `gem push; rake all:release` OR set up ~/.gem/credentials according to instructions at https://rubygems.org/profile/edit before running rake all:release
+    * You will be prompted for your rubygems.org credentials. Create an account at rubygems.org, then either do `gem push; rake all:release` OR set up ~/.gem/credentials according to instructions at https://rubygems.org/profile/edit before running `rake all:release`
 1. Create [release notes in GitHub](https://github.com/projecthydra/sufia/releases/new). In the new release, include at least a block with upgrade notes and a block showing the changelog (copy from earlier step). (See [an example](https://github.com/projecthydra/sufia/releases/tag/v6.4.0).)
 1. Send a release message to [hydra-tech](mailto:hydra-tech@googlegroups.com), [hydra-community](mailto:hydra-community@googlegroups.com), and [hydra-releases](mailto:hydra-releases@googlegroups.com) describing the changes (which you can copy from the GitHub release).
