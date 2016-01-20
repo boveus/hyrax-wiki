@@ -24,7 +24,7 @@ resque-pool start
 
 Refresh the `http://localhost:3000/admin/queues/overview` page and you should see "0 of 1 Workers Working" to confirm that there is a worker ready to handle the jobs.
 
-You can also start Resque as daemon via `resque-pool --daemon` so you don't have to leave the second terminal window open but I prefer to initially test without the daemon to make things work.
+You can also start Resque as daemon via `resque-pool --daemon` so you don't have to leave the second terminal window open but I prefer to initially test without the daemon to make sure things work.
 
 
 
