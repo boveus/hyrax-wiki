@@ -15,11 +15,12 @@ To enable the routes that allow you to view what jobs have been queued add the f
 
 Restart your Rails app and browse to `http://localhost:3000/admin/queues/overview` to see the queues.  
 
-If the queues overview page shows a text that reads "0 of 0 Workers Working" it means that Resque has probably not been started. To start Resque run the following command from a separate terminal window and leave this terminal open/running. Refresh the `http://localhost:3000/admin/queues/overview` page and you should see "0 of 1 Workers Working" to confirm that there is a worker ready to handle the jobs:
+If the queues overview page shows a text that reads "0 of 0 Workers Working" it means that Resque has probably not been started. To start Resque run the following command from a separate terminal window and leave this terminal open/running. 
 
 ```
 cd .internal_test_app
 resque-pool start
 ```
 
+Refresh the `http://localhost:3000/admin/queues/overview` page and you should see "0 of 1 Workers Working" to confirm that there is a worker ready to handle the jobs:
 
