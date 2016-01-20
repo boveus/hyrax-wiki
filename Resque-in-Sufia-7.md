@@ -4,7 +4,7 @@ To use Resque in Sufia 7 add the following to `sufia/.internal_test_app/config/a
 config.active_job.queue_adapter = :resque
 ```
 
-To enable the routes that allow you to view what jobs have been queued add the following to `sufia/app/config/routes.rb (in a production application you probably want to make sure only admin users have access to these routes)
+To enable the routes that allow you to view what jobs have been queued add the following to `sufia/app/config/routes.rb (in a production application you probably want to make sure only admin users have access to these routes) -- TODO: There routes are already there but only enabled if Sufia::ResqueAdmin has been defined (???). 
 
 ```
   namespace :admin do
