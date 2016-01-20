@@ -9,3 +9,4 @@ Welcome to the Sufia wiki!
 * [[Portland Common Data Model Resources]]
 * [[Domain Terms tables]]
 * [[Making Admin Users in Sufia]]
+* [[Resque in Sufia 7]]
