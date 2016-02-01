@@ -1,3 +1,7 @@
+# Note
+
+Please note that this documentation applies to Sufia <7. We will update this documentation for Sufia 7 soon.
+
 Table of Contents
 =================
 
