@@ -56,7 +56,7 @@ task :import => :environment do
   end
 end
 ```
-This take task will read the JSON produced in Step 1 and create the proper GenericWork/FileSet/File objects in the Sufia 7 application by mapping the data from the GenericFile to the correct Sufia 7 objects.
+This take task will read the JSON produced in Step 1 and create the proper `GenericWork/FileSet/File` objects in the Sufia 7 application by mapping the data from the `GenericFile` to the correct Sufia 7 objects.
 
 Since the content of the file is not stored in the JSON application, we read this content straight from the Fedora instance used by the Sufia 6 application at the time that we import the file to the Sufia 7 application.
 
