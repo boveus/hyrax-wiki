@@ -56,6 +56,6 @@ This code will be merged into the Sufia 7 master branch.
 
 ## Things not yet covered
 * Multiple versions of files
-* Some fields are still missing
+* Some fields are still missing (file batches, rights, et cetera)
 * This proof of concept only imports the original content of the Sufia 6 GenericFile and it let's Sufia 7 regenerate the derivatives (e.g. thumbnail, fulltext) and re-characterize the file.
 * Error handling
