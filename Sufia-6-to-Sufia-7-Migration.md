@@ -19,6 +19,8 @@ This rake task will output a JSON file with the metadata (but no the content) fo
 
 A proof of concept for the `ExportService` class can be found at https://github.com/projecthydra/sufia/blob/migration_to_sufia7/lib/sufia/export/export_service.rb
 
+This code will be merged into the Sufia 6 stable branch.
+
 
 ### Step 2 (from a Sufia 7 application)
 In a Sufia 7 application write a rake task as follows:
@@ -47,7 +49,9 @@ This take task will read the JSON files produced in Step 1 and create the proper
 
 Since the content of the file is not stored in the JSON files, we read this content straight from the Fedora instance used by the Sufia 6 application at the time that we import the file to the Sufia 7 application.
 
-A proof of concept the `ImportService` class shown in this rake task can be found at hhttps://github.com/projecthydra/sufia/blob/migration_from_sufia6/lib/sufia/import/import_service.rb
+A proof of concept the `ImportService` class shown in this rake task can be found at hhttps://github.com/projecthydra/sufia/blob/migration_from_sufia6/lib/sufia/import/import_service.rb 
+
+This code will be merged into the Sufia 7 master branch.
 
 
 ## Things not yet covered
