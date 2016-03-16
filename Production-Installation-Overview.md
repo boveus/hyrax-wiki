@@ -10,5 +10,7 @@
 1. Add an ActiveJob driver such as `resque` or `sidekiq` to the Gemfile.
 
 
+This was created with inspiration from https://github.com/projecthydra-labs/hydradam/wiki/Production-Installation%3A-Overview
+
 
 
