@@ -7,17 +7,17 @@ TL;DR. Two steps. From a Sufia 6 application export to a set of JSON files the m
 ### Step 1 (from a Sufia 6 application)
 In a Sufia 6 application write a rake task as follows:
 ```
-require "../lib/sufia/export/export_service.rb"
+require "../lib/sufia/export/service.rb"
 
 desc "Export the metadata for each generic file to a JSON file"
 task :export => :environment do
-  ids = ["1g05fb82g", "rv042t345"]
-  Export::ExportService.export ids, "./"
+  ids = Export::Service.fetch_ids(::GenericFile)
+  Export::Service.export ids, "./"
 end
 ```
 This rake task will output a JSON file with the metadata (but no the content) for each of the files to export.
 
-A proof of concept for the `ExportService` class can be found at https://github.com/projecthydra/sufia/blob/migration_to_sufia7/lib/sufia/export/export_service.rb
+A proof of concept for the `Export::Service` class can be found at https://github.com/projecthydra/sufia/blob/migration_to_sufia7/lib/sufia/export/service.rb
 
 This code will be merged into the Sufia 6 stable branch.
 
