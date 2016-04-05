@@ -1,7 +1,6 @@
 1. Modify [the README](https://github.com/projecthydra/sufia/blob/master/README.md) to replace all instances of the past version with the new version. *Please double-check your changes* to make sure you don't have typos, since you'll be pushing this change without any community review.
 1. Add, commit, and push your README change directly to the master branch of the **[upstream](https://github.com/projecthydra/sufia)** repository.
 1. Bump the version number in [version.rb](https://github.com/projecthydra/sufia/blob/master/lib/sufia/version.rb) to a [SemVer](http://semver.org/)-appropriate version; feel free to consult others (via IRC, hydra-tech, or a Hydra Tech call) if you're not sure. **Do not add, commit, or push this change.**
-1. Modify [the changelog](https://github.com/projecthydra/sufia/blob/master/History.md) to include changes in the version (which can be pulled from commit messages -- `see previous entries in History.md for examples`).  See script [changelog.sh](https://github.com/projecthydra/hydra/blob/master/script/changelog.sh) for help generating changelog entries.  **Do not add, commit, or push this change.**
 1. Release the gem to rubygems.org:
   * If this is your first time pushing to rubygems.org for a Hydra project
     * Create an account at rubygems.org if you haven't already, or make note of your rubygems.org email address.
@@ -9,5 +8,5 @@
     * Ask on IRC or hydra-tech about adding you to the Owners team in the projecthydra GitHub organization.
     * If you have not yet, set up `~/.gem/credentials` according to [these instructions](https://rubygems.org/profile/edit).
   *  Run the `rake build` and `rake release` tasks, in that order.
-1. Create [release notes in GitHub](https://github.com/projecthydra/sufia/releases/new). In the new release, include at least a block with upgrade notes and a block showing the changelog (copy from earlier step). (See [an example](https://github.com/projecthydra/sufia/releases/tag/v6.4.0).)
+1. Create [release notes in GitHub](https://github.com/projecthydra/sufia/releases/new). In the new release, include at least a block with upgrade notes and a block showing the changelog -- see script [changelog.sh](https://github.com/projecthydra/hydra/blob/master/script/changelog.sh) for help generating changelog entries. (See [an example](https://github.com/projecthydra/sufia/releases/tag/v6.4.0).)
 1. Send a release message to [hydra-tech](mailto:hydra-tech@googlegroups.com), [hydra-community](mailto:hydra-community@googlegroups.com), and [hydra-releases](mailto:hydra-releases@googlegroups.com) describing the changes (which you can copy from the GitHub release). (*This assumes you've already joined those three lists.* Do that first!) It may be helpful to base your message on [a prior example](https://groups.google.com/forum/#!topic/hydra-releases/SvQAhtIgpqA), which also contains some new text explicitly thanking contributors, which you can get from the changelog.
