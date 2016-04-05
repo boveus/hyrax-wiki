@@ -8,6 +8,6 @@
     * Ask on IRC or hydra-tech about making you an owner of the gem on rubygems.org. (Your rubygems.org email address and GitHub username need to be added to [this script](https://github.com/projecthydra/hydra/blob/master/script/grant_revoke_gem_authority.rb#L19), and then someone who already has owner access needs to run that script.)
     * Ask on IRC or hydra-tech about adding you to the Owners team in the projecthydra GitHub organization.
     * If you have not yet, set up `~/.gem/credentials` according to [these instructions](https://rubygems.org/profile/edit).
-  *  Run the `rake release` task.
+  *  Run the `rake build` and `rake release` tasks, in that order.
 1. Create [release notes in GitHub](https://github.com/projecthydra/sufia/releases/new). In the new release, include at least a block with upgrade notes and a block showing the changelog (copy from earlier step). (See [an example](https://github.com/projecthydra/sufia/releases/tag/v6.4.0).)
 1. Send a release message to [hydra-tech](mailto:hydra-tech@googlegroups.com), [hydra-community](mailto:hydra-community@googlegroups.com), and [hydra-releases](mailto:hydra-releases@googlegroups.com) describing the changes (which you can copy from the GitHub release). (*This assumes you've already joined those three lists.* Do that first!) It may be helpful to base your message on [a prior example](https://groups.google.com/forum/#!topic/hydra-releases/SvQAhtIgpqA), which also contains some new text explicitly thanking contributors, which you can get from the changelog.
