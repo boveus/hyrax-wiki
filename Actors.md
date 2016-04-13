@@ -2,9 +2,7 @@ When you create or update a work in curation_concerns, there are a number of pro
 
 Code that wishes to use the whole list of actors should call `CurationConcerns::CurationConcern.actor.` That method returns an instance of `CurationConcerns::ActorStack`, which is the list of operations to perform to create or update a Work.
 
-This `ActorStack`, is instantiated by an `ActorFactory`.  The default factory is: `CurationConcerns::ActorFactory`, but you can change it by setting `CurationConcerns::CurationConcern.actor_factory=`
-
-For example, Sufia wants to use its own factory so it sets `CurationConcerns::CurationConcern.actor_factory = Sufia::ActorFactory`
+This `ActorStack`, is instantiated by an `ActorFactory`.  The default factory is: `CurationConcerns::ActorFactory`, but you can change it by setting `CurationConcerns::CurationConcern.actor_factory=`. For example, Sufia wants to use its own factory, so it sets `CurationConcerns::CurationConcern.actor_factory = Sufia::ActorFactory`
 
 Sufia's `ActorFactory` uses a different set of operations than the CurationConcerns version, but other than that it's the same. `Sufia::ActorFactory` it inherits from the version in CurationConcerns, and overrides the `stack_actors` class method like so:
 
