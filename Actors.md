@@ -4,7 +4,7 @@ Code that wishes to use the whole list of actors should call `CurationConcerns::
 
 This `ActorStack`, is instantiated by an `ActorFactory`.  The default factory is: `CurationConcerns::ActorFactory`, but you can change it by setting `CurationConcerns::CurationConcern.actor_factory=`. For example, Sufia wants to use its own factory, so it sets `CurationConcerns::CurationConcern.actor_factory = Sufia::ActorFactory`
 
-Sufia's `ActorFactory` uses a different set of operations than the CurationConcerns version, but other than that it's the same. `Sufia::ActorFactory` it inherits from the version in CurationConcerns, and overrides the `stack_actors` class method like so:
+Sufia's `ActorFactory` uses a different set of operations than the CurationConcerns version, but other than that it's the same. `Sufia::ActorFactory` inherits from the version in CurationConcerns, and overrides the `stack_actors` class method like so:
 
 ```ruby
 module Sufia
