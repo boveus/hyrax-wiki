@@ -6,7 +6,6 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
   * [Database](#database)
   * [Mailers](#mailers)
 * [Background workers](#background-workers)
-* [Redis](#redis)
 * [Audiovisual transcoding](#audiovisual-transcoding)
 * [User interface](#user-interface)
 * [Integration with Dropbox, Box, etc\.](#integration-with-dropbox-box-etc)
@@ -51,11 +50,6 @@ Sufia uses ActionMailer to send email to users. Some environments may need speci
 Sufia processes long-running or particularly slow work in background jobs to speed up the web request/response cycle. Sufia (as of version 7.0.0) no longer packages a default queuing backend for background jobs -- all jobs are expressed as ActiveJob instances, so there is a wide variety of backends that you may use that will work with Sufia's background workers. You may want to read more about [ActiveJob](http://guides.rubyonrails.org/active_job_basics.html).
 
 If you'd like to use Resque in your Sufia app, we've written up a [guide](https://github.com/projecthydra/sufia/wiki/Background-Workers-(Resque-in-Sufia-7)) to help you along.
-
-## Redis
-
-[Redis](http://redis.io/) is a key-value store. Redis is used to provide activity streams on repository objects and users. Additionally it is used as a global mutex when modifying order persisting objects.
-
 
 ## Audiovisual transcoding
 
