@@ -1,3 +1,5 @@
+The Sufia Management Guide provides tips for how to manage, customize, and enhance your Sufia application.
+
 * [Production concerns](#production-concerns)
   * [Identifier state](#identifier-state)
   * [Web server](#web-server)
@@ -16,10 +18,6 @@
   * [One time setup for first admin](#one-time-setup-for-first-admin)
   * [Adding an admin user](#adding-an-admin-user)
 * [Migrating data to PCDM in Sufia 7](#migrating-data-to-pcdm-in-sufia-7)
-
-# Managing a Sufia-based app
-
-This section provides tips for how to manage, customize, and enhance your Sufia application.
 
 ## Production concerns
 
