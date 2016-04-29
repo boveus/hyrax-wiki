@@ -1,5 +1,3 @@
-# Background workers (Resque in Sufia 7)
-
 Sufia 7 no longer packages a default queuing back-end, so if you'd like to use Resque in your Sufia app, read on.
 
 By default, Sufia **used to** use a queuing system named Resque -- [learn more about Resque](https://github.com/resque/resque) -- to manage long-running or slow processes. Resque relies on the [Redis](http://redis.io/) key-value store, so [Redis](http://redis.io/) must be installed *and running* on your system in order for background workers to pick up jobs.
