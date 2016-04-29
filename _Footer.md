@@ -1,1 +1,1 @@
-[Read more about Sufia](http://sufia.io)
+[Learn more about Sufia!](http://sufia.io)
