@@ -1,11 +1,14 @@
+# Guides
+
 * [[Sufia Management Guide]]
-* [[Sufia Development Guide]]
 * [[Customizing Metadata]]
-* [Fedora 4 Glossary](https://github.com/projecthydra/active_fedora/wiki/Fedora-4-Glossary)
+* [[Making Admin Users in Sufia]]
+* [[Background Workers (Resque in Sufia 7)]]
+* [[Sufia Development Guide]]
 * [[Release management process]]
+
+# Other notes
+
 * [[Migration Notes from 5.x to 6.x]]
 * [[Portland Common Data Model Resources]]
 * [[Domain Terms tables]]
-* [[Making Admin Users in Sufia]]
-* [[Background Workers (Resque in Sufia 7)]]
-
