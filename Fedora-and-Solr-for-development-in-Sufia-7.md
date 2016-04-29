@@ -2,7 +2,7 @@ A way to run Fedora and Solr while doing development work in Sufia 7.
 
 In a terminal window run the following command to launch Fedora:
 
-    bundle exec fcrepo_wrapper -p 8986
+    bundle exec fcrepo_wrapper -p 8984
 
 In a separate terminal window run the following command to launch Solr:
 
