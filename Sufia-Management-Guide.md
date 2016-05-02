@@ -168,7 +168,7 @@ Restart your app and it should now be able to pull in Zotero-managed publication
 
 ## Customizing metadata
 
-Chances are you will want to customize the default metadata provided by Sufia.  Here's [a guide](https://github.com/projecthydra/sufia/wiki/Customizing-Metadata) to help you with that.
+Chances are you will want to customize the default metadata provided by Sufia.  Here's [a guide](https://github.com/projecthydra/sufia/wiki/Customizing-Metadata) to help you with that in Sufia >= 7.0.0. If you need similar instructions for Sufia 6.x, read more about [customizing metadata in 6.x](https://github.com/projecthydra/sufia/wiki/Customizing-Metadata-(Sufia-6.x).
 
 ## Admin Users
 
