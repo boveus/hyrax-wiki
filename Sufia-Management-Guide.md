@@ -65,13 +65,11 @@ To compile ffmpeg yourself, see https://trac.ffmpeg.org/wiki/CompilationGuide
 
 ## User interface
 
-**Remove** turbolinks support from `app/assets/javascripts/application.js` if present by deleting the following line:
+If you encounter problems with the in-browser content editor -- e.g., the About page, and the three blocks on the homepage -- you should **remove** turbolinks support from `app/assets/javascripts/application.js` if present by deleting the following line:
 
 ```javascript
 //= require turbolinks
 ```
-
-Turbolinks causes the dynamic content editor not to load, and also causes a number of accessibility problems.
 
 ## Integration with Dropbox, Box, etc.
 
