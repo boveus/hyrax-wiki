@@ -5,18 +5,18 @@ Each indexer uses a ThumbnailPathServer to generate the string used in solr foun
 
 You can change the default behavior by creating your own ThumbnailPathService and Indexer that includes a line to point to  you new ThumnbnailPathService 
 
-```
-module MyIndexModule
-  class MyIndexer < WorkIndexer
-    thumbnail_path_service = MyThumbnailPathService
+```ruby
+module MyNamespace
+  class MyIndexer < CurationConcerns::WorkIndexer
+    self.thumbnail_path_service = MyNamespace::MyThumbnailPathService
   end
 end
 ```
 
 You will then need your work to point at your new indexer
 
-```
-class MyWork < ???
-  self.indexer = CurationConcerns::WorkIndexer
+```ruby
+class MyWork
+  self.indexer = MyNamespace::MyIndexer
 end 
 ```
