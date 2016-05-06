@@ -46,7 +46,7 @@ solr_wrapper -d solr/config/ -n hydra-test -p 8985
 * **How can I start a test instance of Fedora? (DO NOT USE FOR PRODUCTION)**
 ```
 # from sufia root in a separate terminal window
-fcrepo_wrapper -p 8984 --no-jms
+fcrepo_wrapper -p 8986 --no-jms
 ```
 * **Test that Fedora is running.** It should be running at: [localhost:8986](http://localhost:8986/)
 * **Those ports look different.** They are! Now that we use `solr_wrapper` and `fcrepo_wrapper` instead of `hydra-jetty`, which bundled test and dev environments together and was occasionally problematic, test and dev instances of Solr and Fedora now run on separate ports. If you want to run the test suite, use the ports above (8985 for Solr and 8986 for Fedora). If you want to check out Sufia in your browser, use port 8983 for Solr and port 8984 for Fedora as stated in  [Creating a Sufia-based app](https://github.com/projecthydra/sufia#creating-a-sufia-based-app): [Solr](https://github.com/projecthydra/sufia#start-solr) and [Fedora](https://github.com/projecthydra/sufia#start-fcrepo).
