@@ -1,4 +1,4 @@
-The Sufia Development Guide is for people who want to modify Sufia itself, not an application that uses Sufia.
+The Sufia Development Guide is for people who want to modify Sufia itself. See the [[Sufia Management Guide]] for guidance on how to configure and set up a Sufia-based application.
 
 * [Regenerating the README TOC](#regenerating-the-readme-toc)
 * [Run the test suite](#run-the-test-suite)
