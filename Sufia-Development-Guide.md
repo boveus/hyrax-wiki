@@ -70,17 +70,17 @@ You may want to see the test application in your browser to verify that your cha
      * [fcrepo_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/fcrepo_wrapper_test.yml)
      * [solr_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/solr_wrapper_test.yml)
 
-1. Run SolrWrapper in development mode. SolrWrapper will by default pick up the configuration in the .solr_wrapper file.  By default Active Fedora installs a configuration file that starts solr on port 8983.  You may change this default behavior by modifying .internal_test_app/.solr_wrapper 
+1. Run SolrWrapper in development mode. SolrWrapper picks up configuration from the `.solr_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.solr_wrapper`) that starts Solr on port 8983.
   1. Open a terminal
   1. `cd .internal_test_app`
   1. `solr_wrapper`
 
-1. run FcrepoWrapper in development mode. FcrepoWrapper will by default pick up the configuration in the .fcrepo_wrapper file.  By default Active Fedora installs a configuration file that starts solr on port 8984.  You may change this default behavior by modifying .internal_test_app/.fcrepo_wrapper
+1. Run FcrepoWrapper in development mode. FcrepoWrapper picks up configuration from the `.fcrepo_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.fcrepo_wrapper`) that starts Solr on port 8984.
   1. Open a terminal
   1. `cd .internal_test_app`
   1. `fcrepo_wrapper`
 
-1. run the rails server in development mode.
+1. Run the Rails server in development mode
   1. Open a terminal
   1. `cd .internal_test_app`
   1. `rails s`
@@ -89,7 +89,7 @@ You may want to see the test application in your browser to verify that your cha
 
 ## Cleaning up
 
-1. To stop the servers, press CTRL-C in the terminal window
+1. To stop the servers, press CTRL-C in the terminal windows
 1. To clean out the data in Solr & Fedora
   1. `cd .internal_test_app`
   1. `fcrepo_wrapper clean`
@@ -116,4 +116,3 @@ end
 `gh-md-toc https://github.com/USERNAME/sufia/blob/BRANCH/README.md`
 
 That will print to stdout the new TOC, which you can copy into `README.md`, commit, and push.
-
