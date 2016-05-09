@@ -70,3 +70,47 @@ def dump_infected_files
   end
 end
 ```
+
+## Running the test application in Development mode
+You may want to see the test application to verify that your changes look correct.  This section assumes that you have generated the test app via rake engine_cart:generate.
+
+1. Verify that active fedora has installed the development templates by looking for `.internal_test_app/config/solr_wrapper_test.yml`.   As of writing this document Active Fedora with this change has yet to be released.  If the file exists skip to step 3.
+1. Copy the templates from Actve Fedora
+
+   This step is a bit hacky and should go away once the latest active fedora has been released with this commit: [c8309ae](https://github.com/projecthydra/active_fedora/commit/c8309aecd4672d719271cd98c103f017f25191a1). Unfortunately this will need to be done each time you regenerate engine_cart. 
+
+  1. You want to get the following files from active fedora (for development) and put the in `.internal_test_app/`:
+     * [.fcrepo_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/.fcrepo_wrapper)
+     * [.solr_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/.solr_wrapper)
+   
+     ***Note:*** The above files are dot files and are not visible unless you ls -a
+
+  1. You want to get the following files from active fedora (for test) and put the in `.internal_test_app/config`:
+     * [fcrepo_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/fcrepo_wrapper_test.yml)
+     * [solr_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/solr_wrapper_test.yml)
+
+1. Run SolrWrapper in development mode.  SolrWrapper will by default pick up the configuration in the .solr_wrapper file.  By default Active Fedora installs a configuration file that starts solr on port 8983.  You may change this default behavior by modifying .internal_test_app/.solr_wrapper 
+  1. Open a terminal
+  1. `cd .internal_test_app`
+  1. `solr_wrapper`
+
+1. run FcrepoWrapper in development mode. FcrepoWrapper will by default pick up the configuration in the .fcrepo_wrapper file.  By default Active Fedora installs a configuration file that starts solr on port 8984.  You may change this default behavior by modifying .internal_test_app/.fcrepo_wrapper
+  1. Open a terminal
+  1. `cd .internal_test_app`
+  1. `fcrepo_wrapper`
+
+1. run the rails server in development mode.
+  1. Open a terminal
+  1. `cd .internal_test_app`
+  1. `rails s`
+
+1. View the app via [localhost:3000](http://localhost:3000)
+
+### cleaning up development
+
+1. To stop the servers press CRTL-C in the terminal window
+1. To clean out the data in solr & fedora
+  1. `cd .internal_test_app`
+  1. `fcrepo_wrapper clean`
+  1. `solr_wrapper clean`
+
