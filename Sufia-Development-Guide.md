@@ -75,7 +75,7 @@ You may want to see the test application in your browser to verify that your cha
   1. `cd .internal_test_app`
   1. `solr_wrapper`
 
-1. Run FcrepoWrapper in development mode. FcrepoWrapper picks up configuration from the `.fcrepo_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.fcrepo_wrapper`) that starts Solr on port 8984.
+1. Run FcrepoWrapper in development mode. FcrepoWrapper picks up configuration from the `.fcrepo_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.fcrepo_wrapper`) that starts Fedora on port 8984.
   1. Open a terminal
   1. `cd .internal_test_app`
   1. `fcrepo_wrapper`
