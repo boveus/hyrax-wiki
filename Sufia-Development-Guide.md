@@ -82,20 +82,17 @@ You may want to see the test application in your browser to verify that your cha
 
 1. Run SolrWrapper in development mode. SolrWrapper picks up configuration from the `.solr_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.solr_wrapper`) that starts Solr on port 8983.
   1. Open a terminal
-  1. `cd <sufia directory>`
-  1. `cd .internal_test_app`
+  1. `cd <sufia directory>\.internal_test_app`
   1. `solr_wrapper`
 
 1. Run FcrepoWrapper in development mode. FcrepoWrapper picks up configuration from the `.fcrepo_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.fcrepo_wrapper`) that starts Fedora on port 8984.
   1. Open a terminal
-  1. `cd <sufia directory>`
-  1. `cd .internal_test_app`
+  1. `cd <sufia directory>\.internal_test_app`
   1. `fcrepo_wrapper`
 
 1. Run the Rails server in development mode
   1. Open a terminal
-  1. `cd <sufia directory>`
-  1. `cd .internal_test_app`
+  1. `cd <sufia directory>\.internal_test_app`
   1. `rails s`
 
 1. View the app by opening [localhost:3000](http://localhost:3000) in a web browser.
@@ -104,8 +101,7 @@ You may want to see the test application in your browser to verify that your cha
 
 1. To stop the servers, press CTRL-C in the terminal windows
 1. To clean out the data in Solr & Fedora
-  1. `cd <sufia directory>`
-  1. `cd .internal_test_app`
+  1. `cd <sufia directory>\.internal_test_app`
   1. `fcrepo_wrapper clean`
   1. `solr_wrapper clean`
 
