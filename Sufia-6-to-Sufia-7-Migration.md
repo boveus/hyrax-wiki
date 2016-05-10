@@ -19,7 +19,12 @@ Rake task `export` will output to a JSON file the metadata for each file, but no
 
 
 ### Step 2 (from a Sufia 7 application)
-In a Sufia 7 application write a rake task as follows:
+In a Sufia 7 application import the JSON files exported from the Sufia 6 application.
+
+Branch [import_s6 in Sufia](https://github.com/projecthydra/sufia/tree/import_s6) contains a set of classes and rake tasks to show how the JSON data could be imported.
+
+In this branch file `lib/sufia/import/import_service.rb` shows a proof of concept on how to read the JSON files for a Sufia 6 Generic File and import its data into Sufia 7 Generic Works, File Sets, and Files. This code could be called from a Rake task as follows:
+
 ```
 require "../lib/sufia/import/import_service.rb"
 
@@ -43,15 +48,13 @@ end
 ```
 This take task will read the JSON files produced in Step 1 and create the proper `GenericWork/FileSet/File` objects in the Sufia 7 application by mapping the data from the `GenericFile` to the correct Sufia 7 objects.
 
-Since the content of the file is not stored in the JSON files, we read this content straight from the Fedora instance used by the Sufia 6 application at the time that we import the file to the Sufia 7 application.
+Since the content of the file is not stored in the JSON files, we read the content straight from the Fedora instance used by the Sufia 6 application at the time that we import the file to the Sufia 7 application.
 
-A proof of concept the `ImportService` class shown in this rake task can be found at https://github.com/projecthydra/sufia/blob/migration_from_sufia6/lib/sufia/import/import_service.rb 
-
-This code will be merged into the Sufia 7 master branch.
+The code in this branch (import_s6) code could be merged into the Sufia 7 master branch.
 
 
 ## Things not yet covered
-* Multiple versions of files
+* Multiple versions of files is partially supported (e.g. the import reads the versions and imports them but the original date created for each version is not preserved.)
 * Some fields are still missing 
 * Objects still not accounted for (collections, batches, rights, et cetera)
 * This proof of concept only imports the original content of the Sufia 6 GenericFile and it let's Sufia 7 regenerate the derivatives (e.g. thumbnail, fulltext) and re-characterize the file.
