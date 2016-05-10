@@ -19,6 +19,7 @@ The Sufia Development Guide is for people who want to modify Sufia itself. See t
 ## Test app
 Generate the test app.  *NOTE: Run this only once.*
 ```
+cd <sufia directory>
 rake engine_cart:generate
 ```
 
@@ -26,30 +27,39 @@ This generates `sufia/.internal_test_app` directory.  The tests will run against
 
 ## Run tests
 ```
+cd <sufia directory>
 rake spec
 ```
 
 ## Testing FAQ
+* **The generated test app isn't doing what I expected after making (and/or pulling) changes to Sufia.  What can I do?**  Generally, engine cart will pick up changes to Sufia.  If not, try the following to regenerate the test app:
+
+  ```bash
+  cd <sufia directory>
+  rm -rf .internal_test_app Gemfile.lock
+  bundle install
+  rake engine_cart:generate
+  ```
 * **Where is rake jetty?**  It was retired.  Solr and Fedora are started on their own.
 * **How can I start a test instance of Solr? (DO NOT USE FOR PRODUCTION)**
 ```
-# from sufia root in a separate terminal window
+#  from <sufia root>/.internal_test_app in a separate terminal window 
+#  if the file config/solr_wrapper_test.yml exists (created below in step two or by ActiveFedora generators)
+solr_wrapper --config config/solr_wrapper_test.yml
+# - or - from sufia root in a separate terminal window
 solr_wrapper -d solr/config/ -n hydra-test -p 8985
 ```
-* **Test that Solr is running.** It should be running at [localhost:8985](http://localhost:8985/) with a Solr core name of `hydra-test`
+* **Test that Solr is running.** In a web browser check [localhost:8985](http://localhost:8985/).  You should see an instance of Solr with a Solr core name of `hydra-test`
 * **How can I start a test instance of Fedora? (DO NOT USE FOR PRODUCTION)**
 ```
-# from sufia root in a separate terminal window
+#  from <sufia root>/.internal_test_app in a separate terminal window 
+#  if the file config/fcrepo_wrapper_test.yml exists (created below in step two or by ActiveFedora generators)
+fcrepo_wrapper --config config/fcrepo_wrapper_test.yml
+# - or - from sufia root in a separate terminal window
 fcrepo_wrapper -p 8986 --no-jms
 ```
-* **Test that Fedora is running.** It should be running at: [localhost:8986](http://localhost:8986/)
+* **Test that Fedora is running.** In a web browser check [localhost:8986](http://localhost:8986/). You should see the Fedora splash page.
 * **Those ports look different.** They are! Now that we use `solr_wrapper` and `fcrepo_wrapper` instead of `hydra-jetty`, which bundled test and dev environments together and was occasionally problematic, test and dev instances of Solr and Fedora now run on separate ports. If you want to run the test suite, use the ports above (8985 for Solr and 8986 for Fedora). If you want to check out Sufia in your browser, use port 8983 for Solr and port 8984 for Fedora as stated in  [Creating a Sufia-based app](https://github.com/projecthydra/sufia#creating-a-sufia-based-app): [Solr](https://github.com/projecthydra/sufia#start-solr) and [Fedora](https://github.com/projecthydra/sufia#start-fcrepo).
-* **The generated test app isn't doing what I expected after making (and/or pulling) changes to Sufia.  What can I do?**  Generally, engine cart will pick up changes to Sufia.  If not, try the following to regenerate the test app:
-```bash
-rm -rf .internal_test_app Gemfile.lock
-bundle install
-rake engine_cart:generate
-```
 
 # Work with test app in the browser
 
@@ -58,7 +68,7 @@ You may want to see the test application in your browser to verify that your cha
 1. Verify that ActiveFedora has installed the development templates by looking for `.internal_test_app/config/solr_wrapper_test.yml`. (Note: As of the latest draft of this document, ActiveFedora has **not** been released with this change.  If the file exists skip to step 3.)
 1. Copy the templates from ActiveFedora
 
-   This step is a bit hacky and should go away once the latest ActiveFedora has been released with this commit: [c8309ae](https://github.com/projecthydra/active_fedora/commit/c8309aecd4672d719271cd98c103f017f25191a1). Unfortunately this will need to be done each time you regenerate the test application. 
+   Unfortunately this will need to be done each time you regenerate the test application. This step is a bit hacky and should go away once the latest ActiveFedora has been released with this commit:  [c8309ae](https://github.com/projecthydra/active_fedora/commit/c8309aecd4672d719271cd98c103f017f25191a1). 
 
   1. Get the following dev environment-related files from ActiveFedora and put them in `.internal_test_app/`:
     * [.fcrepo_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/.fcrepo_wrapper)
@@ -72,25 +82,29 @@ You may want to see the test application in your browser to verify that your cha
 
 1. Run SolrWrapper in development mode. SolrWrapper picks up configuration from the `.solr_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.solr_wrapper`) that starts Solr on port 8983.
   1. Open a terminal
+  1. `cd <sufia directory>`
   1. `cd .internal_test_app`
   1. `solr_wrapper`
 
 1. Run FcrepoWrapper in development mode. FcrepoWrapper picks up configuration from the `.fcrepo_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.fcrepo_wrapper`) that starts Fedora on port 8984.
   1. Open a terminal
+  1. `cd <sufia directory>`
   1. `cd .internal_test_app`
   1. `fcrepo_wrapper`
 
 1. Run the Rails server in development mode
   1. Open a terminal
+  1. `cd <sufia directory>`
   1. `cd .internal_test_app`
   1. `rails s`
 
-1. View the app via [localhost:3000](http://localhost:3000)
+1. View the app by opening [localhost:3000](http://localhost:3000) in a web browser.
 
 ## Cleaning up
 
 1. To stop the servers, press CTRL-C in the terminal windows
 1. To clean out the data in Solr & Fedora
+  1. `cd <sufia directory>`
   1. `cd .internal_test_app`
   1. `fcrepo_wrapper clean`
   1. `solr_wrapper clean`
