@@ -5,21 +5,17 @@ TL;DR. Two steps. From a Sufia 6 application export to a set of JSON files the m
 ## Long version
 
 ### Step 1 (from a Sufia 6 application)
-In a Sufia 6 application write a rake task as follows:
+In a Sufia 6 application export the data of the Generic Files and Collections to JSON files. Branch [export_s6 in ScholarSphere](https://github.com/psu-stewardship/scholarsphere/tree/export_s6) has a proof of concept of how this could be implemented. The code to handle the export is under `lib/export` folder. File `lib/export/service.rb` is the main driver that calls the other programs in this folder to export individual Generic Files and Collections. A basic set of `rake` tasks to calls this service can be found in `lib/tasks/export.rake`. Below is an example of how these tasks could be used:
+
 ```
-require "../lib/sufia/export/service.rb"
+# export all the GenericFile IDs to a file
+rake gf_ids > gf_ids.txt
 
-desc "Export the metadata for each generic file to a JSON file"
-task :export => :environment do
-  ids = Export::Service.fetch_ids(::GenericFile)
-  Export::Service.export ids, "./"
-end
+# export the metadata of the GenericFiles to JSON files
+rake export_gf[gf_ids.txt]
 ```
-This rake task will output a JSON file with the metadata (but no the content) for each of the files to export.
 
-A proof of concept for the `Export::Service` class can be found at https://github.com/projecthydra/sufia/blob/migration_to_sufia7/lib/sufia/export/service.rb
-
-This code will be merged into the Sufia 6 stable branch.
+Rake task `export` will output to a JSON file the metadata for each file, but not the actual binary of the file. The binary will be read from Fedora at the time of the import (more on this later.)
 
 
 ### Step 2 (from a Sufia 7 application)
