@@ -1,11 +1,11 @@
 1. Modify [the README](https://github.com/projecthydra/sufia/blob/master/README.md) to replace all instances of the past version with the new version. *Please double-check your changes* to make sure you don't have typos, since you'll be pushing this change without any community review.
 1. Add, commit, and push your README change directly to the master branch of the **[upstream](https://github.com/projecthydra/sufia)** repository.
-1. Bump the version number in [version.rb](https://github.com/projecthydra/sufia/blob/master/lib/sufia/version.rb) to a [SemVer](http://semver.org/)-appropriate version; feel free to consult others (via IRC, hydra-tech, or a Hydra Tech call) if you're not sure. **Do not add, commit, or push this change.**
+1. Bump the version number in [version.rb](https://github.com/projecthydra/sufia/blob/master/lib/sufia/version.rb) to a [SemVer](http://semver.org/)-appropriate version; feel free to consult others (via Slack, hydra-tech, or a Hydra Tech call) if you're not sure. **Do not add, commit, or push this change.**
 1. Release the gem to rubygems.org:
   * If this is your first time pushing to rubygems.org for a Hydra project
     * Create an account at rubygems.org if you haven't already, or make note of your rubygems.org email address.
-    * Ask on IRC or hydra-tech about making you an owner of the gem on rubygems.org. (Your rubygems.org email address and GitHub username need to be added to [this script](https://github.com/projecthydra/hydra/blob/master/script/grant_revoke_gem_authority.rb#L19), and then someone who already has owner access needs to run that script.)
-    * Ask on IRC or hydra-tech about adding you to the Owners team in the projecthydra GitHub organization.
+    * Ask on Slack or hydra-tech about making you an owner of the gem on rubygems.org. (Your rubygems.org email address and GitHub username need to be added to [this script](https://github.com/projecthydra/hydra/blob/master/script/grant_revoke_gem_authority.rb#L19), and then someone who already has owner access needs to run that script.)
+    * Ask on Slack or hydra-tech about adding you to the Owners team in the projecthydra GitHub organization.
     * If you have not yet, set up `~/.gem/credentials` according to [these instructions](https://rubygems.org/profile/edit).
   *  Run the `rake build` and `rake release` tasks, in that order.
 1. Create [release notes in GitHub](https://github.com/projecthydra/sufia/releases/new). In the new release, include at least a block with upgrade notes and a block showing the changelog -- see script [changelog.sh](https://github.com/projecthydra/hydra/blob/master/script/changelog.sh) for help generating changelog entries. (See [an example](https://github.com/projecthydra/sufia/releases/tag/v6.4.0).)
