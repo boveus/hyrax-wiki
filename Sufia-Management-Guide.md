@@ -2,6 +2,7 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
 
 * [Production concerns](#production-concerns)
   * [Identifier state](#identifier-state)
+  * [Derivatives](#derivatives)
   * [Web server](#web-server)
   * [Database](#database)
   * [Mailers](#mailers)
@@ -32,6 +33,10 @@ Identifier state is tracked in a file that by default is located in a well-known
 ```ruby
 # config.minter_statefile = '/tmp/minter-state'
 ```
+
+### Derivatives
+
+In Sufia 7, derivatives are served from a directory on the filesystem rather than directly from the Fedora repository. If your production environment includes multiple Rails servers, you will want to make sure that they are using a shared filesystem for derivatives. To set this directory, change the value of `config.derivatives_path` in `config/initializers/curation_concerns.rb`. The default value is `tmp/derivatives/` within your application directory, which will cause unexpected behavior in a multi-server configuration.
 
 ### Web server
 
