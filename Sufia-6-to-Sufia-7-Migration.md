@@ -40,10 +40,16 @@ task :import => :environment do
   # (leave as false so that we can re-run the import without running into duplicate IDs)
   preserve_ids = false
 
+  # Set to false to test metadata import only. True to test including
+  # the binary content of GenericFiles.
+  import_binary = true
+
   # Files exported from Sufia 6
   files_to_import = File.join(Dir.pwd, "gf_*.json")
-  service = Importer::ImportService.new(user, password, root_uri, preserve_ids)
-  service.import_files(files_to_import)
+
+  settings = Importer::ImportSettings.new(user, password, root_uri, preserve_ids, import_binary)
+  service = Importer::ImportService.new(settings)
+  service.import(files_to_import)
 end
 ```
 This take task will read the JSON files produced in Step 1 and create the proper `GenericWork/FileSet/File` objects in the Sufia 7 application by mapping the data from the `GenericFile` to the correct Sufia 7 objects.
