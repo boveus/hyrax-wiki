@@ -85,7 +85,7 @@ Sufia provides built-in support for the [browse-everything](https://github.com/p
 To activate browse-everything in your sufia app, run the browse-everything install generator
 
 ```
-rails g browse_everything:install
+rails g browse_everything:install --skip-assets
 ```
 
 This will generate a file at _config/browse_everything_providers.yml_. Open that file and enter the API keys for the providers that you want to support in your app.  For more info on configuring browse-everything, go to the [project page](https://github.com/projecthydra/browse-everything) on github.
