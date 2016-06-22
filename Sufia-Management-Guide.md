@@ -10,6 +10,7 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
 * [Audiovisual transcoding](#audiovisual-transcoding)
 * [User interface](#user-interface)
 * [Integration with Dropbox, Box, etc\.](#integration-with-dropbox-box-etc)
+* [Autocomplete with geonames](#geonames)
 * [Analytics and usage statistics](#analytics-and-usage-statistics)
   * [Capturing usage](#capturing-usage)
   * [Displaying usage in the UI](#displaying-usage-in-the-ui)
@@ -96,6 +97,8 @@ After running the browse-everything install generator and setting the API keys f
 ```ruby
 config.browse_everything = BrowseEverything.config
 ```
+
+## Geonames
 
 ## Analytics and usage statistics
 
