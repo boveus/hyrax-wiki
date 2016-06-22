@@ -100,6 +100,10 @@ config.browse_everything = BrowseEverything.config
 
 ## Geonames
 
+In order for autocomplete to work in the location field, you must have a valid geonames account that can query the service and return possible matches. To setup an account, visit: http://www.geonames.org/login.
+
+After registering and getting an account username, you'll need to enable the free web services by going to http://www.geonames.org/manageaccount and clicking the link to enable. Once that's done, and you've verified you can query the service via their REST Api, add the account username to the `config/initializers/sufia.rb` file under `config.geonames_username`.
+
 ## Analytics and usage statistics
 
 Sufia provides support for capturing usage information via Google Analytics and for displaying usage stats in the UI.
