@@ -2,12 +2,15 @@ Sufia 7 no longer packages a default queuing back-end, so if you'd like to use R
 
 By default, Sufia **used to** use a queuing system named Resque -- [learn more about Resque](https://github.com/resque/resque) -- to manage long-running or slow processes. Resque relies on the [Redis](http://redis.io/) key-value store, so [Redis](http://redis.io/) must be installed *and running* on your system in order for background workers to pick up jobs.
 
+Run through Resque's installation process (which involves tweaking your `Gemfile`, adding some Rake tasks, and configuring Rails to use Resque as its ActiveJob adapter) first.
+
 There are two ways you can manage your workers:
 
 1. the `resque:work` rake task, which will run in the foreground in the terminal;
 2. use [resque-pool](https://github.com/nevans/resque-pool) to manage a number of configurable workers in background processes
 
-For the remainder of the background worker documentation, it is assumed that you're using resque-pool which is more robust.
+For the remainder of the background worker documentation, it is assumed that you're using resque-pool which is more robust, in which case you should next run through resque-pool's installation process (which involves tweaking your `Gemfile` and adding Rake tasks) first.
+
 
 ## Terminology
 
