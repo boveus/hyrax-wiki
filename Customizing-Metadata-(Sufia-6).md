@@ -1,6 +1,6 @@
 # Note
 
-Please note that this documentation applies to Sufia 6. See [[Customizing Metadata]] for the Sufia 7 guide.
+Please note that this documentation applies to Sufia 6. See [[Customizing Metadata]] for the latest guide.
 
 Table of Contents
 =================
