@@ -1,6 +1,170 @@
+# Customizing Sufia 7 metadata
+
+Table of Contents
+=================
+
+* [Override the GenericWork model](#override-the-genericwork-model)
+  * [Add the property](#add-the-property)
+* [Create a vocabulary](#create-a-vocabulary)
+* [Create a service to load the vocabulary](#create-a-service-to-load-the-vocabulary)
+* [Create a view to display your field](#create-a-view-to-display-your-field)
+* [Update the form so that your new field will display](#update-the-form-so-that-your-new-field-will-display)
+  * [If you'd like to make your new field required](#if-you-would-like-to-make-your-new-field-required)
+* [Making a default Sufia field non-repeatable](#making-a-default-sufia-field-non-repeatable)
+
+# Override the GenericWork model
+
+The GenericWork class is provided by Sufia, but we want to update the model with our own metadata so we define it in our app to override what Sufia provides. Since Rails finds the class in our local application, it won't load it from Sufia.
+
+```ruby
+# app/models/generic_work.rb
+class GenericWork < ActiveFedora::Base
+  include ::CurationConcerns::WorkBehavior
+  include ::CurationConcerns::BasicMetadata
+  include Sufia::WorkBehavior
+  self.human_readable_type = 'Work'
+end
+```
+
+## Add the property
+We'll add a select box of university departments, and make it a non-repeatable field.
+Add the property declaration into the `GenericWork` class (and pass a block to make sure the property is indexed in Solr):
+
+```ruby
+  property :department, predicate: ::RDF::URI.new("http://lib.my.edu/departments"), multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+```
+
+If you'd like the field to be repeatable your block should look like this:
+
+```ruby
+  property :department, predicate: ::RDF::URI.new("http://lib.my.edu/departments") do |index|
+    index.as :stored_searchable, :facetable
+  end
+```
+
+When you're done the file should look like this:
+
+```ruby
+class GenericWork < ActiveFedora::Base
+  include ::CurationConcerns::WorkBehavior
+  include ::CurationConcerns::BasicMetadata
+  include Sufia::WorkBehavior
+  self.human_readable_type = 'Work'
+
+  property :department, predicate: ::RDF::URI.new("http://lib.my.edu/departments"), multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+
+end
+```
+
+# Create a vocabulary
+
+```ruby
+## config/authorities/departments.yml
+terms:
+  - id: English
+    term: English
+  - id: History
+    term: History
+  - id: Latin
+    term: Latin
+  - id: Zoology
+    term: Zoology
+```
+
+# Create a service to load the vocabulary.
+
+```ruby
+# services/departments_services.rb
+module DepartmentsService
+  mattr_accessor :authority
+  self.authority = Qa::Authorities::Local.subauthority_for('departments')
+
+  def self.select_all_options
+    authority.all.map do |element|
+      [element[:label], element[:id]]
+    end
+  end
+
+  def self.label(id)
+    authority.find(id).fetch('term')
+  end
+
+end
+```
+
+# Create a view to display your field
+
+```erb
+# records/edit_fields/_.department.html.erb
+<%= f.input :department, as: :select,
+    collection: DepartmentsService.select_all_options,
+    include_blank: true,
+    item_helper: method(:include_current_value),
+    input_html: { class: 'form-control' }
+%>
+```
+
+# Update the form so that your new field will display
+```ruby
+# forms/curation_concerns/generic_work_form.rb
+module CurationConcerns
+  class GenericWorkForm < Sufia::Forms::WorkForm
+    self.model_class = ::GenericWork
+    self.terms += [:department]
+
+  end
+end
+```
+
+## If you would like to make your new field required
+```ruby
+# forms/curation_concerns/generic_work_form.rb
+module CurationConcerns
+  class GenericWorkForm < Sufia::Forms::WorkForm
+    self.model_class = ::GenericWork
+    self.terms += [:department]
+    self.required_fields +=[:department] # Add this line if you'd like to make your field required
+
+  end
+end
+```
+
+# Making a default Sufia field non-repeatable
+
+By default all fields in Sufia are repeatable. If you'd like to change this behavior for a field that Sufia provides out of the box, the title field in this case, you can do the following:
+
+```ruby
+# forms/curation_concerns/generic_work_form.rb
+module CurationConcerns
+  class GenericWorkForm < Sufia::Forms::WorkForm
+    self.model_class = ::GenericWork
+		
+    def self.multiple?(field)
+      if field.to_sym == :title
+        false
+      else
+        super
+      end
+    end
+		
+    # cast title back to multivalued so it will actually deposit
+    def self.model_attributes(_)
+      attrs = super
+      attrs[:title] = Array(attrs[:title]) if attrs[:title]
+      attrs
+    end
+
+  end
+end
+```
+
 # Note
 
-Please note that this documentation applies to Sufia <7. We will update this documentation for Sufia 7 soon.
+Please note that the documentation below applies to Sufia <7.
 
 Table of Contents
 =================
