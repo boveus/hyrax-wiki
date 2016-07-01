@@ -1,4 +1,6 @@
-# Customizing Sufia 7 metadata
+# Note
+
+Please note that this documentation applies to Sufia 7.
 
 Table of Contents
 =================
