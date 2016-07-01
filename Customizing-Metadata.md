@@ -75,7 +75,7 @@ terms:
     term: Zoology
 ```
 
-# Create a service to load the vocabulary.
+# Create a service to load the vocabulary
 
 ```ruby
 # services/departments_services.rb
