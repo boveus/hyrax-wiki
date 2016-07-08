@@ -168,7 +168,7 @@ Inside app/controllers/catalog_controller.rb, add the following:
 config.add_show_field solr_name("department", :stored_searchable), label: "Department"
 ```
 
-# Adjustments to display the field properly
+# Adjustments to display the field in work display
 Add the field to app/models/solr_document.rb
 ```ruby
 def department
