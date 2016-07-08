@@ -168,9 +168,23 @@ Inside app/controllers/catalog_controller.rb, add the following:
 config.add_show_field solr_name("department", :stored_searchable), label: "Department"
 ```
 
-# Extend the presenter
+# Adjustments to display the field properly
+Add the field to app/models/solr_document.rb
+```ruby
+def department
+  self[Solrizer.solr_name('department')]
+end
+```
 
-**TBD**
+Add the field to app/presenters/sufia/work_show_presenter.rb
+```ruby
+delegate :department, to: :solr_document
+```
+
+Add the field to app/views/curation_concerns/base/_metadata.html.erb
+```ruby
+<%= presenter.attribute_to_html(:department) %>
+```
 
 # Labels and help text
 
