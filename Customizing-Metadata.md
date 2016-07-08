@@ -14,6 +14,7 @@ Table of Contents
   * [If you'd like to make your new field required](#if-you-would-like-to-make-your-new-field-required)
 * [Making a default Sufia field non-repeatable](#making-a-default-sufia-field-non-repeatable)
 * [Make the field searchable](#make-the-field-searchable)
+* [Adjustments to display the field in work display](#adjustments-to-display-the-field-in-work-display)
 
 # Override the GenericWork model
 
