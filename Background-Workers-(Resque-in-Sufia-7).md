@@ -1,22 +1,28 @@
-Sufia 7 no longer packages a default queuing back-end, so if you'd like to use Resque in your Sufia app, read on.
+Sufia 7 no longer packages a default queuing back-end. Sufia 7 builds its jobs using Rails' ActiveJob framework, so you are free to use the queuing system of you choice (e.g., Resque, DelayedJob, Sidekiq) to manage long-running or slow processes. Flexibility and choice come with a cost, though, and there's some work involved in integrating whichever queueing back-end you select. This page offers guidance on installing and using Resque with Resque-pool to handle background jobs in your Sufia app.
 
-By default, Sufia **used to** use a queuing system named Resque -- [learn more about Resque](https://github.com/resque/resque) -- to manage long-running or slow processes. Resque relies on the [Redis](http://redis.io/) key-value store, so [Redis](http://redis.io/) must be installed *and running* on your system in order for background workers to pick up jobs.
+## Pre-Requisites: Install and Run Redis
 
-Run through Resque's installation process (which involves tweaking your `Gemfile`, adding some Rake tasks, and configuring Rails to use Resque as its ActiveJob adapter) first.
+Resque relies on the [Redis](http://redis.io/) key-value store, so [Redis](http://redis.io/) must be installed *and running* on your system in order for background workers to pick up jobs.
+
+## Code Changes: Install Resque
+
+To use Resque -- [learn more about Resque](https://github.com/resque/resque) -- as your queueing back-end, you must modify the code created by the Sufia generator. Resque offers instructions for [installation](https://github.com/resque/resque/#in-a-rails-3x-or-4x-app-as-a-gem); Resque-pool also offers [instructions](https://github.com/nevans/resque-pool#how-to-use) for installation and use. In general, you need to add resque and/or resque-pool to your `Gemfile`, require resque tasks in your `Rakefile`, and configure Rails to use Resque as its ActiveJob adapter). 
+
+## Managing Resque Workers
 
 There are two ways you can manage your workers:
 
 1. the `resque:work` rake task, which will run in the foreground in the terminal;
 2. use [resque-pool](https://github.com/nevans/resque-pool) to manage a number of configurable workers in background processes
 
-For the remainder of the background worker documentation, it is assumed that you're using resque-pool which is more robust, in which case you should next run through resque-pool's installation process (which involves tweaking your `Gemfile` and adding Rake tasks) first.
+For the remainder of the background worker documentation, it is assumed that you're using resque-pool which is more robust, in which case you should make sure you've run through resque-pool's installation process (which involves tweaking your `Gemfile` and adding Rake tasks) first.
 
 
 ## Terminology
 
 ### Resque
 
-Resque is a [message queue](https://en.wikipedia.org/wiki/Message_queue) that is used by Sufia to manage long-running or slow processes. (Sufia builds its jobs using Rails' ActiveJob framework, so you are free to use another queuing system, e.g., DelayedJob or Sidekiq.)
+Resque is a [message queue](https://en.wikipedia.org/wiki/Message_queue) that can be used by Sufia to manage long-running or slow processes. 
 
 ### Resque-Pool/pools
 
