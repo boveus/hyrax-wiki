@@ -140,4 +140,4 @@ If resque or resque-pool fails to start with the error:
 ```
 LoadError: No such file to load -- curation_concerns/actors/generic_work_actor
 ```
-you have not correctly modified your Sufia app to use Resque as a back-end. See [Code Changes: Install Resque](#Code Changes: Install Resque) for more information.
+you have not correctly modified your Sufia app to use Resque as a back-end. See [Code Changes: Install Resque](#Code_Changes:_Install_Resque) for more information.
