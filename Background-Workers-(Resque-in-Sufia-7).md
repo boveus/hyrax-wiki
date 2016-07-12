@@ -134,4 +134,10 @@ $ ps -ef | grep resque | grep -v pool-master
 root     8653  8416  0 00:08 ?        00:00:01 resque-1.25.2: Waiting for *
 ```
 
-If you see multiple resque-pool-master processes running, kill all of them and all of their child processes as well. Start resque-pool again. You should only have one resque-pool-master process running.  But you may have multiple worker processes running.
+If you see multiple resque-pool-master processes running, kill all of them and all of their child processes as well. Start resque-pool again. You should only have one resque-pool-master process running.  But you may have multiple worker processes running.  
+
+If resque or resque-pool fails to start with the error:
+```
+LoadError: No such file to load -- curation_concerns/actors/generic_work_actor
+```
+you have not correctly modified your Sufia app to use Resque as a back-end. See [Code Changes: Install Resque](#Code Changes: Install Resque) for more information.
