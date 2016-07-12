@@ -1,4 +1,4 @@
-Sufia 7 no longer packages a default queuing back-end. Sufia 7 builds its jobs using Rails' ActiveJob framework, so you are free to use the queuing system of you choice (e.g., Resque, DelayedJob, Sidekiq) to manage long-running or slow processes. Flexibility and choice come with a cost, though, and there's some work involved in integrating whichever queueing back-end you select. This page offers guidance on installing and using Resque with Resque-pool to handle background jobs in your Sufia app.
+Sufia 7 no longer packages a default queuing back-end. Sufia 7 builds its jobs using Rails' ActiveJob framework, so you are free to use the queuing system of you choice (e.g. Resque, DelayedJob, Sidekiq) to manage long-running or slow processes. Flexibility and choice come with a cost, though, and there's some work involved in integrating whichever queueing back-end you select. This page offers guidance on installing and using Resque with Resque-pool to handle background jobs in your Sufia app.
 
 ## Pre-Requisites: Install and Run Redis
 
@@ -6,7 +6,7 @@ Resque relies on the [Redis](http://redis.io/) key-value store, so [Redis](http:
 
 ## Code Changes: Install Resque
 
-To use Resque -- [learn more about Resque](https://github.com/resque/resque) -- as your queueing back-end, you must modify the code created by the Sufia generator. Resque offers instructions for [installation](https://github.com/resque/resque/#in-a-rails-3x-or-4x-app-as-a-gem); Resque-pool also offers [instructions](https://github.com/nevans/resque-pool#how-to-use) for installation and use. In general, you need to add resque and/or resque-pool to your `Gemfile`, require resque tasks in your `Rakefile`, and configure Rails to use Resque as its ActiveJob adapter). 
+To use Resque -- [learn more about Resque](https://github.com/resque/resque) -- as your queueing back-end, you must modify the code created by the Sufia generator. Resque offers instructions for [installation](https://github.com/resque/resque/#in-a-rails-3x-or-4x-app-as-a-gem); Resque-pool also offers [instructions](https://github.com/nevans/resque-pool#how-to-use) for installation and use. In general, you need to add resque and/or resque-pool to your `Gemfile`, require resque tasks in your `Rakefile`, and configure Rails to use Resque as its ActiveJob adapter. 
 
 ## Managing Resque Workers
 
