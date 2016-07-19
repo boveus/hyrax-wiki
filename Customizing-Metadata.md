@@ -81,7 +81,7 @@ terms:
 # Create a service to load the vocabulary
 
 ```ruby
-# services/departments_services.rb
+# services/departments_service.rb
 module DepartmentsService
   mattr_accessor :authority
   self.authority = Qa::Authorities::Local.subauthority_for('departments')
