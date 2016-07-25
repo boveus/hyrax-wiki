@@ -183,7 +183,7 @@ Add the field to app/presenters/sufia/work_show_presenter.rb
 delegate :department, to: :solr_document
 ```
 
-Add the field to app/views/curation_concerns/base/_metadata.html.erb
+Add the field to app/views/curation_concerns/base/_attribute_rows.html.erb
 ```ruby
 <%= presenter.attribute_to_html(:department) %>
 ```
