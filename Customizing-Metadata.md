@@ -164,7 +164,7 @@ module CurationConcerns
 end
 ```
 
-# Make the field searchable
+# Retrieve the field for search results display
 Inside app/controllers/catalog_controller.rb, add the following:
 ```ruby
 config.add_show_field solr_name("department", :stored_searchable), label: "Department"
