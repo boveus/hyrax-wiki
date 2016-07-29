@@ -210,4 +210,4 @@ en:
     deposit_agreement: "Institutional Agreement"
 ```
 
-Lastly, create your own `app/views/static/agreement.html.erb` page with the content of you deposit agreement.
+Lastly, create your own `app/views/static/agreement.html.erb` page with the content of your deposit agreement.
