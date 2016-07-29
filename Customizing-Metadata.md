@@ -15,6 +15,7 @@ Table of Contents
 * [Making a default Sufia field non-repeatable](#making-a-default-sufia-field-non-repeatable)
 * [Make the field searchable](#make-the-field-searchable)
 * [Adjustments to display the field in work display](#adjustments-to-display-the-field-in-work-display)
+* [Creating a Default Deposit Agreement](#creating-a-default-deposit-agreement)
 
 # Override the GenericWork model
 
@@ -191,3 +192,22 @@ Add the field to app/views/curation_concerns/base/_attribute_rows.html.erb
 # Labels and help text
 
 **TBD**
+
+# Creating a Default Deposit Agreement
+
+By default, Sufia will ask you to accept a deposit agreement each time you upload a file. You can make this implicit by having a passive agreement instead. To do this, change the `app/config/initializers/sufia.rb` to:
+
+``` ruby
+  config.active_deposit_agreement_acceptance = false
+```
+
+Create custom translations in your `sufia.en.yml` locales file:
+
+``` yml
+en:
+  sufia:
+    passive_consent_to_agreement: "By clicking the Save button, I am agreeing to etc..."
+    deposit_agreement: "Institutional Agreement"
+```
+
+Lastly, create your own `app/views/static/agreement.html.erb` page with the content of you deposit agreement.
