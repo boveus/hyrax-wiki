@@ -1,6 +1,6 @@
+1. Bump the version number in [version.rb](https://github.com/projecthydra/sufia/blob/master/lib/sufia/version.rb) to a [SemVer](http://semver.org/)-appropriate version; feel free to consult others (via Slack, hydra-tech, or a Hydra Tech call) if you're not sure.
 1. Modify [the README](https://github.com/projecthydra/sufia/blob/master/README.md) to replace all instances of the past version with the new version. *Please double-check your changes* to make sure you don't have typos, since you'll be pushing this change without any community review.
-1. Add, commit, and push your README change directly to the master branch of the **[upstream](https://github.com/projecthydra/sufia)** repository.
-1. Bump the version number in [version.rb](https://github.com/projecthydra/sufia/blob/master/lib/sufia/version.rb) to a [SemVer](http://semver.org/)-appropriate version; feel free to consult others (via Slack, hydra-tech, or a Hydra Tech call) if you're not sure. **Add, commit, and push this change.**
+1. Add, commit, and push your README and version changes directly to the master branch of the **[upstream](https://github.com/projecthydra/sufia)** repository.
 1. Release the gem to rubygems.org:
   * If this is your first time pushing to rubygems.org for a Hydra project
     * Create an account at rubygems.org if you haven't already, or make note of your rubygems.org email address.
