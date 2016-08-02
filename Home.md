@@ -7,6 +7,7 @@
 * [Customizing Actors](https://github.com/projecthydra-labs/curation_concerns/wiki/Actors) (from CurationConcerns)
 * [[Sufia Development Guide]]
 * [[Release management process]]
+* [[Backup and Restoration]]
 
 # Other notes
 
