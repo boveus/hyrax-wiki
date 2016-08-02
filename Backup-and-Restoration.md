@@ -1,4 +1,4 @@
-# Sufia Restoration/Migration
+# Sufia Backup and Restoration/Migration
 
 Migrating an existing Sufia Hydra system to a new box or backing up data for disaster recovery purposes is fairly simple but has a few gotcha moments that can cause problems for restoration of data. 
 
