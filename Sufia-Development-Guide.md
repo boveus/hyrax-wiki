@@ -32,7 +32,7 @@ Note: DO NOT USE FOR PRODUCTION
 Start Solr:
 ```
 #  from <sufia root>/.internal_test_app in a separate terminal window 
-#  if the file config/solr_wrapper_test.yml exists (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info)
+#  if the file config/solr_wrapper_test.yml exists (see section 'Work with test app in the browser' for more info)
 solr_wrapper --config config/solr_wrapper_test.yml
 # - or - from sufia root in a separate terminal window
 solr_wrapper -d solr/config/ -n hydra-test -p 8985
@@ -40,7 +40,7 @@ solr_wrapper -d solr/config/ -n hydra-test -p 8985
 Start Fedora:
 ```
 #  from <sufia root>/.internal_test_app in a separate terminal window 
-#  if the file config/fcrepo_wrapper_test.yml exists (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info)
+#  if the file config/fcrepo_wrapper_test.yml exists (see section 'Work with test app in the browser' for more info)
 fcrepo_wrapper --config config/fcrepo_wrapper_test.yml
 # - or - from sufia root in a separate terminal window
 fcrepo_wrapper -p 8986 --no-jms
