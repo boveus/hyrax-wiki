@@ -2,6 +2,7 @@ The Sufia Development Guide is for people who want to modify Sufia itself. See t
 
 * [Run the test suite](#run-the-test-suite)
   * [Prerequisites](#prerequisites)
+    * [Run the wrappers](#run-the-wrappers)
   * [Test app](#test-app)
   * [Run tests](#run-tests)
   * [Testing FAQ](#testing-faq)
@@ -15,6 +16,10 @@ The Sufia Development Guide is for people who want to modify Sufia itself. See t
 ## Prerequisites
 * Make sure all [basic prerequisites](https://github.com/projecthydra/sufia#prerequisites) are running.
 * Additional prerequisite for tests: [PhantomJS](http://phantomjs.org/).
+
+### Run the wrappers
+
+**TODO**
 
 ## Test app
 Generate the test app.  *NOTE: Run this only once.*
