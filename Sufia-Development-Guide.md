@@ -32,7 +32,7 @@ Note: DO NOT USE FOR PRODUCTION
 Start Solr:
 ```
 #  from <sufia root>/.internal_test_app in a separate terminal window 
-#  if the file config/solr_wrapper_test.yml exists (created below in step two or by ActiveFedora generators)
+#  if the file config/solr_wrapper_test.yml exists (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info)
 solr_wrapper --config config/solr_wrapper_test.yml
 # - or - from sufia root in a separate terminal window
 solr_wrapper -d solr/config/ -n hydra-test -p 8985
@@ -40,7 +40,7 @@ solr_wrapper -d solr/config/ -n hydra-test -p 8985
 Start Fedora:
 ```
 #  from <sufia root>/.internal_test_app in a separate terminal window 
-#  if the file config/fcrepo_wrapper_test.yml exists (created below in step two or by ActiveFedora generators)
+#  if the file config/fcrepo_wrapper_test.yml exists (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info)
 fcrepo_wrapper --config config/fcrepo_wrapper_test.yml
 # - or - from sufia root in a separate terminal window
 fcrepo_wrapper -p 8986 --no-jms
@@ -98,10 +98,10 @@ Just let travis handle this when you submit your PR. but if you really want to r
 
 You may want to see the test application in your browser to verify that your changes look correct.  This section assumes that you have generated the test app via `rake engine_cart:generate`.
 
-1. Verify that ActiveFedora has installed the development templates by looking for `.internal_test_app/config/solr_wrapper_test.yml`. (Note: As of the latest draft of this document, ActiveFedora has **not** been released with this change.  If the file exists skip to step 3.)
+1. Verify that ActiveFedora has installed the development templates by looking for `.internal_test_app/config/solr_wrapper_test.yml`. (Note: ActiveFedora was first released with this change in version [9.13.10](https://github.com/projecthydra/active_fedora/releases/tag/v9.13.0).  If the file exists skip to step 3.)
 1. Copy the templates from ActiveFedora
 
-   Unfortunately this will need to be done each time you regenerate the test application. This step is a bit hacky and should go away once the latest ActiveFedora has been released with this commit:  [c8309ae](https://github.com/projecthydra/active_fedora/commit/c8309aecd4672d719271cd98c103f017f25191a1). 
+   If you don't have the files you will need to copy them each time you regenerate the test application. This step is a bit hacky and the fixed was added to ActiveFedora in [c8309ae](https://github.com/projecthydra/active_fedora/commit/c8309aecd4672d719271cd98c103f017f25191a1). 
 
   1. Get the following dev environment-related files from ActiveFedora and put them in `.internal_test_app/`:
     * [.fcrepo_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/.fcrepo_wrapper)
