@@ -2,10 +2,10 @@ The Sufia Development Guide is for people who want to modify Sufia itself. See t
 
 * [Run the test suite](#run-the-test-suite)
   * [Prerequisites](#prerequisites)
-    * [Run the wrappers](#run-the-wrappers)
-  * [Test app](#test-app)
+  * [Generate test app](#generate-test-app)
+  * [Run the wrappers](#run-the-wrappers)
   * [Run tests](#run-tests)
-  * [Testing FAQ](#testing-faq)
+  * [Troubleshooting / Testing FAQ](#troubleshooting--testing-faq)
 * [Work with test app in the browser](#work-with-test-app-in-the-browser)
   * [Cleaning up](#cleaning-up)
 * [Change validation behavior](#change-validation-behavior)
@@ -17,12 +17,8 @@ The Sufia Development Guide is for people who want to modify Sufia itself. See t
 * Make sure all [basic prerequisites](https://github.com/projecthydra/sufia#prerequisites) are running.
 * Additional prerequisite for tests: [PhantomJS](http://phantomjs.org/).
 
-### Run the wrappers
-
-**TODO**
-
-## Test app
-Generate the test app.  *NOTE: Run this only once.*
+## Generate test app
+*NOTE: Run this only once.*
 ```
 cd <sufia directory>
 rake engine_cart:generate
@@ -30,15 +26,48 @@ rake engine_cart:generate
 
 This generates `sufia/.internal_test_app` directory.  The tests will run against this test app.
 
+## Run the wrappers
+Note: DO NOT USE FOR PRODUCTION
+
+Start Solr:
+```
+#  from <sufia root>/.internal_test_app in a separate terminal window 
+#  if the file config/solr_wrapper_test.yml exists (created below in step two or by ActiveFedora generators)
+solr_wrapper --config config/solr_wrapper_test.yml
+# - or - from sufia root in a separate terminal window
+solr_wrapper -d solr/config/ -n hydra-test -p 8985
+```
+Start Fedora:
+```
+#  from <sufia root>/.internal_test_app in a separate terminal window 
+#  if the file config/fcrepo_wrapper_test.yml exists (created below in step two or by ActiveFedora generators)
+fcrepo_wrapper --config config/fcrepo_wrapper_test.yml
+# - or - from sufia root in a separate terminal window
+fcrepo_wrapper -p 8986 --no-jms
+```
+
 ## Run tests
+Run entire suite:
 ```
 cd <sufia directory>
 rake spec
 ```
 
-## Testing FAQ
-* **How do I run just tests without code coverage or style checking?**
-* **How do I run a single test (e.g. while I'm working on the relevant functionality)**
+Run a single spec:
+```
+rspec path/to/filel_spec.rb
+```
+
+Run Rubocop style checker:
+```
+rubocop
+```
+or, to have rubocop autofix errors (only if you git commit first!):
+```
+rubocop -a
+```
+
+## Troubleshooting / Testing FAQ
 * **The generated test app isn't doing what I expected after making (and/or pulling) changes to Sufia.  What can I do?**  Generally, engine cart will pick up changes to Sufia.  If not, try the following to regenerate the test app:
 
   ```bash
@@ -47,26 +76,23 @@ rake spec
   bundle install
   rake engine_cart:generate
   ```
-* **Where is rake jetty?**  It was retired.  Solr and Fedora are started on their own.
-* **How can I start a test instance of Solr? (DO NOT USE FOR PRODUCTION)**
-```
-#  from <sufia root>/.internal_test_app in a separate terminal window 
-#  if the file config/solr_wrapper_test.yml exists (created below in step two or by ActiveFedora generators)
-solr_wrapper --config config/solr_wrapper_test.yml
-# - or - from sufia root in a separate terminal window
-solr_wrapper -d solr/config/ -n hydra-test -p 8985
-```
-* **Test that Solr is running.** In a web browser check [localhost:8985](http://localhost:8985/).  You should see an instance of Solr with a Solr core name of `hydra-test`
-* **How can I start a test instance of Fedora? (DO NOT USE FOR PRODUCTION)**
-```
-#  from <sufia root>/.internal_test_app in a separate terminal window 
-#  if the file config/fcrepo_wrapper_test.yml exists (created below in step two or by ActiveFedora generators)
-fcrepo_wrapper --config config/fcrepo_wrapper_test.yml
-# - or - from sufia root in a separate terminal window
-fcrepo_wrapper -p 8986 --no-jms
-```
-* **Test that Fedora is running.** In a web browser check [localhost:8986](http://localhost:8986/). You should see the Fedora splash page.
-* **Those ports look different.** They are! Now that we use `solr_wrapper` and `fcrepo_wrapper` instead of `hydra-jetty`, which bundled test and dev environments together and was occasionally problematic, test and dev instances of Solr and Fedora now run on separate ports. If you want to run the test suite, use the ports above (8985 for Solr and 8986 for Fedora). If you want to check out Sufia in your browser, use port 8983 for Solr and port 8984 for Fedora as stated in  [Creating a Sufia-based app](https://github.com/projecthydra/sufia#creating-a-sufia-based-app): [Solr](https://github.com/projecthydra/sufia#start-solr) and [Fedora](https://github.com/projecthydra/sufia#start-fcrepo).
+* **Where is rake jetty?**
+It was retired.  Solr and Fedora now run individually; see [Run the wrappers](#run-the-wrappers).
+* **Test that Solr is running.**
+In a web browser check [localhost:8985](http://localhost:8985/).  You should see an instance of Solr with a Solr core name of `hydra-test`
+* **Test that Fedora is running.**
+In a web browser check [localhost:8986](http://localhost:8986/). You should see the Fedora splash page.
+* **Those ports look different.**
+They are! Now that we use `solr_wrapper` and `fcrepo_wrapper` instead of `hydra-jetty`, which bundled test and dev environments together and was occasionally problematic, test and dev instances of Solr and Fedora now run on separate ports. If you want to run the test suite, use the ports above (8985 for Solr and 8986 for Fedora). If you want to check out Sufia in your browser, use port 8983 for Solr and port 8984 for Fedora as stated in  [Creating a Sufia-based app](https://github.com/projecthydra/sufia#creating-a-sufia-based-app): [Solr](https://github.com/projecthydra/sufia#start-solr) and [Fedora](https://github.com/projecthydra/sufia#start-fcrepo).
+* **How do I run the code coverage report?**
+Just let travis handle this when you submit your PR. but if you really want to run it locally:
+   ```
+   COVERAGE=true rspec
+   ```
+* **You can run everything (including fedora, solr wrappers) using the default task:**
+   ```
+   rake
+   ```
 
 # Work with test app in the browser
 
