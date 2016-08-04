@@ -32,6 +32,8 @@ rake spec
 ```
 
 ## Testing FAQ
+* **How do I run just tests without code coverage or style checking?**
+* **How do I run a single test (e.g. while I'm working on the relevant functionality)**
 * **The generated test app isn't doing what I expected after making (and/or pulling) changes to Sufia.  What can I do?**  Generally, engine cart will pick up changes to Sufia.  If not, try the following to regenerate the test app:
 
   ```bash
