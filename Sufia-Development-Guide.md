@@ -29,7 +29,7 @@ rake engine_cart:generate
 This generates `sufia/.internal_test_app` directory.  The tests will run against this test app. You should not have to regenerate the test app unless you pull in code changes from the `master` branch, or start working on a new feature or bug.
 
 ## Run the wrappers
-*Note: DO NOT USE FOR PRODUCTION*  You'll need separate terminal windows/tabs for each.
+*Note: DO NOT USE FOR PRODUCTION*.  You'll need separate terminal windows/tabs for each wrapper.
 
 ### Wrapper Method 1
 
