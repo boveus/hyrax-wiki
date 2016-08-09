@@ -16,23 +16,25 @@ The Sufia Development Guide is for people who want to modify Sufia itself. See t
 ## Prerequisites
 * Make sure all [basic prerequisites](https://github.com/projecthydra/sufia#prerequisites) are running.
 * Additional prerequisite for tests: [PhantomJS](http://phantomjs.org/).
+* Tell EngineCart to use Rails 4.x (this is temporary, while we work on Rails 5 support in Sufia): `export RAILS_VERSION=4.2.7`
 
 ## Generate test app
+
 *NOTE: Run this only once.*
 ```
 cd <sufia directory>
 rake engine_cart:generate
 ```
 
-This generates `sufia/.internal_test_app` directory.  The tests will run against this test app.
+This generates `sufia/.internal_test_app` directory.  The tests will run against this test app. You should not have to regenerate the test app unless you pull in code changes from the `master` branch, or start working on a new feature or bug.
 
 ## Run the wrappers
-Note: DO NOT USE FOR PRODUCTION
+*Note: DO NOT USE FOR PRODUCTION*
 
 Start Solr:
 ```
 #  from <sufia root>/.internal_test_app in a separate terminal window 
-#  if the file config/solr_wrapper_test.yml exists (see section 'Work with test app in the browser' for more info)
+#  if the file config/solr_wrapper_test.yml exists (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info)
 solr_wrapper --config config/solr_wrapper_test.yml
 # - or - from sufia root in a separate terminal window
 solr_wrapper -d solr/config/ -n hydra-test -p 8985
@@ -40,7 +42,7 @@ solr_wrapper -d solr/config/ -n hydra-test -p 8985
 Start Fedora:
 ```
 #  from <sufia root>/.internal_test_app in a separate terminal window 
-#  if the file config/fcrepo_wrapper_test.yml exists (see section 'Work with test app in the browser' for more info)
+#  if the file config/fcrepo_wrapper_test.yml exists (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info)
 fcrepo_wrapper --config config/fcrepo_wrapper_test.yml
 # - or - from sufia root in a separate terminal window
 fcrepo_wrapper -p 8986 --no-jms
@@ -62,37 +64,56 @@ Run Rubocop style checker:
 ```
 rubocop
 ```
-or, to have rubocop autofix errors (only if you git commit first!):
+
+If Rubocop finds style violations, you can ask it to try automatically fixing them. We recommend committing all work prior to running this command, though, as sometimes Rubocop will create breaking changes:
 ```
 rubocop -a
 ```
 
 ## Troubleshooting / Testing FAQ
-* **The generated test app isn't doing what I expected after making (and/or pulling) changes to Sufia.  What can I do?**  Generally, engine cart will pick up changes to Sufia.  If not, try the following to regenerate the test app:
 
-  ```bash
-  cd <sufia directory>
-  rm -rf .internal_test_app Gemfile.lock
-  bundle install
-  rake engine_cart:generate
-  ```
-* **Where is rake jetty?**
+* **The generated test app isn't doing what I expected after making (and/or pulling) changes to Sufia.  What can I do?**  Generally, engine cart will pick up changes to Sufia.  If not, try the following to regenerate a clean test app:
+
+```bash
+cd <sufia directory>
+rm -rf .internal_test_app Gemfile.lock
+bundle install
+rake engine_cart:generate
+```
+
+* **Where is `hydra-jetty`/its rake tasks?**
+
 It was retired.  Solr and Fedora now run individually; see [Run the wrappers](#run-the-wrappers).
-* **Test that Solr is running.**
-In a web browser check [localhost:8985](http://localhost:8985/).  You should see an instance of Solr with a Solr core name of `hydra-test`
-* **Test that Fedora is running.**
-In a web browser check [localhost:8986](http://localhost:8986/). You should see the Fedora splash page.
-* **Those ports look different.**
-They are! Now that we use `solr_wrapper` and `fcrepo_wrapper` instead of `hydra-jetty`, which bundled test and dev environments together and was occasionally problematic, test and dev instances of Solr and Fedora now run on separate ports. If you want to run the test suite, use the ports above (8985 for Solr and 8986 for Fedora). If you want to check out Sufia in your browser, use port 8983 for Solr and port 8984 for Fedora as stated in  [Creating a Sufia-based app](https://github.com/projecthydra/sufia#creating-a-sufia-based-app): [Solr](https://github.com/projecthydra/sufia#start-solr) and [Fedora](https://github.com/projecthydra/sufia#start-fcrepo).
-* **How do I run the code coverage report?**
-Just let travis handle this when you submit your PR. but if you really want to run it locally:
-   ```
-   COVERAGE=true rspec
-   ```
-* **You can run everything (including fedora, solr wrappers) using the default task:**
-   ```
-   rake
-   ```
+
+* **How do I verify that Solr is running?**
+
+In a web browser, check [localhost:8985](http://localhost:8985/). You should see an instance of Solr with a Solr core name of `hydra-test`
+
+* **How do I verify that that Fedora is running?**
+
+In a web browser, check [localhost:8986](http://localhost:8986/). You should see the Fedora splash page.
+
+* **Hey, those ports (8985/8986) look different from what I expected!**
+
+Only because they are! Now that we use `solr_wrapper` and `fcrepo_wrapper` instead of `hydra-jetty`, which bundled test and dev environments together and was occasionally problematic, test and dev instances of Solr and Fedora now run on separate ports. If you want to run the test suite, use the ports above (8985 for Solr and 8986 for Fedora). If you want to check out Sufia in your browser, use port 8983 for Solr and port 8984 for Fedora as stated in [Solr](https://github.com/projecthydra/sufia#start-solr) and [Fedora](https://github.com/projecthydra/sufia#start-fcrepo).
+
+* **How do I run the test coverage report?**
+
+Just let Travis-CI handle this when you submit your PR. But if you really want to run it locally:
+
+```
+COVERAGE=true rspec
+```
+
+* **Can't you simplify this?**
+
+Yes. You can run everything (including the Fedora and Solr wrappers) using the default rake task, like so:
+
+```
+rake
+```
+
+But note that if you're actively working on a feature or a bug fix, you will likely not want to use this task repeatedly because it's remarkably slower than `rspec`.
 
 # Work with test app in the browser
 
@@ -132,7 +153,7 @@ You may want to see the test application in your browser to verify that your cha
 
 ## Cleaning up
 
-1. To stop the servers, press CTRL-C in the terminal windows
+1. To stop the Fedora and Solr servers, press CTRL-C in the terminal windows in which they are running
 1. To clean out the data in Solr & Fedora
   1. `cd <sufia directory>\.internal_test_app`
   1. `fcrepo_wrapper clean`
