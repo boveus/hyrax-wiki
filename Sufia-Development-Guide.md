@@ -29,23 +29,23 @@ rake engine_cart:generate
 This generates `sufia/.internal_test_app` directory.  The tests will run against this test app. You should not have to regenerate the test app unless you pull in code changes from the `master` branch, or start working on a new feature or bug.
 
 ## Run the wrappers
-*Note: DO NOT USE FOR PRODUCTION*
+*Note: DO NOT USE FOR PRODUCTION*  You'll need separate terminal windows/tabs for each.
 
-Start Solr:
+### Wrapper Method 1
+
+From `<sufia root>/.internal_test_app`, if you have `config/solr_wrapper_test.yml` and `config/fcrepo_wrapper_test.yml` (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info), run:
+
+```bash
+solr_wrapper -v --config config/solr_wrapper_test.yml
+fcrepo_wrapper -v --config config/fcrepo_wrapper_test.yml # separate window/tab
 ```
-#  from <sufia root>/.internal_test_app in a separate terminal window 
-#  if the file config/solr_wrapper_test.yml exists (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info)
-solr_wrapper --config config/solr_wrapper_test.yml
-# - or - from sufia root in a separate terminal window
-solr_wrapper -d solr/config/ -n hydra-test -p 8985
-```
-Start Fedora:
-```
-#  from <sufia root>/.internal_test_app in a separate terminal window 
-#  if the file config/fcrepo_wrapper_test.yml exists (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info)
-fcrepo_wrapper --config config/fcrepo_wrapper_test.yml
-# - or - from sufia root in a separate terminal window
-fcrepo_wrapper -p 8986 --no-jms
+### Wrapper Method 2
+
+From `<sufia root>/` (not `.internal_test_app`):
+
+```bash
+solr_wrapper -v -d solr/config/ -n hydra-test -p 8985
+fcrepo_wrapper -v -p 8986 --no-jms # separate window/tab
 ```
 
 ## Run tests
