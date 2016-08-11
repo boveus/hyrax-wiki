@@ -8,6 +8,11 @@ Resque relies on the [Redis](http://redis.io/) key-value store, so [Redis](http:
 
 To use Resque -- [learn more about Resque](https://github.com/resque/resque) -- as your queueing back-end, you must modify the code created by the Sufia generator. Resque offers instructions for [installation](https://github.com/resque/resque/#in-a-rails-3x-or-4x-app-as-a-gem); Resque-pool also offers [instructions](https://github.com/nevans/resque-pool#how-to-use) for installation and use. In general, you need to add resque and/or resque-pool to your `Gemfile`, require resque tasks in your `Rakefile`, and configure Rails to use Resque as its ActiveJob adapter. 
 
+Configure ActiveJob to use resque by adding the following to your application.rb
+```
+config.active_job.queue_adapter = :resque
+```
+
 ## Managing Resque Workers
 
 There are two ways you can manage your workers:
