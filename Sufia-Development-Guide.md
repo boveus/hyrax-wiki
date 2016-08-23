@@ -16,7 +16,7 @@ The Sufia Development Guide is for people who want to modify Sufia itself. See t
 ## Prerequisites
 * Make sure all [basic prerequisites](https://github.com/projecthydra/sufia#prerequisites) are running.
 * Additional prerequisite for tests: [PhantomJS](http://phantomjs.org/).
-* Tell EngineCart to use Rails 4.x (this is temporary, while we work on Rails 5 support in Sufia): `export RAILS_VERSION=4.2.7`
+* Git clone the repo, use latest stable Ruby (2.3.1), `bundle install`.
 
 ## Generate test app
 
