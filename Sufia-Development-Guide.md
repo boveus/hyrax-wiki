@@ -1,5 +1,6 @@
 The Sufia Development Guide is for people who want to modify Sufia itself. See the [[Sufia Management Guide]] for guidance on how to configure and set up a Sufia-based application.
 
+* [Grab an issue](#grab-an-issue)
 * [Run the test suite](#run-the-test-suite)
   * [Prerequisites](#prerequisites)
   * [Generate test app](#generate-test-app)
@@ -10,6 +11,10 @@ The Sufia Development Guide is for people who want to modify Sufia itself. See t
   * [Cleaning up](#cleaning-up)
 * [Change validation behavior](#change-validation-behavior)
 * [Regenerating the README TOC](#regenerating-the-readme-toc)
+
+# Grab an issue
+
+If you're interested in picking up an issue in Sufia, feel free to look over the issues marked "ready" in GitHub (or browse the "Ready" column in [Sufia's waffle board](https://waffle.io/projecthydra/sufia)). When you find an issue you'd like to work on, please do assign yourself the issue in GitHub. This is an important step that signals to other developers that you're working on the issue and that they shouldn't pick it up too.
 
 # Run the test suite
 
