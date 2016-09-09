@@ -88,7 +88,9 @@ rubocop -a
 
 ## Troubleshooting / Testing FAQ
 
-* **The generated test app isn't doing what I expected after making (and/or pulling) changes to Sufia.  What can I do?**  Generally, engine cart will pick up changes to Sufia.  If not, try the following to regenerate a clean test app:
+### The generated test app isn't doing what I expected after making (and/or pulling) changes to Sufia.  What can I do?
+
+Generally, engine_cart will pick up changes to Sufia.  If not, try the following to regenerate a clean test app:
 
 ```bash
 cd <sufia directory>
@@ -97,23 +99,23 @@ bundle install
 rake engine_cart:generate
 ```
 
-* **Where is `hydra-jetty`/its rake tasks?**
+### Where is `hydra-jetty`/its rake tasks?
 
 It was retired.  Solr and Fedora now run individually; see [Run the wrappers](#run-the-wrappers).
 
-* **How do I verify that Solr is running?**
+### How do I verify that Solr is running?
 
 In a web browser, check [localhost:8985](http://localhost:8985/). You should see an instance of Solr with a Solr core name of `hydra-test`
 
-* **How do I verify that that Fedora is running?**
+### How do I verify that that Fedora is running?
 
 In a web browser, check [localhost:8986](http://localhost:8986/). You should see the Fedora splash page.
 
-* **Hey, those ports (8985/8986) look different from what I expected!**
+### Hey, those ports (8985/8986) look different from what I expected!
 
 Only because they are! Now that we use `solr_wrapper` and `fcrepo_wrapper` instead of `hydra-jetty`, which bundled test and dev environments together and was occasionally problematic, test and dev instances of Solr and Fedora now run on separate ports. If you want to run the test suite, use the ports above (8985 for Solr and 8986 for Fedora). If you want to check out Sufia in your browser, use port 8983 for Solr and port 8984 for Fedora as stated in [Solr](https://github.com/projecthydra/sufia#start-solr) and [Fedora](https://github.com/projecthydra/sufia#start-fcrepo).
 
-* **How do I run the test coverage report?**
+### How do I run the test coverage report?
 
 Just let Travis-CI handle this when you submit your PR. But if you really want to run it locally:
 
@@ -121,7 +123,7 @@ Just let Travis-CI handle this when you submit your PR. But if you really want t
 COVERAGE=true rspec
 ```
 
-* **Can't you simplify this?**
+### Can't you simplify this?
 
 Yes. You can run everything (including the Fedora and Solr wrappers) using the default rake task, like so:
 
@@ -129,7 +131,17 @@ Yes. You can run everything (including the Fedora and Solr wrappers) using the d
 rake
 ```
 
+(Note that the default task in Sufia is the `ci` task, so running the above command is the same as running `rake ci`.)
+
 But note that if you're actively working on a feature or a bug fix, you will likely not want to use this task repeatedly because it's remarkably slower than `rspec`.
+
+### I've pushed my branch, which passed locally, to GitHub and the build failed on Travis-CI. What gives? I need to be able to reproduce this locally to get my branch merged.
+
+The three most common situations here are:
+
+* **A new version of bundler came out.** Upgrade the version of bundler via `gem install bundler -v x.y.z` and then run `bundle install` and regenerate the test application.
+* **Travis-CI picked up a newer version of a dependency than you have.** Delete your local `Gemfile.lock`, run `bundle install` again, and regenerate the test application.
+* **Your test application is stale.** Regenerate it.
 
 # Work with test app in the browser
 
