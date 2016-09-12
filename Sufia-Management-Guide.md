@@ -17,8 +17,6 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
 * [Zotero integration](#zotero-integration)
 * [Customizing metadata](#customizing-metadata)
 * [Admin Users](#admin-users)
-  * [One time setup for first admin](#one-time-setup-for-first-admin)
-  * [Adding an admin user](#adding-an-admin-user)
 * [Migrating data to PCDM in Sufia 7](#migrating-data-to-pcdm-in-sufia-7)
 
 ## Production concerns
