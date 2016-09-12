@@ -57,15 +57,7 @@ If you'd like to use Resque in your Sufia app, we've written up a [guide](https:
 
 ## Audiovisual transcoding
 
-Sufia includes support for transcoding audio and video files.  To enable this, make sure to have ffmpeg > 1.0 installed.
-
-On OSX, you can use homebrew for this.
-
-```
-brew install ffmpeg --with-fdk-aac --with-libvpx --with-libvorbis
-```
-
-To compile ffmpeg yourself, see https://trac.ffmpeg.org/wiki/CompilationGuide
+Sufia includes support for transcoding audio and video files via CurationConcerns. View [CurationConcerns README](https://github.com/projecthydra/curation_concerns/blob/master/README.md#ffmpeg) for installation/configuration help.
 
 ## User interface
 
