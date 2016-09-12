@@ -1,64 +1,67 @@
-## One time setup for first admin
+# Setup
 
-### Install hydra-role-management
+## Install hydra-role-management
 
 Follow the directions for installing [hydra-role-management](https://github.com/projecthydra/hydra-role-management#installing).
 
+Add the following to your application's Gemfile:
+
+```ruby
+gem 'hydra-role-management'
+```
+
+Then install the gem and run its database migrations:
+
+```bash
+# each of these commands will produce some output.
+bundle install
+rails generate roles
+rake db:migrate
+```
+
 NOTE: When adding cancan abilities, put them at the end of the custom_permissions method.
 
-### Add the first admin user
+# Add an initial admin user via command-line
 
 Run rails console
+
 ```
 $ rails c
 ```
 
-Run the following commands in the rails console
+Add the administrative role to an administrative user:
+
 ```
-u = User.find_by_user_key( "your_admin_users_email@fake.email.org" )
-r = Role.create name: "admin"
-r.users << u
-r.save
+admin = Role.create(name: "admin")
+admin.users << User.find_by_user_key( "your_admin_users_email@fake.email.org" )
+admin.save
 ```
 
-## Add more admin users
+# Add more admin users
 
-### via Command Line
-Run the following commands in the rails console
-```
-u = User.find_by_user_key( "your_admin_users_email@fake.email.org" )
-r = Role.find_by_name("admin")
-r.users << u
-r.save
-```
+You can add more administrative users via the command-line like you did above, or you can do so via the UI:
 
-### via Browser
 * Login as an admin user
-* add /roles to the end of the main URL
-* select a role and add user
+* Browse to http://your.app.host/roles 
+* Select a role and add one or more users to it
 
-## Confirm user was made an admin
+# Confirm user was made an admin
 
-### via Command Line
+Run the following commands in the rails console:
 
-Run the following commands in the rails console
 ```
 u = User.find_by_user_key( "your_admin_users_email@fake.email.org" )
 u.admin?
-  # shows SELECT statment
- => true
+# => true
 ```
-if u.admin? == true then SUCCESS
 
-### via Browser
+If `u.admin?` returns `true` then everything worked as expected.
 
-* go to your Sufia install
-* login as the admin user
-* add /roles to the end of the main URL
+Or you can verify this in the UI:
 
-SUCCESS will look like...
+* Login as an admin user
+* Browse to http://your.app.host/roles 
+  * The page should load without exceptions
+  * You should see a button labeled "Create a new role"
 
-* you don't get an error on the /roles page
-* you see a button labeled "Create a new role"
-
-If you don't see this or get a permission error, you may need to restart and try again in the browser.
+If you don't see this or get a permission error, you may need to restart your Rails server and try again in the browser.
