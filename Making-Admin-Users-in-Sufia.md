@@ -19,7 +19,7 @@ rails generate roles
 rake db:migrate
 ```
 
-NOTE: When adding cancan abilities, put them at the end of the custom_permissions method.
+When you add new abilities to `app/models/ability.rb` per the hydra-role-management instructions, add that code to the end of the `custom_permissions` method.
 
 # Add an initial admin user via command-line
 
