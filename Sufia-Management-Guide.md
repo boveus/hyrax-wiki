@@ -182,56 +182,7 @@ Chances are you will want to customize the default metadata provided by Sufia.  
 
 ## Admin Users
 
-### One time setup for first admin
-
-Follow the directions for [installing hydra-role-management](https://github.com/projecthydra/hydra-role-management#installing).
-
-Add the following gem to Sufia installed app's Gemfile
-```ruby
-gem 'hydra-role-management'
-```
-
-Then install the gem, run the generator, and database migrations:
-```bash
-# each of these commands will produce some output.
-bundle install
-rails generate roles
-rake db:migrate
-```
-
-### Adding an admin user
-
-In rails console, run the following commands to create the admin role.
-```ruby
-r = Role.create name: "admin"
-```
-
-Add a user as the admin.
-```ruby
-r.users << User.find_by_user_key( "your_admin_users_email@fake.email.org" )
-r.save
-```
-
-Confirm user was made an admin.
-```ruby
-u = User.find_by_user_key( "your_admin_users_email@fake.email.org" )
-u.admin?
-  # shows SELECT statment
- => true
-
-if u.admin? == true then SUCCESS
-```
-
-Confirm in browser
-
-* go to your Sufia install
-* login as the admin user
-* add /roles to the end of the main URL
-
-SUCCESS will look like...
-
-* you don't get an error on the /roles page
-* you see a button labeled "Create a new role"
+See [making admin users in Sufia](https://github.com/projecthydra/sufia/wiki/Making-Admin-Users-in-Sufia).
 
 ## Migrating data to PCDM in Sufia 7
 
