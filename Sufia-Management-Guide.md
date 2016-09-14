@@ -60,6 +60,7 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
 | Capture usage statistics | requires [Google Analytics ID to be specified in Sufia initializer](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#capturing-usage) || Geonames integration for location-oriented metadata | requires a Geonames API username to be specified in Sufia initializer |
 | Virus detection for uploaded files | install `clamav` package and follow [the instructions in CurationConcerns](https://github.com/projecthydra/curation_concerns#virus-detection) |
 | Display usage statistics in the UI | requires [configuration](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#displaying-usage-in-the-ui) |
+| Administrative users | requires [configuration](https://github.com/projecthydra/sufia/wiki/Making-Admin-Users-in-Sufia) |
 | Citation formatting suggestions | requires configuration: enable `config.citations` in Sufia initializer, then run `rails g sufia:citation_config` |
 | Integration with Zotero | requires [configuration](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#zotero-integration) |
 | Integration w/ cloud storage providers | requires [configuration](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#integration-with-dropbox-box-etc) |
