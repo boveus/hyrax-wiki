@@ -7,7 +7,7 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
   * [Web server](#web-server)
   * [Database](#database)
   * [Mailers](#mailers)
-* [Background workers](#background-workers)
+  * [Background workers](#background-workers)
 * [Audiovisual transcoding](#audiovisual-transcoding)
 * [User interface](#user-interface)
 * [Integration with Dropbox, Box, etc\.](#integration-with-dropbox-box-etc)
@@ -17,10 +17,10 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
   * [Displaying usage in the UI](#displaying-usage-in-the-ui)
 * [Zotero integration](#zotero-integration)
 * [Customizing metadata](#customizing-metadata)
-* [Admin Users](#admin-users)
+* [Admin users](#admin-users)
 * [Migrating data to PCDM in Sufia 7](#migrating-data-to-pcdm-in-sufia-7)
 
-## Feature matrix
+# Feature matrix
 
 | Feature | How to enable |
 | ------- | ------------- |
@@ -57,7 +57,8 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
 | Transcoding of audio and video files | off by default: enable in CurationConcerns initializer (requires `ffmpeg`) |
 | Administrative sets (curated collections) | off by default: enable by flipping on in administrative UI |
 | Customizable banner image | specify a banner image in Sufia initializer |
-| Capture usage statistics | requires [Google Analytics ID to be specified in Sufia initializer](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#capturing-usage) || Geonames integration for location-oriented metadata | requires a Geonames API username to be specified in Sufia initializer |
+| Capture usage statistics | requires [Google Analytics ID to be specified in Sufia initializer](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#capturing-usage) |
+| Geonames integration for location-oriented metadata | requires [configuration](requires [configuration](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#geonames)) |
 | Virus detection for uploaded files | install `clamav` package and follow [the instructions in CurationConcerns](https://github.com/projecthydra/curation_concerns#virus-detection) |
 | Display usage statistics in the UI | requires [configuration](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#displaying-usage-in-the-ui) |
 | Administrative users | requires [configuration](https://github.com/projecthydra/sufia/wiki/Making-Admin-Users-in-Sufia) |
@@ -66,11 +67,11 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
 | Integration w/ cloud storage providers | requires [configuration](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#integration-with-dropbox-box-etc) |
 | Background jobs | requires configuration: though jobs will automatically run via the default in-memory adapter, we recommend using an `ActiveJob` adapter like `Sidekiq` in production environments |
 
-## Production concerns
+# Production concerns
 
 In production or production-like (e.g., staging) environments, you may want to make changes to the following areas.
 
-### Identifier state
+## Identifier state
 
 Sufia uses the ActiveFedora::Noid gem to mint [Noid](https://confluence.ucop.edu/display/Curation/NOID)-style identifiers -- short, opaque identifiers -- for all user-created content (including `GenericWorks`, `FileSets`, and `Collections`). The identifier minter is stateful, meaning that it keeps track of where it is in the sequence of minting identifiers so that the minter can be "replayed," for example in a disaster recovery scenario. (Read more about the [technical details](https://github.com/microservices/noid/blob/master/lib/noid/minter.rb#L2-L35).) The state also means that the minter, once it has minted an identifier, will never mint it again so there's no risk of identifier collisions.
 
@@ -80,19 +81,19 @@ Identifier state is tracked in a file that by default is located in a well-known
 # config.minter_statefile = '/tmp/minter-state'
 ```
 
-### Derivatives
+## Derivatives
 
 In Sufia 7, derivatives are served from a directory on the filesystem rather than directly from the Fedora repository. If your production environment includes multiple Rails servers, you will want to make sure that they are using a shared filesystem for derivatives. To set this directory, change the value of `config.derivatives_path` in `config/initializers/curation_concerns.rb`. The default value is `tmp/derivatives/` within your application directory, which will cause unexpected behavior in a multi-server configuration.
 
-### Web server
+## Web server
 
 The web server provided by Rails (whether that's WEBrick, Unicorn, or another) is not built to scale out very far, so you should consider alternatives such as Passenger with Apache httpd or nginx.
 
-### Database
+## Database
 
 The database provided by default is SQLite, and you may wish to swap in something built more for scale like PostgreSQL or MySQL, both of which have been used in other production Sufia applications.
 
-### Mailers
+## Mailers
 
 Sufia uses ActionMailer to send email to users. Some environments may need special configuration to enable your application to send messages. These changes are best made in one of your application's environment files. The configuration options are documented in the [ActionMailer Rails Guide](http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration).
 
@@ -102,11 +103,11 @@ Sufia processes long-running or particularly slow work in background jobs to spe
 
 If you'd like to use Resque in your Sufia app, we've written up a [guide](https://github.com/projecthydra/sufia/wiki/Background-Workers-(Resque-in-Sufia-7)) to help you along.
 
-## Audiovisual transcoding
+# Audiovisual transcoding
 
 Sufia includes support for transcoding audio and video files via CurationConcerns. View [CurationConcerns README](https://github.com/projecthydra/curation_concerns/blob/master/README.md#ffmpeg) for installation/configuration help.
 
-## User interface
+# User interface
 
 If you encounter problems with the in-browser content editor -- e.g., the About page, and the three blocks on the homepage -- you should **remove** turbolinks support from `app/assets/javascripts/application.js` if present by deleting the following line:
 
@@ -114,7 +115,7 @@ If you encounter problems with the in-browser content editor -- e.g., the About 
 //= require turbolinks
 ```
 
-## Integration with Dropbox, Box, etc.
+# Integration with Dropbox, Box, etc.
 
 Sufia provides built-in support for the [browse-everything](https://github.com/projecthydra/browse-everything) gem, which provides a consolidated file picker experience for selecting files from [DropBox](http://www.dropbox.com),
 [Skydrive](https://skydrive.live.com/), [Google Drive](http://drive.google.com),
@@ -135,21 +136,21 @@ After running the browse-everything install generator and setting the API keys f
 config.browse_everything = BrowseEverything.config
 ```
 
-## Geonames
+# Geonames
 
 In order for autocomplete to work in the location field, you must have a valid geonames account that can query the service and return possible matches. To setup an account, visit: http://www.geonames.org/login.
 
 After registering and getting an account username, you'll need to enable the free web services by going to http://www.geonames.org/manageaccount and clicking the link to enable. Once that's done, and you've verified you can query the service via their REST Api, add the account username to the `config/initializers/sufia.rb` file under `config.geonames_username`.
 
-## Analytics and usage statistics
+# Analytics and usage statistics
 
 Sufia provides support for capturing usage information via Google Analytics and for displaying usage stats in the UI.
 
-### Capturing usage
+## Capturing usage
 
 To enable the Google Analytics javascript snippet, make sure that `config.google_analytics_id` is set in your app within the `config/initializers/sufia.rb` file. A Google Analytics ID typically looks like _UA-99999999-1_.
 
-### Displaying usage in the UI
+## Displaying usage in the UI
 
 To display data from Google Analytics in the UI, first head to the Google Developers Console and create a new project:
 
@@ -183,7 +184,7 @@ Lastly, you will need to set `config.analytics = true` and `config.analytic_star
 has the proper access within your Google Analyics account.  To do so, go to the _Admin_ tab for your Google Analytics account.
 Click on _User Management_, in the _Account_ column, and add "Read & Analyze" permissions for the OAuth client email address.
 
-## Zotero integration
+# Zotero integration
 
 Integration with Zotero-managed publications is possible using [Arkivo](https://github.com/inukshuk/arkivo). Arkivo is a Node-based Zotero subscription service that monitors Zotero for changes and will feed those changes to your Sufia-based app. [Read more about this work](https://www.zotero.org/blog/feeds-and-institutional-repositories-coming-to-zotero/).
 
@@ -213,15 +214,15 @@ Tweak `config/zotero.yml` to hold your Zotero OAuth client key and secret. Alter
 
 Restart your app and it should now be able to pull in Zotero-managed publications on behalf of your users.  Each user will need to link their Sufia app account with their Zotero accounts, which can be done in the "Edit Profile" page. After the accounts are linked, Arkivo will create a subscription to that user's Zotero-hosted "My Publications" collection. When users add items to their "My Publications" collection via the Zotero client, they will automatically be pushed into the Sufia-based repository application. Updates to these items will trigger updates to item metadata in your app, and deletes will delete the files from your app.
 
-## Customizing metadata
+# Customizing metadata
 
 Chances are you will want to customize the default metadata provided by Sufia.  Here's [a guide](https://github.com/projecthydra/sufia/wiki/Customizing-Metadata) to help you with that in Sufia >= 7.0.0. If you need similar instructions for Sufia 6.x, read more about [customizing metadata in 6.x](https://github.com/projecthydra/sufia/wiki/Customizing-Metadata-(Sufia-6.x)).
 
-## Admin Users
+# Admin users
 
 See [making admin users in Sufia](https://github.com/projecthydra/sufia/wiki/Making-Admin-Users-in-Sufia).
 
-## Migrating data to PCDM in Sufia 7
+# Migrating data to PCDM in Sufia 7
 
 **WARNING: THIS IS IN PROGRESS AND UNTESTED**
 
@@ -230,4 +231,3 @@ See [making admin users in Sufia](https://github.com/projecthydra/sufia/wiki/Mak
 1. Move the binary from `GenericFile#content` to `FileSet#original_file`.
 
 Here are more details on a [proof of concept](https://github.com/projecthydra/sufia/wiki/Sufia-6-to-Sufia-7-Migration).
-
