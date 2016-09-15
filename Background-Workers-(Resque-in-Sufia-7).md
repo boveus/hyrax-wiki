@@ -106,9 +106,30 @@ You may need to adjust it to meet your needs, e.g.: the default location for the
 
 ## Monitoring
 
-Edit `config/initializers/resque_admin.rb` so that `ResqueAdmin#matches?` returns a `true` value for the user(s) who should be able to access this page. One fast way to do this is to return `current_user.admin?` and add an `#admin?` method to your user model which checks for specific emails or the 'admin' role. See [Admin Users](#admin-users) for information on how to add users with the admin role.
+Create `config/initializers/resque_admin.rb` so that `ResqueAdmin#matches?` returns a `true` value for the user(s) who should be able to access this page. See below for an example which depends on adding an `#admin?` method to your user model which checks for specific emails or the 'admin' role. See [Admin Users](#admin-users) for information on how to add users with the admin role.
 
-Then you can view jobs at the `/admin/queues` route.
+```
+class ResqueAdmin
+  def self.matches?(request)
+    current_user = request.env['warden'].user
+    return false if current_user.blank?
+    return current_user.admin?
+  end
+end
+```
+
+Then you need to create the `/admin/queues` route. In `config/routes.rb` add `require 'resque/server'` at the top and the below in the config block:
+
+```
+  # Administrative URLs
+  namespace :admin do
+    # Job monitoring
+    constraints ResqueAdmin do
+      mount Resque::Server, at: 'queues'
+    end
+  end
+```
+
 
 ## Troubleshooting
 
