@@ -1,4 +1,7 @@
-# Administration Menu
+# Administration Menu for Developers of Curation Concerns Code
+
+Coming Soon:  Documentation for Developers of Curation Concerns applications
+
 
 To view the admin menu, click the user name and select Admin Dashboard.
 
@@ -68,11 +71,13 @@ Menu items appear in the left hand side by adding a menu and defining its action
 single left hand menu item defined by `menu -> index` with `action -> index`.
 
 There is a default controller method that will drive the rendering of left hand menu items and their content.  
-The code for it lives in `app/controllers/concerns/curation_concerns/admin_controller_behavior.rb #index`  You won't 
-be changing this method.  It is mentioned here for reference only.
+The code for it lives in `app/controllers/concerns/curation_concerns/admin_controller_behavior.rb #index`  
 
-`#index` will render `app/views/curation_concerns/admin/index.html.erb` which will in turn render each of the partials
+The `index` method will render `app/views/curation_concerns/admin/index.html.erb` which will in turn render each of the partials
 listed for the action under `actions -> index -> partials`.
+
+You won't be changing the `index` method.  It is mentioned here for reference only to understand the processing that is 
+happening.
 
 `data_sources` allows you to identify a class to provide data for use in the partials.
 
@@ -236,5 +241,8 @@ NOTE: This isn't any different than the simple example.
 
 Click Hello World.  `admin_controller_behavior.rb #index` will render the partial `_hi_there` when you select the `hello_world` menu item
 and you will see content `Hi There _your_email_`.
+
+
+
 
 
