@@ -1,6 +1,19 @@
 # Administration Menu
 
-To view the admin menu, append /admin to the end of the root path for the app.  (e.g. http://localhost:3000/admin)
+To view the admin menu, click the user name and select Admin Dashboard.
+
+### One time process to add development admin user.  Not for use in production.
+
+The user will need to be an admin user.  During development, you can create an admin by...
+
+Edit `.internal_test_app/config/role_map.yml`
+
+```
+development:
+  ...
+  admin:
+    - adminuser@example.com
+```
 
 ## Adding new admin menu items
 
@@ -74,7 +87,7 @@ listed for the action under `actions -> index -> partials`.
 2) Update the config:  
 
 `menu -> hello_world` puts hello_world on the left side admin menu
-`actions -> hello_world` tells default #index method which partials to show in the content
+`actions -> hello_world` tells default `#index` method which partials to show in the content
 
 ```
     def dashboard_configuration
@@ -130,5 +143,6 @@ en:
 5) Test in the browser at http://localhost:3000/admin
 
 Click Hello World.  `admin_controller_behavior.rb #index` will render the partial `_hi_there` when you select the `hello_world` menu item
-and you will see content Hi There.
+and you will see content `Hi There`.
+
 
