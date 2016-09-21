@@ -24,7 +24,7 @@ To view the admin menu, append /admin to the end of the root path for the app.  
 
 ### Steps to add a new menu item in the left hand menu of the Administration Menu.
 
-#### Step 1: Configure new menu item
+#### Understanding the configuration file
 
 Edit lib/curation_concerns/configuration.rb
 
@@ -64,7 +64,7 @@ listed for the action under `actions -> index -> partials`.
 `data_sources` allows you to identify a class to provide data for use in the partials.
 
 
-##### Add a simple menu item
+#### Add a simple menu item
 
 1) Create a partial to render as the content:  Add file: `app/views/curation_concerns/admin/_hi_there.html.erb`
 ```
