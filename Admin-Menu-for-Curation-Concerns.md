@@ -1,7 +1,7 @@
 # Administration Menu for Developers of Curation Concerns Code
 
-Coming Soon:  Documentation for Developers of Curation Concerns applications
-
+**Audience:  Developers**
+**Development Area: commits to Curation Concerns code**
 
 To view the admin menu, click the user name and select Admin Dashboard.
 
