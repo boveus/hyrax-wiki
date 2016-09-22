@@ -6,38 +6,11 @@
 By default, to view the admin menu, click the user name and select Admin Dashboard.  This comes from the curation concerns
 UI.  Your app may have modified this.
 
-### One time process to add development admin user.  Not for use in production.
+### Access to admin dashboard
 
-The user will need to be an admin user.  During development, you can create an admin by...
-
-Edit `.internal_test_app/config/role_map.yml`
-
-```
-development:
-  ...
-  admin:
-    - adminuser@example.com
-```
+The admin dashboard requires admin access with cancan abilities `can :read, :admin_dashboardß`
 
 ## Adding new admin menu items
-
-### Files effected:
-
-* lib/curation_concerns/configuration.rb
-* app/controllers/curation_concerns/admin_controller.rb
-* app/controllers/concerns/curation_concerns/admin_controller_behavior.rb
-* app/views/curation_concerns/admin/index.html.erb
-* config/routes.rb
-* config/locales/curation_concerns.en.yml
-
-### Directories effected: 
-
-* app/sources/curation_concerns
-* app/views/curation_concerns/admin
-* app/views/curation_concerns/admin/widget
-* app/assets/javascripts/curation_concerns
-* app/helpers/curation_concerns
-
 
 ### Steps to add a new menu item in the left hand menu of the Administration Menu.
 
