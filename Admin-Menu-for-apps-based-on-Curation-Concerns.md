@@ -9,7 +9,18 @@ UI.  Your app may have modified this.
 
 ### Access to admin dashboard
 
-The admin dashboard requires admin access with cancan abilities `can :read, :admin_dashboardß`
+The admin dashboard requires admin access with cancan abilities `can :read, :admin_dashboard`
+
+## Run the AdminDashboard Generator
+
+**If you have just run the sufia generator for the first time this step is unnecessary.**
+To get the CurationConcerns::AdminController in your app run:
+
+```
+rails generate curation_concerns:admin_dashboard
+```
+
+You should see a file in app/controllers/curation_concerns/admin_controller.rb
 
 ## Adding new admin menu items
 
