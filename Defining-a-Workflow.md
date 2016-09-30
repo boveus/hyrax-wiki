@@ -16,3 +16,7 @@ Grab a whiteboard and draw up your workflow.
 
 Consider that some roles will be assigned to all items in the workflow (e.g. Metadata Reviewer) whereas some roles will be assigned to single items in the workflow (e.g. an Advisor Reviewer).
 
+Below is one example:
+
+![example-workflow](https://cloud.githubusercontent.com/assets/2130/19000926/1eab97e4-8713-11e6-9edc-0599fedca795.png)
+
