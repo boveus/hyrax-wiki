@@ -2,7 +2,7 @@ When you create or update a work in curation_concerns, there are a number of pro
 
 Code that wishes to use the whole list of actors should call `CurationConcerns::CurationConcern.actor.` That method returns an instance of `CurationConcerns::ActorStack`, which is the list of operations to perform to create or update a Work.
 
-This `ActorStack`, is instantiated by an `ActorFactory`.  The default factory is: `CurationConcerns::ActorFactory`, but you can change it by setting `CurationConcerns::CurationConcern.actor_factory=`. For example, Sufia wants to use its own factory, so it sets `CurationConcerns::CurationConcern.actor_factory = Sufia::ActorFactory`
+This `ActorStack` is instantiated by an `ActorFactory`.  The default factory is: `CurationConcerns::ActorFactory`, but you can change it by setting `CurationConcerns::CurationConcern.actor_factory=`. For example, Sufia wants to use its own factory, so it sets `CurationConcerns::CurationConcern.actor_factory = Sufia::ActorFactory`
 
 Sufia's `ActorFactory` uses a different set of operations than the CurationConcerns version, but other than that it's the same. `Sufia::ActorFactory` inherits from the version in CurationConcerns, and overrides the `stack_actors` class method like so:
 
@@ -23,7 +23,7 @@ module Sufia
 end
 ```
 
-Each of the actors in this chain should inherit from `CurationConcerns::AbstractFactory`, then they can override `update()` or `create()` as required. In these methods they must call `next_actor.update(attributes)` or `next_actor.create(attributes)` respectively. Here's an example:
+Each of the actors in this chain should inherit from `CurationConcerns::AbstractFactory`, and can override `update()` or `create()` as required. In these methods they must call `next_actor.update(attributes)` or `next_actor.create(attributes)` respectively. Here's an example:
 
 ```ruby
 module CurationConcerns
