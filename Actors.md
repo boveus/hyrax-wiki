@@ -1,6 +1,8 @@
-When you create or update a work in curation_concerns, there are a number of processing steps involved.  These processing steps are broken out into classes called Actors.  
+When you create or update a work in curation_concerns, there are a number of processing steps involved, and a specific format for doing so. This format is a [stack (last in, first out)](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)). Each frame does one thing, and the whole stack must be executed in the order it's written in. 
 
-Code that wishes to use the whole list of actors should call `CurationConcerns::CurationConcern.actor.` That method returns an instance of `CurationConcerns::ActorStack`, which is the list of operations to perform to create or update a Work.
+Each processing step, or frame, is broken out into a class called an Actor. They do common tasks like add a work to a collection, add a work to another work, assign a representative file to work, and apply order to a work.
+
+Code that wishes to use the whole stack of actors should call `CurationConcerns::CurationConcern.actor.` That method returns an instance of `CurationConcerns::ActorStack`, which is the full list of operations to perform to create or update a Work.
 
 This `ActorStack` is instantiated by an `ActorFactory`.  The default factory is: `CurationConcerns::ActorFactory`, but you can change it by setting `CurationConcerns::CurationConcern.actor_factory=`. For example, Sufia wants to use its own factory, so it sets `CurationConcerns::CurationConcern.actor_factory = Sufia::ActorFactory`
 
