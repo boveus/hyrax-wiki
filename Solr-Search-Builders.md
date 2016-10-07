@@ -1,6 +1,6 @@
 # Search Builders
 
-Building searches is core to any Blacklight app, and CurationConcerns is no exception. The app/search_builders/curation_concerns directory contains our Search Builders, originally so-named because the class design followed a builder pattern. Builder pattern setter methods return the object itself when invoked, so that invocations can be chained, like:
+Building searches is core to any Blacklight app, and CurationConcerns is no exception. The app/search_builders/curation_concerns directory contains our Search Builders, originally so-named because the class design followed a Builder pattern. Builder setter methods return the object itself when invoked, so that invocations can be chained, like:
 
 ```ruby
 builder = Blacklight::SearchBuilder.new(processor_chain, scope)
@@ -9,7 +9,7 @@ builder = Blacklight::SearchBuilder.new(processor_chain, scope)
             .with(q: 'Abraham Lincoln')
 ```
 
-However, at this level, many if not most of the additional methods do not follow this pattern. So the builders build searches in the general sense of the name, not by strictly following the builder pattern. Refer to the `Blacklight::SearchBuilder` class if you want to be certain of whether a method can be chained. That leads to the next topic...
+However, at this level, many if not most of the additional methods do not follow this pattern. So these builders create searches in the general sense of the name, not by strictly following the Builder pattern. Refer to the `Blacklight::SearchBuilder` class if you want to be certain of whether a method can be chained. That leads to the next topic...
 
 ## Ancestry
 
