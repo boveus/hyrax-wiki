@@ -1,6 +1,6 @@
 # Search Builders
 
-Building searches is core to any Blacklight app, and CurationConcerns is no exception. The app/search_builders/curation_concerns directory contains our Search Builders, originally so-named because the class design followed a builder pattern. In this pattern, setter methods return the object itself when invoked, so that invocations can be chained, like:
+Building searches is core to any Blacklight app, and CurationConcerns is no exception. The app/search_builders/curation_concerns directory contains our Search Builders, originally so-named because the class design followed a builder pattern. Builder pattern setter methods return the object itself when invoked, so that invocations can be chained, like:
 
 ```ruby
 builder = Blacklight::SearchBuilder.new(processor_chain, scope)
