@@ -9,6 +9,10 @@ The Sufia Development Guide is for people who want to modify Sufia itself. See t
   * [Troubleshooting / Testing FAQ](#troubleshooting--testing-faq)
 * [Work with test app in the browser](#work-with-test-app-in-the-browser)
   * [Cleaning up](#cleaning-up)
+* [Start servers individually for development](#start-servers-individually-for-development)
+  * [Solr](#solr)
+  * [Fedora](#fedora)
+  * [Rails](#rails)
 * [Change validation behavior](#change-validation-behavior)
 * [Regenerating the README TOC](#regenerating-the-readme-toc)
 
@@ -186,6 +190,35 @@ You may want to see the test application in your browser to verify that your cha
   1. `cd <sufia directory>\.internal_test_app`
   1. `fcrepo_wrapper clean`
   1. `solr_wrapper clean`
+
+# Start servers individually for development
+
+## Solr
+
+If you already have an instance of Solr that you would like to use, you may skip this step.  Open a new terminal window and type:
+```
+solr_wrapper -d solr/config/ --collection_name hydra-development
+```
+
+You can check to see if Solr is started by going to [localhost:8983](http://localhost:8983/).
+
+## Fedora
+
+If you already have an instance of Fedora that you would like to use, you may skip this step.  Open a new terminal window and type:
+
+```
+fcrepo_wrapper -p 8984
+```
+
+You can check to see if Fedora is started by going to [localhost:8984](http://localhost:8984/).
+
+## Rails
+
+To test-drive your new Sufia application, spin up the web server that Rails provides:
+
+```
+rails server
+```
 
 # Change validation behavior
 
