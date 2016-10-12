@@ -223,7 +223,7 @@ rails server
 
 # Install problems
 
-If installing Sufia results in errors that look like `ERROR -- : fsevent: running worker failed: Resource temporarily unavailable`, you may want to include `--skip-listen` among the arguments to `rails new`.
+If installing Sufia results in errors that look like `ERROR -- : fsevent: running worker failed: Resource temporarily unavailable`, you may include `--skip-listen` among the arguments to `rails new`. That should get you past these errors. NOTE: we do not recommend passing this argument when generating your Sufia application unless you understand what the ramifications of this are.
 
 # Change validation behavior
 
