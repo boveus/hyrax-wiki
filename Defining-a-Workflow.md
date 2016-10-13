@@ -35,11 +35,9 @@ Below is the JSON that models the above workflow.
            "name": "approve", "transition_to": "approved",
            "from_states": [{"names": ["under_review"], "roles": ["approving_work"]}]
          }, {
-           "actions": [{
              "name": "submit_for_review", "transition_to": "approved",
              "from_states": [{"names": ["new", "changes_required"], "roles": ["creating_deposit"]}]
          }, {
-           "actions": [{
              "name": "request_changes", "transition_to": "changes_required",
              "from_states": [{"names": ["under_review"], "roles": ["approving_work"]}]
         }]
