@@ -59,3 +59,20 @@ Within each action is a "name" tag, a "transition_to" tag, a "from_states", and 
   ]
 }
 ```
+
+## How do I get this workflow into the system?
+
+Thats a good question. Its quite simple! All you need to do now is run a simple command in the command line.
+```
+rake curation_concerns:workflow:load
+```
+and voila! Your workflow is now loaded into the system and is ready to be used. If you dont get yelled at by this rake task then you know that it worked. The verification of your workflow JSON file is very particular and will come back with errors if there is anything wrong in your workflow JSON file.
+
+## Don't users need roles in order to process items within a workflow?
+
+This is true. Luckily, there is a UI element that now exists in which an administrative user can add a role to a user within a particular workflow. This can be seen at `/admin/workflow/?`. For development purposes, if you would like to add all users to all roles, you can do that with the following command:
+```
+CurationConcerns::Workflow::PermissionGenerator.call(roles: Sipity::Role.all,        
+                                                     workflow: Sipity::Workflow.last,        
+                                                     agents: User.all)
+```
