@@ -29,7 +29,9 @@ Now that a workflow has been conceptually figured out, it is now time to generat
 The first expression in the JSON is a "work_types" tag. This tells the program that a list of work types are coming up. These work types need to exist in Sufia in order for the program to fully generate the workflow needed. To generate a work type, a user can run `rails generator curation_concerns:work <NameOfWork>` in the command line. Note: This generator command will generate a default workflow, but it may not be the workflow you want.
 
 ```
-(Example: A user whom wants to generate a GenericWork work type would run `rails generator curation_concerns:work GenericWork`. This will generate a generic_work_workflow.json file which is your workflow JSON file)
+(Example: A user whom wants to generate a GenericWork work type would run
+`rails generator curation_concerns:work GenericWork`.
+ This will generate a generic_work_workflow.json file which is your workflow JSON file)
 ```
 
 Next comes the "actions" tag which is a list of actions that can be taken in the workflow. This is expressed in the JSON file as an array of action names with other supporting information that describe the way to get from one state to the next, what state comes next, what actions can be taken during a state change, and the roles needed to make the state change. 
