@@ -8,9 +8,9 @@ In Sufia, a workflow is a state machine generated pragmatically by utilizing wor
 
 # Initial workflow setup
 
-    ## Creating a workflow
+     ## Creating a workflow
 
-    The first step in introducing a workflow in Sufia is to draw out a state machine. Pull up a whiteboard or piece of paper and diagram out what you think a workflow should look like. Here are a few tips about drawing out a state machine:
+     The first step in introducing a workflow in Sufia is to draw out a state machine. Pull up a whiteboard or piece of paper and diagram out what you think a workflow should look like. Here are a few tips about drawing out a state machine:
 
         * Draw circles or squares to describe a step in that workflow. (metadata review step, digitization review step, etc.)
         * Draw lines in between these circles or squares to describe how to transition from one state to another.
@@ -18,6 +18,6 @@ In Sufia, a workflow is a state machine generated pragmatically by utilizing wor
         * Determine which roles can see items throughout the workflow.
         * When a state change occurs, what other actions could/should be taken?
 
-    Here is a quick example of a state machine that describes a workflow:
+     Here is a quick example of a state machine that describes a workflow:
 
 ![example-workflow](https://cloud.githubusercontent.com/assets/2130/19000926/1eab97e4-8713-11e6-9edc-0599fedca795.png)
