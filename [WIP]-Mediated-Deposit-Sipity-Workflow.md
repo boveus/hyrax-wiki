@@ -21,3 +21,35 @@ The first step in introducing a workflow in Sufia is to draw out a state machine
 Here is a quick example of a state machine that describes a workflow:
 
 ![example-workflow](https://cloud.githubusercontent.com/assets/2130/19000926/1eab97e4-8713-11e6-9edc-0599fedca795.png)
+
+## Translating a workflow into JSON
+
+Now that a workflow has been conceptually figured out, it is now time to generate a JSON expression of said workflow. Sipity follows a very stringent format for this JSON expression of a state machine. 
+
+The first expression in the JSON is a "work_types" tag. This tells the program that a list of work types are coming up. These work types need to exist in Sufia in order for the program to fully generate the workflow needed. To generate a work type, a user can run `rails generator curation_concerns:work <NameOfWork>` in the command line. Note: This generator command will generate a default workflow, but it may not be the workflow you want.
+
+(Example: A user whom wants to generate a GenericWork work type would run `rails generator curation_concerns:work GenericWork`. This will generate a generic_work_workflow.json file which is your workflow JSON file)
+
+Next comes the "actions" tag which is a list of actions that can be taken in the workflow. This is expressed in the JSON file as an array of action names with other supporting information that describe the way to get from one state to the next, what state comes next, what actions can be taken during a state change, and the roles needed to make the state change. 
+
+Within each action is a "name" tag, a "transition_to" tag, a "from_states", and a "roles" tag. This describes the name of the action, where the state transitions to after an action taken, what state is prior to the current state, and the roles needed for making the change from the current state to the next. Below is a sample JSON file, which replicates the aforementioned state machine.
+
+```
+{
+  "work_types": [
+    {
+      "name": "example",
+         "actions": [{
+           "name": "approve", "transition_to": "approved",
+           "from_states": [{"names": ["under_review"], "roles": ["approving_work"]}]
+         }, {
+             "name": "submit_for_review", "transition_to": "approved",
+             "from_states": [{"names": ["new", "changes_required"], "roles": ["creating_deposit"]}]
+         }, {
+             "name": "request_changes", "transition_to": "changes_required",
+             "from_states": [{"names": ["under_review"], "roles": ["approving_work"]}]
+        }]
+     }
+  ]
+}
+```
