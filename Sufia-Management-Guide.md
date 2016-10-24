@@ -75,10 +75,38 @@ In production or production-like (e.g., staging) environments, you may want to m
 
 Sufia uses the ActiveFedora::Noid gem to mint [Noid](https://confluence.ucop.edu/display/Curation/NOID)-style identifiers -- short, opaque identifiers -- for all user-created content (including `GenericWorks`, `FileSets`, and `Collections`). The identifier minter is stateful, meaning that it keeps track of where it is in the sequence of minting identifiers so that the minter can be "replayed," for example in a disaster recovery scenario. (Read more about the [technical details](https://github.com/microservices/noid/blob/master/lib/noid/minter.rb#L2-L35).) The state also means that the minter, once it has minted an identifier, will never mint it again so there's no risk of identifier collisions.
 
-Identifier state is tracked in a file that by default is located in a well-known directory in UNIX-like environments, `/tmp/`, but this may be insufficient in production-like environments where `/tmp/` may be aggressively cleaned out. To prevent the chance of identifier collisions, it is recommended that you find a more suitable filesystem location for your system environment. If you are deploying via Capistrano, that location should **not** be in your application directory, which will change on each deployment. If you have multiple instances of your Sufia application, for instance in load-balanced scenarios, you will want to choose a filesystem location that all instances can access. You may change this by uncommenting and changing the value in this line from `config/initializers/sufia.rb` to a filesystem location other than `/tmp/`:
+Identifier state is tracked by default in a file that is located in a well-known directory in UNIX-like environments, `/tmp/`, but this may be insufficient in production-like environments where `/tmp/` may be aggressively cleaned out. To prevent the chance of identifier collisions, it is recommended that you go one of two routes: specifying a less transient shared filesystem location or using a relational database to store minter state.
+
+### Filesystem-backed minter state
+
+You can continue using the filesystem for minter state if you have a system location that your application can write to that is under its control (read: not `/tmp/`). If you are deploying via Capistrano, that location should **not** be in your application directory, which will change on each deployment. If you run multiple instances of your Sufia application, for instance in load-balanced scenarios, you will want to choose a filesystem location that all instances can access. You may change this by uncommenting and changing the value in this line from `config/initializers/sufia.rb` to a filesystem location other than `/tmp/`:
 
 ```ruby
 # config.minter_statefile = '/tmp/minter-state'
+```
+
+### Database-backed minter state
+
+Alternatively, to get around situations where you have multiple application instances attempting to obtain locks on a single, shared filesystem location, you may use the database-backed minter. To start using this minter (new to ActiveFedora::Noid 2.x), create a new initializer in your application (`config/initializers/active_fedora-noid.rb`):
+
+```ruby
+require 'active_fedora/noid'
+
+ActiveFedora::Noid.configure do |config|
+  config.minter_class = ActiveFedora::Noid::Minter::Db
+end
+```
+
+Using the database-backed minter can cause problems with your test suite, where it is often sensible to wipe out database rows between tests (which destroys the database-backed minter's state, which renders it unusable). To deal with this and still get the benefits of using the database-backed minter in development and production environments, you'll also want to add the following helper to your `spec/spec_helper.rb`:
+
+```ruby
+require 'active_fedora/noid/rspec'
+```
+
+If you switch to the new database-backed minter and want to include in that minter the state of your current file-backed minter, AF::Noid 2.x provides a new rake task that will copy your minter's state from the filesystem to the database:
+
+```bash
+$ rake active_fedora:noid:migrate:file_to_database
 ```
 
 ## Derivatives
