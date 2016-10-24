@@ -87,7 +87,16 @@ You can continue using the filesystem for minter state if you have a system loca
 
 ### Database-backed minter state
 
-Alternatively, to get around situations where you have multiple application instances attempting to obtain locks on a single, shared filesystem location, you may use the database-backed minter. To start using this minter (new to ActiveFedora::Noid 2.x), create a new initializer in your application (`config/initializers/active_fedora-noid.rb`):
+Alternatively, to get around situations where you have multiple application instances attempting to obtain locks on a 
+single, shared filesystem location, you may use the database-backed minter (new to ActiveFedora::Noid 2.x), which stores minter state information in your application's relational database.
+
+To use it, you'll first need to run the install generator:
+
+```bash
+$ rails generate active_fedora:noid:install
+```
+
+This will create the necessary database tables and seed the database minter. To start minting identifiers with the new minter, override the AF::Noid configuration in e.g `config/initializers/active_fedora-noid.rb`:
 
 ```ruby
 require 'active_fedora/noid'
