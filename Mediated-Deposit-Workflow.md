@@ -24,7 +24,7 @@ Here is a quick example of a state machine that describes a workflow:
 
 ## Translating a workflow into JSON
 
-Now that a workflow has been conceptually figured out, it is now time to generate a JSON expression of said workflow. Sipity follows a very stringent format for this JSON expression of a state machine. 
+Now that a workflow has been conceptually figured out, it is now time to generate a JSON expression of said workflow. This JSON file, should live in `APP_ROOT/config/workflows/*.json` Sipity follows a very stringent format for this JSON expression of a state machine. 
 
 The first expression in the JSON is a "work_types" tag. This tells the program that a list of work types are coming up. These work types need to exist in Sufia in order for the program to fully generate the workflow needed. To generate a work type, a user can run `rails generator curation_concerns:work <NameOfWork>` in the command line. Note: This generator command will generate a default workflow, but it may not be the workflow you want.
 
