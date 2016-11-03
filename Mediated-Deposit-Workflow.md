@@ -42,7 +42,7 @@ Within each action is a "name" tag, a "transition_to" tag, a "from_states", and 
 
 ```
 {
-  "work_types": [
+  "workflow": [
     {
       "name": "example",
          "actions": [{
@@ -76,3 +76,7 @@ CurationConcerns::Workflow::PermissionGenerator.call(roles: Sipity::Role.all,
                                                      workflow: Sipity::Workflow.last,        
                                                      agents: User.all)
 ```
+
+## Seeing workflow in the UI
+
+You first need to enable mediated deposit via the admin UI.
