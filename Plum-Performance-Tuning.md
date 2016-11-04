@@ -18,7 +18,8 @@ disabled it completely to allow ingest to proceed at a decent pace.  We plan to 
 ingest.
 
 ## Graph Copying
-XXX
+Updating our largest objects was taking more than 8 minutes.  Profiling showed that most of the time was being spent copying RDF graphs unnecessarily.  A [deceptively simple update](https://github.com/projecthydra/active_fedora/commit/f6ac3fbe04d5c0fedb64b7c04a34ca207d29f7f7#diff-4827a9cc4420720ae18bf842f60f18f5R46) 
+avoided the vast majority of graph copying, and reduced save times dramatically.
 
 ## Reversing Collection Membership
 We saw a lot of slowdown when trying to ingest works in large collections.  As the collection grew,
