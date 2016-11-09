@@ -4,7 +4,8 @@ Please note that this documentation applies to Sufia 7.
 
 Table of Contents
 =================
-
+* [Generate a Model](#generate-a-model)
+* [Customize the Displayed Labels](#customize-the-displayed-labels)
 * [Override the GenericWork model](#override-the-genericwork-model)
   * [Add the property](#add-the-property)
 * [Create a vocabulary](#create-a-vocabulary)
@@ -27,7 +28,7 @@ $ bin/rails generate sufia:work GenericWork
 
 This will generate a number of files into your application.  Now we can customize these files.
 
-# Change the displayed values of the metadata
+# Customize the displayed labels
 
 One file that is generated is the English locale file for the work type.  For `GenericWork` this is located in `config/locales/generic_work.en.yml`.  You can copy this file, change the `en` key to another locale, and translate the included keys to provide internationalization. You may edit the values in the English locale to change what is displayed by default.
 
