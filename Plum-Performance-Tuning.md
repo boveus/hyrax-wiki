@@ -64,3 +64,8 @@ statefiles, and so were generating duplicate PIDs.  So we switched to [storing o
 in the database](https://github.com/projecthydra/active_fedora-noid#use-database-based-minter-state).
 We had some trouble getting this to work, and eventually got it working by [manually deleting an
 invalid minter state](https://gist.github.com/escowles/c5f1b505954ab368fa659614a2a85610).
+
+## Restarting Fedora Nightly
+Ingest performance was initially very good, but after several days of sustained ingest, we were seeing
+lots of errors and operations were significantly slower.  Restarting Fedora resulted in an immediate
+increase in ingest throughtput, so we configured our Fedora machine to restart Tomcat nightly.
