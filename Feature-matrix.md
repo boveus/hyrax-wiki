@@ -5,7 +5,7 @@
 | Flexible user- and group-based access controls | automatically enabled |
 | Generation and validation of identifiers | automatically enabled |
 | Generation of derivatives | automatically enabled |
-| Fixity checking | automatically enabled |
+| Fixity checking (using Fedora's fixity service) | automatically enabled |
 | Version control | automatically enabled |
 | Characterization of uploaded files | automatically enabled |
 | Forms for batch editing metadata | automatically enabled |
