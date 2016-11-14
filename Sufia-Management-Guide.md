@@ -8,6 +8,7 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
   * [Database](#database)
   * [Mailers](#mailers)
   * [Background workers](#background-workers)
+  * [Fixity checking](#fixity-checking)
 * [Audiovisual transcoding](#audiovisual-transcoding)
 * [User interface](#user-interface)
 * [Integration with Dropbox, Box, etc\.](#integration-with-dropbox-box-etc)
@@ -103,6 +104,14 @@ Sufia uses ActionMailer to send email to users. Some environments may need speci
 Sufia processes long-running or particularly slow work in background jobs to speed up the web request/response cycle. Sufia (as of version 7.0.0) no longer packages a default queuing backend for background jobs -- all jobs are expressed as ActiveJob instances, so there is a wide variety of backends that you may use that will work with Sufia's background workers. You may want to read more about [ActiveJob](http://guides.rubyonrails.org/active_job_basics.html).
 
 If you'd like to use Resque in your Sufia app, we've written up a [guide](https://github.com/projecthydra/sufia/wiki/Background-Workers-(Resque-in-Sufia-7)) to help you along.
+
+## Fixity checking
+
+Sufia provides a [service](https://github.com/projecthydra/sufia/blob/master/app/services/sufia/repository_audit_service.rb) that iterates over all file sets in your repository and verifies fixities in the background. Sufia will not run this service for you, so you should use a cronjob (or similar, e.g., the `whenever` gem) to run this on a schedule that fits your needs and your content. The code that'll need to run is:
+
+```ruby
+Sufia::RepositoryAuditService.audit_everything
+```
 
 # Audiovisual transcoding
 
