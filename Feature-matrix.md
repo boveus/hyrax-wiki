@@ -1,5 +1,3 @@
-# Feature matrix
-
 | Feature | How to enable |
 | ------- | ------------- |
 | Multiple file upload | automatically enabled |
