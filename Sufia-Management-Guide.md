@@ -22,7 +22,7 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
 
 # Feature matrix
 
-[[Feature matrix]]
+[[Feature matrix]] (*moved to its own page*)
 
 # Production concerns
 
