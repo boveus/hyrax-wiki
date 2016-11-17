@@ -1,10 +1,8 @@
-Please note these scripts are still under development and are not ready for production use. But they are ready for testing 
+Please note these scripts are still under development and are not ready for production use. But please do start testing and check out the outstanding issues. 
 
-TL;DR. Two steps. From a Sufia 6 application export to a set of JSON files the metadata of all the GenericFiles and Collections. From a Sufia 7 application read the JSON files and create GenericWorks/FileSet/Files, then Collections. 
+This is a two step process. From a Sufia 6 application export to a set of JSON files the metadata of all the GenericFiles and Collections. From a Sufia 7 application read the JSON files and create GenericWorks/FileSet/Files, then Collections. 
 
-## Long version
-
-### Step 1 (from a Sufia 6 application)
+## Step 1 (from a Sufia 6 application)
 - Upgrade your app to the latest Sufia 6 release, and then pin to sufia-6.x to get the most recent export code.
 - You'll want to put your application in read-only or maintenance mode.
 - First run the survey script; this writes the ID of every collection and generic file to the database:
@@ -17,7 +15,7 @@ TL;DR. Two steps. From a Sufia 6 application export to a set of JSON files the m
 - Check your json files. If you've had fedora.yml set up with '127.0.0.1' and will be migrating on a different server, you will need to replace all instances of 127.0.0.1 with a real IP or domain name.
 - Move all those json files to the import location.
 
-### Step 2 (from a Sufia 7 application)
+## Step 2 (from a Sufia 7 application)
 - Make sure you've configured fedora_sufia6_user and fedora_sufia6_password in config/application so you can reach your fedora instance to retrieve the binaries.
 - In a Sufia 7 application import the JSON files exported from the Sufia 6 application. Again, use --help to see options; you may want to create overrides if you have customized your data model:
 `$ RAILS_ENV=production bundle exec sufia_import`
