@@ -45,3 +45,24 @@ Below is the JSON that models the above workflow.
   ]
 }
 ```
+
+# Loading a Workflow
+
+## Default Workflow
+
+When a Curation Concerns app is created by running `rails generate curation_concerns:install`, a default workflow is created in [config/workflows/default_workflow.json](https://github.com/projecthydra/curation_concerns/blob/master/lib/generators/curation_concerns/templates/workflow.json.erb).
+
+## Additional Workflows
+
+You can define additional workflows following the syntax described (#Defining a Workflow in CurationConcerns) above.  Add the json files to `config/workflows` directory in your app.
+
+## Loading workflows
+
+All workflows defined in `config/workflows` directory can be loaded using the following command.
+
+```
+rails curation_concerns:workflow:load
+```
+
+This will load the workflow and create user roles.  You will want to assign users/groups to the roles.  You will be able to select the workflow for use in an admin_set.
+
