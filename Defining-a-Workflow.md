@@ -54,7 +54,7 @@ When a Curation Concerns app is created by running `rails generate curation_conc
 
 ## Additional Workflows
 
-You can define additional workflows following the syntax described (#Defining a Workflow in CurationConcerns) above.  Add the json files to `config/workflows` directory in your app.
+You can define additional workflows following the syntax described [Defining a Workflow in CurationConcerns](#defining-a-workflow-in-curationconcerns) above.  Add the json files to `config/workflows` directory in your app.
 
 ## Loading workflows
 
