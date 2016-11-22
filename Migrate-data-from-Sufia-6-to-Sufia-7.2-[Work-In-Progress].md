@@ -13,7 +13,7 @@ This is a two step process. From a Sufia 6 application export to a set of JSON f
   - The export will output to a JSON file the metadata for each file, but not the actual binary of the file. The binary will be read from Fedora at the time of the import.
 - Make sure your Fedora port is open to whatever server will be running the import.
 - Check your json files. If you've had fedora.yml set up with '127.0.0.1' and will be migrating on a different server, you will need to replace all instances of 127.0.0.1 with a real IP or domain name.
-- Move all those json files to the import location.
+- Move all those json files to the import location. Also migrate your minter statefile, your postgres db, and (at some point) your Redis data.
 
 ## Step 2 (from a Sufia 7.2 application)
 - pin to the 7.2-migration branch of Sufia.
