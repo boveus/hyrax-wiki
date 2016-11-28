@@ -28,3 +28,12 @@ This is a two step process. From a Sufia 6 application export to a set of JSON f
 ## Outstanding issues
 (not an exact list because some of these are related to code migration as opposed to data migration)
 https://github.com/projecthydra/sufia/issues?q=is%3Aopen+is%3Aissue+label%3Amigration
+
+## Timing
+As a rough test here is a sample migration of approximately 71 GB of data (~2000 generic file objects) from a Sufia 6 instance to a Sufia 7 instance.
+The Sufia 6 instance is a AWS m4.large box (2 vCPU, 8 GB of RAM, with the data stored on a RAID 1 array of magnetic disk class storage). The Sufia 6 instance is on Fedora 4.6 with a levelDB database.
+Two Sufia 7 instances were tested, both running Fedora 4.7 with a Postgres database.
+Migration times:
+A m4.large box (2 vCPU, 8 GB RAM, magnetic disk non-raid): 34 hours 23 minutes 
+A c4.2xlarge box (4 vCPU, 7.5 GB RAM, SSD storage): 7 hours 40 minutes
+The CPU and disk I/O are the two factors most involved in the speed increase. Testing with the same CPU but a different disk should help isolate how much the disk I/O affects the transfer.
