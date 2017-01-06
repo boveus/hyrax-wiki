@@ -4,6 +4,8 @@ See the [Sufia Management Guide](https://github.com/projecthydra/sufia/wiki/Sufi
 
 ***
 
+**Deprecated**:
+
 == Setup & Configuration
 
 * Run the generators
