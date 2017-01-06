@@ -1,4 +1,4 @@
-# THIS DOCUMENT IS DEPRECATED/OUTDATED/UNTESTED
+# THIS DOCUMENT IS DEPRECATED (BECAUSE OUTDATED AND UNTESTED ON MODERN SUFIA)
 
 See the [Sufia Management Guide](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#analytics-and-usage-statistics) for more information on setting up Google Analytics.
 
