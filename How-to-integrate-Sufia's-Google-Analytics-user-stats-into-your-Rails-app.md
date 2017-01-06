@@ -1,6 +1,8 @@
-For more info about setting up Google Analytics, see the 
-{Analytics section of the README}[https://github.com/projecthydra/sufia/blob/master/README.md#analytics]
-.
+**THIS DOCUMENT IS DEPRECATED/OUTDATED/UNTESTED**
+
+See the [Sufia Management Guide](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#analytics-and-usage-statistics) for more information on setting up Google Analytics.
+
+***
 
 == Setup & Configuration
 
