@@ -16,6 +16,7 @@
 1. Close your rails server
 1. Follow steps for making an Admin user: https://github.com/projecthydra/sufia/wiki/Making-Admin-Users-in-Sufia
 1. Load the workflows
+
   ```
   rake hyrax:workflow:load    
   ```
