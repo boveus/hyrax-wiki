@@ -14,7 +14,15 @@
   ```
 
 1. Close your rails server
-1. Follow steps for making an Admin user: https://github.com/projecthydra/sufia/wiki/Making-Admin-Users-in-Sufia
+1. Add your user to the admin role by editing .internal_test_app/config/role_map.yml 
+
+  ```
+    development:
+      ...
+      admin:
+        - my_fake_user@faker.com
+  ```
+
 1. Load the workflows
 
   ```
