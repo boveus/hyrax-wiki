@@ -1,5 +1,9 @@
 # Setup
 
+## Development Note
+
+If you need to add administrative users in a production or production-like application, please proceed. If you only need to set up an admin user in development, this guide may be too heavyweight for your needs. Instead you should edit `config/role_map.yml` in the internal test application per [these instructions](https://github.com/projecthydra-labs/hyrax/wiki/Setting-up-test-app-for-workflow).
+
 ## Install hydra-role-management
 
 Follow the directions for installing [hydra-role-management](https://github.com/projecthydra/hydra-role-management#installing).
