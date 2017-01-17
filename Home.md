@@ -1,13 +1,14 @@
 # Guides
 
 * [[Sufia Management Guide]]
+* [[Feature matrix]]
 * [[Customizing Metadata]]
 * [[Making Admin Users in Sufia]]
 * [[Background Workers (Resque in Sufia 7)]]
 * [Customizing Actors](https://github.com/projecthydra-labs/curation_concerns/wiki/Actors) (from CurationConcerns)
+* [[Backup and Restoration]]
 * [[Sufia Development Guide]]
 * [[Release management process]]
-* [[Backup and Restoration]]
 
 # Other notes
 
