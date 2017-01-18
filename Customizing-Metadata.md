@@ -4,21 +4,31 @@ Please note that this documentation applies to Sufia 7.
 
 Table of Contents
 =================
-* [Generate a Model](#generate-a-model)
-* [Customize the Displayed Labels](#customize-the-displayed-labels)
-* [Override the GenericWork model](#override-the-genericwork-model)
-  * [Add the property](#add-the-property)
-* [Create a vocabulary](#create-a-vocabulary)
-* [Create a service to load the vocabulary](#create-a-service-to-load-the-vocabulary)
-* [Create a view to display your field](#create-a-view-to-display-your-field)
-* [Update the form so that your new field will display](#update-the-form-so-that-your-new-field-will-display)
-  * [If you'd like to make your new field required](#if-you-would-like-to-make-your-new-field-required)
-* [Making a default Sufia field non-repeatable](#making-a-default-sufia-field-non-repeatable)
-* [Make the field searchable](#make-the-field-searchable)
-* [Adjustments to display the field in work display](#adjustments-to-display-the-field-in-work-display)
+* [Prerequisite: Generating the basic files for a new work type](#prerequisite-generating-the-basic-files-for-a-new-work-type)
+* [Understanding the controller](#understanding-the-controller)
+* [Customizing the work-type to include a single-value text property](#customizing-the-work-type-to-include-a-single-value-text-property)
+  * [Add the new single-value property to the model](#add-the-new-single-value-property-to-the-model)
+  * [Add the new single-value property to the new/edit form](#add-the-new-single-value-property-to-the-newedit-form)
+  * [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page)
+* [Customizing the work-type to include a multi-value text property](#customizing-the-work-type-to-include-a-multi-value-text-property)  
+  * [Add the new multi-value property to the model](#add-the-new-multi-value-property-to-the-model)
+  * [Add the new multi-value property to the new/edit form](#add-the-new-multi-value-property-to-the-newedit-form)
+  * [Add the new multi-value property to the show page](#add-the-new-multi-value-property-to-the-show-page)
+* [Customizing the work-type to include a controlled vocabulary property](#customizing-the-work-type-to-include-a-controlled-vocabulary-property)  
+  * [Add the new controlled-value property to the model](#add-the-new-controlled-value-property-to-the-model)
+  * [Add the new controlled-value property to the new/edit form](#add-the-new-controlled-value-property-to-the-newedit-form)
+    * [Create a vocabulary](#create-a-vocabulary)
+    * [Create a service to load the vocabulary](#create-a-service-to-load-the-vocabulary)
+  * [Add the new controlled-value property to the show page](#add-the-new-controlled-value-property-to-the-show-page)  
+* [Modifying default Sufia fields](#modifying-default-sufia-fields)
+  * [Remove a default property from the set of required fields](#remove-a-default-property-from-the-set-of-required-fields)
+  * [Making a default property non-repeatable](#making-a-default-property-non-repeatable)
 * [Creating a Default Deposit Agreement](#creating-a-default-deposit-agreement)
+* [Labels and help text](#labels-and-help-text)
 
-# Generate a model
+
+---
+# Prerequisite: Generating the basic files for a new work type
 
 We'll begin by generating a work-type for Sufia to use.  We'll call our work type `GenericWork` although you could use any name you choose (e.g. `Image`, `ETD`, etc).  The first step is to run this generator:
 
@@ -28,13 +38,51 @@ $ bin/rails generate sufia:work GenericWork
 
 This will generate a number of files into your application.  Now we can customize these files.
 
-# Customize the displayed labels
+# Understanding the controller
 
-One file that is generated is the English locale file for the work type.  For `GenericWork` this is located in `config/locales/generic_work.en.yml`.  You can copy this file, change the `en` key to another locale, and translate the included keys to provide internationalization. You may edit the values in the English locale to change what is displayed by default.
+The GenericWorksController class is generated with some default behaviors.  It is located at `app/controllers/curation_concerns/generic_works_controller.rb`
 
-# Override the GenericWork model
+```ruby
+# Generated via
+#  `rails generate curation_concerns:work GenericWork`
 
-The GenericWork class is generated with some default metadata, but we want to update it with our own metadata.
+module CurationConcerns
+  class GenericWorksController < ApplicationController
+    include CurationConcerns::CurationConcernController
+    # Adds Sufia behaviors to the controller.
+    include Sufia::WorksControllerBehavior
+
+    self.curation_concern_type = GenericWork
+  end
+end
+```
+
+The model class name follows the Rails convention of controller name minus 'Controller' (e.g. GenericWork)
+
+The form class, used to control the new/edit form, and the presenter class, used to control the show page, can be identified in the controller class.  The default values for these are:
+
+- form_class = model_name.name + Form (e.g. GenericWorkForm) defined in [CurationConcern's work_form_service.rb](https://github.com/projecthydra/curation_concerns/blob/163d6029703bd5eeb77f9e15a7c21e9d5391f8cf/app/services/curation_concerns/work_form_service.rb) self.form_class method
+- show_presenter = Sufia::WorkShowPresenter defined in [Sufia's works_controller_behavior.rb](https://github.com/projecthydra/sufia/blob/master/app/controllers/concerns/sufia/works_controller_behavior.rb)
+
+These can be overridden in the GenericWorksController class using...
+
+```ruby
+    self.form_class = GenericWorkExtForm # UNCOMMON, see note below.
+    self.show_presenter = GenericWorkPresenter
+```
+
+Note:
+- It is uncommon to override self.form_class as the form class is already generated (e.g. GenericWorkForm) and can hold your extensions.
+- The presenter class is not generated.  There is an example adding this class in section [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page)
+- As usual, you can add code for special processing to the controller.
+
+
+---
+# Customizing the work-type to include a single-value text property
+
+## Add the new single-value property to the model
+
+The GenericWork class is generated with some default metadata, but we want to update it with our own metadata.  The generated version of the file looks like...
 
 ```ruby
 # app/models/generic_work.rb
@@ -42,36 +90,522 @@ class GenericWork < ActiveFedora::Base
   include ::CurationConcerns::WorkBehavior
   include ::CurationConcerns::BasicMetadata
   include Sufia::WorkBehavior
-  self.human_readable_type = 'Work'
+  self.human_readable_type = 'Generic Work'
+  # Change this to restrict which works can be added as a child.
+  # self.valid_child_concerns = []
+  validates :title, presence: { message: 'Your work must have a title.' }  
 end
 ```
 
-## Add the property
-
-We'll add a select box of university departments, and make it a non-repeatable field. Add the property declaration into the `GenericWork` class (and pass a block to make sure the property is indexed in Solr):
-
+### Extend the model to add a new single-value property
+ 
+To define a property that has a single text value, add the following to the GenericWork model.
 ```ruby
-  property :department, predicate: ::RDF::URI.new("http://lib.my.edu/departments"), multiple: false do |index|
-    index.as :stored_searchable, :facetable
+  property :contact_email, predicate: ::RDF::Vocab::VCARD.hasEmail, multiple: false do |index|
+    index.as :stored_searchable
   end
 ```
 
-If you'd like the field to be repeatable your block should look like this:
+### Expected behaviors for this property:
+- It will be limited to a single value (set multiple: true  or leave off for multi-value, which is the default behavior)
+- If included in the new/edit form, it will have `input type=text`  (There is a bit more configuration under section [Add the new single-value property to the new/edit form](#add-the-new-single-value-property-to-the-newedit-form) to have this included in the form.)
+- By setting `index.as :stored_searchable`, values will be added to the solr_doc as contact_email_tesi indicating this field is English text (te), stored (s), indexed (i) 
+  - See [Solr Schema](https://github.com/projecthydra/hydra-head/wiki/Solr-Schema) documentation for more information on dynamic solr field postfixes.
+  - See [Solrizer::DefaultDescriptors](http://www.rubydoc.info/gems/solrizer/3.4.0/Solrizer/DefaultDescriptors) documentation for more information on values for `index.as`
+  
+| ![QUESTION](https://cloud.githubusercontent.com/assets/6855473/13064236/f2f04cbe-d41e-11e5-9674-e9a56a6326e6.png) | Are all values described in Solrizer::DefaultDescriptors supported within Sufia/CC property definitions? |
+| ------------- | ---------------- | 
 
-```ruby
-  property :department, predicate: ::RDF::URI.new("http://lib.my.edu/departments") do |index|
-    index.as :stored_searchable, :facetable
-  end
-```
+### The modified model
 
-When you're done the file should look like this:
+The GenericWork at this point looks like:
 
 ```ruby
 class GenericWork < ActiveFedora::Base
   include ::CurationConcerns::WorkBehavior
   include ::CurationConcerns::BasicMetadata
   include Sufia::WorkBehavior
-  self.human_readable_type = 'Work'
+  self.human_readable_type = 'Generic Work'
+  # Change this to restrict which works can be added as a child.
+  # self.valid_child_concerns = []
+  validates :title, presence: { message: 'Your work must have a title.' }  
+
+  property :contact_email, predicate: ::RDF::Vocab::VCARD.hasEmail, multiple: false do |index|
+    index.as :stored_searchable
+  end
+end
+```
+
+## Add the new single-value property to the new/edit form
+
+The inclusion of properties in the new/edit form is controlled by the GenericWorkForm class.  The GenericWorkForm class is generated with the default set of properties (aka terms) to include.  The generated version of the file looks like...
+
+```ruby
+# Generated via
+#  `rails generate curation_concerns:work GenericWork`
+module CurationConcerns
+  class GenericWorkForm < Sufia::Forms::WorkForm
+    self.model_class = ::GenericWork
+    self.terms += [:resource_type]
+
+  end
+end
+```
+
+NOTE: 
+- As generated, model_class is the generated model class
+- As generated, terms includes basic work terms defined in [CurationConcerns' work_form.rb](https://github.com/projecthydra/curation_concerns/blob/master/app/forms/curation_concerns/forms/work_form.rb) and [Sufia's work_form.rb](https://github.com/projecthydra/sufia/blob/master/app/forms/sufia/forms/work_form.rb).
+- A controller class was also generated and configure form_class to be the one described here, e.g., `self.form_class = Sufia::Forms::GenericWorkForm` 
+ 
+### Adding the property to the work-type's new/edit form
+
+Now we want to update GenericWorkForm to include our own new property.  Edit `app/forms/curation_concerns/generic_work_form.rb` and modify `self.terms` to include the new property.
+
+```ruby
+    self.terms += [:resource_type, :contact_email]
+```
+
+Optionally, you can add the property to the set of required fields.
+```ruby
+    self.required_fields += [:contact_email] 
+```
+
+Optionally, you can also remove one of the default properties from the set of required fields.
+```ruby
+    self.required_fields -= [:keyword, :rights] 
+```
+
+The full class after the changes looks like...
+```ruby
+# app/forms/curation_concerns/generic_work_form.rb
+# Generated via
+#  `rails generate curation_concerns:work GenericWork`
+module CurationConcerns
+  class GenericWorkForm < Sufia::Forms::WorkForm
+    self.model_class = ::GenericWork
+    self.terms += [:resource_type, :contact_email]
+    self.required_fields += [:contact_email] 
+    self.required_fields -= [:keyword, :rights] 
+  end
+end
+```
+
+### Default form field behavior
+
+Default behavior:
+- By adding the property to self.terms, it will be added to the new/edit form.
+- Without additional customization, the field will be a text input field.  (See [Sufia's app/views/records/edit_fields/_default.html.erb](https://github.com/projecthydra/sufia/blob/master/app/views/records/edit_fields/_default.html.erb)
+- Because we did not set multiple: true, there will be only a single value set for this property.
+- Because we added it to the required_fields set, it will be displayed as required on the initial display of metadata fields on the form. If you did not add it to the set of required_fields, it will display in the form when you click Additional Fields button.
+
+### Customizing the form field
+
+Optionally, you can customize the creation of the form field.  To customize a form field, you create a partial with the property name under app/views/records/edit_fields.  Add form code to display the form as desired.  If this is the first form field customization you have made, you will need to create the `app/views/records/edit_fields` directories under `app/views`.
+
+For a single-value field, you can use something similar to...
+```erb
+<% # app/views/records/edit_fields/_contact_email.html.erb %>
+<%= f.input :contact_email, as: :email, required: f.object.required?(key),
+  input_html: { class: 'form-control', multiple: false }
+%>
+```
+
+You can see [more examples](https://github.com/projecthydra/sufia/tree/master/app/views/records/edit_fields) by exploring those created for the default fields in Sufia.
+
+## Add the new single-value property to the show page
+
+By default, the new property will **NOT** be displayed on the show page for works of this type.   
+
+- See [Curation Concern's work_show_presenter.rb](https://github.com/projecthydra/curation_concerns/blob/master/app/presenters/curation_concerns/work_show_presenter.rb) around line 39 with comment # Metadata Methods to see the primary list of properties that will be displayed on the show page.
+- See [Sufia's work_show_presenter.rb](https://github.com/projecthydra/sufia/blob/master/app/presenters/sufia/work_show_presenter.rb) for a few additional properties that are displayed on the work show page.  Look for the property names delegated to the solr_document near the top of the file.
+
+### Define the class to use to control the show page
+
+Display of the show page for a work is controlled by a presenter class specified in the controller.  This is not automatically generated and set by the generator process.  By default, [Sufia's work_show_presenter.rb](https://github.com/projecthydra/sufia/blob/master/app/presenters/sufia/work_show_presenter.rb) class is used for show pages.
+
+Create the following as a starting point for the custom presenter class.
+
+```ruby
+# app/presenters/generic_work_presenter.rb
+class GenericWorkPresenter < Sufia::WorkShowPresenter
+end
+```
+
+Assign the presenter class in the generated controller.  Edit `app/controllers/curation_concerns/generic_work_controller.rb` and add the following line under the curation_concern_type assignment.
+
+```ruby
+  self.show_presenter = GenericWorkPresenter
+```
+
+The controller class now looks like...
+
+```ruby
+module CurationConcerns
+  class GenericWorksController < ApplicationController
+    include CurationConcerns::CurationConcernController
+    # Adds Sufia behaviors to the controller.
+    include Sufia::WorksControllerBehavior
+
+    self.curation_concern_type = GenericWork
+    self.show_presenter = Sufia::Forms::GenericWorkPresenter
+  end
+end
+```
+
+### Add the property to be displayed
+
+Edit the custom presenter class (e.g. app/presenters/generic_work_presenter.rb) and add a delegate to solr_document for the property to be displayed.
+ 
+```ruby
+  delegate :contact_email, to: :solr_document
+```
+
+The full custom presenter class now looks like...
+```ruby
+# app/presenters/generic_work_presenter.rb
+class GenericWorkPresenter < Sufia::WorkShowPresenter
+  delegate :contact_email, to: :solr_document
+end
+```
+
+Edit app/models/solr_document.rb and add a method to retrieve the property's value from the solr doc.
+```ruby
+def contact_email
+  self[Solrizer.solr_name('contact_email')]
+end
+```
+
+If this is the first custom property added to the show page, you will need to copy [Sufia's app/views/curation_concerns/base/_attribute_rows.html.erb](https://github.com/projecthydra/sufia/blob/master/app/views/curation_concerns/base/_attribute_rows.html.erb) to the same directory structure in your app.  NOTE: The link goes to master.  Make sure you copy from the release/branch of Sufia that your app has installed.
+ 
+Add the field to the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb
+```erb
+<%= presenter.attribute_to_html(:contact_email) %>
+```
+
+### Configure Blacklight to show the property on the show page
+ 
+Edit app/controllers/catalog_controller.rb and look for the section including `add_show_field` statements.  Add the following:
+```ruby
+config.add_show_field solr_name("contact_email", :stored_searchable), label: "Contact Email"
+```
+
+### Configure Blacklight to show the property in search results
+ 
+Optionally, you can also have the property shown in the search results for a work.
+ 
+Edit app/controllers/catalog_controller.rb and look for the section including `add_index_field` statements.  Add the following:
+```ruby
+config.add_index_field solr_name("contact_email", :stored_searchable), label: "Contact Email"
+```
+
+### Default property display behavior
+
+Each value for the property, in this case the single value, will be displayed using a `<span>` tag.  See [Sufia's app/views/records/show_fields/_default.html-erb](https://github.com/projecthydra/sufia/blob/master/app/views/records/show_fields/_default.html.erb).
+
+### Customizing the property display
+
+Optionally, you can customize the display of the property value on the show page.  To customize the display of a property, create a partial with the property name under app/views/records/show_fields.  Add display code as desired.  If this is the first display property customization you have made, you will need to create the `app/views/records/show_fields` directories under `app/views`.
+
+For a single-value field, you can use something similar to...
+```erb
+<% # app/views/records/show_fields/_contact_email.html.erb %>
+<% Array(record.contact_email).each do |email| %>
+  <span itemprop="email">
+    <a href="mailto:<%= email %>"><%= email %></a>
+  </span>
+  <br />
+<% end %>
+```
+
+You can see [more examples](https://github.com/projecthydra/sufia/tree/master/app/views/records/show_fields) by exploring those created for the default fields in Sufia.
+
+
+---
+# Customizing the work-type to include a multi-value text property
+
+Reference [Customizing the work-type to include a single-value text property](#customizing-the-work-type-to-include-a-single-value-text-property) section for the overall process.  This section includes only new changes to support multi-value properties.
+
+## Add the new multi-value property to the model
+
+The GenericWork class after the customization for the single-value property looked like...
+
+```ruby
+class GenericWork < ActiveFedora::Base
+  include ::CurationConcerns::WorkBehavior
+  include ::CurationConcerns::BasicMetadata
+  include Sufia::WorkBehavior
+  self.human_readable_type = 'Generic Work'
+  # Change this to restrict which works can be added as a child.
+  # self.valid_child_concerns = []
+  validates :title, presence: { message: 'Your work must have a title.' }  
+
+  property :contact_email, predicate: ::RDF::Vocab::VCARD.hasEmail, multiple: false do |index|
+    index.as :stored_searchable
+  end
+end
+```
+
+### Extend the model to add a new multi-value property
+ 
+To define a property that has multiple text values, add the following to the GenericWork model.
+
+```ruby
+  property :contact_phone, predicate: ::RDF::Vocab::VCARD.hasTelephone do |index|
+    index.as :stored_searchable
+  end
+```
+
+Expected behaviors for this property:
+- Can have one or more values assigned.  Note: By default properties are multi-value.  You can also explicitly state this by adding `, multiple: true` before `do |index|`
+- The remaining basic behaviors are the same as for single-value properties.  See more information under [Add the new single-value property to the model](#add-the-new-single-value-property-to-the-model) Expected behaviors.
+
+### The modified model
+
+The GenericWork at this point with the single and multi-valued properties looks like...
+
+```ruby
+class GenericWork < ActiveFedora::Base
+  include ::CurationConcerns::WorkBehavior
+  include ::CurationConcerns::BasicMetadata
+  include Sufia::WorkBehavior
+  self.human_readable_type = 'Generic Work'
+  # Change this to restrict which works can be added as a child.
+  # self.valid_child_concerns = []
+  validates :title, presence: { message: 'Your work must have a title.' }  
+
+  property :contact_email, predicate: ::RDF::Vocab::VCARD.hasEmail, multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :contact_phone, predicate: ::RDF::Vocab::VCARD.hasTelephone do |index|
+    index.as :stored_searchable
+  end
+end
+```
+
+## Add the new multi-value property to the new/edit form
+
+The GenericWorkForm class after the customization for the single-value property looked like...
+
+```ruby
+# app/forms/generic_work_form.rb
+# Generated via
+#  `rails generate curation_concerns:work GenericWork`
+module CurationConcerns
+  class GenericWorkForm < Sufia::Forms::WorkForm
+    self.model_class = ::GenericWork
+    self.terms += [:resource_type, :contact_email]
+    self.required_fields += [:contact_email] 
+    self.required_fields -= [:keyword, :rights] 
+  end
+end
+```
+
+See [Add the new single-value property to the new/edit form](#add-the-new-single-value-property-to-the-newedit-form) section for more information on the GenericWorkForm class.
+ 
+### Adding the property to the work-type's new/edit form
+
+Now we want to update GenericWorkForm to include the new multi-value property.
+
+Modify `self.terms` to include the new property.
+
+```ruby
+    self.terms += [:resource_type, :contact_email, :contact_phone]
+```
+
+The full class after the changes looks like...
+```ruby
+# app/forms/generic_work_form.rb
+# Generated via
+#  `rails generate curation_concerns:work GenericWork`
+module CurationConcerns
+  class GenericWorkForm < Sufia::Forms::WorkForm
+    self.model_class = ::GenericWork
+    self.terms += [:resource_type, :contact_email, :contact_phone]
+    self.required_fields += [:contact_email] 
+    self.required_fields -= [:keyword, :rights] 
+  end
+end
+```
+
+See [Add the new single-value property to the new/edit form](#add-the-new-single-value-property-to-the-newedit-form) section for more information on modifying required_fields.
+
+### Default form field behavior
+
+Default behavior:
+- By adding the property to self.terms, it will be added to the new/edit form.
+- Without additional customization, the field will be a text input field.  (See [Sufia's app/views/records/edit_fields/_default.html.erb](https://github.com/projecthydra/sufia/blob/master/app/views/records/edit_fields/_default.html.erb)
+- Because we did not set a value for multiple:, there can be one or more values set for this property.
+- Because we did not add it to the required_fields set, it will be displayed in the form when you click Additional Fields button.
+
+### Customizing the form field
+
+Optionally, you can customize the creation of the form field.  To customize a form field, you create a partial with the property name under app/views/records/edit_fields.  Add form code to display the form as desired.
+
+For a multi-value field, you can use something similar to...
+```erb
+<% # app/views/records/edit_fields/_contact_phone.html.erb %>
+<%= f.input :contact_phone, as: :tel, required: f.object.required?(key),
+    input_html: { class: 'form-control', multiple: true }
+%>
+```
+
+You can see [more examples](https://github.com/projecthydra/sufia/tree/master/app/views/records/edit_fields) by exploring those created for the default fields in Sufia.
+
+
+## Add the new multi-value property to the show page
+
+By default, the new property will **NOT** be displayed on the show page for works of this type.  
+
+### Define the class to use to control the show page
+
+A presenter class is **NOT** generated as part of the generation process, but we created one for the single-value property.
+
+The GenericWorkPresenter class after the customization for the single-value property looked like...
+
+```ruby
+# app/presenters/generic_work_presenter.rb
+class GenericWorkPresenter < Sufia::WorkShowPresenter
+  delegate :contact_email, to: :solr_document
+end
+```
+
+See [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page) section for more information.   
+
+### Add the property to be displayed
+
+Edit the custom presenter class (e.g. app/presenters/generic_work_presenter.rb) and add a delegate to solr_document for the property to be displayed.
+ 
+```ruby
+  delegate :contact_email, :contact_phone, to: :solr_document
+```
+
+The full custom presenter class now looks like...
+```ruby
+# app/presenters/generic_work_presenter.rb
+class GenericWorkPresenter < Sufia::WorkShowPresenter
+  delegate :contact_email, :contact_phone, to: :solr_document
+end
+```
+
+Edit app/models/solr_document.rb and add a method to retrieve the property's value from the solr doc.
+```ruby
+def contact_email
+  self[Solrizer.solr_name('contact_email')]
+end
+
+def contact_phone
+  self[Solrizer.solr_name('contact_phone')]
+end
+```
+ 
+Add the field to the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb  If this file doesn't exist in your local app, see [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page) for where to get a copy.
+```erb
+<%= presenter.attribute_to_html(:contact_email) %>
+<%= presenter.attribute_to_html(:contact_phone) %>
+```
+ 
+### Configure Blacklight to show the property on the show page
+ 
+Edit app/controllers/catalog_controller.rb and look for the section including add_show_field statements.  Add the following:
+```ruby
+config.add_show_field solr_name("contact_email", :stored_searchable), label: "Contact Email"
+config.add_show_field solr_name("contact_phone", :stored_searchable), label: "Contact Phone"
+```
+
+### Configure Blacklight to show the property in search results
+ 
+Optionally, you can also have the property shown in the search results for a work.
+ 
+Edit app/controllers/catalog_controller.rb and look for the section including `add_index_field` statements.  Add the following:
+```ruby
+config.add_index_field solr_name("contact_email", :stored_searchable), label: "Contact Email"
+config.add_index_field solr_name("contact_phone", :stored_searchable), label: "Contact Phone"
+```
+
+### Default property display behavior
+
+Each value for the property, will be displayed using a `<span>` tag.  See [Sufia's app/views/records/show_fields/_default.html-erb](https://github.com/projecthydra/sufia/blob/master/app/views/records/show_fields/_default.html.erb).
+
+### Customizing the property display
+
+Optionally, you can customize the display of the property value on the show page.  To customize the display of a property, create a partial with the property name under app/views/records/show_fields.  Add display code as desired.
+
+For a multi-value field, you can use something similar to...
+```erb
+<% # app/views/records/show_fields/_contact_phone.html.erb %>
+<% Array(record.contact_phone).each do |phone_num| %>
+  <span itemprop="telephone">
+    <a href="tel:+<%= phone_num %>"><%= phone_num %></a>
+  </span>
+  <br />
+<% end %>
+```
+
+You can see [more examples](https://github.com/projecthydra/sufia/tree/master/app/views/records/show_fields) by exploring those created for the default fields in Sufia.
+
+
+---
+# Customizing the work-type to include a controlled vocabulary property
+
+Reference [Customizing the work-type to include a single-value text property](#customizing-the-work-type-to-include-a-single-value-text-property) section for the overall process.  This section includes only new changes to support controlled-value properties.
+
+## Add the new controlled-value property to the model
+
+The GenericWork class after the customization for the multi-value property looked like...
+
+```ruby
+class GenericWork < ActiveFedora::Base
+  include ::CurationConcerns::WorkBehavior
+  include ::CurationConcerns::BasicMetadata
+  include Sufia::WorkBehavior
+  self.human_readable_type = 'Generic Work'
+  # Change this to restrict which works can be added as a child.
+  # self.valid_child_concerns = []
+  validates :title, presence: { message: 'Your work must have a title.' }  
+
+  property :contact_email, predicate: ::RDF::Vocab::VCARD.hasEmail, multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :contact_phone, predicate: ::RDF::Vocab::VCARD.hasTelephone do |index|
+    index.as :stored_searchable
+  end
+end
+```
+
+### Extend the model to add a new controlled-value property
+
+The controlled-value property based on values in a controlled vocabulary is defined in the same was as the single and multi-valued properties.
+
+To define a property with values driven from a controlled vocabulary is initially the same.  Add the following to the GenericWork model.
+```ruby
+  property :department, predicate: ::RDF::URI.new("http://lib.my.edu/departments"), multiple: false do |index|
+    index.as :stored_searchable, :facetable
+  end
+```
+
+### The modified model
+
+With all three properties added, the GenericWork now looks like:
+
+```ruby
+class GenericWork < ActiveFedora::Base
+  include ::CurationConcerns::WorkBehavior
+  include ::CurationConcerns::BasicMetadata
+  include Sufia::WorkBehavior
+  self.human_readable_type = 'Generic Work'
+  # Change this to restrict which works can be added as a child.
+  # self.valid_child_concerns = []
+  validates :title, presence: { message: 'Your work must have a title.' }  
+
+  property :contact_email, predicate: ::RDF::Vocab::VCARD.hasEmail, multiple: false do |index|
+    index.as :stored_searchable
+  end
+
+  property :contact_phone, predicate: ::RDF::Vocab::VCARD.hasTelephone do |index|
+    index.as :stored_searchable
+  end
 
   property :department, predicate: ::RDF::URI.new("http://lib.my.edu/departments"), multiple: false do |index|
     index.as :stored_searchable, :facetable
@@ -79,22 +613,77 @@ class GenericWork < ActiveFedora::Base
 end
 ```
 
-# Create a vocabulary
+## Add the new controlled-value property to the new/edit form
 
+The GenericWorkForm class after the customization for the multi-value property looked like...
+
+```ruby
+# Generated via
+#  `rails generate curation_concerns:work GenericWork`
+module CurationConcerns
+  class GenericWorkForm < Sufia::Forms::WorkForm
+    self.model_class = ::GenericWork
+    self.terms += [:resource_type, :contact_email, :contact_phone]
+    self.required_fields += [:contact_email] 
+    self.required_fields -= [:keyword, :rights] 
+  end
+end
+```
+
+See [Add the new single-value property to the new/edit form](#add-the-new-single-value-property-to-the-newedit-form) section for more information on the GenericWorkForm class.
+ 
+### Adding the property to the work-type's new/edit form
+
+Now we want to update GenericWorkForm to include the new controlled-value property.
+
+Modify `self.terms` to include the new property.
+
+```ruby
+    self.terms += [:resource_type, :contact_email, :contact_phone, :department]
+```
+
+The full class after the changes looks like...
+```ruby
+# app/forms/generic_work_form.rb
+# Generated via
+#  `rails generate curation_concerns:work GenericWork`
+module CurationConcerns
+  class GenericWorkForm < Sufia::Forms::WorkForm
+    self.model_class = ::GenericWork
+    self.terms += [:resource_type, :contact_email, :contact_phone, :department]
+    self.required_fields += [:contact_email] 
+    self.required_fields -= [:keyword, :rights] 
+  end
+end
+```
+
+See [Add the new single-value property to the new/edit form](#add-the-new-single-value-property-to-the-newedit-form) section for more information on modifying required_fields.
+
+### Default form field behavior
+
+Default behavior will be the same for the single-value property at this point which is the creation of a text input field for the user to type in the value.  But that's not what we want in this case.
+
+### Create a vocabulary
+
+Before we try to use the controlled vocabulary, we need to create it first.
 ```ruby
 ## config/authorities/departments.yml
 terms:
-  - id: English
+  - id: eng
     term: English
-  - id: History
+  - id: hst
     term: History
-  - id: Latin
+  - id: ltn
     term: Latin
-  - id: Zoology
+  - id: zoo
     term: Zoology
 ```
 
-# Create a service to load the vocabulary
+NOTE: Support for controlled vocabularies is provided by the [Questioning Authority](https://github.com/projecthydra-labs/questioning_authority) (qa) gem.  See that gem for more details on controlled vocabularies.
+
+### Create a service to load the vocabulary
+
+A service is required to set up Questioning Authority to return all the values, which will be used to populate the selection list, and a single value given an id, which will be used to show the value instead of the id on the show page. 
 
 ```ruby
 # services/departments_service.rb
@@ -114,10 +703,14 @@ module DepartmentsService
 end
 ```
 
-# Create a view to display your field
+### Customizing the form field
+
+For a controlled vocabulary, you must customize the creation of the form field.  To customize a form field, you create a partial with the property name under app/views/records/edit_fields.  Add form code to display the form as desired.
+
+For a controlled-value field, you can use something similar to...
 
 ```erb
-# records/edit_fields/_department.html.erb
+# app/views/records/edit_fields/_department.html.erb
 <%= f.input :department, as: :select,
     collection: DepartmentsService.select_all_options,
     include_blank: true,
@@ -126,87 +719,175 @@ end
 %>
 ```
 
-# Update the form so that your new field will display
+You can see [more examples](https://github.com/projecthydra/sufia/tree/master/app/views/records/edit_fields) by exploring those created for the default fields in Sufia.
+
+
+## Add the new controlled-value property to the show page
+
+By default, the new property will **NOT** be displayed on the show page for works of this type.  
+
+### Define the class to use to control the show page
+
+A presenter class is **NOT** generated as part of the generation process, but we created one for the single-value property.
+
+The GenericWorkPresenter class after the customization for the multi-value property looked like...
 
 ```ruby
-# forms/curation_concerns/generic_work_form.rb
-module CurationConcerns
-  class GenericWorkForm < Sufia::Forms::WorkForm
-    self.model_class = ::GenericWork
-    self.terms += [:department]
-  end
+# app/presenters/generic_work_presenter.rb
+class GenericWorkPresenter < Sufia::WorkShowPresenter
+  delegate :contact_email, :contact_phone, to: :solr_document
 end
 ```
 
-## If you would like to make your new field required
+See [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page) section for more information.   
 
+### Add the property to be displayed
+
+Edit the custom presenter class (e.g. app/presenters/generic_work_presenter.rb) and add a delegate to solr_document for the property to be displayed.
+ 
 ```ruby
-# forms/curation_concerns/generic_work_form.rb
-module CurationConcerns
-  class GenericWorkForm < Sufia::Forms::WorkForm
-    self.model_class = ::GenericWork
-    self.terms += [:department]
-    # Add following line if you'd like to make your field required
-    self.required_fields += [:department]
-  end
+  delegate :contact_email, :contact_phone, :department, to: :solr_document
+```
+
+The full custom presenter class now looks like...
+```ruby
+# app/presenters/generic_work_presenter.rb
+class GenericWorkPresenter < Sufia::WorkShowPresenter
+  delegate :contact_email, :contact_phone, :department, to: :solr_document
 end
 ```
 
-# Making a default Sufia field non-repeatable
+Edit app/models/solr_document.rb and add a method to retrieve the property's value from the solr doc.
+```ruby
+def contact_email
+  self[Solrizer.solr_name('contact_email')]
+end
 
-By default all fields in Sufia are repeatable. If you'd like to change this behavior for a field that Sufia provides out of the box, the title field in this case, you can do the following:
+def contact_phone
+  self[Solrizer.solr_name('contact_phone')]
+end
+
+def department
+  self[Solrizer.solr_name('department')]
+end
+```
+ 
+Add the field to the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb  If this file doesn't exist in your local app, see [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page) for where to get a copy.
+```erb
+<%= presenter.attribute_to_html(:contact_email) %>
+<%= presenter.attribute_to_html(:contact_phone) %>
+<%= presenter.attribute_to_html(:department) %>
+```
+ 
+### Configure Blacklight to show the property on the show page
+ 
+Edit app/controllers/catalog_controller.rb and look for the section including add_show_field statements.  Add the following:
+```ruby
+config.add_show_field solr_name("contact_email", :stored_searchable), label: "Contact Email"
+config.add_show_field solr_name("contact_phone", :stored_searchable), label: "Contact Phone"
+config.add_show_field solr_name("department", :stored_searchable), label: "Department"
+```
+
+### Configure Blacklight to show the property in search results
+ 
+Optionally, you can also have the property shown in the search results for a work.
+ 
+Edit app/controllers/catalog_controller.rb and look for the section including `add_index_field` statements.  Add the following:
+```ruby
+config.add_index_field solr_name("contact_email", :stored_searchable), label: "Contact Email"
+config.add_index_field solr_name("contact_phone", :stored_searchable), label: "Contact Phone"
+config.add_index_field solr_name("department", :stored_searchable), label: "Department"
+```
+
+### Default property display behavior
+
+Each value for the property, will be displayed using a `<span>` tag.  See [Sufia's app/views/records/show_fields/_default.html-erb](https://github.com/projecthydra/sufia/blob/master/app/views/records/show_fields/_default.html.erb).
+
+### Customizing the property display
+
+For a controlled vocabulary, you must customize the display of the property on the show page; otherwise, the ID will be displayed instead of the value.  To customize the display of a property, create a partial with the property name under app/views/records/show_fields.  Add display code as desired.
+
+For a controlled-value field, you can use something similar to...
+```erb
+<% # app/views/records/show_fields/_department.html.erb %>
+<%= f.input :department, as: :select,
+     collection: DepartmentsService.select_all_options,
+     include_blank: true,
+     item_helper: method(:include_current_value),
+     input_html: { class: 'form-control' }
+ %>
+```
+
+You can see [more examples](https://github.com/projecthydra/sufia/tree/master/app/views/records/show_fields) by exploring those created for the default fields in Sufia.
+
+
+
+
+
+
+
+---
+# Modifying default Sufia fields
+
+## Remove a default property from the set of required fields
+
+Edit app/forms/generic_work_form.rb  (substitute your work-type name for generic_work) and make add the following to make keyword and rights optional fields.  Note: This also moves these fields below all required fields and they only display on the form when the Additional Fields button is clicked.
 
 ```ruby
-# forms/curation_concerns/generic_work_form.rb
+    self.required_fields -= [:keyword, :rights] 
+```
+
+## Making a default property non-repeatable
+
+By default all fields in Sufia are repeatable. If you'd like to change this behavior for a field that Sufia provides out of the box, you can do the following.  This example makes title, description, and publisher fields single-value.
+
+Edit app/forms/generic_work_form.rb  (substitute your work-type name for generic_work) and make the following changes
+
+* Override `self.multiple?(field)` and return false for any default fields you want to be single value.
+* Override `self.model_attributes(_)` to cast back to multi-value when saving
+* Add methods to return the field value as single-value for populating the form fields during editing
+
+The form class after making these changes looks like...
+
+```ruby
+# app/forms/generic_work_form.rb
+# Generated via
+#  `rails generate curation_concerns:work GenericWork`
 module CurationConcerns
   class GenericWorkForm < Sufia::Forms::WorkForm
-    self.model_class = ::GenericWork
-		
+    self.model_class = ::GenericWork	
+    	
     def self.multiple?(field)
-      if field.to_sym == :title
+      if [:title, :description, :publisher].include? field.to_sym
         false
       else
         super
       end
     end
 		
-    # cast title back to multivalued so it will actually deposit
     def self.model_attributes(_)
       attrs = super
       attrs[:title] = Array(attrs[:title]) if attrs[:title]
+      attrs[:description] = Array(attrs[:description]) if attrs[:description]
+      attrs[:publisher] = Array(attrs[:publisher]) if attrs[:publisher]
       attrs
     end
+
+    def title
+      super.first || ""
+    end
+    
+    def description
+      super.first || ""
+    end
+    
+    def publisher
+      super.first || ""
+    end    
   end
 end
 ```
 
-# Retrieve the field for search results display
-Inside app/controllers/catalog_controller.rb, add the following:
-```ruby
-config.add_show_field solr_name("department", :stored_searchable), label: "Department"
-```
-
-# Adjustments to display the field in work display
-Add the field to app/models/solr_document.rb
-```ruby
-def department
-  self[Solrizer.solr_name('department')]
-end
-```
-
-Add the field to app/presenters/sufia/work_show_presenter.rb
-```ruby
-delegate :department, to: :solr_document
-```
-
-Add the field to app/views/curation_concerns/base/_attribute_rows.html.erb
-```ruby
-<%= presenter.attribute_to_html(:department) %>
-```
-
-# Labels and help text
-
-**TBD**
 
 # Creating a Default Deposit Agreement
 
@@ -226,3 +907,8 @@ en:
 ```
 
 Lastly, create your own `app/views/static/agreement.html.erb` page with the content of your deposit agreement.
+
+# Labels and help text
+
+**TBD**
+
