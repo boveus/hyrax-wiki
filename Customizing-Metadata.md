@@ -41,9 +41,9 @@ This will generate a number of files into your application.  Now we can customiz
 
 ## Labels and help text
 
-One of the generated files includes config/locales/generic_work.en.yml in which many of the labels used on forms and show pages for the new work type are defined.  You can modify these labels and also add labels for any new properties defined.
+One of the generated files includes `config/locales/generic_work.en.yml` in which many of the labels used on forms and show pages for the new work type are defined.  You can modify these labels and also add labels for any new properties defined.
 
-Application specific labels are defined in config/locales/sufia.en.yml
+Application specific labels are defined in `config/locales/sufia.en.yml`.
 
 
 # Understanding the controller
