@@ -1,10 +1,11 @@
-# Note
+# NOTE
 
 Please note that this documentation applies to Sufia 7.
 
 Table of Contents
 =================
 * [Prerequisite: Generating the basic files for a new work type](#prerequisite-generating-the-basic-files-for-a-new-work-type)
+  * [Labels and help text](#labels-and-help-text)
 * [Understanding the controller](#understanding-the-controller)
 * [Customizing the work-type to include a single-value text property](#customizing-the-work-type-to-include-a-single-value-text-property)
   * [Add the new single-value property to the model](#add-the-new-single-value-property-to-the-model)
@@ -37,6 +38,13 @@ $ bin/rails generate sufia:work GenericWork
 ```
 
 This will generate a number of files into your application.  Now we can customize these files.
+
+## Labels and help text
+
+One of the generated files includes config/locales/generic_work.en.yml in which many of the labels used on forms and show pages for the new work type are defined.  You can modify these labels and also add labels for any new properties defined.
+
+Application specific labels are defined in config/locales/sufia.en.yml
+
 
 # Understanding the controller
 
@@ -71,7 +79,7 @@ These can be overridden in the GenericWorksController class using...
     self.show_presenter = GenericWorkPresenter
 ```
 
-Note:
+NOTE:
 - It is uncommon to override self.form_class as the form class is already generated (e.g. GenericWorkForm) and can hold your extensions.
 - The presenter class is not generated.  There is an example adding this class in section [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page)
 - As usual, you can add code for special processing to the controller.
@@ -300,24 +308,35 @@ config.add_index_field solr_name("contact_email", :stored_searchable), label: "C
 
 ### Default property display behavior
 
-Each value for the property, in this case the single value, will be displayed using a `<span>` tag.  See [Sufia's app/views/records/show_fields/_default.html-erb](https://github.com/projecthydra/sufia/blob/master/app/views/records/show_fields/_default.html.erb).
+Each value for the property, in this case the single value, will be displayed using a `<span>` tag.  See [Curation Concerns's default AttributeRenderer](https://github.com/projecthydra/curation_concerns/blob/master/app/renderers/curation_concerns/renderers/attribute_renderer.rb).
 
 ### Customizing the property display
 
-Optionally, you can customize the display of the property value on the show page.  To customize the display of a property, create a partial with the property name under app/views/records/show_fields.  Add display code as desired.  If this is the first display property customization you have made, you will need to create the `app/views/records/show_fields` directories under `app/views`.
+Optionally, you can customize the display of the property value on the show page.  
 
-For a single-value field, you can use something similar to...
+Either use an existing renderer or define a new renderer.  The renderer can be for a type of attribute, like an email, that can be used with multiple properties or a one-off renderer for a specific property.  The process is the same for both. 
+
+To define a general renderer for all email properties...
 ```erb
-<% # app/views/records/show_fields/_contact_email.html.erb %>
-<% Array(record.contact_email).each do |email| %>
-  <span itemprop="email">
-    <a href="mailto:<%= email %>"><%= email %></a>
-  </span>
-  <br />
-<% end %>
+<% # app/renderers/email_attribute_renderer.rb %>
+class EmailAttributeRenderer < CurationConcerns::Renderers::AttributeRenderer
+  def attribute_value_to_html(value)
+    %(<span itemprop="email"><a href="mailto:#{value}">#{value}</a></span>)
+  end
+end
 ```
 
-You can see [more examples](https://github.com/projecthydra/sufia/tree/master/app/views/records/show_fields) by exploring those created for the default fields in Sufia.
+Identify the renderer to use for the property.  Edit the definition in the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb and add the render_as parameter for the property.
+```erb
+<%= presenter.attribute_to_html(:contact_email, render_as: :email) %>
+```
+
+NOTES:
+* The class name must begin with the renderer name and end with AttributeRenderer.
+* To identify a renderer, use the renderer name (everything upto, but not including AttributeRenderer)
+* You can use one of the renderers defined in Curation Concerns.
+* You can make more complex renderers.  See Curation Concerns defined renderers for examples. 
+* See [Curation Concerns defined renderers](https://github.com/projecthydra/curation_concerns/tree/master/app/renderers/curation_concerns/renderers).
 
 
 ---
@@ -356,7 +375,7 @@ To define a property that has multiple text values, add the following to the Gen
 ```
 
 Expected behaviors for this property:
-- Can have one or more values assigned.  Note: By default properties are multi-value.  You can also explicitly state this by adding `, multiple: true` before `do |index|`
+- Can have one or more values assigned.  NOTE: By default properties are multi-value.  You can also explicitly state this by adding `, multiple: true` before `do |index|`
 - The remaining basic behaviors are the same as for single-value properties.  See more information under [Add the new single-value property to the model](#add-the-new-single-value-property-to-the-model) Expected behaviors.
 
 ### The modified model
@@ -525,24 +544,31 @@ config.add_index_field solr_name("contact_phone", :stored_searchable), label: "C
 
 ### Default property display behavior
 
-Each value for the property, will be displayed using a `<span>` tag.  See [Sufia's app/views/records/show_fields/_default.html-erb](https://github.com/projecthydra/sufia/blob/master/app/views/records/show_fields/_default.html.erb).
+Each value for the property will be displayed using a `<span>` tag.  See [Curation Concerns's default AttributeRenderer](https://github.com/projecthydra/curation_concerns/blob/master/app/renderers/curation_concerns/renderers/attribute_renderer.rb).
 
 ### Customizing the property display
 
-Optionally, you can customize the display of the property value on the show page.  To customize the display of a property, create a partial with the property name under app/views/records/show_fields.  Add display code as desired.
+Optionally, you can customize the display of the property value on the show page.  
 
-For a multi-value field, you can use something similar to...
+Either use an existing renderer or define a new renderer.  The renderer can be for a type of attribute, like a phone, that can be used with multiple properties or a one-off renderer for a specific property.  The process is the same for both. 
+
+To define a general renderer for all phone properties...
 ```erb
-<% # app/views/records/show_fields/_contact_phone.html.erb %>
-<% Array(record.contact_phone).each do |phone_num| %>
-  <span itemprop="telephone">
-    <a href="tel:+<%= phone_num %>"><%= phone_num %></a>
-  </span>
-  <br />
-<% end %>
+<% # app/renderers/phone_attribute_renderer.rb %>
+class PhoneAttributeRenderer < CurationConcerns::Renderers::AttributeRenderer
+  def attribute_value_to_html(value)
+    %(<span itemprop="telephone"><a href="tel:#{value}">#{value}</a></span>)
+  end
+end
 ```
 
-You can see [more examples](https://github.com/projecthydra/sufia/tree/master/app/views/records/show_fields) by exploring those created for the default fields in Sufia.
+Identify the renderer to use for the property.  Edit the definition in the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb and add the render_as parameter for the property.
+```erb
+<%= presenter.attribute_to_html(:contact_phone, render_as: :phone) %>
+```
+
+See [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page) Customizing the property display section for more information.
+
 
 
 ---
@@ -801,24 +827,33 @@ config.add_index_field solr_name("department", :stored_searchable), label: "Depa
 
 ### Default property display behavior
 
-Each value for the property, will be displayed using a `<span>` tag.  See [Sufia's app/views/records/show_fields/_default.html-erb](https://github.com/projecthydra/sufia/blob/master/app/views/records/show_fields/_default.html.erb).
+Each value for the property, in this case the selected controlled value's ID, will be displayed using a `<span>` tag.  See [Curation Concerns's default AttributeRenderer](https://github.com/projecthydra/curation_concerns/blob/master/app/renderers/curation_concerns/renderers/attribute_renderer.rb).
+
+NOTE: If the ID and TERM for your controlled vocabulary are the same, then you can use the default display behavior.
 
 ### Customizing the property display
 
-For a controlled vocabulary, you must customize the display of the property on the show page; otherwise, the ID will be displayed instead of the value.  To customize the display of a property, create a partial with the property name under app/views/records/show_fields.  Add display code as desired.
+For a controlled vocabulary, you must customize the display of the property on the show page if the ID is not the same as the TERM; otherwise, the ID will be displayed instead of the value.  
 
-For a controlled-value field, you can use something similar to...
+Define a new renderer to convert the value from the controlled value's ID to its TERM.  The renderer in this case will be specific to the controlled value property. 
+
+To define a property specific renderer for the department property...
 ```erb
-<% # app/views/records/show_fields/_department.html.erb %>
-<%= f.input :department, as: :select,
-     collection: DepartmentsService.select_all_options,
-     include_blank: true,
-     item_helper: method(:include_current_value),
-     input_html: { class: 'form-control' }
- %>
+<% # app/renderers/department_attribute_renderer.rb %>
+class DepartmentAttributeRenderer < CurationConcerns::Renderers::AttributeRenderer
+  def attribute_value_to_html(value)
+    %(<span itemprop="department">#{::DepartmentsService.label(value)}</span>)
+  end
+end
+
 ```
 
-You can see [more examples](https://github.com/projecthydra/sufia/tree/master/app/views/records/show_fields) by exploring those created for the default fields in Sufia.
+Identify the renderer to use for the property.  Edit the definition in the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb and add the render_as parameter for the property.
+```erb
+<%= presenter.attribute_to_html(:department, render_as: :department) %>
+```
+
+See [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page) Customizing the property display section for more information.
 
 
 
@@ -831,7 +866,7 @@ You can see [more examples](https://github.com/projecthydra/sufia/tree/master/ap
 
 ## Remove a default property from the set of required fields
 
-Edit app/forms/generic_work_form.rb  (substitute your work-type name for generic_work) and make add the following to make keyword and rights optional fields.  Note: This also moves these fields below all required fields and they only display on the form when the Additional Fields button is clicked.
+Edit app/forms/generic_work_form.rb  (substitute your work-type name for generic_work) and make add the following to make keyword and rights optional fields.  NOTE: This also moves these fields below all required fields and they only display on the form when the Additional Fields button is clicked.
 
 ```ruby
     self.required_fields -= [:keyword, :rights] 
@@ -908,7 +943,12 @@ en:
 
 Lastly, create your own `app/views/static/agreement.html.erb` page with the content of your deposit agreement.
 
-# Labels and help text
+# Customizing display of Collection properties
 
-**TBD**
+The collection properties do not use the renderer process to control the display of properties.  
 
+To modify the display of a colleciton property...
+* add a partial with the property's name to app/views/records/show_fields  (e.g. _department.html.erb)
+* in that file, include markup to control the display of the field
+
+NOTE: See [Sufia's show_fields](https://github.com/projecthydra/sufia/tree/master/app/views/records/show_fields) for examples. 
