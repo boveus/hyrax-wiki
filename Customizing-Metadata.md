@@ -318,7 +318,7 @@ Either use an existing renderer or define a new renderer.  The renderer can be f
 
 To define a general renderer for all email properties...
 ```erb
-<% # app/renderers/email_attribute_renderer.rb %>
+# app/renderers/email_attribute_renderer.rb
 class EmailAttributeRenderer < CurationConcerns::Renderers::AttributeRenderer
   def attribute_value_to_html(value)
     %(<span itemprop="email"><a href="mailto:#{value}">#{value}</a></span>)
@@ -554,7 +554,7 @@ Either use an existing renderer or define a new renderer.  The renderer can be f
 
 To define a general renderer for all phone properties...
 ```erb
-<% # app/renderers/phone_attribute_renderer.rb %>
+# app/renderers/phone_attribute_renderer.rb
 class PhoneAttributeRenderer < CurationConcerns::Renderers::AttributeRenderer
   def attribute_value_to_html(value)
     %(<span itemprop="telephone"><a href="tel:#{value}">#{value}</a></span>)
@@ -839,7 +839,7 @@ Define a new renderer to convert the value from the controlled value's ID to its
 
 To define a property specific renderer for the department property...
 ```erb
-<% # app/renderers/department_attribute_renderer.rb %>
+# app/renderers/department_attribute_renderer.rb
 class DepartmentAttributeRenderer < CurationConcerns::Renderers::AttributeRenderer
   def attribute_value_to_html(value)
     %(<span itemprop="department">#{::DepartmentsService.label(value)}</span>)
