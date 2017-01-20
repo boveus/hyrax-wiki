@@ -247,7 +247,7 @@ module CurationConcerns
     include Sufia::WorksControllerBehavior
 
     self.curation_concern_type = GenericWork
-    self.show_presenter = Sufia::Forms::GenericWorkPresenter
+    self.show_presenter = GenericWorkPresenter
   end
 end
 ```
