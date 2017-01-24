@@ -209,10 +209,10 @@ But note that if you're actively working on a feature or a bug fix, you will lik
 
 The three most common situations here are:
 
-* **A new version of bundler came out.** Upgrade the version of bundler via `gem install bundler -v x.y.z` and then run `bundle install` and regenerate the test application.
-* **Travis-CI picked up a newer version of a dependency than you have.** Delete your local `Gemfile.lock`, run `bundle install` again, and regenerate the test application.
 * **Your test application is stale.** Regenerate it.
-
+* **Travis-CI picked up a newer version of a dependency than you have.** Delete your local `Gemfile.lock`, run `bundle install` again, and regenerate the test application.
+* **A new version of bundler came out.** Upgrade the version of bundler via `gem update bundler` and then run `bundle install` and regenerate the test application.
+* **A new version of Rubygems came out.** Upgrade it via `gem update --system` and then run `bundle install` and regenerate the test application.
 
 # Start servers individually for development
 
