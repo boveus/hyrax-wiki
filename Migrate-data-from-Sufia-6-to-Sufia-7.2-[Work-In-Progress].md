@@ -1,4 +1,4 @@
-Please note these scripts are still under development and are not ready for production use. But please do start testing and check out the outstanding issues. 
+Please note these scripts are not fully finalized by have been used for a real live migration at CHF. Do plenty of testing and check out the outstanding issues. 
 
 This is a two step process. From a Sufia 6 application export to a set of JSON files the metadata of all the GenericFiles and Collections. From a Sufia 7 application read the JSON files and create GenericWorks/FileSet/Files, then Collections. 
 
