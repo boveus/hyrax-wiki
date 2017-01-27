@@ -12,6 +12,7 @@
 
 # Other notes
 
+* [Migrate data from Sufia 6 to Sufia 7.2](https://github.com/projecthydra/sufia/wiki/Migrate-data-from-Sufia-6-to-Sufia-7.2-%5BWork-In-Progress%5D)
 * [[Migration Notes from 5.x to 6.x]]
 * [[Portland Common Data Model Resources]]
 * [[Domain Terms tables]]
