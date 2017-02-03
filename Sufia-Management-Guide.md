@@ -101,9 +101,7 @@ Sufia uses ActionMailer to send email to users. Some environments may need speci
 
 ## Background workers
 
-Sufia processes long-running or particularly slow work in background jobs to speed up the web request/response cycle. Sufia (as of version 7.0.0) no longer packages a default queuing backend for background jobs -- all jobs are expressed as ActiveJob instances, so there is a wide variety of backends that you may use that will work with Sufia's background workers. You may want to read more about [ActiveJob](http://guides.rubyonrails.org/active_job_basics.html).
-
-If you'd like to use Sidekiq or Resque in your Sufia app, we've written up a couple guides ([Sidekiq](https://github.com/projecthydra/sufia/wiki/Using-Sidekiq-with-Sufia), [Resque](https://github.com/projecthydra/sufia/wiki/Using-Resque-with-Sufia)) to help you along. We recommend using Sidekiq, which is better maintained and has fewer quirks.
+[[Background Workers]] (*moved to its own page*)
 
 ## Fixity checking
 
