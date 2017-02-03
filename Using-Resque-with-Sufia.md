@@ -1,4 +1,8 @@
-Sufia 7 no longer packages a default queuing back-end. Sufia 7 builds its jobs using Rails' ActiveJob framework, so you are free to use the queuing system of you choice (e.g. Resque, DelayedJob, Sidekiq) to manage long-running or slow processes. Flexibility and choice come with a cost, though, and there's some work involved in integrating whichever queueing back-end you select. This page offers guidance on installing and using Resque with Resque-pool to handle background jobs in your Sufia app.
+As of version 7, Sufia no longer packages a default queuing back-end. Sufia 7 builds its jobs using Rails' ActiveJob framework, so you are free to use the queuing system of you choice (e.g. Resque, DelayedJob, Sidekiq) to manage long-running or slow processes. Flexibility and choice come with a cost, though, and there's some work involved in integrating whichever queueing back-end you select. This page offers guidance on installing and using Resque with Resque-pool to handle background jobs in your Sufia app.
+
+## Note
+
+You should consider [using Sidekiq with Sufia](https://github.com/projecthydra/sufia/wiki/Using-Sidekiq-with-Sufia] instead of Resque, for it is better maintained and less idiosyncratic. If you must use Resque, see below.
 
 ## Pre-Requisites: Install and Run Redis
 
