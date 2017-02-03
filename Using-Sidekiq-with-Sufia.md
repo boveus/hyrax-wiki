@@ -1,8 +1,8 @@
-## Pre-Requisites: Install and Run Redis
+# Pre-Requisites: Install and Run Redis
 Sidekiq relies on the [Redis](http://redis.io/) key-value store, so Redis must be installed and running
 on your system in order for background workers to pick up jobs.
 
-## Install Sidekiq
+# Install Sidekiq
 First we need to install Sidekiq. To do this, we'll add the gem to our `Gemfile`
 ```
 gem 'sidekiq'
@@ -10,7 +10,7 @@ gem 'sidekiq'
 
 Install the gem: `bundle install`
 
-## Enable Sidekiq ActiveJob adapter
+# Enable Sidekiq ActiveJob adapter
 ActiveJob support a [series of adapters](http://api.rubyonrails.org/classes/ActiveJob/QueueAdapters.html), the default being `:async`. In order to configure ActiveJob to use the Sidekiq adapter, we need to update `config/application.rb` in our application and insert the following to set the adapter:
 
 ```
@@ -33,7 +33,7 @@ config.active_job.queue_adapter = :inline
 config.active_job.queue_adapter = :sidekiq
 ```
 
-## Queue name(s)
+# Queue name(s)
 Sufia uses a specific queue for handling ingest work. In many of the job classes in `app/jobs` you will see the queue declaration as:
 
 ```
@@ -47,7 +47,7 @@ class CreateWorkJob < ActiveJob::Base
 config.ingest_queue_name = :ingest
 ```
 
-## Create sidekiq.yml
+# Configuring Sidekiq
 Sidekiq allows you to manage queues and their priorities using a YAML configuration file.
 
 Create one in your app as: `config/sidekiq.yml`
@@ -60,7 +60,7 @@ The YAML file supplies a list of queues and their priorities. There are also [ad
   - ingest
 ```
 
-## Configuring Redis
+# Configuring Redis
 By default Sidekiq will look for Redis on the localhost system at port `6379`. This will 'just work' in a development context if Redis is already running. However, you will likely want to configure Sidekiq to look for Redis in different locations depending on the environment. To do so, you will need a Redis configuration file, and a Sidekiq configuration file. Sidekiq's [Redis guide](https://github.com/mperham/sidekiq/wiki/Using-Redis) can be referenced for further detail.
 
 * Create `config/redis.yml` -- Populate it with the Redis information for each environment. Here is a sample which assumes `REDIS_HOST` and `REDIS_PORT` will be available to the application environment, and has localhost fallbacks for development and test environments:
@@ -93,7 +93,7 @@ By default Sidekiq will look for Redis on the localhost system at port `6379`. T
   end
   ```
 
-## Monitoring Sidekiq
+# Monitoring Sidekiq
 
 Sidekiq comes with a [built-in web application](https://github.com/mperham/sidekiq/wiki/Monitoring#web-ui) that you can mount to monitor the state of your message queue. To setup this application, first mount the application in `config/routes.rb`:
 
@@ -104,7 +104,7 @@ mount Sidekiq::Web => '/sidekiq'
 
 **For production applications** you will likely want to secure access to this queue interface. There are various ways to do this depending on the scope of your application. Please see the [authentication](https://github.com/mperham/sidekiq/wiki/Monitoring#authentication) section of the Sidekiq wiki for options. Since Sufia uses Devise, the examples given will be available for you to integrate.
 
-## Starting Sidekiq
+# Starting Sidekiq
 The most direct way to start Sidekiq is by opening a separate terminal window or tab, ensuring that you are in your project directory, and starting the service (**note that this may require `bundle exec` depending on how you use Ruby**):
 
 ```
@@ -116,5 +116,5 @@ sidekiq
 * [Use Upstart and Capistrano for Ubuntu and Centos 6.x](https://github.com/mperham/sidekiq/wiki/Deploying-to-Ubuntu)
 * [capistrano-sidekiq plugin](https://github.com/seuros/capistrano-sidekiq)
 
-## Troubleshooting
+# Troubleshooting
 Please see the Sidekiq wiki [troubleshooting](https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting) page which covers a wide variety of tips and solutions for issues that might arise. Beyond that, there is the [Sidekiq Google Group](https://groups.google.com/forum/#!forum/sidekiq), the [Hydra Tech Google Group](https://groups.google.com/forum/#!forum/hydra-tech) as well as the [Hydra #dev Slack channel](https://wiki.duraspace.org/pages/viewpage.action?pageId=43910187#Getintouch!-Slack).
