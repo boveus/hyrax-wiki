@@ -4,7 +4,7 @@
 * [[Feature matrix]]
 * [[Customizing Metadata]]
 * [[Making Admin Users in Sufia]]
-* Background Workers
+* [[Background Workers]]
     * [[Using Resque with Sufia]]
     * [[Using Sidekiq with Sufia]]
 * [Customizing Actors](https://github.com/projecthydra-labs/curation_concerns/wiki/Actors) (from CurationConcerns)
