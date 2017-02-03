@@ -2,7 +2,7 @@ As of version 7, Sufia no longer packages a default queuing back-end. Sufia 7 bu
 
 ## Note
 
-You should consider [using Sidekiq with Sufia](https://github.com/projecthydra/sufia/wiki/Using-Sidekiq-with-Sufia] instead of Resque, for it is better maintained and less idiosyncratic. If you must use Resque, see below.
+You should consider [using Sidekiq with Sufia](https://github.com/projecthydra/sufia/wiki/Using-Sidekiq-with-Sufia) instead of Resque, for it is better maintained and less idiosyncratic. If you must use Resque, see below.
 
 ## Pre-Requisites: Install and Run Redis
 
