@@ -110,6 +110,10 @@ The most direct way to start Sidekiq is by opening a separate terminal window or
 ```
 sidekiq
 ```
+or if you did as minimal setup as possible, you may need
+```
+sidekiq -q ingest -q default -q event
+```
 
 **For production applications**, there are a few ways to deploy and manage sidekiq. If you are using Capistrano, you can consider the following options:
 
