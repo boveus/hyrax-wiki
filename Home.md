@@ -4,6 +4,7 @@
 * [[Feature matrix]]
 * [[Customizing Metadata]]
 * [[Making Admin Users in Sufia]]
+    * [[Understanding Admin Sets Participants]]
 * [[Background Workers]]
     * [[Using Sidekiq with Sufia]] (*recommended*)
     * [[Using Resque with Sufia]]
