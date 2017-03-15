@@ -1,0 +1,5 @@
+After you've generated a new work type (or "curation concern"), you may want to customize it in your application. This is a guide that should help you do this. (If it is missing a section that you would find helpful, please feel free to add it!)
+
+# Changing the label and description
+
+When you have two or more work types created, you will notice that the "Create work" and "Batch create" functions pop up a modal that allows you to select a work type. The modal includes a label and description for each work type. To customize the label and description, look for `config/locales/your_work_type.en.yml` in your application and change the following keys `en.hyrax.select_type.{your_work_type).name` and `en.hyrax.select_type.{your_work_type).description`. Restart your application and it should pick up the changes.
