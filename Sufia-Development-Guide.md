@@ -104,7 +104,8 @@ Before running the test suite, you need to be sure you've initialized your devel
 * [Generate test app](#generate-test-app) - Ensure you've generated the Sufia test application in `<sufia directory>/.internal_test_app` 
 
 ## Run the wrappers
-*Note: DO NOT USE FOR PRODUCTION*.  You'll need separate terminal windows/tabs for each wrapper.
+*Note: DO NOT USE FOR PRODUCTION*.
+Note: You'll need separate terminal windows/tabs for each wrapper.
 
 ### Wrapper Method 1
 
