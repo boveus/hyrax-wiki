@@ -14,7 +14,7 @@ Tested on Ruby 2.3.1 and OS X 10.12.3
     - install fits `brew install fits`, note that homebrew currently installs 0.8.6.  0.8.5 is officially supported, but I've had no issues with 0.8.6 so far.  If brew installs anything past 0.8.x you'll want to follow [these instructions.](https://github.com/projecthydra-labs/hyrax#characterization)
     - ensure fits is installed, `fits -v` should show the version number
 1. Redis: 
-    - install: `brew install redis` or run 
+    - install: `brew install redis`
     - run: `redis-server` 
     - alternatively: `brew services start redis` to launch redis on boot 
 
