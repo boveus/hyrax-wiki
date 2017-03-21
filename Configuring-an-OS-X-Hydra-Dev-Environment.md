@@ -1,6 +1,6 @@
 Note: This is intended primarily as a means to share notes prior to the Spring 2017 Hyrax Bootcamp.  Consult the README.md for the official steps.
 
-Tests on Ruby 2.3.1 and OS X 10.12.3
+Tested on Ruby 2.3.1 and OS X 10.12.3
 
 ## Dependencies:
 
