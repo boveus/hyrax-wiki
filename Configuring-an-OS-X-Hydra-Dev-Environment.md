@@ -6,7 +6,7 @@ Tested on Ruby 2.3.1 and OS X 10.12.3
 
 1. Imagemagick:
     - `brew install imagemagick --with-openjpeg`
-    - run `convert -list format` in terminal and ensure that there is a JP2 entry, if there is on imagemagick with JPEG-2000 is properly installed
+    - run `convert -list format` in terminal and ensure that there is a JP2 entry, imagemagick has been successfully installed with JPEG-2000 support
 1. LibreOffice and Ghostscript:
     - install LibreOffice `brew cask install libreoffice`
     - install ghost script `brew install ghostscript`
