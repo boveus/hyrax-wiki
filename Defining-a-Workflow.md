@@ -22,7 +22,7 @@ Below is one example:
 
 # Defining a Workflow in CurationConcerns
 
-CurationConcerns will create a default workflow configuration when you call the `rails generator curation_concerns:work`. **Before you load the default workflow into the database** via the `rails curation_concerns:workflow:load` command, make sure to review your workflow.
+CurationConcerns will create a default workflow configuration when you call the `rails generator curation_concerns:work`. **Before you load the default workflow into the database** via the `rake curation_concerns:workflow:load` command, make sure to review your workflow.
 
 Below is the JSON that models the above workflow.
 
@@ -61,7 +61,7 @@ You can define additional workflows following the syntax described [Defining a W
 All workflows defined in `config/workflows` directory can be loaded using the following command.
 
 ```
-rails curation_concerns:workflow:load
+rake curation_concerns:workflow:load
 ```
 
 This will load the workflow and create user roles.  You will want to assign users/groups to the roles.  You will be able to select the workflow for use in an admin_set.
