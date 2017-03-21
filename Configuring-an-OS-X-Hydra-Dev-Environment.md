@@ -70,4 +70,4 @@ Tests on Ruby 2.3.1 and OS X 10.12.3
   
 ## Developing
 
-G up a level to the `hyrax` directory and make changes as you would when doing normal rails development, changes should be reflected in your app.  Of course you make need to restart the server for some changes to be picked up.
+Go up a level to the `hyrax` directory and make changes as you would when doing normal rails development, changes should be reflected in your app.  Of course you make need to restart the server for some changes to be picked up.
