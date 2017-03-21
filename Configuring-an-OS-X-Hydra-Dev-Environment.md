@@ -28,7 +28,7 @@ Tested on Ruby 2.3.1 and OS X 10.12.3
 1. start solr: `solr_wrapper`
     - ensure that `http://127.0.0.1:8983/solr/#/hydra-development` resolves in your browser
 1. start fedora: `fcrepo_wrapper`
-    - ensure that `http://127.0.0.1:8984/rest/dev` resolves in your browser
+    - ensure that `http://127.0.0.1:8080/rest` resolves in your browser
 
 ## Configuring Hyrax
 
