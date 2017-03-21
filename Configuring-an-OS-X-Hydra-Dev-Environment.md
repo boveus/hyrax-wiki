@@ -1,4 +1,4 @@
-Note: This is intended primarily as a means to share notes prior to the Spring 2016 Hyrax Bootcamp.  Consult the README.md for the official steps.
+Note: This is intended primarily as a means to share notes prior to the Spring 2017 Hyrax Bootcamp.  Consult the README.md for the official steps.
 
 Tests on Ruby 2.3.1 and OS X 10.12.3
 
@@ -8,14 +8,15 @@ Tests on Ruby 2.3.1 and OS X 10.12.3
     - `brew install imagemagick --with-openjpeg`
     - run `convert -list format` in terminal and ensure that there is a JP2 entry, if there is on imagemagick with JPEG-2000 is properly installed
 1. LibreOffice and Ghostscript:
-    - download LibreOffice from `https://www.libreoffice.org/get-help/install-howto/` and install it
+    - install LibreOffice `brew cask install libreoffice`
     - install ghost script `brew install ghostscript`
 1. FITS
     - install fits `brew install fits`, note that homebrew currently installs 0.8.6.  0.8.5 is officially supported, but I've had no issues with 0.8.6 so far.  If brew installs anything past 0.8.x you'll want to follow [these instructions.](https://github.com/projecthydra-labs/hyrax#characterization)
     - ensure fits is installed, `fits -v` should show the version number
 1. Redis: 
-    - install: `brew install redis`
-    - run: `redis-server`
+    - install: `brew install redis` or run 
+    - run: `redis-server` 
+    - alternatively: `brew services start redis` to launch redis on boot 
 
 ## Installing Hyrax
 
