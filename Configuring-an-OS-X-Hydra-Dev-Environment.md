@@ -68,4 +68,6 @@ Tests on Ruby 2.3.1 and OS X 10.12.3
    - you will then be able to log in and self deposit word, you will also have admin rights if you granted them to archivist1 in the optional step above
    
   
+## Developing
 
+G up a level to the `hyrax` directory and make changes as you would when doing normal rails development, changes should be reflected in your app.  Of course you make need to restart the server for some changes to be picked up.
