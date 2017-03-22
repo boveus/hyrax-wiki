@@ -20,7 +20,7 @@ required: f.object.required?(key) %>
 ```
 If you add the attribute to your view it will be active when you visit the form. 
 
-Hyrax comes with [Questioning Authority](https://github.com/projecthydra-labs/questioning_authority) which provides some RESTful endpoints that you can use as autocomplete sources. Checkout the [QA README](https://github.com/projecthydra-labs/questioning_authority/blob/master/README.md)  for a list of the authorities that it comes with (you can even make your own). 
+Hyrax comes with [Questioning Authority](https://github.com/projecthydra-labs/questioning_authority) which provides some RESTful endpoints that you can use as autocomplete sources. Checkout the [QA README](https://github.com/projecthydra-labs/questioning_authority/blob/master/README.md) for a list of the authorities that it comes with (you can even make your own). 
 
 Autocomplete in Hyrax currently uses jQuery UI Autocomplete. Hyrax stores the [jQuery UI Autocomplete options and 
 source](http://jqueryui.com/autocomplete/#remote-jsonp) in ES6 classes. Unless you need to make specific query that requires you to change the options and source, the JS will use a default query from [default.es6](https://github.com/projecthydra-labs/hyrax/blob/master/app/assets/javascripts/hyrax/autocomplete/default.es6). This should just 
@@ -28,6 +28,14 @@ work with the QA vocabs.
 
 The autocomplete for the `Work` field requires different a different source and options so it has a different class: [work.es6](https://github.com/projecthydra-labs/hyrax/blob/master/app/assets/javascripts/hyrax/autocomplete/work.es6).
 After creating your own class, you will need to import it and an additional case to the autocomplete method in [autocomplete.es6](https://github.com/projecthydra-labs/hyrax/blob/master/app/assets/javascripts/hyrax/autocomplete.es6)
+
+### Default autocomplete fields
+
+There are some fields that come with autocomplete turned on by default. The location field
+uses GeoNames, but you need to provide credentials in `config/hyrax.rb` for it to work. 
+
+Subject & language use local vocabularies by default. You can read about how to set those up 
+in the [Questioning Authority README]((https://github.com/projecthydra-labs/questioning_authority/blob/master/README.md). 
 
 # Activating a dropdown with authorities
 
