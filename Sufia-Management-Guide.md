@@ -10,6 +10,7 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
   * [Background workers](#background-workers)
   * [Fixity checking](#fixity-checking)
 * [Audiovisual transcoding](#audiovisual-transcoding)
+* [Removing a work type](#removing-a-work-type)
 * [User interface](#user-interface)
 * [Integration with Dropbox, Box, etc\.](#integration-with-dropbox-box-etc)
 * [Autocomplete with geonames](#geonames)
@@ -114,6 +115,14 @@ Sufia::RepositoryAuditService.audit_everything
 # Audiovisual transcoding
 
 Sufia includes support for transcoding audio and video files via CurationConcerns. View [CurationConcerns README](https://github.com/projecthydra/curation_concerns/blob/master/README.md#ffmpeg) for installation/configuration help.
+
+# Removing a work type
+
+If you need to remove a work type that you created, e.g., via `rails generate sufia:work MyWorkType`, you can do so via:
+
+```bash
+rails destroy sufia:work MyWorkType
+```
 
 # User interface
 
