@@ -49,22 +49,28 @@ This generates the test Sufia application in the `<sufia directory>/.internal_te
 ## Work with test app in the browser
 
 In order to do UI development, you'll want to load the Sufia test app (`<sufia directory>/.internal_test_app`) in your browser.
+
 This section assumes that you have generated the test app via `rake engine_cart:generate`.
 
-1. Verify that ActiveFedora has installed the development templates by looking for `.internal_test_app/config/solr_wrapper_test.yml`. (Note: ActiveFedora was first released with this change in version [9.13.10](https://github.com/projecthydra/active_fedora/releases/tag/v9.13.0).  If the file exists skip to step 3.)
-1. Copy the templates from ActiveFedora
+1. Only if you are using ActiveFedora earlier than 9.13, you need to copy some configuration files. Check your ActiveFedora version with `cd .internal_test_app; bundle show active-fedora`. If it's 9.13 or higher, you can skip these steps, go on to step 2. 
 
-   If you don't have the files you will need to copy them each time you regenerate the test application. This step is a bit hacky and the fixed was added to ActiveFedora in [c8309ae](https://github.com/projecthydra/active_fedora/commit/c8309aecd4672d719271cd98c103f017f25191a1). 
+    1. Verify that ActiveFedora has installed the development templates by looking for 
+  `.internal_test_app/config/solr_wrapper_test.yml`. (Note: ActiveFedora was first released with this change in version 
+  [9.13.10](https://github.com/projecthydra/active_fedora/releases/tag/v9.13.0).  If the file exists skip to step 3.)
 
-  1. Get the following dev environment-related files from ActiveFedora and put them in `.internal_test_app/`:
-    * [.fcrepo_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/.fcrepo_wrapper)
-    * [.solr_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/.solr_wrapper)
+    1. Copy the templates from ActiveFedora
+
+        If you don't have the files you will need to copy them each time you regenerate the test application. This step is a bit hacky and the fixed was added to ActiveFedora in [c8309ae](https://github.com/projecthydra/active_fedora/commit/c8309aecd4672d719271cd98c103f017f25191a1). 
+
+      1. Get the following dev environment-related files from ActiveFedora and put them in `.internal_test_app/`:
+        * [.fcrepo_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/.fcrepo_wrapper)
+        * [.solr_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/.solr_wrapper)
    
-     **Note:** These two files are dot files and are not visible unless you add the `-a` flag to `ls`.
+         **Note:** These two files are dot files and are not visible unless you add the `-a` flag to `ls`.
 
-  1. Get the following test environment-related files from ActiveFedora and put them in `.internal_test_app/config`:
-     * [fcrepo_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/fcrepo_wrapper_test.yml)
-     * [solr_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/solr_wrapper_test.yml)
+      1. Get the following test environment-related files from ActiveFedora and put them in `.internal_test_app/config`:
+         * [fcrepo_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/fcrepo_wrapper_test.yml)
+         * [solr_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/solr_wrapper_test.yml)
 
 1. Run SolrWrapper in development mode. SolrWrapper picks up configuration from the `.solr_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.solr_wrapper`) that starts Solr on port 8983.
   1. Open a terminal
