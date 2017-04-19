@@ -705,7 +705,7 @@ terms:
     term: Zoology
 ```
 
-NOTE: Support for controlled vocabularies is provided by the [Questioning Authority](https://github.com/projecthydra-labs/questioning_authority) (qa) gem.  See that gem for more details on controlled vocabularies.
+NOTE: Support for controlled vocabularies is provided by the [Questioning Authority](https://github.com/projecthydra/questioning_authority) (qa) gem.  See that gem for more details on controlled vocabularies.
 
 ### Create a service to load the vocabulary
 
