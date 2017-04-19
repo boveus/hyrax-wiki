@@ -26,5 +26,5 @@ Below are some notes that I took from a conversation with @mjgiarlo a few months
 >
 > We have also wired our Location field to geonames' autosuggest API but since that's all via the network, it doesn't use these domain_terms/authorities tables. Geonames is pretty widely used.
 
-Ideally these domain_terms tables should be replaced with [Questioning Authority](https://github.com/projecthydra-labs/questioning_authority)  
+Ideally these domain_terms tables should be replaced with [Questioning Authority](https://github.com/projecthydra/questioning_authority)  
 
