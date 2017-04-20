@@ -17,6 +17,7 @@ The Sufia Development Guide is for people who want to modify Sufia itself. See t
   * [Rails](#rails)
 * [Install problems](#install-problems)
 * [Change validation behavior](#change-validation-behavior)
+* [Quick Start for Hyrax development](#quick-start-for-hyrax-development)
 * [Regenerating the README TOC](#regenerating-the-readme-toc)
 
 # Grab an issue
@@ -52,20 +53,20 @@ In order to do UI development, you'll want to load the Sufia test app (`<sufia d
 
 This section assumes that you have generated the test app via `rake engine_cart:generate`.
 
-1. Only if you are using ActiveFedora earlier than 9.13, you need to copy some configuration files. Check your ActiveFedora version with `cd .internal_test_app; bundle show active-fedora`. If it's 9.13 or higher, you can skip these steps, go on to step 2. 
+1. Only if you are using ActiveFedora earlier than 9.13, you need to copy some configuration files. Check your ActiveFedora version with `cd .internal_test_app; bundle show active-fedora`. If it's 9.13 or higher, you can skip these steps, go on to step 2.
 
-    1. Verify that ActiveFedora has installed the development templates by looking for 
-  `.internal_test_app/config/solr_wrapper_test.yml`. (Note: ActiveFedora was first released with this change in version 
+    1. Verify that ActiveFedora has installed the development templates by looking for
+  `.internal_test_app/config/solr_wrapper_test.yml`. (Note: ActiveFedora was first released with this change in version
   [9.13.10](https://github.com/projecthydra/active_fedora/releases/tag/v9.13.0).  If the file exists skip to step 3.)
 
     1. Copy the templates from ActiveFedora
 
-        If you don't have the files you will need to copy them each time you regenerate the test application. This step is a bit hacky and the fixed was added to ActiveFedora in [c8309ae](https://github.com/projecthydra/active_fedora/commit/c8309aecd4672d719271cd98c103f017f25191a1). 
+        If you don't have the files you will need to copy them each time you regenerate the test application. This step is a bit hacky and the fixed was added to ActiveFedora in [c8309ae](https://github.com/projecthydra/active_fedora/commit/c8309aecd4672d719271cd98c103f017f25191a1).
 
       1. Get the following dev environment-related files from ActiveFedora and put them in `.internal_test_app/`:
         * [.fcrepo_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/.fcrepo_wrapper)
         * [.solr_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/.solr_wrapper)
-   
+
          **Note:** These two files are dot files and are not visible unless you add the `-a` flag to `ls`.
 
       1. Get the following test environment-related files from ActiveFedora and put them in `.internal_test_app/config`:
@@ -107,7 +108,7 @@ This section assumes that you have generated the test app via `rake engine_cart:
 
 Before running the test suite, you need to be sure you've initialized your development environment using these instructions:
 * [Development Prerequisites](#development-prerequisites) - Install all of the base development prerequisites
-* [Generate test app](#generate-test-app) - Ensure you've generated the Sufia test application in `<sufia directory>/.internal_test_app` 
+* [Generate test app](#generate-test-app) - Ensure you've generated the Sufia test application in `<sufia directory>/.internal_test_app`
 
 ## Run the wrappers
 *Note: DO NOT USE FOR PRODUCTION*.
@@ -267,6 +268,22 @@ def dump_infected_files
   end
 end
 ```
+
+# Quick Start for Hyrax development
+
+The following steps need to be done in order to create a test app for Hyrax development.  This is a quick list with links to the details.
+
+1. [Install prerequisite software](#development-prerequisites) - Follow all instructions carefully.
+1. Clone [Hyrax](https://github.com/projecthydra-labs/hyrax) code from github
+1. Remove existing test app with `rake engine_cart:clean` (Not required after initial clone. Use when your code updates require the test app to be regenerated.)
+1. [Create the test app](#generate-test-app) with `rake engine_cart:generate`
+1. If using rubyracer for JavaScript runtime, uncomment in `.internal_test_app/Gemfile` and bundle install.  (Not needed if using nodejs.) ([more info](https://github.com/projecthydra-labs/hyrax#javascript-runtime))
+1. [Start servers](#start-servers-individually-for-development) with `rake hydra:server`  (e.g. solr, fedora, rails) - Stop with Ctrl-C
+1. [Start background workers](https://github.com/projecthydra-labs/hyrax#start-background-workers) (message queue) - several options for message queue
+1. Move into the test app directory with `cd .internal_test_app`
+1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) with `rake hyrax:default_admin_set:create`
+1. [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rake hyrax:workflow:load`
+1. [Generate a work type](https://github.com/projecthydra-labs/hyrax#generate-a-work-type) with `rails generate hyrax:work Work` (Replace Work with the name of your work type.)
 
 # Regenerating the README TOC
 
