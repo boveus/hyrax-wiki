@@ -63,35 +63,42 @@ This section assumes that you have generated the test app via `rake engine_cart:
 
         If you don't have the files you will need to copy them each time you regenerate the test application. This step is a bit hacky and the fixed was added to ActiveFedora in [c8309ae](https://github.com/projecthydra/active_fedora/commit/c8309aecd4672d719271cd98c103f017f25191a1).
 
-      1. Get the following dev environment-related files from ActiveFedora and put them in `.internal_test_app/`:
-        * [.fcrepo_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/.fcrepo_wrapper)
-        * [.solr_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/.solr_wrapper)
+        1. Get the following dev environment-related files from ActiveFedora and put them in `.internal_test_app/`:
+            * [.fcrepo_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/.fcrepo_wrapper)
+            * [.solr_wrapper](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/.solr_wrapper)
 
-         **Note:** These two files are dot files and are not visible unless you add the `-a` flag to `ls`.
+            **Note:** These two files are dot files and are not visible unless you add the `-a` flag to `ls`.
 
-      1. Get the following test environment-related files from ActiveFedora and put them in `.internal_test_app/config`:
-         * [fcrepo_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/fcrepo_wrapper_test.yml)
-         * [solr_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/solr_wrapper_test.yml)
+        1. Get the following test environment-related files from ActiveFedora and put them in `.internal_test_app/config`:
+            * [fcrepo_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/fedora/templates/fcrepo_wrapper_test.yml)
+            * [solr_wrapper_test.yml](https://github.com/projecthydra/active_fedora/blob/master/lib/generators/active_fedora/config/solr/templates/solr_wrapper_test.yml)
 
 1. Run SolrWrapper in development mode. SolrWrapper picks up configuration from the `.solr_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.solr_wrapper`) that starts Solr on port 8983.
-  1. Open a terminal
-  1. `cd <sufia directory>\.internal_test_app`
-  1. `solr_wrapper`
+   1. Open a terminal
+   1. `cd <sufia directory>\.internal_test_app`
+   1. `solr_wrapper`
 
 1. Run FcrepoWrapper in development mode. FcrepoWrapper picks up configuration from the `.fcrepo_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.fcrepo_wrapper`) that starts Fedora on port 8984.
-  1. Open a terminal
-  1. `cd <sufia directory>\.internal_test_app`
-  1. `fcrepo_wrapper`
+   1. Open a terminal
+   1. `cd <sufia directory>\.internal_test_app`
+   1. `fcrepo_wrapper`
 
 1. Run the Rails server in development mode
-  1. Open a terminal
-  1. `cd <sufia directory>\.internal_test_app`
-  1. `rails server`
+   1. Open a terminal
+   1. `cd <sufia directory>\.internal_test_app`
+   1. `rails server`
 
 1. View the app by opening [localhost:3000](http://localhost:3000) in a web browser.
 
 1. Optionally, if you want to use Sufia's Administrative functionality, you'll need to [make admin users in Sufia](https://github.com/projecthydra/sufia/wiki/Making-Admin-Users-in-Sufia) from within your test application directory (`<sufia directory>\.internal_test_app`)
-
+   1. Register a new user, and then edit the `<sufia directory>\.internal_test_app\config\role_map.yml` to include that user as a `development.admin`. For example:
+       ```
+       development:
+         ...
+         admin:
+           - my_fake_user@faker.com
+       ```
+   1. Restart the Rails server and you should now see the Administrative menu
 1. You can now begin develop new features in Sufia (by modifying/adding code in your `<sufia directory>`), and test them out immediately in your web browser. In many cases any changes you make will take immediate effect. But, on occasion, you may find you'll need to restart the Rails server (see step 5 above).
 
 ## Cleaning up
