@@ -175,29 +175,17 @@ To display data from Google Analytics in the UI, first head to the Google Develo
 
 Let's assume for now Google assigns it a project ID of _foo-bar-123_. It may take a few seconds for this to complete (watch the Activities bar near the bottom of the browser).  Once it's complete, enable the Google+ and Google Analytics APIs here (note: this is an example URL -- you'll have to change the project ID to match yours):
 
-    https://console.developers.google.com/project/apps~foo-bar-123/apiui/api
+    https://console.developers.google.com/apis/library?project=foo-bar-123
 
-Finally, head to this URL (note: this is an example URL -- you'll have to change the project ID to match yours):
+Finally, click the 'credentials' menu item and create a new Service Account Key. This will give you the client ID, a client email address, a private key file, and a private key secret/password, which you will need in the next step.
 
-    https://console.developers.google.com/project/apps~foo-bar-537/apiui/credential
+Then copy this config into your app at `config/analytics.yml` (don't commit it to a public repo):
 
-And create a new OAuth client ID.  When prompted for the type, use the "Service Account" type.  This will give you the OAuth client ID, a client email address, a private key file, a private key secret/password, which you will need in the next step.
+    https://github.com/projecthydra/sufia/blob/v7.3.1/lib/generators/sufia/templates/config/analytics.yml
 
-Then run this generator:
+Edit the file to reflect the information that the Google Developer Console gave you earlier.
 
-```
-rails g sufia:usagestats
-```
-
-The generator will create a configuration file at _config/analytics.yml_.  Edit that file to reflect the information that the Google Developer Console gave you earlier, namely you'll need to provide it:
-
-* The path to the private key
-* The password/secret for the privatekey
-* The OAuth client email
-* An application name (you can make this up)
-* An application version (you can make this up)
-
-Lastly, you will need to set `config.analytics = true` and `config.analytic_start_date` in _config/initializers/sufia.rb_ and ensure that the OAuth client email
+Lastly, you will need to set `config.analytics = true` and `config.analytic_start_date` in _config/initializers/sufia.rb_ and ensure that the client email
 has the proper access within your Google Analyics account.  To do so, go to the _Admin_ tab for your Google Analytics account.
 Click on _User Management_, in the _Account_ column, and add "Read & Analyze" permissions for the OAuth client email address.
 
