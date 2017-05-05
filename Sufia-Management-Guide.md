@@ -179,11 +179,7 @@ Let's assume for now Google assigns it a project ID of _foo-bar-123_. It may tak
 
 Finally, click the 'credentials' menu item and create a new Service Account Key. This will give you the client ID, a client email address, a private key file, and a private key secret/password, which you will need in the next step.
 
-Then copy this config into your app at `config/analytics.yml` (don't commit it to a public repo):
-
-    https://github.com/projecthydra/sufia/blob/v7.3.1/lib/generators/sufia/templates/config/analytics.yml
-
-Edit the file to reflect the information that the Google Developer Console gave you earlier; namely you'll need to provide it:
+Edit config/analytics.yml to reflect the information that the Google Developer Console gave you earlier; namely you'll need to provide it:
 
 - The path to the private key
 - The password/secret for the privatekey
