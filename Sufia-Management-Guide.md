@@ -183,7 +183,13 @@ Then copy this config into your app at `config/analytics.yml` (don't commit it t
 
     https://github.com/projecthydra/sufia/blob/v7.3.1/lib/generators/sufia/templates/config/analytics.yml
 
-Edit the file to reflect the information that the Google Developer Console gave you earlier.
+Edit the file to reflect the information that the Google Developer Console gave you earlier; namely you'll need to provide it:
+
+- The path to the private key
+- The password/secret for the privatekey
+- The Service Account ID (email)
+- An application name (you can make this up)
+- An application version (you can make this up)
 
 Lastly, you will need to set `config.analytics = true` and `config.analytic_start_date` in _config/initializers/sufia.rb_ and ensure that the client email
 has the proper access within your Google Analyics account.  To do so, go to the _Admin_ tab for your Google Analytics account.
