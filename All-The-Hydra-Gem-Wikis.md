@@ -6,7 +6,7 @@ This document was copied from the Sufia wiki. It is likely outdated and should b
 
 [Hydra](https://github.com/projecthydra/hydra/wiki)
 
-[Hyrax](https://github.com/projecthydra/hyrax/wiki)
+[Sufia](https://github.com/projecthydra/sufia/wiki)
 
 [Curation Concerns](https://github.com/projecthydra/curation_concerns/wiki)
 
