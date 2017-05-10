@@ -1,6 +1,12 @@
-After Installing Hyrax..
+# NOTE
 
-Add rspec-rails and factory-girl to your Gemfile 
+This document was copied from the Sufia wiki. It is likely outdated and should be considered deprecated.
+
+# Getting started
+
+After Installing Hyrax...
+
+Add rspec-rails and factory-girl to your Gemfile
 ```ruby
   group :development, :test do
     gem "rspec-rails"
@@ -43,7 +49,7 @@ within the `RSpec.configure do |config|` section, add
   config.include Devise::TestHelpers, :type => :controller
 ```
 
-Copy this file into `spec/factories/`  
+Copy this file into `spec/factories/`
 https://github.com/projecthydra/hyrax/blob/master/spec/factories/users.rb
 
 # Add your first test and make it pass
@@ -52,16 +58,16 @@ This is a relatively sophisticated test that attempts to log into your Dashboard
 
 ### Copy the DashboardController test file from Hyrax
 
-Put this test into `spec/controllers/`   
-https://github.com/projecthydra/hyrax/blob/master/spec/controllers/dashboard_controller_spec.rb 
+Put this test into `spec/controllers/`
+https://github.com/projecthydra/hyrax/blob/master/spec/controllers/dashboard_controller_spec.rb
 
 ### Clean up the test
 
 Delete the 2 tests that are marked `pending` in `spec/controllers/dashboard_controller.rb` (lines 10-41).  You don't want them.
- 
-### Make your test use the routes from Hyrax 
 
-The route to dashboard_controller is defined by Hyrax.  By default, rspec tests will only know about the routes defined in your application.  To make the tests in this file aware of the Hyrax routes, add this before block after the line that reads `describe DashboardController do`: 
+### Make your test use the routes from Hyrax
+
+The route to dashboard_controller is defined by Hyrax.  By default, rspec tests will only know about the routes defined in your application.  To make the tests in this file aware of the Hyrax routes, add this before block after the line that reads `describe DashboardController do`:
 
 ```ruby
   before do
@@ -87,4 +93,3 @@ rails jetty:start
 Now run `rails spec` again.
 
 If you get a Connection Refused error, it's because jetty is not running.
-

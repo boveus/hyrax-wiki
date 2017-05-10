@@ -1,3 +1,9 @@
+# NOTE
+
+This document was copied from the Sufia wiki. It is likely outdated and should be considered deprecated.
+
+# Gems
+
 [Hydra](https://github.com/projecthydra/hydra/wiki)
 
 [Hyrax](https://github.com/projecthydra/hyrax/wiki)
