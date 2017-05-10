@@ -1,6 +1,6 @@
 [Hydra](https://github.com/projecthydra/hydra/wiki)
 
-[Sufia](https://github.com/projecthydra/sufia/wiki)
+[Hyrax](https://github.com/projecthydra/hyrax/wiki)
 
 [Curation Concerns](https://github.com/projecthydra/curation_concerns/wiki)
 

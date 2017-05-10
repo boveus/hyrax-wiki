@@ -34,7 +34,7 @@ config.active_job.queue_adapter = :sidekiq
 ```
 
 # Queue name(s)
-Sufia uses a specific queue for handling ingest work. In many of the job classes in `app/jobs` you will see the queue declaration as:
+Hyrax uses a specific queue for handling ingest work. In many of the job classes in `app/jobs` you will see the queue declaration as:
 
 ```
 class CreateWorkJob < ActiveJob::Base
@@ -102,7 +102,7 @@ require 'sidekiq/web'
 mount Sidekiq::Web => '/sidekiq'
 ```
 
-**For production applications** you will likely want to secure access to this queue interface. There are various ways to do this depending on the scope of your application. Please see the [authentication](https://github.com/mperham/sidekiq/wiki/Monitoring#authentication) section of the Sidekiq wiki for options. Since Sufia uses Devise, the examples given will be available for you to integrate.
+**For production applications** you will likely want to secure access to this queue interface. There are various ways to do this depending on the scope of your application. Please see the [authentication](https://github.com/mperham/sidekiq/wiki/Monitoring#authentication) section of the Sidekiq wiki for options. Since Hyrax uses Devise, the examples given will be available for you to integrate.
 
 # Starting Sidekiq
 The most direct way to start Sidekiq is by opening a separate terminal window or tab, ensuring that you are in your project directory, and starting the service (**note that this may require `bundle exec` depending on how you use Ruby**):

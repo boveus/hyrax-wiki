@@ -1,4 +1,4 @@
-We use the following coding conventions for Sufia:
+We use the following coding conventions for Hyrax:
 
 For **Ruby on Rails** coding we follow this guide: https://github.com/bbatsov/rails-style-guide
 

@@ -29,16 +29,16 @@
 | ResourceSync capability lists and resource lists | automatically enabled |
 | Contact form | automatically enabled |
 | Administrative dashboard, w/ feature flippers | automatically enabled (for administrative users) |
-| Flexible object model | automatically enabled: to allow zero-file works, enable in Sufia initializer |
+| Flexible object model | automatically enabled: to allow zero-file works, enable in Hyrax initializer |
 | Transcoding of audio and video files | off by default: enable in CurationConcerns initializer (requires `ffmpeg`) |
 | Administrative sets (curated collections) | off by default: enable by flipping on in administrative UI |
-| Customizable banner image | specify a banner image in Sufia initializer |
-| Capture usage statistics | requires [Google Analytics ID to be specified in Sufia initializer](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#capturing-usage) |
-| Geonames integration for location-oriented metadata | requires [configuration](requires [configuration](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#geonames)) |
+| Customizable banner image | specify a banner image in Hyrax initializer |
+| Capture usage statistics | requires [Google Analytics ID to be specified in Hyrax initializer](https://github.com/projecthydra/hyrax/wiki/Hyrax-Management-Guide#capturing-usage) |
+| Geonames integration for location-oriented metadata | requires [configuration](requires [configuration](https://github.com/projecthydra/hyrax/wiki/Hyrax-Management-Guide#geonames)) |
 | Virus detection for uploaded files | install `clamav` package and follow [the instructions in CurationConcerns](https://github.com/projecthydra/curation_concerns#virus-detection) |
-| Display usage statistics in the UI | requires [configuration](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#displaying-usage-in-the-ui) |
-| Administrative users | requires [configuration](https://github.com/projecthydra/sufia/wiki/Making-Admin-Users-in-Sufia) |
-| Citation formatting suggestions | requires configuration: enable `config.citations` in Sufia initializer, then run `rails g sufia:citation_config` |
-| Integration with Zotero | requires [configuration](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#zotero-integration) |
-| Integration w/ cloud storage providers | requires [configuration](https://github.com/projecthydra/sufia/wiki/Sufia-Management-Guide#integration-with-dropbox-box-etc) |
+| Display usage statistics in the UI | requires [configuration](https://github.com/projecthydra/hyrax/wiki/Hyrax-Management-Guide#displaying-usage-in-the-ui) |
+| Administrative users | requires [configuration](https://github.com/projecthydra/hyrax/wiki/Making-Admin-Users-in-Hyrax) |
+| Citation formatting suggestions | requires configuration: enable `config.citations` in Hyrax initializer, then run `rails g hyrax:citation_config` |
+| Integration with Zotero | requires [configuration](https://github.com/projecthydra/hyrax/wiki/Hyrax-Management-Guide#zotero-integration) |
+| Integration w/ cloud storage providers | requires [configuration](https://github.com/projecthydra/hyrax/wiki/Hyrax-Management-Guide#integration-with-dropbox-box-etc) |
 | Background jobs | requires configuration: though jobs will automatically run via the default in-memory adapter, we recommend using an `ActiveJob` adapter like `Sidekiq` in production environments |

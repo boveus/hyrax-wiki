@@ -1,11 +1,11 @@
-# Sufia Development/Design
+# Hyrax Development/Design
 
 **Feb 4, 2013 1:30 EST**
 
 **Attendees:** Notre Dame, PSU, Curation Experts
 **Agenda:**
 
-## Design Boundries of Sufia
+## Design Boundries of Hyrax
 * Notre Dame – is looking to provide the general deposit service
 * Penn State – will use Scholarsphere for the “general case” of deposit until more customized deposit services are “identified”
 * Curation Experts (on behalf of WGBH) – video repository, generic file with modifications, different forms
@@ -16,8 +16,8 @@
 * Goal: Stay as simple as possible; One model in the app
 * Initial boundaries will be discussed iteratively
 * Proposed regular conference calls, discussions (monthly check-ins)
-* Add “proof of concepts” into institutional instances of Sufia and propose/discuss merging into “master” Sufia
-* http://github.com/curationexperts/sufia is the “canonical” repository
+* Add “proof of concepts” into institutional instances of Hyrax and propose/discuss merging into “master” Hyrax
+* http://github.com/curationexperts/hyrax is the “canonical” repository
 * Deposit information as “soon as possible” is the design goal
 
 ## Plugin new content models

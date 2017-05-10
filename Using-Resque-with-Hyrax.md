@@ -1,8 +1,8 @@
-As of version 7, Sufia no longer packages a default queuing back-end. Sufia 7 builds its jobs using Rails' ActiveJob framework, so you are free to use the queuing system of you choice (e.g. Resque, DelayedJob, Sidekiq) to manage long-running or slow processes. Flexibility and choice come with a cost, though, and there's some work involved in integrating whichever queueing back-end you select. This page offers guidance on installing and using Resque with Resque-pool to handle background jobs in your Sufia app.
+Hyrax does not package a default queuing back-end. Hyrax builds its jobs using Rails' ActiveJob framework, so you are free to use the queuing system of you choice (e.g. Resque, DelayedJob, Sidekiq) to manage long-running or slow processes. Flexibility and choice come with a cost, though, and there's some work involved in integrating whichever queueing back-end you select. This page offers guidance on installing and using Resque with Resque-pool to handle background jobs in your Hyrax app.
 
 ## Note
 
-You should consider [using Sidekiq with Sufia](https://github.com/projecthydra/sufia/wiki/Using-Sidekiq-with-Sufia) instead of Resque, for it is better maintained and less idiosyncratic. If you must use Resque, see below.
+You should consider [using Sidekiq with Hyrax](https://github.com/projecthydra/hyrax/wiki/Using-Sidekiq-with-Hyrax) instead of Resque, for it is better maintained and less idiosyncratic. If you must use Resque, see below.
 
 ## Pre-Requisites: Install and Run Redis
 
@@ -10,7 +10,7 @@ Resque relies on the [Redis](http://redis.io/) key-value store, so [Redis](http:
 
 ## Code Changes: Install Resque
 
-To use Resque -- [learn more about Resque](https://github.com/resque/resque) -- as your queueing back-end, you must modify the code created by the Sufia generator. Resque offers instructions for [installation](https://github.com/resque/resque/#in-a-rails-3x-or-4x-app-as-a-gem); Resque-pool also offers [instructions](https://github.com/nevans/resque-pool#how-to-use) for installation and use. In general, you need to add resque and/or resque-pool to your `Gemfile`, require resque tasks in your `Rakefile`, and configure Rails to use Resque as its ActiveJob adapter. 
+To use Resque -- [learn more about Resque](https://github.com/resque/resque) -- as your queueing back-end, you must modify the code created by the Hyrax generator. Resque offers instructions for [installation](https://github.com/resque/resque/#in-a-rails-3x-or-4x-app-as-a-gem); Resque-pool also offers [instructions](https://github.com/nevans/resque-pool#how-to-use) for installation and use. In general, you need to add resque and/or resque-pool to your `Gemfile`, require resque tasks in your `Rakefile`, and configure Rails to use Resque as its ActiveJob adapter.
 
 Configure ActiveJob to use resque by adding the following to your application.rb
 ```
@@ -26,12 +26,11 @@ There are two ways you can manage your workers:
 
 For the remainder of the background worker documentation, it is assumed that you're using resque-pool which is more robust, in which case you should make sure you've run through resque-pool's installation process (which involves tweaking your `Gemfile` and adding Rake tasks) first.
 
-
 ## Terminology
 
 ### Resque
 
-Resque is a [message queue](https://en.wikipedia.org/wiki/Message_queue) that can be used by Sufia to manage long-running or slow processes. 
+Resque is a [message queue](https://en.wikipedia.org/wiki/Message_queue) that can be used by Hyrax to manage long-running or slow processes.
 
 ### Resque-Pool/pools
 
@@ -39,11 +38,11 @@ Resque is a [message queue](https://en.wikipedia.org/wiki/Message_queue) that ca
 
 ### workers
 
-Workers run the background jobs. Each worker has a copy of your Sufia app which has the jobs code in `app/jobs/`. The workers listen to queues (by polling Redis) and pull jobs waiting on the queue. Once a worker pulls a job, it will perform the task as expressed by the persisted job. A worker can be dedicated to a single queue or may listen to multiple queues -- this is [configurable](#configuration) in `config/resque-pool.yml`. Multiple workers can also listen to the same queue.
+Workers run the background jobs. Each worker has a copy of your Hyrax app which has the jobs code in `app/jobs/`. The workers listen to queues (by polling Redis) and pull jobs waiting on the queue. Once a worker pulls a job, it will perform the task as expressed by the persisted job. A worker can be dedicated to a single queue or may listen to multiple queues -- this is [configurable](#configuration) in `config/resque-pool.yml`. Multiple workers can also listen to the same queue.
 
 ### queues
 
-Jobs are sent to queues where they wait until a worker is available to pick them up. Sufia defines a number of queues for processing different background jobs (e.g. `batch_update`, `characterize`). Multiple queues are provided to give you the ability to control how many workers work on the different jobs. Why? Some jobs are fast-running, such as all of Sufia's event jobs, and some jobs are slow-running like the characterize job. Using dedicated queues allows you to say, "I only want one worker for characterization but I want five for events," thus making sure characterization jobs serially and event jobs run in parallel.
+Jobs are sent to queues where they wait until a worker is available to pick them up. Hyrax defines a number of queues for processing different background jobs (e.g. `batch_update`, `characterize`). Multiple queues are provided to give you the ability to control how many workers work on the different jobs. Why? Some jobs are fast-running, such as all of Hyrax's event jobs, and some jobs are slow-running like the characterize job. Using dedicated queues allows you to say, "I only want one worker for characterization but I want five for events," thus making sure characterization jobs serially and event jobs run in parallel.
 
 ### jobs
 
@@ -70,7 +69,7 @@ resolrize: 1
 audit: 2
 event: 5
 import_url: 3
-sufia: 1
+hyrax: 1
 "*": 1
 ```
 
@@ -82,7 +81,7 @@ Each line defines a queue name and how many workers should be created to process
 
 OPTION 1: Start 1 worker (ignores the resque-pool [configuration file](#configuration)). The following command will run until you stop it, so you may want to do this in a dedicated terminal and would typically be used during development only.
 
-**IMPORTANT:** Change directories to the root of your Sufia app before executing:
+**IMPORTANT:** Change directories to the root of your Hyrax app before executing:
 
 ```
 RUN_AT_EXIT_HOOKS=true TERM_CHILD=1 QUEUE=* rake environment resque:work
@@ -90,7 +89,7 @@ RUN_AT_EXIT_HOOKS=true TERM_CHILD=1 QUEUE=* rake environment resque:work
 
 OPTION 2: Start a pool of configurable workers. This is typically used for production-like environments, but may also be used for development.  See [configuration](#configuration) examples above.
 
-**IMPORTANT:** Change directories to the root of your Sufia app before executing:
+**IMPORTANT:** Change directories to the root of your Hyrax app before executing:
 
 ```
 RUN_AT_EXIT_HOOKS=true TERM_CHILD=1 resque-pool --daemon --environment development start
@@ -102,7 +101,7 @@ For more information on the signals that Resque-Pool responds to, see the [resqu
 
 ## Restarting the pool
 
-**IMPORTANT:** Change directories to the root of your Sufia app before executing.
+**IMPORTANT:** Change directories to the root of your Hyrax app before executing.
 
 You may be interested in a script to help you manage starting/stopping Resque-Pool. Here's a [sample from ScholarSphere](https://github.com/psu-stewardship/scholarsphere/blob/develop/script/restart_resque.sh).
 
@@ -134,7 +133,6 @@ Then you need to create the `/admin/queues` route. In `config/routes.rb` add `re
   end
 ```
 
-
 ## Troubleshooting
 
 The code executed by workers reflects the state of the code when the workers were started. If the workers are behaving in a way you can't explain, you may have more than one resque-pool master process running. You can also see unusual behaviors if more than one redis-server is running. The information below describes the processes that will be running when everything is operating correctly.
@@ -164,10 +162,10 @@ $ ps -ef | grep resque | grep -v pool-master
 root     8653  8416  0 00:08 ?        00:00:01 resque-1.25.2: Waiting for *
 ```
 
-If you see multiple resque-pool-master processes running, kill all of them and all of their child processes as well. Start resque-pool again. You should only have one resque-pool-master process running.  But you may have multiple worker processes running.  
+If you see multiple resque-pool-master processes running, kill all of them and all of their child processes as well. Start resque-pool again. You should only have one resque-pool-master process running.  But you may have multiple worker processes running.
 
 If resque or resque-pool fails to start with the error:
 ```
 LoadError: No such file to load -- curation_concerns/actors/generic_work_actor
 ```
-you have not correctly modified your Sufia app to use Resque as a back-end. See [Code Changes: Install Resque](##Code-Changes:-Install-Resque) for more information.
+you have not correctly modified your Hyrax app to use Resque as a back-end. See [Code Changes: Install Resque](##Code-Changes:-Install-Resque) for more information.

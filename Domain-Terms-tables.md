@@ -1,4 +1,4 @@
-There are a few SQL tables in the Sufia app that are for handling *domain terms* (which is librarian for fields with an autocomplete). 
+There are a few SQL tables in the Hyrax app that are for handling *domain terms* (which is librarian for fields with an autocomplete). 
 
 Below is a quick summary of these tables: 
 

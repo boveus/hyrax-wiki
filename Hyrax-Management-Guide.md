@@ -1,4 +1,4 @@
-The Sufia Management Guide provides tips for how to manage, customize, and enhance your Sufia application.
+The Hyrax Management Guide provides tips for how to manage, customize, and enhance your Hyrax application.
 
 * [Feature matrix](#feature-matrix)
 * [Production concerns](#production-concerns)
@@ -20,7 +20,6 @@ The Sufia Management Guide provides tips for how to manage, customize, and enhan
 * [Zotero integration](#zotero-integration)
 * [Customizing metadata](#customizing-metadata)
 * [Admin users](#admin-users)
-* [Migrating data to PCDM in Sufia 7](#migrating-data-to-pcdm-in-sufia-7)
 
 # Feature matrix
 
@@ -32,13 +31,13 @@ In production or production-like (e.g., staging) environments, you may want to m
 
 ## Identifier state
 
-Sufia uses the ActiveFedora::Noid gem to mint [Noid](https://confluence.ucop.edu/display/Curation/NOID)-style identifiers -- short, opaque identifiers -- for all user-created content (including `GenericWorks`, `FileSets`, and `Collections`). The identifier minter is stateful, meaning that it keeps track of where it is in the sequence of minting identifiers so that the minter can be "replayed," for example in a disaster recovery scenario. (Read more about the [technical details](https://github.com/microservices/noid/blob/master/lib/noid/minter.rb#L2-L35).) The state also means that the minter, once it has minted an identifier, will never mint it again so there's no risk of identifier collisions.
+Hyrax uses the ActiveFedora::Noid gem to mint [Noid](https://confluence.ucop.edu/display/Curation/NOID)-style identifiers -- short, opaque identifiers -- for all user-created content (including `GenericWorks`, `FileSets`, and `Collections`). The identifier minter is stateful, meaning that it keeps track of where it is in the sequence of minting identifiers so that the minter can be "replayed," for example in a disaster recovery scenario. (Read more about the [technical details](https://github.com/microservices/noid/blob/master/lib/noid/minter.rb#L2-L35).) The state also means that the minter, once it has minted an identifier, will never mint it again so there's no risk of identifier collisions.
 
 Identifier state is tracked by default in a file that is located in a well-known directory in UNIX-like environments, `/tmp/`, but this may be insufficient in production-like environments where `/tmp/` may be aggressively cleaned out. To prevent the chance of identifier collisions, it is recommended that you go one of two routes: specifying a less transient shared filesystem location or using a relational database to store minter state.
 
 ### Filesystem-backed minter state
 
-You can continue using the filesystem for minter state if you have a system location that your application can write to that is under its control (read: not `/tmp/`). If you are deploying via Capistrano, that location should **not** be in your application directory, which will change on each deployment. If you run multiple instances of your Sufia application, for instance in load-balanced scenarios, you will want to choose a filesystem location that all instances can access. You may change this by uncommenting and changing the value in this line from `config/initializers/sufia.rb` to a filesystem location other than `/tmp/`:
+You can continue using the filesystem for minter state if you have a system location that your application can write to that is under its control (read: not `/tmp/`). If you are deploying via Capistrano, that location should **not** be in your application directory, which will change on each deployment. If you run multiple instances of your Hyrax application, for instance in load-balanced scenarios, you will want to choose a filesystem location that all instances can access. You may change this by uncommenting and changing the value in this line from `config/initializers/hyrax.rb` to a filesystem location other than `/tmp/`:
 
 ```ruby
 # config.minter_statefile = '/tmp/minter-state'
@@ -46,7 +45,7 @@ You can continue using the filesystem for minter state if you have a system loca
 
 ### Database-backed minter state
 
-Alternatively, to get around situations where you have multiple application instances attempting to obtain locks on a 
+Alternatively, to get around situations where you have multiple application instances attempting to obtain locks on a
 single, shared filesystem location, you may use the database-backed minter (new to ActiveFedora::Noid 2.x), which stores minter state information in your application's relational database.
 
 To use it, you'll first need to run the install generator:
@@ -86,7 +85,7 @@ $ rake active_fedora:noid:migrate:file_to_database
 
 ## Derivatives
 
-In Sufia 7, derivatives are served from a directory on the filesystem rather than directly from the Fedora repository. If your production environment includes multiple Rails servers, you will want to make sure that they are using a shared filesystem for derivatives. To set this directory, change the value of `config.derivatives_path` in `config/initializers/sufia.rb`. The default value is `tmp/derivatives/` within your application directory, which will cause unexpected behavior in a multi-server configuration, or if you deploy with capistrano.
+In Hyrax, derivatives are served from a directory on the filesystem rather than directly from the Fedora repository. If your production environment includes multiple Rails servers, you will want to make sure that they are using a shared filesystem for derivatives. To set this directory, change the value of `config.derivatives_path` in `config/initializers/hyrax.rb`. The default value is `tmp/derivatives/` within your application directory, which will cause unexpected behavior in a multi-server configuration, or if you deploy with capistrano.
 
 ## Web server
 
@@ -94,11 +93,11 @@ The web server provided by Rails (whether that's WEBrick, Unicorn, or another) i
 
 ## Database
 
-The database provided by default is SQLite, and you may wish to swap in something built more for scale like PostgreSQL or MySQL, both of which have been used in other production Sufia applications.
+The database provided by default is SQLite, and you may wish to swap in something built more for scale like PostgreSQL or MySQL, both of which have been used in other production Hyrax applications.
 
 ## Mailers
 
-Sufia uses ActionMailer to send email to users. Some environments may need special configuration to enable your application to send messages. These changes are best made in one of your application's environment files. The configuration options are documented in the [ActionMailer Rails Guide](http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration).
+Hyrax uses ActionMailer to send email to users. Some environments may need special configuration to enable your application to send messages. These changes are best made in one of your application's environment files. The configuration options are documented in the [ActionMailer Rails Guide](http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration).
 
 ## Background workers
 
@@ -106,22 +105,22 @@ Sufia uses ActionMailer to send email to users. Some environments may need speci
 
 ## Fixity checking
 
-Sufia provides a [service](https://github.com/projecthydra/sufia/blob/master/app/services/sufia/repository_audit_service.rb) that iterates over all file sets in your repository and verifies fixities in the background. Sufia will not run this service for you, so you should use a cronjob (or similar, e.g., the `whenever` gem) to run this on a schedule that fits your needs and your content. The code that'll need to run is:
+Hyrax provides a [service](https://github.com/projecthydra/hyrax/blob/master/app/services/hyrax/repository_audit_service.rb) that iterates over all file sets in your repository and verifies fixities in the background. Hyrax will not run this service for you, so you should use a cronjob (or similar, e.g., the `whenever` gem) to run this on a schedule that fits your needs and your content. The code that'll need to run is:
 
 ```ruby
-Sufia::RepositoryAuditService.audit_everything
+Hyrax::RepositoryAuditService.audit_everything
 ```
 
 # Audiovisual transcoding
 
-Sufia includes support for transcoding audio and video files via CurationConcerns. View [CurationConcerns README](https://github.com/projecthydra/curation_concerns/blob/master/README.md#ffmpeg) for installation/configuration help.
+Hyrax includes support for transcoding audio and video files via CurationConcerns. View [CurationConcerns README](https://github.com/projecthydra/curation_concerns/blob/master/README.md#ffmpeg) for installation/configuration help.
 
 # Removing a work type
 
-If you need to remove a work type that you created, e.g., via `rails generate sufia:work MyWorkType`, you can do so via:
+If you need to remove a work type that you created, e.g., via `rails generate hyrax:work MyWorkType`, you can do so via:
 
 ```bash
-rails destroy sufia:work MyWorkType
+rails destroy hyrax:work MyWorkType
 ```
 
 # User interface
@@ -134,11 +133,11 @@ If you encounter problems with the in-browser content editor -- e.g., the About 
 
 # Integration with Dropbox, Box, etc.
 
-Sufia provides built-in support for the [browse-everything](https://github.com/projecthydra/browse-everything) gem, which provides a consolidated file picker experience for selecting files from [DropBox](http://www.dropbox.com),
+Hyrax provides built-in support for the [browse-everything](https://github.com/projecthydra/browse-everything) gem, which provides a consolidated file picker experience for selecting files from [DropBox](http://www.dropbox.com),
 [Skydrive](https://skydrive.live.com/), [Google Drive](http://drive.google.com),
 [Box](http://www.box.com), and a server-side directory share.
 
-To activate browse-everything in your sufia app, run the browse-everything install generator
+To activate browse-everything in your hyrax app, run the browse-everything install generator
 
 ```
 rails g browse_everything:install --skip-assets
@@ -148,24 +147,19 @@ This will generate a file at _config/browse_everything_providers.yml_. Open that
 
 After running the browse-everything install generator and setting the API keys for the desired providers, an extra tab will appear in your app's Upload page allowing users to pick files from those providers and submit them into your app's repository.
 
-**If your `config/initializers/sufia.rb` was generated with sufia 3.7.2 or earlier**, then you need to add this line to an initializer (probably _config/initializers/sufia.rb _):
-```ruby
-config.browse_everything = BrowseEverything.config
-```
-
 # Geonames
 
 In order for autocomplete to work in the location field, you must have a valid geonames account that can query the service and return possible matches. To setup an account, visit: http://www.geonames.org/login.
 
-After registering and getting an account username, you'll need to enable the free web services by going to http://www.geonames.org/manageaccount and clicking the link to enable. Once that's done, and you've verified you can query the service via their REST Api, add the account username to the `config/initializers/sufia.rb` file under `config.geonames_username`.
+After registering and getting an account username, you'll need to enable the free web services by going to http://www.geonames.org/manageaccount and clicking the link to enable. Once that's done, and you've verified you can query the service via their REST Api, add the account username to the `config/initializers/hyrax.rb` file under `config.geonames_username`.
 
 # Analytics and usage statistics
 
-Sufia provides support for capturing usage information via Google Analytics and for displaying usage stats in the UI.
+Hyrax provides support for capturing usage information via Google Analytics and for displaying usage stats in the UI.
 
 ## Capturing usage
 
-To enable the Google Analytics javascript snippet, make sure that `config.google_analytics_id` is set in your app within the `config/initializers/sufia.rb` file. A Google Analytics ID typically looks like _UA-99999999-1_.
+To enable the Google Analytics javascript snippet, make sure that `config.google_analytics_id` is set in your app within the `config/initializers/hyrax.rb` file. A Google Analytics ID typically looks like _UA-99999999-1_.
 
 ## Displaying usage in the UI
 
@@ -187,23 +181,23 @@ Edit config/analytics.yml to reflect the information that the Google Developer C
 - An application name (you can make this up)
 - An application version (you can make this up)
 
-Lastly, you will need to set `config.analytics = true` and `config.analytic_start_date` in _config/initializers/sufia.rb_ and ensure that the client email
+Lastly, you will need to set `config.analytics = true` and `config.analytic_start_date` in _config/initializers/hyrax.rb_ and ensure that the client email
 has the proper access within your Google Analyics account.  To do so, go to the _Admin_ tab for your Google Analytics account.
 Click on _User Management_, in the _Account_ column, and add "Read & Analyze" permissions for the OAuth client email address.
 
 # Zotero integration
 
-Integration with Zotero-managed publications is possible using [Arkivo](https://github.com/inukshuk/arkivo). Arkivo is a Node-based Zotero subscription service that monitors Zotero for changes and will feed those changes to your Sufia-based app. [Read more about this work](https://www.zotero.org/blog/feeds-and-institutional-repositories-coming-to-zotero/).
+Integration with Zotero-managed publications is possible using [Arkivo](https://github.com/inukshuk/arkivo). Arkivo is a Node-based Zotero subscription service that monitors Zotero for changes and will feed those changes to your Hyrax-based app. [Read more about this work](https://www.zotero.org/blog/feeds-and-institutional-repositories-coming-to-zotero/).
 
-To enable Zotero integration, first [register an OAuth client with Zotero](https://www.zotero.org/oauth/apps), then [install and start Arkivo-Sufia](https://github.com/inukshuk/arkivo-sufia) and then generate the Arkivo API in your Sufia-based application:
+To enable Zotero integration, first [register an OAuth client with Zotero](https://www.zotero.org/oauth/apps), then [install and start Arkivo-Hyrax](https://github.com/inukshuk/arkivo-hyrax) and then generate the Arkivo API in your Hyrax-based application:
 
 ```
-rails g sufia:arkivo_api
+rails g hyrax:arkivo_api
 ```
 
 The generator does the following:
 
-* Enables the API in the Sufia initializer
+* Enables the API in the Hyrax initializer
 * Adds a database migration
 * Creates a routing constraint that allows you to control what clients can access the API
 * Copies a config file that allows you to specify the host and port Arkivo is running on
@@ -211,30 +205,20 @@ The generator does the following:
 
 Update your database schema with `rake db:migrate`.
 
-Add unique Arkivo tokens for each of your existing user accounts with `rake sufia:user:tokens`. (New users will have tokens created as part of the account creation process.)
+Add unique Arkivo tokens for each of your existing user accounts with `rake hyrax:user:tokens`. (New users will have tokens created as part of the account creation process.)
 
-Edit the routing constraint in `config/initializers/arkivo_constraint.rb` so that your Sufia-based app will allow connections from Arkivo. **Make sure this is restrictive as you are allowing access to an API that allows creates, updates and deletes.**
+Edit the routing constraint in `config/initializers/arkivo_constraint.rb` so that your Hyrax-based app will allow connections from Arkivo. **Make sure this is restrictive as you are allowing access to an API that allows creates, updates and deletes.**
 
 Tweak `config/arkivo.yml` to point at the host and port your instance of Arkivo is running on.
 
 Tweak `config/zotero.yml` to hold your Zotero OAuth client key and secret. Alternatively, if you'd rather not paste these into a file, you may use the environment variables `ZOTERO_CLIENT_KEY` and `ZOTERO_CLIENT_SECRET`.
 
-Restart your app and it should now be able to pull in Zotero-managed publications on behalf of your users.  Each user will need to link their Sufia app account with their Zotero accounts, which can be done in the "Edit Profile" page. After the accounts are linked, Arkivo will create a subscription to that user's Zotero-hosted "My Publications" collection. When users add items to their "My Publications" collection via the Zotero client, they will automatically be pushed into the Sufia-based repository application. Updates to these items will trigger updates to item metadata in your app, and deletes will delete the files from your app.
+Restart your app and it should now be able to pull in Zotero-managed publications on behalf of your users.  Each user will need to link their Hyrax app account with their Zotero accounts, which can be done in the "Edit Profile" page. After the accounts are linked, Arkivo will create a subscription to that user's Zotero-hosted "My Publications" collection. When users add items to their "My Publications" collection via the Zotero client, they will automatically be pushed into the Hyrax-based repository application. Updates to these items will trigger updates to item metadata in your app, and deletes will delete the files from your app.
 
 # Customizing metadata
 
-Chances are you will want to customize the default metadata provided by Sufia.  Here's [a guide](https://github.com/projecthydra/sufia/wiki/Customizing-Metadata) to help you with that in Sufia >= 7.0.0. If you need similar instructions for Sufia 6.x, read more about [customizing metadata in 6.x](https://github.com/projecthydra/sufia/wiki/Customizing-Metadata-(Sufia-6.x)).
+Chances are you will want to customize the default metadata provided by Hyrax.  Here's [a guide](https://github.com/projecthydra/hyrax/wiki/Customizing-Metadata) to help you with that in Hyrax.
 
 # Admin users
 
-See [making admin users in Sufia](https://github.com/projecthydra/sufia/wiki/Making-Admin-Users-in-Sufia).
-
-# Migrating data to PCDM in Sufia 7
-
-**WARNING: THIS IS IN PROGRESS AND UNTESTED**
-
-1. Create a GenericWork for each GenericFile. The new GenericWork should have the same id as the old GenericFile so that URLs that users have saved will route them to the appropriate location.
-1. Create a FileSet for each GenericWork and add it to the `ordered_members` collection on the GenericWork.
-1. Move the binary from `GenericFile#content` to `FileSet#original_file`.
-
-Here are more details on a [proof of concept](https://github.com/projecthydra/sufia/wiki/Sufia-6-to-Sufia-7-Migration).
+See [making admin users in Hyrax](https://github.com/projecthydra/hyrax/wiki/Making-Admin-Users-in-Hyrax).

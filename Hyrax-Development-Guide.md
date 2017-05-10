@@ -1,4 +1,4 @@
-The Sufia Development Guide is for people who want to modify Sufia itself. See the [[Sufia Management Guide]] for guidance on how to configure and set up a Sufia-based application.
+The Hyrax Development Guide is for people who want to modify Hyrax itself. See the [[Hyrax Management Guide]] for guidance on how to configure and set up a Hyrax-based application.
 
 * [Grab an issue](#grab-an-issue)
 * [Setup development environment](#setup-development-environment)
@@ -22,34 +22,34 @@ The Sufia Development Guide is for people who want to modify Sufia itself. See t
 
 # Grab an issue
 
-If you're interested in picking up an issue in Sufia, feel free to look over the issues marked "ready" in GitHub (or browse the "Ready" column in [Sufia's waffle board](https://waffle.io/projecthydra/sufia)). When you find an issue you'd like to work on, please do assign yourself the issue in GitHub. This is an important step that signals to other developers that you're working on the issue and that they shouldn't pick it up too.
+If you're interested in picking up an issue in Hyrax, feel free to look over the issues marked "ready" in GitHub (or browse the "Ready" column in [Hyrax's waffle board](https://waffle.io/projecthydra/hyrax)). When you find an issue you'd like to work on, please do assign yourself the issue in GitHub. This is an important step that signals to other developers that you're working on the issue and that they shouldn't pick it up too.
 
 # Setup development environment
 
-Since Sufia is a Rails engine, in order to develop/test new Sufia UI features you'll want to test/demo Rails application (based on Sufia). Luckily, Sufia comes with its own test application which can be used for this purpose. This section walks you through the basics of setting up that test application for development (and testing).
+Since Hyrax is a Rails engine, in order to develop/test new Hyrax UI features you'll want to test/demo Rails application (based on Hyrax). Luckily, Hyrax comes with its own test application which can be used for this purpose. This section walks you through the basics of setting up that test application for development (and testing).
 
 ## Development prerequisites
 
-First off, you need to have Sufia installed (obviously):
-* Make sure all of Sufia's [basic prerequisites](https://github.com/projecthydra/sufia#prerequisites) are running.
+First off, you need to have Hyrax installed (obviously):
+* Make sure all of Hyrax's [basic prerequisites](https://github.com/projecthydra/hyrax#prerequisites) are running.
 * Additional prerequisite for tests: [PhantomJS](http://phantomjs.org/).
-* Git clone the Sufia repo, use latest stable Ruby (2.3.1), run `bundle install`.
+* Git clone the Hyrax repo, use latest stable Ruby (2.3.1), run `bundle install`.
 
 ## Generate test app
 
-The test application (`<sufia directory>/.internal_test_app`) can be used both for UI development, as well as for [running the test suite](#run-the-test-suite).
+The test application (`<hyrax directory>/.internal_test_app`) can be used both for UI development, as well as for [running the test suite](#run-the-test-suite).
 
 *NOTE: Run this only once.*
 ```
-cd <sufia directory>
+cd <hyrax directory>
 rake engine_cart:generate
 ```
 
-This generates the test Sufia application in the `<sufia directory>/.internal_test_app` directory. You should not have to regenerate the test app unless you pull in code changes from the `master` branch, or start working on a new feature or bug.
+This generates the test Hyrax application in the `<hyrax directory>/.internal_test_app` directory. You should not have to regenerate the test app unless you pull in code changes from the `master` branch, or start working on a new feature or bug.
 
 ## Work with test app in the browser
 
-In order to do UI development, you'll want to load the Sufia test app (`<sufia directory>/.internal_test_app`) in your browser.
+In order to do UI development, you'll want to load the Hyrax test app (`<hyrax directory>/.internal_test_app`) in your browser.
 
 This section assumes that you have generated the test app via `rake engine_cart:generate`.
 
@@ -75,23 +75,23 @@ This section assumes that you have generated the test app via `rake engine_cart:
 
 1. Run SolrWrapper in development mode. SolrWrapper picks up configuration from the `.solr_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.solr_wrapper`) that starts Solr on port 8983.
    1. Open a terminal
-   1. `cd <sufia directory>\.internal_test_app`
+   1. `cd <hyrax directory>\.internal_test_app`
    1. `solr_wrapper`
 
 1. Run FcrepoWrapper in development mode. FcrepoWrapper picks up configuration from the `.fcrepo_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.fcrepo_wrapper`) that starts Fedora on port 8984.
    1. Open a terminal
-   1. `cd <sufia directory>\.internal_test_app`
+   1. `cd <hyrax directory>\.internal_test_app`
    1. `fcrepo_wrapper`
 
 1. Run the Rails server in development mode
    1. Open a terminal
-   1. `cd <sufia directory>\.internal_test_app`
+   1. `cd <hyrax directory>\.internal_test_app`
    1. `rails server`
 
 1. View the app by opening [localhost:3000](http://localhost:3000) in a web browser.
 
-1. Optionally, if you want to use Sufia's Administrative functionality, you'll need to [make admin users in Sufia](https://github.com/projecthydra/sufia/wiki/Making-Admin-Users-in-Sufia) from within your test application directory (`<sufia directory>\.internal_test_app`)
-   1. Register a new user, and then edit the `<sufia directory>\.internal_test_app\config\role_map.yml` to include that user as a `development.admin`. For example:
+1. Optionally, if you want to use Hyrax's Administrative functionality, you'll need to [make admin users in Hyrax](https://github.com/projecthydra/hyrax/wiki/Making-Admin-Users-in-Hyrax) from within your test application directory (`<hyrax directory>\.internal_test_app`)
+   1. Register a new user, and then edit the `<hyrax directory>\.internal_test_app\config\role_map.yml` to include that user as a `development.admin`. For example:
        ```
        development:
          ...
@@ -99,13 +99,13 @@ This section assumes that you have generated the test app via `rake engine_cart:
            - my_fake_user@faker.com
        ```
    1. Restart the Rails server and you should now see the Administrative menu
-1. You can now begin develop new features in Sufia (by modifying/adding code in your `<sufia directory>`), and test them out immediately in your web browser. In many cases any changes you make will take immediate effect. But, on occasion, you may find you'll need to restart the Rails server (see step 5 above).
+1. You can now begin develop new features in Hyrax (by modifying/adding code in your `<hyrax directory>`), and test them out immediately in your web browser. In many cases any changes you make will take immediate effect. But, on occasion, you may find you'll need to restart the Rails server (see step 5 above).
 
 ## Cleaning up
 
 1. To stop the development Fedora and Solr servers, press CTRL-C in the terminal windows in which they are running
 1. To clean out the data in Solr & Fedora
-  1. `cd <sufia directory>\.internal_test_app`
+  1. `cd <hyrax directory>\.internal_test_app`
   1. `fcrepo_wrapper clean`
   1. `solr_wrapper clean`
 
@@ -115,7 +115,7 @@ This section assumes that you have generated the test app via `rake engine_cart:
 
 Before running the test suite, you need to be sure you've initialized your development environment using these instructions:
 * [Development Prerequisites](#development-prerequisites) - Install all of the base development prerequisites
-* [Generate test app](#generate-test-app) - Ensure you've generated the Sufia test application in `<sufia directory>/.internal_test_app`
+* [Generate test app](#generate-test-app) - Ensure you've generated the Hyrax test application in `<hyrax directory>/.internal_test_app`
 
 ## Run the wrappers
 *Note: DO NOT USE FOR PRODUCTION*.
@@ -123,7 +123,7 @@ Note: You'll need separate terminal windows/tabs for each wrapper.
 
 ### Wrapper Method 1
 
-From `<sufia directory>/.internal_test_app`, if you have `config/solr_wrapper_test.yml` and `config/fcrepo_wrapper_test.yml` (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info), run:
+From `<hyrax directory>/.internal_test_app`, if you have `config/solr_wrapper_test.yml` and `config/fcrepo_wrapper_test.yml` (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info), run:
 
 ```bash
 solr_wrapper -v --config config/solr_wrapper_test.yml
@@ -131,7 +131,7 @@ fcrepo_wrapper -v --config config/fcrepo_wrapper_test.yml # separate window/tab
 ```
 ### Wrapper Method 2
 
-From `<sufia directory>/` (not `.internal_test_app`):
+From `<hyrax directory>/` (not `.internal_test_app`):
 
 ```bash
 solr_wrapper -v -d solr/config/ -n hydra-test -p 8985
@@ -141,7 +141,7 @@ fcrepo_wrapper -v -p 8986 --no-jms # separate window/tab
 ## Run tests
 Run entire suite:
 ```
-cd <sufia directory>
+cd <hyrax directory>
 rake spec
 ```
 
@@ -173,12 +173,12 @@ rubocop -a
 
 ## Troubleshooting / Testing FAQ
 
-### The generated test app isn't doing what I expected after making (and/or pulling) changes to Sufia.  What can I do?
+### The generated test app isn't doing what I expected after making (and/or pulling) changes to Hyrax.  What can I do?
 
-Generally, engine_cart will pick up changes to Sufia.  If not, try the following to regenerate a clean test app:
+Generally, engine_cart will pick up changes to Hyrax.  If not, try the following to regenerate a clean test app:
 
 ```bash
-cd <sufia directory>
+cd <hyrax directory>
 rm -rf .internal_test_app Gemfile.lock
 bundle install
 rake engine_cart:generate
@@ -198,7 +198,7 @@ In a web browser, check [localhost:8986](http://localhost:8986/). You should see
 
 ### Hey, those ports (8985/8986) look different from what I expected!
 
-Only because they are! Now that we use `solr_wrapper` and `fcrepo_wrapper` instead of `hydra-jetty`, which bundled test and dev environments together and was occasionally problematic, test and dev instances of Solr and Fedora now run on separate ports. If you want to run the test suite, use the ports above (8985 for Solr and 8986 for Fedora). If you want to check out Sufia in your browser, use port 8983 for Solr and port 8984 for Fedora as stated in [Solr](https://github.com/projecthydra/sufia#start-solr) and [Fedora](https://github.com/projecthydra/sufia#start-fcrepo).
+Only because they are! Now that we use `solr_wrapper` and `fcrepo_wrapper` instead of `hydra-jetty`, which bundled test and dev environments together and was occasionally problematic, test and dev instances of Solr and Fedora now run on separate ports. If you want to run the test suite, use the ports above (8985 for Solr and 8986 for Fedora). If you want to check out Hyrax in your browser, use port 8983 for Solr and port 8984 for Fedora as stated in [Solr](https://github.com/projecthydra/hyrax#start-solr) and [Fedora](https://github.com/projecthydra/hyrax#start-fcrepo).
 
 ### How do I run the test coverage report?
 
@@ -216,7 +216,7 @@ Yes. You can run everything (including the Fedora and Solr wrappers) using the d
 rake
 ```
 
-(Note that the default task in Sufia is the `ci` task, so running the above command is the same as running `rake ci`.)
+(Note that the default task in Hyrax is the `ci` task, so running the above command is the same as running `rake ci`.)
 
 But note that if you're actively working on a feature or a bug fix, you will likely not want to use this task repeatedly because it's remarkably slower than `rspec`.
 
@@ -252,7 +252,7 @@ You can check to see if Fedora is started by going to [localhost:8984](http://lo
 
 ## Rails
 
-To test-drive your new Sufia application, spin up the web server that Rails provides:
+To test-drive your new Hyrax application, spin up the web server that Rails provides:
 
 ```
 rails server
@@ -260,7 +260,7 @@ rails server
 
 # Install problems
 
-If installing Sufia results in errors that look like `ERROR -- : fsevent: running worker failed: Resource temporarily unavailable`, you may include `--skip-listen` among the arguments to `rails new`. That should get you past these errors. NOTE: we do not recommend passing this argument when generating your Sufia application unless you understand what the ramifications of this are.
+If installing Hyrax results in errors that look like `ERROR -- : fsevent: running worker failed: Resource temporarily unavailable`, you may include `--skip-listen` among the arguments to `rails new`. That should get you past these errors. NOTE: we do not recommend passing this argument when generating your Hyrax application unless you understand what the ramifications of this are.
 
 # Change validation behavior
 
@@ -296,6 +296,6 @@ The following steps need to be done in order to create a test app for Hyrax deve
 
 [Install the gh-md-toc tool](https://github.com/ekalinin/github-markdown-toc/blob/master/README.md#installation), then ensure your README changes are up on GitHub, and then run:
 
-`gh-md-toc https://github.com/USERNAME/sufia/blob/BRANCH/README.md`
+`gh-md-toc https://github.com/USERNAME/hyrax/blob/BRANCH/README.md`
 
 That will print to stdout the new TOC, which you can copy into `README.md`, commit, and push.

@@ -1,4 +1,4 @@
-After Installing Sufia..
+After Installing Hyrax..
 
 Add rspec-rails and factory-girl to your Gemfile 
 ```ruby
@@ -19,7 +19,7 @@ Run `rake spec`
 
 # Add FactoryGirl, Capybara and Devise support to your rspec environment
 
-Note: This section is closely based on the [spec_helper.rb](https://github.com/projecthydra/sufia/blob/master/spec/spec_helper.rb) in sufia.  You can refer to that file to see how it all fits together.
+Note: This section is closely based on the [spec_helper.rb](https://github.com/projecthydra/hyrax/blob/master/spec/spec_helper.rb) in hyrax.  You can refer to that file to see how it all fits together.
 
 In order to run this type of test, you need to tell rspec to use FactoryGirl and you need to add a convenient find_or_create method to the FactoryGirl module.
 
@@ -44,28 +44,28 @@ within the `RSpec.configure do |config|` section, add
 ```
 
 Copy this file into `spec/factories/`  
-https://github.com/projecthydra/sufia/blob/master/spec/factories/users.rb
+https://github.com/projecthydra/hyrax/blob/master/spec/factories/users.rb
 
 # Add your first test and make it pass
 
 This is a relatively sophisticated test that attempts to log into your DashboardController and send a couple requests to it.
 
-### Copy the DashboardController test file from Sufia
+### Copy the DashboardController test file from Hyrax
 
 Put this test into `spec/controllers/`   
-https://github.com/projecthydra/sufia/blob/master/spec/controllers/dashboard_controller_spec.rb 
+https://github.com/projecthydra/hyrax/blob/master/spec/controllers/dashboard_controller_spec.rb 
 
 ### Clean up the test
 
 Delete the 2 tests that are marked `pending` in `spec/controllers/dashboard_controller.rb` (lines 10-41).  You don't want them.
  
-### Make your test use the routes from Sufia 
+### Make your test use the routes from Hyrax 
 
-The route to dashboard_controller is defined by Sufia.  By default, rspec tests will only know about the routes defined in your application.  To make the tests in this file aware of the Sufia routes, add this before block after the line that reads `describe DashboardController do`: 
+The route to dashboard_controller is defined by Hyrax.  By default, rspec tests will only know about the routes defined in your application.  To make the tests in this file aware of the Hyrax routes, add this before block after the line that reads `describe DashboardController do`: 
 
 ```ruby
   before do
-    @routes = Sufia::Engine.routes
+    @routes = Hyrax::Engine.routes
   end
 ```
 

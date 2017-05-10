@@ -13,7 +13,7 @@ file - individual item that someone can upload to the system
 work - entity that you want to have in the system, this is where descriptive metadata will be stored.
 collection - larger set of work
 
-Issues that may arise mapping  Sufia's collection model, this new model we cannot go:
+Issues that may arise mapping  Hyrax's collection model, this new model we cannot go:
 Collection -> Work -> Collection 
      -the restriction of this data model, works cannot have collections
 Use Case:
@@ -34,13 +34,13 @@ At this point we will have empty pointers to these files if they don't exist. We
 Lynette has a point of having additional streams being part of a work -- not sure of that
 
 ***Goal of the sprint:***
-Intention is to create a gem that has base level behaviors that anyone who is using PCDM can use, and those that implement PCDM object can use those behaviors to ensure our relationships are consistent. Trying to stick with the coding goal to stick with one class. So a separate gem that the whole community can use and then a specific implementation of this abstract implementation for sufia.
+Intention is to create a gem that has base level behaviors that anyone who is using PCDM can use, and those that implement PCDM object can use those behaviors to ensure our relationships are consistent. Trying to stick with the coding goal to stick with one class. So a separate gem that the whole community can use and then a specific implementation of this abstract implementation for hyrax.
 
 PCDM object has:
 collection, object, and file
 
-Sufia level:
-implement generic file and sufia work, both of which are PCDM objects
+Hyrax level:
+implement generic file and hyrax work, both of which are PCDM objects
 
 Potential Action Items for next meeting
 -Need to think about the discovery phase, because it will determine how we migrate things

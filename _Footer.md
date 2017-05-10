@@ -1,1 +1,1 @@
-[Learn more about Sufia!](http://sufia.io)
+[Learn more about Hyrax!](http://hyr.ax/)

@@ -1,4 +1,4 @@
-A way to run Fedora and Solr while doing development work in Sufia 7.
+A way to run Fedora and Solr while doing development work in Hyrax.
 
 In a terminal window run the following command to launch Fedora:
 
@@ -13,4 +13,4 @@ In a separate terminal window run the following command to run the Rails applica
     cd .internal_test_app
     bundle exec rails s
 
-With this approach you can stop and restart the Rails application without having to kill Fedora and Solr. 
+With this approach you can stop and restart the Rails application without having to kill Fedora and Solr.
