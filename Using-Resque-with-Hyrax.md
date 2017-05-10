@@ -84,7 +84,7 @@ OPTION 1: Start 1 worker (ignores the resque-pool [configuration file](#configur
 **IMPORTANT:** Change directories to the root of your Hyrax app before executing:
 
 ```
-RUN_AT_EXIT_HOOKS=true TERM_CHILD=1 QUEUE=* rake environment resque:work
+RUN_AT_EXIT_HOOKS=true TERM_CHILD=1 QUEUE=* rails environment resque:work
 ```
 
 OPTION 2: Start a pool of configurable workers. This is typically used for production-like environments, but may also be used for development.  See [configuration](#configuration) examples above.

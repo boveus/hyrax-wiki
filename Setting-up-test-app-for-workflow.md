@@ -26,6 +26,6 @@
 1. Load the workflows
 
   ```
-  rake hyrax:workflow:load    
+  rails hyrax:workflow:load    
   ```
 1. Start your rails server and reload the page (you should now see an administrative menu)

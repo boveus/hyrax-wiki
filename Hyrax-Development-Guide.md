@@ -42,7 +42,7 @@ The test application (`<hyrax directory>/.internal_test_app`) can be used both f
 *NOTE: Run this only once.*
 ```
 cd <hyrax directory>
-rake engine_cart:generate
+rails engine_cart:generate
 ```
 
 This generates the test Hyrax application in the `<hyrax directory>/.internal_test_app` directory. You should not have to regenerate the test app unless you pull in code changes from the `master` branch, or start working on a new feature or bug.
@@ -51,7 +51,7 @@ This generates the test Hyrax application in the `<hyrax directory>/.internal_te
 
 In order to do UI development, you'll want to load the Hyrax test app (`<hyrax directory>/.internal_test_app`) in your browser.
 
-This section assumes that you have generated the test app via `rake engine_cart:generate`.
+This section assumes that you have generated the test app via `rails engine_cart:generate`.
 
 1. Only if you are using ActiveFedora earlier than 9.13, you need to copy some configuration files. Check your ActiveFedora version with `cd .internal_test_app; bundle show active-fedora`. If it's 9.13 or higher, you can skip these steps, go on to step 2.
 
@@ -142,7 +142,7 @@ fcrepo_wrapper -v -p 8986 --no-jms # separate window/tab
 Run entire suite:
 ```
 cd <hyrax directory>
-rake spec
+rails spec
 ```
 
 Run a single spec:
@@ -152,7 +152,7 @@ rspec path/to/filel_spec.rb
 
 Run jasmine server:
 ```
-rake jasmine
+rails jasmine
 ```
 Access the jasmine server at port 8888. Note rspec's jasmine spec won't run any jasmine file with syntax errors. It does report the the number of specs run; pay attention to that number if you're doing js tests. Insert `debug` into your test file to do browser debugging on the test itself. If you're working on a remote box, add
 ```
@@ -181,7 +181,7 @@ Generally, engine_cart will pick up changes to Hyrax.  If not, try the following
 cd <hyrax directory>
 rm -rf .internal_test_app Gemfile.lock
 bundle install
-rake engine_cart:generate
+rails engine_cart:generate
 ```
 
 ### Where is `hydra-jetty`/its rake tasks?
@@ -213,10 +213,10 @@ COVERAGE=true rspec
 Yes. You can run everything (including the Fedora and Solr wrappers) using the default rake task, like so:
 
 ```
-rake
+rails
 ```
 
-(Note that the default task in Hyrax is the `ci` task, so running the above command is the same as running `rake ci`.)
+(Note that the default task in Hyrax is the `ci` task, so running the above command is the same as running `rails ci`.)
 
 But note that if you're actively working on a feature or a bug fix, you will likely not want to use this task repeatedly because it's remarkably slower than `rspec`.
 
@@ -282,14 +282,14 @@ The following steps need to be done in order to create a test app for Hyrax deve
 
 1. [Install prerequisite software](#development-prerequisites) - Follow all instructions carefully.
 1. Clone [Hyrax](https://github.com/projecthydra-labs/hyrax) code from github
-1. Remove existing test app with `rake engine_cart:clean` (Not required after initial clone. Use when your code updates require the test app to be regenerated.)
-1. [Create the test app](#generate-test-app) with `rake engine_cart:generate`
+1. Remove existing test app with `rails engine_cart:clean` (Not required after initial clone. Use when your code updates require the test app to be regenerated.)
+1. [Create the test app](#generate-test-app) with `rails engine_cart:generate`
 1. If using rubyracer for JavaScript runtime, uncomment in `.internal_test_app/Gemfile` and bundle install.  (Not needed if using nodejs.) ([more info](https://github.com/projecthydra-labs/hyrax#javascript-runtime))
-1. [Start servers](#start-servers-individually-for-development) with `rake hydra:server`  (e.g. solr, fedora, rails) - Stop with Ctrl-C
+1. [Start servers](#start-servers-individually-for-development) with `rails hydra:server`  (e.g. solr, fedora, rails) - Stop with Ctrl-C
 1. [Start background workers](https://github.com/projecthydra-labs/hyrax#start-background-workers) (message queue) - several options for message queue
 1. Move into the test app directory with `cd .internal_test_app`
-1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) with `rake hyrax:default_admin_set:create`
-1. [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rake hyrax:workflow:load`
+1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) with `rails hyrax:default_admin_set:create`
+1. [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rails hyrax:workflow:load`
 1. [Generate a work type](https://github.com/projecthydra-labs/hyrax#generate-a-work-type) with `rails generate hyrax:work Work` (Replace Work with the name of your work type.)
 
 # Regenerating the README TOC

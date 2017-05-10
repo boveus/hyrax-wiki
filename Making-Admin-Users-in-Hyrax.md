@@ -22,7 +22,7 @@ Then install the gem and run its database migrations:
 # each of these commands will produce some output.
 bundle install
 rails generate roles
-rake db:migrate
+rails db:migrate
 ```
 
 ## Add new abilities

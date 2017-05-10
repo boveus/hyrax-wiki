@@ -64,7 +64,7 @@ Within each action is a "name" tag, a "transition_to" tag, a "from_states", and 
 
 Thats a good question. Its quite simple! All you need to do now is run a simple command in the command line.
 ```
-rake curation_concerns:workflow:load
+rails curation_concerns:workflow:load
 ```
 and voila! Your workflow is now loaded into the system and is ready to be used. If you dont get yelled at by this rake task then you know that it worked. The verification of your workflow JSON file is very particular and will come back with errors if there is anything wrong in your workflow JSON file.
 

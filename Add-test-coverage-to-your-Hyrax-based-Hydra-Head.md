@@ -13,7 +13,7 @@ Run `bundle install`
 
 Run the rspec generator `rails g rspec:install`
 
-Run `rake spec`
+Run `rails spec`
 
 … everything should pass -- 0 tests, 0 failures
 
@@ -73,18 +73,18 @@ The route to dashboard_controller is defined by Hyrax.  By default, rspec tests 
 
 If you have never done it, you might need to push your solr_config into jetty
 ```
-rake jetty:stop
-rake jetty:config
+rails jetty:stop
+rails jetty:config
 ```
 
 Now start jetty (if it's not already running)
 ```
-rake jetty:start
+rails jetty:start
 ```
 
 ### Run the test
 
-Now run `rake spec` again.
+Now run `rails spec` again.
 
 If you get a Connection Refused error, it's because jetty is not running.
 

@@ -13,7 +13,7 @@ See the [Hyrax Management Guide](https://github.com/projecthydra/hyrax/wiki/Hyra
     $ rails g hyrax:models:cached_stats
 
 * Run the migrations
-    $ rake db:migrate
+    $ rails db:migrate
 
 * Edit config/initializers/hyrax.rb
 
@@ -25,7 +25,7 @@ See the [Hyrax Management Guide](https://github.com/projecthydra/hyrax/wiki/Hyra
 
 * Run the rake task to build the cache in the <code>user_stats</code> table, and schedule it as a nightly background job
 
-  * <code>$ rake hyrax:stats:user_stats</code>
+  * <code>$ rails hyrax:stats:user_stats</code>
   * Schedule a nightly job to run that rake task so that user stats will update once a day
 
 * Update views

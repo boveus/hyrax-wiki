@@ -2,7 +2,7 @@ After you've generated a new work type (or "curation concern"), you may want to 
 
 # Making sure routes match your expectations
 
-Rails makes generally good guesses about how to pluralize models, such as the new work type you just generated. Sometimes it gets things wrong, though. Maybe you generate a model called `Atlas`, for example, and Rails guesses that is the plural form of "Atla." If it does, it will assume routing with paths like `atla_path`. If this is something you care about, check `rake routes` after generating the new work type. If it doesn't look the way you'd like, you can add code to your application's `config/initializers/inflections.rb` file like so:
+Rails makes generally good guesses about how to pluralize models, such as the new work type you just generated. Sometimes it gets things wrong, though. Maybe you generate a model called `Atlas`, for example, and Rails guesses that is the plural form of "Atla." If it does, it will assume routing with paths like `atla_path`. If this is something you care about, check `rails routes` after generating the new work type. If it doesn't look the way you'd like, you can add code to your application's `config/initializers/inflections.rb` file like so:
 
 ```ruby
 ActiveSupport::Inflector.inflections(:en) do |inflect|

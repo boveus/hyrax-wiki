@@ -80,7 +80,7 @@ end
 If you switch to the new database-backed minter and want to include in that minter the state of your current file-backed minter, AF::Noid 2.x provides a new rake task that will copy your minter's state from the filesystem to the database:
 
 ```bash
-$ rake active_fedora:noid:migrate:file_to_database
+$ rails active_fedora:noid:migrate:file_to_database
 ```
 
 ## Derivatives
@@ -203,9 +203,9 @@ The generator does the following:
 * Copies a config file that allows you to specify the host and port Arkivo is running on
 * Copies a config file for your Zotero OAuth client credentials
 
-Update your database schema with `rake db:migrate`.
+Update your database schema with `rails db:migrate`.
 
-Add unique Arkivo tokens for each of your existing user accounts with `rake hyrax:user:tokens`. (New users will have tokens created as part of the account creation process.)
+Add unique Arkivo tokens for each of your existing user accounts with `rails hyrax:user:tokens`. (New users will have tokens created as part of the account creation process.)
 
 Edit the routing constraint in `config/initializers/arkivo_constraint.rb` so that your Hyrax-based app will allow connections from Arkivo. **Make sure this is restrictive as you are allowing access to an API that allows creates, updates and deletes.**
 
