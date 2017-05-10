@@ -1,0 +1,5 @@
+Sufia processes long-running or particularly slow work in background jobs to speed up the web request/response cycle. As of version 7, Sufia no longer packages a default queuing back-end for background jobs. Sufia builds its jobs using the [Rails ActiveJob framework](http://guides.rubyonrails.org/active_job_basics.html), so there is a wide variety of back-ends that you may use that will work with Sufia including [Sidekiq](http://sidekiq.org/), [Resque](https://github.com/resque/resque), and [DelayedJob](https://github.com/collectiveidea/delayed_job). Flexibility and choice come with a cost, though, and there's some work involved with integrating whichever queuing back-end you select. 
+
+If you'd like to use Sidekiq or Resque in your Sufia app, we've written up a couple guides on [using Sidekiq with Sufia](https://github.com/projecthydra/sufia/wiki/Using-Sidekiq-with-Sufia) and [using Resque with Sufia](https://github.com/projecthydra/sufia/wiki/Using-Resque-with-Sufia) to help you along.
+
+**We recommend using Sidekiq, which is better maintained and has fewer quirks.**
