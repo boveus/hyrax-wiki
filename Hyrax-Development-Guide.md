@@ -51,24 +51,12 @@ This generates the test Hyrax application in the `<hyrax directory>/.internal_te
 
 In order to do UI development, you'll want to load the Hyrax test app (`<hyrax directory>/.internal_test_app`) in your browser.
 
-This section assumes that you have generated the test app via `rails engine_cart:generate`.
+This section assumes that you have generated the test app via `rails engine_cart:generate`. **Note:** All the following commands should be run from `<hyrax directory>\.internal_test_app`.
 
-1. Run SolrWrapper in development mode. SolrWrapper picks up configuration from the `.solr_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.solr_wrapper`) that starts Solr on port 8983.
-   1. Open a terminal
-   1. `cd <hyrax directory>\.internal_test_app`
-   1. `solr_wrapper`
-
-1. Run FcrepoWrapper in development mode. FcrepoWrapper picks up configuration from the `.fcrepo_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.fcrepo_wrapper`) that starts Fedora on port 8984.
-   1. Open a terminal
-   1. `cd <hyrax directory>\.internal_test_app`
-   1. `fcrepo_wrapper`
-
-1. Run the Rails server in development mode
-   1. Open a terminal
-   1. `cd <hyrax directory>\.internal_test_app`
-   1. `rails server`
-
-1. View the app by opening [localhost:3000](http://localhost:3000) in a web browser.
+1. Open separate terminals for each of the following steps:
+   1. `solr_wrapper`: Runs SolrWrapper in development mode. SolrWrapper picks up configuration from the `.solr_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.solr_wrapper`) that starts Solr on port 8983.
+   1. `fcrepo_wrapper`: Runs FcrepoWrapper in development mode. FcrepoWrapper picks up configuration from the `.fcrepo_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.fcrepo_wrapper`) that starts Fedora on port 8984.
+   1. `rails server`: Runs the Rails server in development mode.
 
 1. Optionally, if you want to use Hyrax's Administrative functionality, you'll need to [make admin users in Hyrax](https://github.com/projecthydra-labs/hyrax/wiki/Making-Admin-Users-in-Hyrax) from within your test application directory (`<hyrax directory>\.internal_test_app`)
    1. Register a new user, and then edit the `<hyrax directory>\.internal_test_app\config\role_map.yml` to include that user as a `development.admin`. For example:
@@ -78,8 +66,11 @@ This section assumes that you have generated the test app via `rails engine_cart
          admin:
            - my_fake_user@faker.com
        ```
-   1. Restart the Rails server and you should now see the Administrative menu
-1. You can now begin develop new features in Hyrax (by modifying/adding code in your `<hyrax directory>`), and test them out immediately in your web browser. In many cases any changes you make will take immediate effect. But, on occasion, you may find you'll need to restart the Rails server (see step 5 above).
+1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) and [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rails hyrax:default_admin_set:create hyrax:workflow:load`
+1. [Generate a work type](https://github.com/projecthydra-labs/hyrax#generate-a-work-type) with `rails generate hyrax:work Work` (Replace `Work` with the name of your work type.)
+1. View the app by opening [localhost:3000](http://localhost:3000) in a web browser.
+
+You can now begin develop new features in Hyrax (by modifying/adding code in your `<hyrax directory>`), and test them out immediately in your web browser. In many cases any changes you make will take immediate effect. But, on occasion, you may find you'll need to stop/restart the Rails server (as above).
 
 ## Cleaning up
 
