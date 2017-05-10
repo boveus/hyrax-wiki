@@ -288,8 +288,7 @@ The following steps need to be done in order to create a test app for Hyrax deve
 1. [Start servers](#start-servers-individually-for-development) with `rails hydra:server`  (e.g. solr, fedora, rails) - Stop with Ctrl-C
 1. [Start background workers](https://github.com/projecthydra-labs/hyrax#start-background-workers) (message queue) - several options for message queue
 1. Move into the test app directory with `cd .internal_test_app`
-1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) with `rails hyrax:default_admin_set:create`
-1. [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rails hyrax:workflow:load`
+1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) and [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rails hyrax:default_admin_set:create hyrax:workflow:load`
 1. [Generate a work type](https://github.com/projecthydra-labs/hyrax#generate-a-work-type) with `rails generate hyrax:work Work` (Replace Work with the name of your work type.)
 
 # Regenerating the README TOC
