@@ -2,7 +2,7 @@ Hyrax does not package a default queuing back-end. Hyrax builds its jobs using R
 
 ## Note
 
-You should consider [using Sidekiq with Hyrax](https://github.com/projecthydra/hyrax/wiki/Using-Sidekiq-with-Hyrax) instead of Resque, for it is better maintained and less idiosyncratic. If you must use Resque, see below.
+You should consider [using Sidekiq with Hyrax](https://github.com/projecthydra-labs/hyrax/wiki/Using-Sidekiq-with-Hyrax) instead of Resque, for it is better maintained and less idiosyncratic. If you must use Resque, see below.
 
 ## Pre-Requisites: Install and Run Redis
 

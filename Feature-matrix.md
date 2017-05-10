@@ -33,12 +33,12 @@
 | Transcoding of audio and video files | off by default: enable in CurationConcerns initializer (requires `ffmpeg`) |
 | Administrative sets (curated collections) | off by default: enable by flipping on in administrative UI |
 | Customizable banner image | specify a banner image in Hyrax initializer |
-| Capture usage statistics | requires [Google Analytics ID to be specified in Hyrax initializer](https://github.com/projecthydra/hyrax/wiki/Hyrax-Management-Guide#capturing-usage) |
-| Geonames integration for location-oriented metadata | requires [configuration](requires [configuration](https://github.com/projecthydra/hyrax/wiki/Hyrax-Management-Guide#geonames)) |
+| Capture usage statistics | requires [Google Analytics ID to be specified in Hyrax initializer](https://github.com/projecthydra-labs/hyrax/wiki/Hyrax-Management-Guide#capturing-usage) |
+| Geonames integration for location-oriented metadata | requires [configuration](requires [configuration](https://github.com/projecthydra-labs/hyrax/wiki/Hyrax-Management-Guide#geonames)) |
 | Virus detection for uploaded files | install `clamav` package and follow [the instructions in CurationConcerns](https://github.com/projecthydra/curation_concerns#virus-detection) |
-| Display usage statistics in the UI | requires [configuration](https://github.com/projecthydra/hyrax/wiki/Hyrax-Management-Guide#displaying-usage-in-the-ui) |
-| Administrative users | requires [configuration](https://github.com/projecthydra/hyrax/wiki/Making-Admin-Users-in-Hyrax) |
+| Display usage statistics in the UI | requires [configuration](https://github.com/projecthydra-labs/hyrax/wiki/Hyrax-Management-Guide#displaying-usage-in-the-ui) |
+| Administrative users | requires [configuration](https://github.com/projecthydra-labs/hyrax/wiki/Making-Admin-Users-in-Hyrax) |
 | Citation formatting suggestions | requires configuration: enable `config.citations` in Hyrax initializer, then run `rails g hyrax:citation_config` |
-| Integration with Zotero | requires [configuration](https://github.com/projecthydra/hyrax/wiki/Hyrax-Management-Guide#zotero-integration) |
-| Integration w/ cloud storage providers | requires [configuration](https://github.com/projecthydra/hyrax/wiki/Hyrax-Management-Guide#integration-with-dropbox-box-etc) |
+| Integration with Zotero | requires [configuration](https://github.com/projecthydra-labs/hyrax/wiki/Hyrax-Management-Guide#zotero-integration) |
+| Integration w/ cloud storage providers | requires [configuration](https://github.com/projecthydra-labs/hyrax/wiki/Hyrax-Management-Guide#integration-with-dropbox-box-etc) |
 | Background jobs | requires configuration: though jobs will automatically run via the default in-memory adapter, we recommend using an `ActiveJob` adapter like `Sidekiq` in production environments |

@@ -105,7 +105,7 @@ Hyrax uses ActionMailer to send email to users. Some environments may need speci
 
 ## Fixity checking
 
-Hyrax provides a [service](https://github.com/projecthydra/hyrax/blob/master/app/services/hyrax/repository_audit_service.rb) that iterates over all file sets in your repository and verifies fixities in the background. Hyrax will not run this service for you, so you should use a cronjob (or similar, e.g., the `whenever` gem) to run this on a schedule that fits your needs and your content. The code that'll need to run is:
+Hyrax provides a [service](https://github.com/projecthydra-labs/hyrax/blob/master/app/services/hyrax/repository_audit_service.rb) that iterates over all file sets in your repository and verifies fixities in the background. Hyrax will not run this service for you, so you should use a cronjob (or similar, e.g., the `whenever` gem) to run this on a schedule that fits your needs and your content. The code that'll need to run is:
 
 ```ruby
 Hyrax::RepositoryAuditService.audit_everything
@@ -217,8 +217,8 @@ Restart your app and it should now be able to pull in Zotero-managed publication
 
 # Customizing metadata
 
-Chances are you will want to customize the default metadata provided by Hyrax.  Here's [a guide](https://github.com/projecthydra/hyrax/wiki/Customizing-Metadata) to help you with that in Hyrax.
+Chances are you will want to customize the default metadata provided by Hyrax.  Here's [a guide](https://github.com/projecthydra-labs/hyrax/wiki/Customizing-Metadata) to help you with that in Hyrax.
 
 # Admin users
 
-See [making admin users in Hyrax](https://github.com/projecthydra/hyrax/wiki/Making-Admin-Users-in-Hyrax).
+See [making admin users in Hyrax](https://github.com/projecthydra-labs/hyrax/wiki/Making-Admin-Users-in-Hyrax).

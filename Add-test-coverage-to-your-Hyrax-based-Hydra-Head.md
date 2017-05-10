@@ -25,7 +25,7 @@ Run `rails spec`
 
 # Add FactoryGirl, Capybara and Devise support to your rspec environment
 
-Note: This section is closely based on the [spec_helper.rb](https://github.com/projecthydra/hyrax/blob/master/spec/spec_helper.rb) in hyrax.  You can refer to that file to see how it all fits together.
+Note: This section is closely based on the [spec_helper.rb](https://github.com/projecthydra-labs/hyrax/blob/master/spec/spec_helper.rb) in hyrax.  You can refer to that file to see how it all fits together.
 
 In order to run this type of test, you need to tell rspec to use FactoryGirl and you need to add a convenient find_or_create method to the FactoryGirl module.
 
@@ -50,7 +50,7 @@ within the `RSpec.configure do |config|` section, add
 ```
 
 Copy this file into `spec/factories/`
-https://github.com/projecthydra/hyrax/blob/master/spec/factories/users.rb
+https://github.com/projecthydra-labs/hyrax/blob/master/spec/factories/users.rb
 
 # Add your first test and make it pass
 
@@ -59,7 +59,7 @@ This is a relatively sophisticated test that attempts to log into your Dashboard
 ### Copy the DashboardController test file from Hyrax
 
 Put this test into `spec/controllers/`
-https://github.com/projecthydra/hyrax/blob/master/spec/controllers/dashboard_controller_spec.rb
+https://github.com/projecthydra-labs/hyrax/blob/master/spec/controllers/dashboard_controller_spec.rb
 
 ### Clean up the test
 

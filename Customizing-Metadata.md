@@ -68,7 +68,7 @@ The model class name follows the Rails convention of controller name minus 'Cont
 The form class, used to control the new/edit form, and the presenter class, used to control the show page, can be identified in the controller class.  The default values for these are:
 
 - form_class = model_name.name + Form (e.g. GenericWorkForm) defined in [CurationConcern's work_form_service.rb](https://github.com/projecthydra/curation_concerns/blob/163d6029703bd5eeb77f9e15a7c21e9d5391f8cf/app/services/curation_concerns/work_form_service.rb) self.form_class method
-- show_presenter = Hyrax::WorkShowPresenter defined in [Hyrax's works_controller_behavior.rb](https://github.com/projecthydra/hyrax/blob/master/app/controllers/concerns/hyrax/works_controller_behavior.rb)
+- show_presenter = Hyrax::WorkShowPresenter defined in [Hyrax's works_controller_behavior.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/controllers/concerns/hyrax/works_controller_behavior.rb)
 
 These can be overridden in the GenericWorksController class using...
 
@@ -159,7 +159,7 @@ end
 
 NOTE:
 - As generated, model_class is the generated model class
-- As generated, terms includes basic work terms defined in [CurationConcerns' work_form.rb](https://github.com/projecthydra/curation_concerns/blob/master/app/forms/curation_concerns/forms/work_form.rb) and [Hyrax's work_form.rb](https://github.com/projecthydra/hyrax/blob/master/app/forms/hyrax/forms/work_form.rb).
+- As generated, terms includes basic work terms defined in [CurationConcerns' work_form.rb](https://github.com/projecthydra/curation_concerns/blob/master/app/forms/curation_concerns/forms/work_form.rb) and [Hyrax's work_form.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/forms/hyrax/forms/work_form.rb).
 - A controller class was also generated and configure form_class to be the one described here, e.g., `self.form_class = Hyrax::Forms::GenericWorkForm`
 
 ### Adding the property to the work-type's new/edit form
@@ -199,7 +199,7 @@ end
 
 Default behavior:
 - By adding the property to self.terms, it will be added to the new/edit form.
-- Without additional customization, the field will be a text input field.  (See [Hyrax's app/views/records/edit_fields/_default.html.erb](https://github.com/projecthydra/hyrax/blob/master/app/views/records/edit_fields/_default.html.erb)
+- Without additional customization, the field will be a text input field.  (See [Hyrax's app/views/records/edit_fields/_default.html.erb](https://github.com/projecthydra-labs/hyrax/blob/master/app/views/records/edit_fields/_default.html.erb)
 - Because we did not set multiple: true, there will be only a single value set for this property.
 - Because we added it to the required_fields set, it will be displayed as required on the initial display of metadata fields on the form. If you did not add it to the set of required_fields, it will display in the form when you click Additional Fields button.
 
@@ -215,18 +215,18 @@ For a single-value field, you can use something similar to...
 %>
 ```
 
-You can see [more examples](https://github.com/projecthydra/hyrax/tree/master/app/views/records/edit_fields) by exploring those created for the default fields in Hyrax.
+You can see [more examples](https://github.com/projecthydra-labs/hyrax/tree/master/app/views/records/edit_fields) by exploring those created for the default fields in Hyrax.
 
 ## Add the new single-value property to the show page
 
 By default, the new property will **NOT** be displayed on the show page for works of this type.
 
 - See [Curation Concern's work_show_presenter.rb](https://github.com/projecthydra/curation_concerns/blob/master/app/presenters/curation_concerns/work_show_presenter.rb) around line 39 with comment # Metadata Methods to see the primary list of properties that will be displayed on the show page.
-- See [Hyrax's work_show_presenter.rb](https://github.com/projecthydra/hyrax/blob/master/app/presenters/hyrax/work_show_presenter.rb) for a few additional properties that are displayed on the work show page.  Look for the property names delegated to the solr_document near the top of the file.
+- See [Hyrax's work_show_presenter.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/presenters/hyrax/work_show_presenter.rb) for a few additional properties that are displayed on the work show page.  Look for the property names delegated to the solr_document near the top of the file.
 
 ### Define the class to use to control the show page
 
-Display of the show page for a work is controlled by a presenter class specified in the controller.  This is not automatically generated and set by the generator process.  By default, [Hyrax's work_show_presenter.rb](https://github.com/projecthydra/hyrax/blob/master/app/presenters/hyrax/work_show_presenter.rb) class is used for show pages.
+Display of the show page for a work is controlled by a presenter class specified in the controller.  This is not automatically generated and set by the generator process.  By default, [Hyrax's work_show_presenter.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/presenters/hyrax/work_show_presenter.rb) class is used for show pages.
 
 Create the following as a starting point for the custom presenter class.
 
@@ -280,7 +280,7 @@ def contact_email
 end
 ```
 
-If this is the first custom property added to the show page, you will need to copy [Hyrax's app/views/curation_concerns/base/_attribute_rows.html.erb](https://github.com/projecthydra/hyrax/blob/master/app/views/curation_concerns/base/_attribute_rows.html.erb) to the same directory structure in your app.  NOTE: The link goes to master.  Make sure you copy from the release/branch of Hyrax that your app has installed.
+If this is the first custom property added to the show page, you will need to copy [Hyrax's app/views/curation_concerns/base/_attribute_rows.html.erb](https://github.com/projecthydra-labs/hyrax/blob/master/app/views/curation_concerns/base/_attribute_rows.html.erb) to the same directory structure in your app.  NOTE: The link goes to master.  Make sure you copy from the release/branch of Hyrax that your app has installed.
 
 Add the field to the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb
 ```erb
@@ -449,7 +449,7 @@ See [Add the new single-value property to the new/edit form](#add-the-new-single
 
 Default behavior:
 - By adding the property to self.terms, it will be added to the new/edit form.
-- Without additional customization, the field will be a text input field.  (See [Hyrax's app/views/records/edit_fields/_default.html.erb](https://github.com/projecthydra/hyrax/blob/master/app/views/records/edit_fields/_default.html.erb)
+- Without additional customization, the field will be a text input field.  (See [Hyrax's app/views/records/edit_fields/_default.html.erb](https://github.com/projecthydra-labs/hyrax/blob/master/app/views/records/edit_fields/_default.html.erb)
 - Because we did not set a value for multiple:, there can be one or more values set for this property.
 - Because we did not add it to the required_fields set, it will be displayed in the form when you click Additional Fields button.
 
@@ -465,7 +465,7 @@ For a multi-value field, you can use something similar to...
 %>
 ```
 
-You can see [more examples](https://github.com/projecthydra/hyrax/tree/master/app/views/records/edit_fields) by exploring those created for the default fields in Hyrax.
+You can see [more examples](https://github.com/projecthydra-labs/hyrax/tree/master/app/views/records/edit_fields) by exploring those created for the default fields in Hyrax.
 
 ## Add the new multi-value property to the show page
 
@@ -738,7 +738,7 @@ For a controlled-value field, you can use something similar to...
 %>
 ```
 
-You can see [more examples](https://github.com/projecthydra/hyrax/tree/master/app/views/records/edit_fields) by exploring those created for the default fields in Hyrax.
+You can see [more examples](https://github.com/projecthydra-labs/hyrax/tree/master/app/views/records/edit_fields) by exploring those created for the default fields in Hyrax.
 
 ## Add the new controlled-value property to the show page
 
@@ -936,4 +936,4 @@ To modify the display of a colleciton property...
 * add a partial with the property's name to app/views/records/show_fields  (e.g. _department.html.erb)
 * in that file, include markup to control the display of the field
 
-NOTE: See [Hyrax's show_fields](https://github.com/projecthydra/hyrax/tree/master/app/views/records/show_fields) for examples.
+NOTE: See [Hyrax's show_fields](https://github.com/projecthydra-labs/hyrax/tree/master/app/views/records/show_fields) for examples.

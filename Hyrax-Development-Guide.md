@@ -22,7 +22,7 @@ The Hyrax Development Guide is for people who want to modify Hyrax itself. See t
 
 # Grab an issue
 
-If you're interested in picking up an issue in Hyrax, feel free to look over the issues marked "ready" in GitHub (or browse the "Ready" column in [Hyrax's waffle board](https://waffle.io/projecthydra/hyrax)). When you find an issue you'd like to work on, please do assign yourself the issue in GitHub. This is an important step that signals to other developers that you're working on the issue and that they shouldn't pick it up too.
+If you're interested in picking up an issue in Hyrax, feel free to look over the issues marked "ready" in GitHub (or browse the "Ready" column in [Hyrax's waffle board](https://waffle.io/projecthydra-labs/hyrax)). When you find an issue you'd like to work on, please do assign yourself the issue in GitHub. This is an important step that signals to other developers that you're working on the issue and that they shouldn't pick it up too.
 
 # Setup development environment
 
@@ -31,7 +31,7 @@ Since Hyrax is a Rails engine, in order to develop/test new Hyrax UI features yo
 ## Development prerequisites
 
 First off, you need to have Hyrax installed (obviously):
-* Make sure all of Hyrax's [basic prerequisites](https://github.com/projecthydra/hyrax#prerequisites) are running.
+* Make sure all of Hyrax's [basic prerequisites](https://github.com/projecthydra-labs/hyrax#prerequisites) are running.
 * Additional prerequisite for tests: [PhantomJS](http://phantomjs.org/).
 * Git clone the Hyrax repo, use latest stable Ruby (2.3.1), run `bundle install`.
 
@@ -90,7 +90,7 @@ This section assumes that you have generated the test app via `rails engine_cart
 
 1. View the app by opening [localhost:3000](http://localhost:3000) in a web browser.
 
-1. Optionally, if you want to use Hyrax's Administrative functionality, you'll need to [make admin users in Hyrax](https://github.com/projecthydra/hyrax/wiki/Making-Admin-Users-in-Hyrax) from within your test application directory (`<hyrax directory>\.internal_test_app`)
+1. Optionally, if you want to use Hyrax's Administrative functionality, you'll need to [make admin users in Hyrax](https://github.com/projecthydra-labs/hyrax/wiki/Making-Admin-Users-in-Hyrax) from within your test application directory (`<hyrax directory>\.internal_test_app`)
    1. Register a new user, and then edit the `<hyrax directory>\.internal_test_app\config\role_map.yml` to include that user as a `development.admin`. For example:
        ```
        development:
@@ -198,7 +198,7 @@ In a web browser, check [localhost:8986](http://localhost:8986/). You should see
 
 ### Hey, those ports (8985/8986) look different from what I expected!
 
-Only because they are! Now that we use `solr_wrapper` and `fcrepo_wrapper` instead of `hydra-jetty`, which bundled test and dev environments together and was occasionally problematic, test and dev instances of Solr and Fedora now run on separate ports. If you want to run the test suite, use the ports above (8985 for Solr and 8986 for Fedora). If you want to check out Hyrax in your browser, use port 8983 for Solr and port 8984 for Fedora as stated in [Solr](https://github.com/projecthydra/hyrax#start-solr) and [Fedora](https://github.com/projecthydra/hyrax#start-fcrepo).
+Only because they are! Now that we use `solr_wrapper` and `fcrepo_wrapper` instead of `hydra-jetty`, which bundled test and dev environments together and was occasionally problematic, test and dev instances of Solr and Fedora now run on separate ports. If you want to run the test suite, use the ports above (8985 for Solr and 8986 for Fedora). If you want to check out Hyrax in your browser, use port 8983 for Solr and port 8984 for Fedora as stated in [Solr](https://github.com/projecthydra-labs/hyrax#start-solr) and [Fedora](https://github.com/projecthydra-labs/hyrax#start-fcrepo).
 
 ### How do I run the test coverage report?
 
