@@ -10,7 +10,7 @@ Welcome to the Hyrax wiki!
 * [[Background Workers]]
     * [[Using Sidekiq with Hyrax]] (*recommended*)
     * [[Using Resque with Hyrax]]
-* [[Actors]]
+* [[Customizing Actors]]
 * [[Backup and Restoration]]
 * [[Hyrax Development Guide]]
 * [[Release management process]]
