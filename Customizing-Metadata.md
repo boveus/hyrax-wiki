@@ -1,6 +1,6 @@
 # NOTE
 
-Please note that this documentation applies to Sufia 7.
+Please note that this documentation applies to Sufia 7. (It may work for Hyrax, but we have not tested this yet.)
 
 Table of Contents
 =================
