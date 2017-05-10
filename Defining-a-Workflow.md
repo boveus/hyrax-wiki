@@ -1,8 +1,6 @@
-_This is an alpha feature_
-
 # Introduction
 
-Curation Concern's workflow is a database-driven implementation of a [finite state machines](https://en.wikipedia.org/wiki/Finite-state_machine). There exist other Ruby implementations of FSMs ([AASM gem](https://github.com/aasm/aasm) but these state machines are defined in code).
+Hyrax's workflow is a database-driven implementation of a [finite state machines](https://en.wikipedia.org/wiki/Finite-state_machine). There exist other Ruby implementations of FSMs ([AASM gem](https://github.com/aasm/aasm) but these state machines are defined in code).
 
 # Workflow Modeling
 
@@ -20,9 +18,9 @@ Below is one example:
 
 ![example-workflow](https://cloud.githubusercontent.com/assets/2130/19000926/1eab97e4-8713-11e6-9edc-0599fedca795.png)
 
-# Defining a Workflow in CurationConcerns
+# Defining a Workflow in Hyrax
 
-CurationConcerns will create a default workflow configuration when you call the `rails generator curation_concerns:work`. **Before you load the default workflow into the database** via the `rake curation_concerns:workflow:load` command, make sure to review your workflow.
+Hyrax  will create a default workflow configuration when you call the `rails generate hyrax:work`. **Before you load the default workflow into the database** via the `rails hyrax:workflow:load` command, make sure to review your workflow.
 
 Below is the JSON that models the above workflow.
 
@@ -50,19 +48,18 @@ Below is the JSON that models the above workflow.
 
 ## Default Workflow
 
-When a Curation Concerns app is created by running `rails generate curation_concerns:install`, a default workflow is created in [config/workflows/default_workflow.json](https://github.com/projecthydra/curation_concerns/blob/master/lib/generators/curation_concerns/templates/workflow.json.erb).
+When a Hyrax app is created by running `rails generate hyrax:install`, a default workflow is created in [config/workflows/default_workflow.json](https://github.com/projecthydra-labs/hyrax/blob/master/lib/generators/hyrax/templates/workflow.json.erb).
 
 ## Additional Workflows
 
-You can define additional workflows following the syntax described [Defining a Workflow in CurationConcerns](#defining-a-workflow-in-curationconcerns) above.  Add the json files to `config/workflows` directory in your app.
+You can define additional workflows following the syntax described [Defining a Workflow in Hyrax](#defining-a-workflow-in-hyrax) above.  Add the json files to `config/workflows` directory in your app.
 
 ## Loading workflows
 
 All workflows defined in `config/workflows` directory can be loaded using the following command.
 
 ```
-rake curation_concerns:workflow:load
+rails hyrax:workflow:load
 ```
 
 This will load the workflow and create user roles.  You will want to assign users/groups to the roles.  You will be able to select the workflow for use in an admin_set.
-

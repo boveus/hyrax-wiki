@@ -1,6 +1,6 @@
 ## Introduction
-These are some notes on performance tuning [Plum](https://github.com/pulibrary/plum/).  We hope 
-to fill these out more, but hope this is useful to help other people working on scaling up and 
+These are some notes on performance tuning [Plum](https://github.com/pulibrary/plum/).  We hope
+to fill these out more, but hope this is useful to help other people working on scaling up and
 addressing performance issues.
 
 ## Upgrading Fedora
@@ -18,14 +18,14 @@ disabled it completely to allow ingest to proceed at a decent pace.  We plan to 
 ingest.
 
 ## Graph Copying
-Updating our largest objects was taking more than 8 minutes.  Profiling showed that most of the time was being spent copying RDF graphs unnecessarily.  A [deceptively simple update](https://github.com/projecthydra/active_fedora/commit/f6ac3fbe04d5c0fedb64b7c04a34ca207d29f7f7#diff-4827a9cc4420720ae18bf842f60f18f5R46) 
+Updating our largest objects was taking more than 8 minutes.  Profiling showed that most of the time was being spent copying RDF graphs unnecessarily.  A [deceptively simple update](https://github.com/projecthydra/active_fedora/commit/f6ac3fbe04d5c0fedb64b7c04a34ca207d29f7f7#diff-4827a9cc4420720ae18bf842f60f18f5R46)
 avoided the vast majority of graph copying, and reduced save times dramatically.
 
 ## Reversing Collection Membership
 We saw a lot of slowdown when trying to ingest works in large collections.  As the collection grew,
 ingesting each works got slower and slower, because the time to update and save the collection was
 growing with the number of membership links.  To address this, we reversed the collection
-membership relationship in Curation Concerns (see [CC#901](https://github.com/projecthydra/curation_concerns/pull/901),
+membership relationship in Hyrax (see [CC#901](https://github.com/projecthydra/curation_concerns/pull/901),
 having works link to collections.  So instead of large collections having many links to their
 member works, each work links to a single collection.  This dramatically improved work ingest times.
 
