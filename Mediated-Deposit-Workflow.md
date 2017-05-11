@@ -1,6 +1,6 @@
 # Why mediated deposit?
 
-In the hydra community, there are a lot of folks who would like to be able to ingest an item and make sure it doesn't go live until the item and its metadata have been thoroughly reviewed. This is where mediated deposit comes in. In Hyrax, a user can now describe groups of steps they want to take to have an item "properly" reviewed. Hyrax uses what is called "workflows" to describe these groups of steps to review an item that was ingested. 
+In the hydra community, there are a lot of folks who would like to be able to ingest an item and make sure it doesn't go live until the item and its metadata have been thoroughly reviewed. This is where mediated deposit comes in. In Hyrax, a user can now describe groups of steps they want to take to have an item "properly" reviewed. Hyrax uses what is called "workflows" to describe these groups of steps to review an item that was ingested.
 
 # What is a workflow?
 
@@ -24,19 +24,19 @@ Here is a quick example of a state machine that describes a workflow:
 
 ## Translating a workflow into JSON
 
-Now that a workflow has been conceptually figured out, it is now time to generate a JSON expression of said workflow. This JSON file, should live in `APP_ROOT/config/workflows/*.json` Sipity follows a very stringent format for this JSON expression of a state machine. 
+Now that a workflow has been conceptually figured out, it is now time to generate a JSON expression of said workflow. This JSON file, should live in `APP_ROOT/config/workflows/*.json` Sipity follows a very stringent format for this JSON expression of a state machine.
 
-The first expression in the JSON is a "work_types" tag. This tells the program that a list of work types are coming up. These work types need to exist in Hyrax in order for the program to fully generate the workflow needed. To generate a work type, a user can run `rails generator curation_concerns:work <NameOfWork>` in the command line. Note: This generator command will generate a default workflow, but it may not be the workflow you want.
+The first expression in the JSON is a "work_types" tag. This tells the program that a list of work types are coming up. These work types need to exist in Hyrax in order for the program to fully generate the workflow needed. To generate a work type, a user can run `rails generator hyrax:work <NameOfWork>` in the command line. Note: This generator command will generate a default workflow, but it may not be the workflow you want.
 
 ```
-Example: 
+Example:
 A user whom wants to generate a GenericWork work type would run
-rails generator curation_concerns:work GenericWork.
+rails generator hyrax:work GenericWork.
 This will generate a generic_work_workflow.json file.
 It will serve as your workflow JSON file
 ```
 
-Next comes the "actions" tag which is a list of actions that can be taken in the workflow. This is expressed in the JSON file as an array of action names with other supporting information that describe the way to get from one state to the next, what state comes next, what actions can be taken during a state change, and the roles needed to make the state change. 
+Next comes the "actions" tag which is a list of actions that can be taken in the workflow. This is expressed in the JSON file as an array of action names with other supporting information that describe the way to get from one state to the next, what state comes next, what actions can be taken during a state change, and the roles needed to make the state change.
 
 Within each action is a "name" tag, a "transition_to" tag, a "from_states", and a "roles" tag. This describes the name of the action, where the state transitions to after an action taken, what state is prior to the current state, and the roles needed for making the change from the current state to the next. Below is a sample JSON file, which replicates the aforementioned state machine.
 
@@ -64,7 +64,7 @@ Within each action is a "name" tag, a "transition_to" tag, a "from_states", and 
 
 Thats a good question. Its quite simple! All you need to do now is run a simple command in the command line.
 ```
-rails curation_concerns:workflow:load
+rails hyrax:workflow:load
 ```
 and voila! Your workflow is now loaded into the system and is ready to be used. If you dont get yelled at by this rake task then you know that it worked. The verification of your workflow JSON file is very particular and will come back with errors if there is anything wrong in your workflow JSON file.
 
@@ -72,7 +72,7 @@ and voila! Your workflow is now loaded into the system and is ready to be used. 
 
 This is true. Luckily, there is a UI element that now exists in which an administrative user can add a role to a user within a particular workflow. This can be seen at `/admin/workflow_roles/?`. For development purposes, if you would like to add all users to all roles, you can do that with the following command:
 ```
-Hyrax::Workflow::PermissionGenerator.call(roles: Sipity::Role.all,        
-                                                     workflow: Sipity::Workflow.last,        
+Hyrax::Workflow::PermissionGenerator.call(roles: Sipity::Role.all,
+                                                     workflow: Sipity::Workflow.last,
                                                      agents: User.all)
 ```

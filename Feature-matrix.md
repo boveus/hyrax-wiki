@@ -35,7 +35,7 @@
 | Customizable banner image | specify a banner image in Hyrax initializer |
 | Capture usage statistics | requires [Google Analytics ID to be specified in Hyrax initializer](https://github.com/projecthydra-labs/hyrax/wiki/Hyrax-Management-Guide#capturing-usage) |
 | Geonames integration for location-oriented metadata | requires [configuration](requires [configuration](https://github.com/projecthydra-labs/hyrax/wiki/Hyrax-Management-Guide#geonames)) |
-| Virus detection for uploaded files | install `clamav` package and follow [the instructions in Hyrax](https://github.com/projecthydra/curation_concerns#virus-detection) |
+| Virus detection for uploaded files | install `clamav` package and follow [the instructions in Hyrax](https://github.com/projecthydra-labs/hyrax#virus-detection) |
 | Display usage statistics in the UI | requires [configuration](https://github.com/projecthydra-labs/hyrax/wiki/Hyrax-Management-Guide#displaying-usage-in-the-ui) |
 | Administrative users | requires [configuration](https://github.com/projecthydra-labs/hyrax/wiki/Making-Admin-Users-in-Hyrax) |
 | Citation formatting suggestions | requires configuration: enable `config.citations` in Hyrax initializer, then run `rails g hyrax:citation_config` |

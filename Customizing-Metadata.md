@@ -46,11 +46,11 @@ Application specific labels are defined in `config/locales/hyrax.en.yml`.
 
 # Understanding the controller
 
-The GenericWorksController class is generated with some default behaviors.  It is located at `app/controllers/curation_concerns/generic_works_controller.rb`
+The GenericWorksController class is generated with some default behaviors.  It is located at `app/controllers/hyrax/generic_works_controller.rb`
 
 ```ruby
 # Generated via
-#  `rails generate curation_concerns:work GenericWork`
+#  `rails generate hyrax:work GenericWork`
 
 module Hyrax
   class GenericWorksController < ApplicationController
@@ -67,7 +67,7 @@ The model class name follows the Rails convention of controller name minus 'Cont
 
 The form class, used to control the new/edit form, and the presenter class, used to control the show page, can be identified in the controller class.  The default values for these are:
 
-- form_class = model_name.name + Form (e.g. GenericWorkForm) defined in [CurationConcern's work_form_service.rb](https://github.com/projecthydra/curation_concerns/blob/163d6029703bd5eeb77f9e15a7c21e9d5391f8cf/app/services/curation_concerns/work_form_service.rb) self.form_class method
+- form_class = model_name.name + Form (e.g. GenericWorkForm) defined in [CurationConcern's work_form_service.rb](https://github.com/projecthydra-labs/hyrax/blob/163d6029703bd5eeb77f9e15a7c21e9d5391f8cf/app/services/hyrax/work_form_service.rb) self.form_class method
 - show_presenter = Hyrax::WorkShowPresenter defined in [Hyrax's works_controller_behavior.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/controllers/concerns/hyrax/works_controller_behavior.rb)
 
 These can be overridden in the GenericWorksController class using...
@@ -147,7 +147,7 @@ The inclusion of properties in the new/edit form is controlled by the GenericWor
 
 ```ruby
 # Generated via
-#  `rails generate curation_concerns:work GenericWork`
+#  `rails generate hyrax:work GenericWork`
 module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
@@ -159,12 +159,12 @@ end
 
 NOTE:
 - As generated, model_class is the generated model class
-- As generated, terms includes basic work terms defined in [Hyrax' work_form.rb](https://github.com/projecthydra/curation_concerns/blob/master/app/forms/curation_concerns/forms/work_form.rb) and [Hyrax's work_form.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/forms/hyrax/forms/work_form.rb).
+- As generated, terms includes basic work terms defined in [Hyrax' work_form.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/forms/hyrax/forms/work_form.rb) and [Hyrax's work_form.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/forms/hyrax/forms/work_form.rb).
 - A controller class was also generated and configure form_class to be the one described here, e.g., `self.form_class = Hyrax::Forms::GenericWorkForm`
 
 ### Adding the property to the work-type's new/edit form
 
-Now we want to update GenericWorkForm to include our own new property.  Edit `app/forms/curation_concerns/generic_work_form.rb` and modify `self.terms` to include the new property.
+Now we want to update GenericWorkForm to include our own new property.  Edit `app/forms/hyrax/generic_work_form.rb` and modify `self.terms` to include the new property.
 
 ```ruby
     self.terms += [:resource_type, :contact_email]
@@ -182,9 +182,9 @@ Optionally, you can also remove one of the default properties from the set of re
 
 The full class after the changes looks like...
 ```ruby
-# app/forms/curation_concerns/generic_work_form.rb
+# app/forms/hyrax/generic_work_form.rb
 # Generated via
-#  `rails generate curation_concerns:work GenericWork`
+#  `rails generate hyrax:work GenericWork`
 module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
@@ -221,7 +221,7 @@ You can see [more examples](https://github.com/projecthydra-labs/hyrax/tree/mast
 
 By default, the new property will **NOT** be displayed on the show page for works of this type.
 
-- See [Curation Concern's work_show_presenter.rb](https://github.com/projecthydra/curation_concerns/blob/master/app/presenters/curation_concerns/work_show_presenter.rb) around line 39 with comment # Metadata Methods to see the primary list of properties that will be displayed on the show page.
+- See [Curation Concern's work_show_presenter.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/presenters/hyrax/work_show_presenter.rb) around line 39 with comment # Metadata Methods to see the primary list of properties that will be displayed on the show page.
 - See [Hyrax's work_show_presenter.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/presenters/hyrax/work_show_presenter.rb) for a few additional properties that are displayed on the work show page.  Look for the property names delegated to the solr_document near the top of the file.
 
 ### Define the class to use to control the show page
@@ -236,7 +236,7 @@ class GenericWorkPresenter < Hyrax::WorkShowPresenter
 end
 ```
 
-Assign the presenter class in the generated controller.  Edit `app/controllers/curation_concerns/generic_work_controller.rb` and add the following line under the curation_concern_type assignment.
+Assign the presenter class in the generated controller.  Edit `app/controllers/hyrax/generic_work_controller.rb` and add the following line under the curation_concern_type assignment.
 
 ```ruby
   self.show_presenter = GenericWorkPresenter
@@ -280,9 +280,9 @@ def contact_email
 end
 ```
 
-If this is the first custom property added to the show page, you will need to copy [Hyrax's app/views/curation_concerns/base/_attribute_rows.html.erb](https://github.com/projecthydra-labs/hyrax/blob/master/app/views/curation_concerns/base/_attribute_rows.html.erb) to the same directory structure in your app.  NOTE: The link goes to master.  Make sure you copy from the release/branch of Hyrax that your app has installed.
+If this is the first custom property added to the show page, you will need to copy [Hyrax's app/views/hyrax/base/_attribute_rows.html.erb](https://github.com/projecthydra-labs/hyrax/blob/master/app/views/hyrax/base/_attribute_rows.html.erb) to the same directory structure in your app.  NOTE: The link goes to master.  Make sure you copy from the release/branch of Hyrax that your app has installed.
 
-Add the field to the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb
+Add the field to the local copy of app/views/hyrax/base/_attribute_rows.html.erb
 ```erb
 <%= presenter.attribute_to_html(:contact_email) %>
 ```
@@ -305,7 +305,7 @@ config.add_index_field solr_name("contact_email", :stored_searchable), label: "C
 
 ### Default property display behavior
 
-Each value for the property, in this case the single value, will be displayed using a `<span>` tag.  See [Curation Concerns's default AttributeRenderer](https://github.com/projecthydra/curation_concerns/blob/master/app/renderers/curation_concerns/renderers/attribute_renderer.rb).
+Each value for the property, in this case the single value, will be displayed using a `<span>` tag.  See [Curation Concerns's default AttributeRenderer](https://github.com/projecthydra-labs/hyrax/blob/master/app/renderers/hyrax/renderers/attribute_renderer.rb).
 
 ### Customizing the property display
 
@@ -323,7 +323,7 @@ class EmailAttributeRenderer < Hyrax::Renderers::AttributeRenderer
 end
 ```
 
-Identify the renderer to use for the property.  Edit the definition in the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb and add the render_as parameter for the property.
+Identify the renderer to use for the property.  Edit the definition in the local copy of app/views/hyrax/base/_attribute_rows.html.erb and add the render_as parameter for the property.
 ```erb
 <%= presenter.attribute_to_html(:contact_email, render_as: :email) %>
 ```
@@ -333,7 +333,7 @@ NOTES:
 * To identify a renderer, use the renderer name (everything upto, but not including AttributeRenderer)
 * You can use one of the renderers defined in Curation Concerns.
 * You can make more complex renderers.  See Curation Concerns defined renderers for examples.
-* See [Curation Concerns defined renderers](https://github.com/projecthydra/curation_concerns/tree/master/app/renderers/curation_concerns/renderers).
+* See [Curation Concerns defined renderers](https://github.com/projecthydra-labs/hyrax/tree/master/app/renderers/hyrax/renderers).
 
 ---
 # Customizing the work-type to include a multi-value text property
@@ -405,7 +405,7 @@ The GenericWorkForm class after the customization for the single-value property 
 ```ruby
 # app/forms/generic_work_form.rb
 # Generated via
-#  `rails generate curation_concerns:work GenericWork`
+#  `rails generate hyrax:work GenericWork`
 module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
@@ -432,7 +432,7 @@ The full class after the changes looks like...
 ```ruby
 # app/forms/generic_work_form.rb
 # Generated via
-#  `rails generate curation_concerns:work GenericWork`
+#  `rails generate hyrax:work GenericWork`
 module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
@@ -513,7 +513,7 @@ def contact_phone
 end
 ```
 
-Add the field to the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb  If this file doesn't exist in your local app, see [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page) for where to get a copy.
+Add the field to the local copy of app/views/hyrax/base/_attribute_rows.html.erb  If this file doesn't exist in your local app, see [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page) for where to get a copy.
 ```erb
 <%= presenter.attribute_to_html(:contact_email) %>
 <%= presenter.attribute_to_html(:contact_phone) %>
@@ -539,7 +539,7 @@ config.add_index_field solr_name("contact_phone", :stored_searchable), label: "C
 
 ### Default property display behavior
 
-Each value for the property will be displayed using a `<span>` tag.  See [Curation Concerns's default AttributeRenderer](https://github.com/projecthydra/curation_concerns/blob/master/app/renderers/curation_concerns/renderers/attribute_renderer.rb).
+Each value for the property will be displayed using a `<span>` tag.  See [Curation Concerns's default AttributeRenderer](https://github.com/projecthydra-labs/hyrax/blob/master/app/renderers/hyrax/renderers/attribute_renderer.rb).
 
 ### Customizing the property display
 
@@ -557,7 +557,7 @@ class PhoneAttributeRenderer < Hyrax::Renderers::AttributeRenderer
 end
 ```
 
-Identify the renderer to use for the property.  Edit the definition in the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb and add the render_as parameter for the property.
+Identify the renderer to use for the property.  Edit the definition in the local copy of app/views/hyrax/base/_attribute_rows.html.erb and add the render_as parameter for the property.
 ```erb
 <%= presenter.attribute_to_html(:contact_phone, render_as: :phone) %>
 ```
@@ -638,7 +638,7 @@ The GenericWorkForm class after the customization for the multi-value property l
 
 ```ruby
 # Generated via
-#  `rails generate curation_concerns:work GenericWork`
+#  `rails generate hyrax:work GenericWork`
 module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
@@ -665,7 +665,7 @@ The full class after the changes looks like...
 ```ruby
 # app/forms/generic_work_form.rb
 # Generated via
-#  `rails generate curation_concerns:work GenericWork`
+#  `rails generate hyrax:work GenericWork`
 module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
@@ -790,7 +790,7 @@ def department
 end
 ```
 
-Add the field to the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb  If this file doesn't exist in your local app, see [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page) for where to get a copy.
+Add the field to the local copy of app/views/hyrax/base/_attribute_rows.html.erb  If this file doesn't exist in your local app, see [Add the new single-value property to the show page](#add-the-new-single-value-property-to-the-show-page) for where to get a copy.
 ```erb
 <%= presenter.attribute_to_html(:contact_email) %>
 <%= presenter.attribute_to_html(:contact_phone) %>
@@ -819,7 +819,7 @@ config.add_index_field solr_name("department", :stored_searchable), label: "Depa
 
 ### Default property display behavior
 
-Each value for the property, in this case the selected controlled value's ID, will be displayed using a `<span>` tag.  See [Curation Concerns's default AttributeRenderer](https://github.com/projecthydra/curation_concerns/blob/master/app/renderers/curation_concerns/renderers/attribute_renderer.rb).
+Each value for the property, in this case the selected controlled value's ID, will be displayed using a `<span>` tag.  See [Curation Concerns's default AttributeRenderer](https://github.com/projecthydra-labs/hyrax/blob/master/app/renderers/hyrax/renderers/attribute_renderer.rb).
 
 NOTE: If the ID and TERM for your controlled vocabulary are the same, then you can use the default display behavior.
 
@@ -840,7 +840,7 @@ end
 
 ```
 
-Identify the renderer to use for the property.  Edit the definition in the local copy of app/views/curation_concerns/base/_attribute_rows.html.erb and add the render_as parameter for the property.
+Identify the renderer to use for the property.  Edit the definition in the local copy of app/views/hyrax/base/_attribute_rows.html.erb and add the render_as parameter for the property.
 ```erb
 <%= presenter.attribute_to_html(:department, render_as: :department) %>
 ```
@@ -873,7 +873,7 @@ The form class after making these changes looks like...
 ```ruby
 # app/forms/generic_work_form.rb
 # Generated via
-#  `rails generate curation_concerns:work GenericWork`
+#  `rails generate hyrax:work GenericWork`
 module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork

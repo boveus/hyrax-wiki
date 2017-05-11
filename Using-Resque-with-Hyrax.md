@@ -166,6 +166,6 @@ If you see multiple resque-pool-master processes running, kill all of them and a
 
 If resque or resque-pool fails to start with the error:
 ```
-LoadError: No such file to load -- curation_concerns/actors/generic_work_actor
+LoadError: No such file to load -- hyrax/actors/generic_work_actor
 ```
 you have not correctly modified your Hyrax app to use Resque as a back-end. See [Code Changes: Install Resque](##Code-Changes:-Install-Resque) for more information.

@@ -40,7 +40,7 @@ Hyrax uses a specific queue for handling ingest work. In many of the job classes
 class CreateWorkJob < ActiveJob::Base
   queue_as Hyrax.config.ingest_queue_name
 ```
-`Hyrax.config.ingest_queue_name` will [default](https://github.com/projecthydra/curation_concerns/blob/1be404f895c71292ed2614d26022c36b964a9b3b/lib/curation_concerns/configuration.rb#L139-L144) to `:default` unless otherwise specified. If you want to change the queue name for ingest, you can set the queue name to the value of your choice in `config/initializers/curation_concerns.rb` by uncommenting the following line and setting to your choice:
+`Hyrax.config.ingest_queue_name` will [default](https://github.com/projecthydra-labs/hyrax/blob/1be404f895c71292ed2614d26022c36b964a9b3b/lib/hyrax/configuration.rb#L139-L144) to `:default` unless otherwise specified. If you want to change the queue name for ingest, you can set the queue name to the value of your choice in `config/initializers/hyrax.rb` by uncommenting the following line and setting to your choice:
 
 ```
 # ActiveJob queue to handle ingest-like jobs
@@ -81,7 +81,7 @@ By default Sidekiq will look for Redis on the localhost system at port `6379`. T
 
   ```
   config = YAML.load(ERB.new(IO.read(Rails.root + 'config' + 'redis.yml')).result)[Rails.env].with_indifferent_access
-  
+
   redis_conn = { url: "redis://#{config[:host]}:#{config[:port]}/" }
 
   Sidekiq.configure_server do |s|
