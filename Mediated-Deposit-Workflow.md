@@ -72,7 +72,7 @@ and voila! Your workflow is now loaded into the system and is ready to be used. 
 
 This is true. Luckily, there is a UI element that now exists in which an administrative user can add a role to a user within a particular workflow. This can be seen at `/admin/workflow_roles/?`. For development purposes, if you would like to add all users to all roles, you can do that with the following command:
 ```
-CurationConcerns::Workflow::PermissionGenerator.call(roles: Sipity::Role.all,        
+Hyrax::Workflow::PermissionGenerator.call(roles: Sipity::Role.all,        
                                                      workflow: Sipity::Workflow.last,        
                                                      agents: User.all)
 ```

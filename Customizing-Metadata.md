@@ -52,9 +52,9 @@ The GenericWorksController class is generated with some default behaviors.  It i
 # Generated via
 #  `rails generate curation_concerns:work GenericWork`
 
-module CurationConcerns
+module Hyrax
   class GenericWorksController < ApplicationController
-    include CurationConcerns::CurationConcernController
+    include Hyrax::CurationConcernController
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
 
@@ -92,8 +92,8 @@ The GenericWork class is generated with some default metadata, but we want to up
 ```ruby
 # app/models/generic_work.rb
 class GenericWork < ActiveFedora::Base
-  include ::CurationConcerns::WorkBehavior
-  include ::CurationConcerns::BasicMetadata
+  include ::Hyrax::WorkBehavior
+  include ::Hyrax::BasicMetadata
   include Hyrax::WorkBehavior
   self.human_readable_type = 'Generic Work'
   # Change this to restrict which works can be added as a child.
@@ -127,8 +127,8 @@ The GenericWork at this point looks like:
 
 ```ruby
 class GenericWork < ActiveFedora::Base
-  include ::CurationConcerns::WorkBehavior
-  include ::CurationConcerns::BasicMetadata
+  include ::Hyrax::WorkBehavior
+  include ::Hyrax::BasicMetadata
   include Hyrax::WorkBehavior
   self.human_readable_type = 'Generic Work'
   # Change this to restrict which works can be added as a child.
@@ -148,7 +148,7 @@ The inclusion of properties in the new/edit form is controlled by the GenericWor
 ```ruby
 # Generated via
 #  `rails generate curation_concerns:work GenericWork`
-module CurationConcerns
+module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
     self.terms += [:resource_type]
@@ -159,7 +159,7 @@ end
 
 NOTE:
 - As generated, model_class is the generated model class
-- As generated, terms includes basic work terms defined in [CurationConcerns' work_form.rb](https://github.com/projecthydra/curation_concerns/blob/master/app/forms/curation_concerns/forms/work_form.rb) and [Hyrax's work_form.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/forms/hyrax/forms/work_form.rb).
+- As generated, terms includes basic work terms defined in [Hyrax' work_form.rb](https://github.com/projecthydra/curation_concerns/blob/master/app/forms/curation_concerns/forms/work_form.rb) and [Hyrax's work_form.rb](https://github.com/projecthydra-labs/hyrax/blob/master/app/forms/hyrax/forms/work_form.rb).
 - A controller class was also generated and configure form_class to be the one described here, e.g., `self.form_class = Hyrax::Forms::GenericWorkForm`
 
 ### Adding the property to the work-type's new/edit form
@@ -185,7 +185,7 @@ The full class after the changes looks like...
 # app/forms/curation_concerns/generic_work_form.rb
 # Generated via
 #  `rails generate curation_concerns:work GenericWork`
-module CurationConcerns
+module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
     self.terms += [:resource_type, :contact_email]
@@ -245,9 +245,9 @@ Assign the presenter class in the generated controller.  Edit `app/controllers/c
 The controller class now looks like...
 
 ```ruby
-module CurationConcerns
+module Hyrax
   class GenericWorksController < ApplicationController
-    include CurationConcerns::CurationConcernController
+    include Hyrax::CurationConcernController
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
 
@@ -316,7 +316,7 @@ Either use an existing renderer or define a new renderer.  The renderer can be f
 To define a general renderer for all email properties...
 ```erb
 # app/renderers/email_attribute_renderer.rb
-class EmailAttributeRenderer < CurationConcerns::Renderers::AttributeRenderer
+class EmailAttributeRenderer < Hyrax::Renderers::AttributeRenderer
   def attribute_value_to_html(value)
     %(<span itemprop="email"><a href="mailto:#{value}">#{value}</a></span>)
   end
@@ -346,8 +346,8 @@ The GenericWork class after the customization for the single-value property look
 
 ```ruby
 class GenericWork < ActiveFedora::Base
-  include ::CurationConcerns::WorkBehavior
-  include ::CurationConcerns::BasicMetadata
+  include ::Hyrax::WorkBehavior
+  include ::Hyrax::BasicMetadata
   include Hyrax::WorkBehavior
   self.human_readable_type = 'Generic Work'
   # Change this to restrict which works can be added as a child.
@@ -380,8 +380,8 @@ The GenericWork at this point with the single and multi-valued properties looks 
 
 ```ruby
 class GenericWork < ActiveFedora::Base
-  include ::CurationConcerns::WorkBehavior
-  include ::CurationConcerns::BasicMetadata
+  include ::Hyrax::WorkBehavior
+  include ::Hyrax::BasicMetadata
   include Hyrax::WorkBehavior
   self.human_readable_type = 'Generic Work'
   # Change this to restrict which works can be added as a child.
@@ -406,7 +406,7 @@ The GenericWorkForm class after the customization for the single-value property 
 # app/forms/generic_work_form.rb
 # Generated via
 #  `rails generate curation_concerns:work GenericWork`
-module CurationConcerns
+module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
     self.terms += [:resource_type, :contact_email]
@@ -433,7 +433,7 @@ The full class after the changes looks like...
 # app/forms/generic_work_form.rb
 # Generated via
 #  `rails generate curation_concerns:work GenericWork`
-module CurationConcerns
+module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
     self.terms += [:resource_type, :contact_email, :contact_phone]
@@ -550,7 +550,7 @@ Either use an existing renderer or define a new renderer.  The renderer can be f
 To define a general renderer for all phone properties...
 ```erb
 # app/renderers/phone_attribute_renderer.rb
-class PhoneAttributeRenderer < CurationConcerns::Renderers::AttributeRenderer
+class PhoneAttributeRenderer < Hyrax::Renderers::AttributeRenderer
   def attribute_value_to_html(value)
     %(<span itemprop="telephone"><a href="tel:#{value}">#{value}</a></span>)
   end
@@ -575,8 +575,8 @@ The GenericWork class after the customization for the multi-value property looke
 
 ```ruby
 class GenericWork < ActiveFedora::Base
-  include ::CurationConcerns::WorkBehavior
-  include ::CurationConcerns::BasicMetadata
+  include ::Hyrax::WorkBehavior
+  include ::Hyrax::BasicMetadata
   include Hyrax::WorkBehavior
   self.human_readable_type = 'Generic Work'
   # Change this to restrict which works can be added as a child.
@@ -610,8 +610,8 @@ With all three properties added, the GenericWork now looks like:
 
 ```ruby
 class GenericWork < ActiveFedora::Base
-  include ::CurationConcerns::WorkBehavior
-  include ::CurationConcerns::BasicMetadata
+  include ::Hyrax::WorkBehavior
+  include ::Hyrax::BasicMetadata
   include Hyrax::WorkBehavior
   self.human_readable_type = 'Generic Work'
   # Change this to restrict which works can be added as a child.
@@ -639,7 +639,7 @@ The GenericWorkForm class after the customization for the multi-value property l
 ```ruby
 # Generated via
 #  `rails generate curation_concerns:work GenericWork`
-module CurationConcerns
+module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
     self.terms += [:resource_type, :contact_email, :contact_phone]
@@ -666,7 +666,7 @@ The full class after the changes looks like...
 # app/forms/generic_work_form.rb
 # Generated via
 #  `rails generate curation_concerns:work GenericWork`
-module CurationConcerns
+module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
     self.terms += [:resource_type, :contact_email, :contact_phone, :department]
@@ -832,7 +832,7 @@ Define a new renderer to convert the value from the controlled value's ID to its
 To define a property specific renderer for the department property...
 ```erb
 # app/renderers/department_attribute_renderer.rb
-class DepartmentAttributeRenderer < CurationConcerns::Renderers::AttributeRenderer
+class DepartmentAttributeRenderer < Hyrax::Renderers::AttributeRenderer
   def attribute_value_to_html(value)
     %(<span itemprop="department">#{::DepartmentsService.label(value)}</span>)
   end
@@ -874,7 +874,7 @@ The form class after making these changes looks like...
 # app/forms/generic_work_form.rb
 # Generated via
 #  `rails generate curation_concerns:work GenericWork`
-module CurationConcerns
+module Hyrax
   class GenericWorkForm < Hyrax::Forms::WorkForm
     self.model_class = ::GenericWork
 

@@ -114,7 +114,7 @@ Hyrax::RepositoryAuditService.audit_everything
 
 # Audiovisual transcoding
 
-Hyrax includes support for transcoding audio and video files via CurationConcerns. View [CurationConcerns README](https://github.com/projecthydra/curation_concerns/blob/master/README.md#ffmpeg) for installation/configuration help.
+Hyrax includes support for transcoding audio and video files via Hyrax. View [Hyrax README](https://github.com/projecthydra/curation_concerns/blob/master/README.md#ffmpeg) for installation/configuration help.
 
 # Removing a work type
 

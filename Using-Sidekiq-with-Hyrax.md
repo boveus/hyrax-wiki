@@ -38,9 +38,9 @@ Hyrax uses a specific queue for handling ingest work. In many of the job classes
 
 ```
 class CreateWorkJob < ActiveJob::Base
-  queue_as CurationConcerns.config.ingest_queue_name
+  queue_as Hyrax.config.ingest_queue_name
 ```
-`CurationConcerns.config.ingest_queue_name` will [default](https://github.com/projecthydra/curation_concerns/blob/1be404f895c71292ed2614d26022c36b964a9b3b/lib/curation_concerns/configuration.rb#L139-L144) to `:default` unless otherwise specified. If you want to change the queue name for ingest, you can set the queue name to the value of your choice in `config/initializers/curation_concerns.rb` by uncommenting the following line and setting to your choice:
+`Hyrax.config.ingest_queue_name` will [default](https://github.com/projecthydra/curation_concerns/blob/1be404f895c71292ed2614d26022c36b964a9b3b/lib/curation_concerns/configuration.rb#L139-L144) to `:default` unless otherwise specified. If you want to change the queue name for ingest, you can set the queue name to the value of your choice in `config/initializers/curation_concerns.rb` by uncommenting the following line and setting to your choice:
 
 ```
 # ActiveJob queue to handle ingest-like jobs
