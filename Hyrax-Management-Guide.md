@@ -17,6 +17,7 @@ The Hyrax Management Guide provides tips for how to manage, customize, and enhan
 * [Analytics and usage statistics](#analytics-and-usage-statistics)
   * [Capturing usage](#capturing-usage)
   * [Displaying usage in the UI](#displaying-usage-in-the-ui)
+  * [Problems with Analytics](#problems-with-analytics)
 * [Zotero integration](#zotero-integration)
 * [Customizing metadata](#customizing-metadata)
 * [Admin users](#admin-users)
