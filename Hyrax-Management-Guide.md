@@ -185,6 +185,10 @@ Lastly, you will need to set `config.analytics = true` and `config.analytic_star
 has the proper access within your Google Analyics account.  To do so, go to the _Admin_ tab for your Google Analytics account.
 Click on _User Management_, in the _Account_ column, and add "Read & Analyze" permissions for the OAuth client email address.
 
+## Problems with Analytics
+
+Having a problem setting up Analytics. See [[Analytics-workaround-for-non-production-environments]], which documents a workaround for one known issue.
+
 # Zotero integration
 
 Integration with Zotero-managed publications is possible using [Arkivo](https://github.com/inukshuk/arkivo). Arkivo is a Node-based Zotero subscription service that monitors Zotero for changes and will feed those changes to your Hyrax-based app. [Read more about this work](https://www.zotero.org/blog/feeds-and-institutional-repositories-coming-to-zotero/).
