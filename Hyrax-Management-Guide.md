@@ -165,13 +165,8 @@ Hyrax provides support for capturing usage information via Google Analytics and 
 To enable the Google Analytics javascript snippet, make sure that `config.google_analytics_id` is set in your app within the `config/initializers/hyrax.rb` file. A Google Analytics ID typically looks like _UA-99999999-1_.
 
 ## Capturing download counts
-TODO: Fill in detail here once it's known.
 
-Once the UI is set up (below) you'll notice a chart to track downloads. However, this will never populate unless you set up some google event tracking. Here are some potentially relevant google documentation pages:
-* https://support.google.com/analytics/answer/1033068
-* https://developers.google.com/analytics/devguides/collection/analyticsjs/events
-
-Another option would be to track downloads directly, so that anyone hitting your download endpoint (whether from the download button or anywhere else) would be counted.
+The mechanism to capture download events is currently broken. See https://github.com/projecthydra-labs/hyrax/issues/968
 
 ## Displaying usage in the UI
 
