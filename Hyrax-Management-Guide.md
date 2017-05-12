@@ -162,6 +162,13 @@ Hyrax provides support for capturing usage information via Google Analytics and 
 
 To enable the Google Analytics javascript snippet, make sure that `config.google_analytics_id` is set in your app within the `config/initializers/hyrax.rb` file. A Google Analytics ID typically looks like _UA-99999999-1_.
 
+## Capturing download counts
+TODO: Fill in detail here once it's known.
+
+Once the UI is set up (below) you'll notice a chart to track downloads. However, this will never populate unless you set up some google event tracking. Here are some potentially relevant google documentation pages:
+* https://support.google.com/analytics/answer/1033068
+* https://developers.google.com/analytics/devguides/collection/analyticsjs/events
+
 ## Displaying usage in the UI
 
 To display data from Google Analytics in the UI, first head to the Google Developers Console and create a new project:
@@ -185,6 +192,15 @@ Edit config/analytics.yml to reflect the information that the Google Developer C
 Lastly, you will need to set `config.analytics = true` and `config.analytic_start_date` in _config/initializers/hyrax.rb_ and ensure that the client email
 has the proper access within your Google Analyics account.  To do so, go to the _Admin_ tab for your Google Analytics account.
 Click on _User Management_, in the _Account_ column, and add "Read & Analyze" permissions for the OAuth client email address.
+
+
+## Populating the Analytics DB
+TODO: Add more detail
+
+The API access required in the UI integration step, above, enables more than just per-object stats display. We can harvest GA stats for all of our objects into the local database, and use this data to integrate usage reports into the Admin Statistics dashboard. So far this integration into the dashboard has not been done.
+
+To harvest stats for all your objects, you might use a rake task that runs Sufia::UserStatImporter which in turn is called by a cron job.
+
 
 ## Problems with Analytics
 
