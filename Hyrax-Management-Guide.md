@@ -169,6 +169,8 @@ Once the UI is set up (below) you'll notice a chart to track downloads. However,
 * https://support.google.com/analytics/answer/1033068
 * https://developers.google.com/analytics/devguides/collection/analyticsjs/events
 
+Another option would be to track downloads directly, so that anyone hitting your download endpoint (whether from the download button or anywhere else) would be counted.
+
 ## Displaying usage in the UI
 
 To display data from Google Analytics in the UI, first head to the Google Developers Console and create a new project:
