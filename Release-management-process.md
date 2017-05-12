@@ -3,13 +3,13 @@
 1. Modify [the README](https://github.com/projecthydra-labs/hyrax/blob/master/README.md) **and** [the install template](https://github.com/projecthydra-labs/hyrax/blob/master/template.rb) to replace all instances of the past version with the new version.
 1. Change the tag for the installation template in the README from, e.g. (if bumping from 1.0.0 to 1.1.0), `rails new my_app -m https://raw.githubusercontent.com/projecthydra-labs/hyrax/v1.0.0/template.rb` to `rails new my_app -m https://raw.githubusercontent.com/projecthydra-labs/hyrax/v1.1.0/template.rb`.
 1. Add, commit, and push all your changes directly to the `master` branch of the **[upstream](https://github.com/projecthydra-labs/hyrax)** repository. (If GitHub prevents you from pushing directly to `master`, submit your changes as a PR.)
-1. Release the gem to rubygems.org:
-  * If this is your first time pushing to rubygems.org for a Hydra project
-    * Create an account at rubygems.org if you haven't already, or make note of your rubygems.org email address.
-    * Ask on Slack or hydra-tech about making you an owner of the gem on rubygems.org. (Your rubygems.org email address and GitHub username need to be added to [this script](https://github.com/projecthydra/hydra/blob/master/script/grant_revoke_gem_authority.rb#L19), and then someone who already has owner access needs to run that script.)
-    * Ask on Slack or hydra-tech about adding you to the Owners team in the projecthydra GitHub organization.
-    * If you have not yet, set up `~/.gem/credentials` according to [these instructions](https://rubygems.org/profile/edit).
-  *  Run the `rails release` task.
+1. Release the gem to rubygems.org
+  1. If this is your first time pushing to rubygems.org for a Hydra project
+    1. Create an account at rubygems.org if you haven't already, or make note of your rubygems.org email address.
+    1. Ask on Slack or hydra-tech about making you an owner of the gem on rubygems.org. (Your rubygems.org email address and GitHub username need to be added to [this script](https://github.com/projecthydra/hydra/blob/master/script/grant_revoke_gem_authority.rb#L19), and then someone who already has owner access needs to run that script.)
+    1. Ask on Slack or hydra-tech about adding you to the Owners team in the projecthydra GitHub organization.
+    1. If you have not yet, set up `~/.gem/credentials` according to [these instructions](https://rubygems.org/profile/edit).
+  1.  Run the `rails release` task.
 1. Create [release notes in GitHub](https://github.com/projecthydra-labs/hyrax/releases/new). In the new release, include at least a block with upgrade notes and a block showing the changelog -- see script [changelog.sh](https://github.com/projecthydra/hydra/blob/master/script/changelog.sh) for help generating changelog entries. (See [an example](https://github.com/projecthydra-labs/hyrax/releases/tag/v6.4.0).)
 1. Update the [Hydra Stack Built-in Feature Checklist](https://wiki.duraspace.org/display/hydra/Built-in+Feature+Checklist) to indicate features that have been added, removed, or moved to a different layer of the stack.
 1. Send a release message to [hydra-tech](mailto:hydra-tech@googlegroups.com), [hydra-community](mailto:hydra-community@googlegroups.com), and [hydra-releases](mailto:hydra-releases@googlegroups.com) describing the changes (which you can copy from the GitHub release). (*This assumes you've already joined those three lists.* Do that first!) It may be helpful to base your message on [a prior example](https://groups.google.com/forum/#!topic/hydra-releases/SvQAhtIgpqA), which also contains some new text explicitly thanking contributors, which you can get from the changelog.
