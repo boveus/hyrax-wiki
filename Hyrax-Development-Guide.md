@@ -123,7 +123,7 @@ rspec path/to/filel_spec.rb
 
 Run jasmine server:
 ```
-rails jasmine
+rake jasmine
 ```
 Access the jasmine server at port 8888. Note rspec's jasmine spec won't run any jasmine file with syntax errors. It does report the the number of specs run; pay attention to that number if you're doing js tests. Insert `debug` into your test file to do browser debugging on the test itself. If you're working on a remote box, add
 ```
