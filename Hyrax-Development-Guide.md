@@ -258,13 +258,13 @@ The following steps need to be done in order to create a test app for Hyrax deve
 
 1. [Install prerequisite software](#development-prerequisites) - Follow all instructions carefully.
 1. Clone [Hyrax](https://github.com/projecthydra-labs/hyrax) code from github
-1. Remove existing test app with `rails engine_cart:clean` (Not required after initial clone. Use when your code updates require the test app to be regenerated.)
-1. [Create the test app](#generate-test-app) with `rails engine_cart:generate`
+1. Remove existing test app with `rake engine_cart:clean` (Not required after initial clone. Use when your code updates require the test app to be regenerated.)
+1. [Create the test app](#generate-test-app) with `rake engine_cart:generate`
 1. If using rubyracer for JavaScript runtime, uncomment in `.internal_test_app/Gemfile` and bundle install.  (Not needed if using nodejs.) ([more info](https://github.com/projecthydra-labs/hyrax#javascript-runtime))
-1. [Start servers](#start-servers-individually-for-development) with `rails hydra:server`  (e.g. solr, fedora, rails) - Stop with Ctrl-C
+1. [Start servers](#start-servers-individually-for-development) with `rake hydra:server`  (e.g. solr, fedora, rails) - Stop with Ctrl-C
 1. [Start background workers](https://github.com/projecthydra-labs/hyrax#start-background-workers) (message queue) - several options for message queue
 1. Move into the test app directory with `cd .internal_test_app`
-1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) and [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rails hyrax:default_admin_set:create hyrax:workflow:load`
+1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) and [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rake hyrax:default_admin_set:create hyrax:workflow:load`
 1. [Generate a work type](https://github.com/projecthydra-labs/hyrax#generate-a-work-type) with `rails generate hyrax:work Work` (Replace Work with the name of your work type.)
 
 # Regenerating the README TOC
