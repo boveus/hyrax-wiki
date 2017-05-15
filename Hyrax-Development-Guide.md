@@ -51,7 +51,7 @@ This generates the test Hyrax application in the `<hyrax directory>/.internal_te
 
 In order to do UI development, you'll want to load the Hyrax test app (`<hyrax directory>/.internal_test_app`) in your browser.
 
-This section assumes that you have generated the test app via `rails engine_cart:generate`. **Note:** All the following commands should be run from `<hyrax directory>\.internal_test_app`.
+This section assumes that you have generated the test app via `rake engine_cart:generate`. **Note:** All the following commands should be run from `<hyrax directory>\.internal_test_app`.
 
 1. Open separate terminals for each of the following steps:
    1. `solr_wrapper`: Runs SolrWrapper in development mode. SolrWrapper picks up configuration from the `.solr_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.solr_wrapper`) that starts Solr on port 8983.
