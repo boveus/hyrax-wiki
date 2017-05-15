@@ -110,6 +110,11 @@ fcrepo_wrapper -v -p 8986 --no-jms # separate window/tab
 ```
 
 ## Run tests
+Start Redis:
+```
+redis-server
+```
+
 Run entire suite:
 ```
 cd <hyrax directory>
