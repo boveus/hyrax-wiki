@@ -42,7 +42,7 @@ The test application (`<hyrax directory>/.internal_test_app`) can be used both f
 *NOTE: Run this only once.*
 ```
 cd <hyrax directory>
-rails engine_cart:generate
+rake engine_cart:generate
 ```
 
 This generates the test Hyrax application in the `<hyrax directory>/.internal_test_app` directory. You should not have to regenerate the test app unless you pull in code changes from the `master` branch, or start working on a new feature or bug.
