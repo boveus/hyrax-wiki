@@ -23,7 +23,7 @@ Tested on Ruby 2.3.1 and OS X 10.12.3
 1. clone hyrax: `git@github.com:projecthydra-labs/hyrax.git`
 1. enter the folder: `cd hyrax`
 1. install gems: `bundle install`
-1. generate the test app: `rails engine_cart:generate`
+1. generate the test app: `rake engine_cart:generate`
 1. enter the test app: `cd .internal_test_app/`
 1. start solr: `solr_wrapper`
     - ensure that `http://127.0.0.1:8983/solr/#/hydra-development` resolves in your browser
