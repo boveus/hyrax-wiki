@@ -12,7 +12,7 @@ Tested on Ruby 2.3.1 and OS X 10.12.3
     - install ghost script `brew install ghostscript`
 1. FITS
     - install fits `brew install fits`, note that homebrew currently installs 0.8.6 (which works currently), but Hydra Derivatives is known to be good with up to 1.0.5.  To install a newer FITS follow [these instructions.](https://github.com/projecthydra-labs/hyrax#characterization)
-    - ensure fits is installed, `fits -v` should show the version number
+    - ensure fits is installed (via brew), `fits -v` should show the version number
 1. Redis: 
     - install: `brew install redis`
     - run: `redis-server` 
