@@ -15,6 +15,7 @@ The Hyrax Development Guide is for people who want to modify Hyrax itself. See t
   * [Solr](#solr)
   * [Fedora](#fedora)
   * [Rails](#rails)
+* [Testing internationalization](#testing-internationalization)
 * [Install problems](#install-problems)
 * [Change validation behavior](#change-validation-behavior)
 * [Quick Start for Hyrax development](#quick-start-for-hyrax-development)
@@ -233,6 +234,10 @@ To test-drive your new Hyrax application, spin up the web server that Rails prov
 ```
 rails server
 ```
+
+# Testing internationalization
+
+If you'd like to check if any i18n translations are missing, check out [[Testing-internationalization-(i18n)-support]]
 
 # Install problems
 
