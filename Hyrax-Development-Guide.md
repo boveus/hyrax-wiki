@@ -67,7 +67,7 @@ This section assumes that you have generated the test app via `rake engine_cart:
          admin:
            - my_fake_user@faker.com
        ```
-1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) and [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rails hyrax:default_admin_set:create hyrax:workflow:load`
+1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) and [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rake hyrax:default_admin_set:create hyrax:workflow:load`
 1. [Generate a work type](https://github.com/projecthydra-labs/hyrax#generate-a-work-type) with `rails generate hyrax:work Work` (Replace `Work` with the name of your work type.)
 1. View the app by opening [localhost:3000](http://localhost:3000) in a web browser.
 
@@ -119,7 +119,7 @@ redis-server
 Run entire suite:
 ```
 cd <hyrax directory>
-rails spec
+rake spec
 ```
 
 Run a single spec:
@@ -158,7 +158,7 @@ Generally, engine_cart will pick up changes to Hyrax.  If not, try the following
 cd <hyrax directory>
 rm -rf .internal_test_app Gemfile.lock
 bundle install
-rails engine_cart:generate
+rake engine_cart:generate
 ```
 
 ### Where is `hydra-jetty`/its rake tasks?
@@ -190,10 +190,10 @@ COVERAGE=true rspec
 Yes. You can run everything (including the Fedora and Solr wrappers) using the default rake task, like so:
 
 ```
-rails
+rake
 ```
 
-(Note that the default task in Hyrax is the `ci` task, so running the above command is the same as running `rails ci`.)
+(Note that the default task in Hyrax is the `ci` task, so running the above command is the same as running `rake ci`.)
 
 But note that if you're actively working on a feature or a bug fix, you will likely not want to use this task repeatedly because it's remarkably slower than `rspec`.
 
