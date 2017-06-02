@@ -212,7 +212,7 @@ The three most common situations here are:
 
 If you already have an instance of Solr that you would like to use, you may skip this step.  Open a new terminal window and type:
 ```
-solr_wrapper -d solr/config/ --collection_name hydra-development
+solr_wrapper # using .solr_wrapper config
 ```
 
 You can check to see if Solr is started by going to [localhost:8983](http://localhost:8983/).
@@ -222,7 +222,7 @@ You can check to see if Solr is started by going to [localhost:8983](http://loca
 If you already have an instance of Fedora that you would like to use, you may skip this step.  Open a new terminal window and type:
 
 ```
-fcrepo_wrapper -p 8984
+fcrepo_wrapper # using .fcrepo_wrapper config
 ```
 
 You can check to see if Fedora is started by going to [localhost:8984](http://localhost:8984/).
