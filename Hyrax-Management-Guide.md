@@ -9,6 +9,7 @@ The Hyrax Management Guide provides tips for how to manage, customize, and enhan
   * [Mailers](#mailers)
   * [Background workers](#background-workers)
   * [Fixity checking](#fixity-checking)
+  * [Virus checking](#virus-checking)
 * [Audiovisual transcoding](#audiovisual-transcoding)
 * [Removing a work type](#removing-a-work-type)
 * [User interface](#user-interface)
@@ -113,10 +114,17 @@ Hyrax provides a [service](https://github.com/projecthydra-labs/hyrax/blob/maste
 ```ruby
 Hyrax::RepositoryAuditService.audit_everything
 ```
+## Virus checking
+
+To turn on virus detection, install `clamav` on your system and add the `clamav` gem to your application's `Gemfile`:
+
+```ruby
+gem 'clamav'
+```
 
 # Audiovisual transcoding
 
-Hyrax includes support for transcoding audio and video files via Hyrax. View [Hyrax README](https://github.com/projecthydra-labs/hyrax/blob/master/README.md#ffmpeg) for installation/configuration help.
+Hyrax includes support for transcoding audio and video files via Hyrax. View [Hyrax README](https://github.com/projecthydra-labs/hyrax#trancoding) for installation/configuration help.
 
 # Removing a work type
 
