@@ -10,6 +10,7 @@ The Hyrax Management Guide provides tips for how to manage, customize, and enhan
   * [Background workers](#background-workers)
   * [Fixity checking](#fixity-checking)
   * [Virus checking](#virus-checking)
+* [Workflows](#workflows)
 * [Audiovisual transcoding](#audiovisual-transcoding)
 * [Removing a work type](#removing-a-work-type)
 * [User interface](#user-interface)
@@ -121,6 +122,10 @@ To turn on virus detection, install `clamav` on your system and add the `clamav`
 ```ruby
 gem 'clamav'
 ```
+
+# Workflows
+
+Read more about [[Defining a Workflow]]
 
 # Audiovisual transcoding
 
