@@ -4,7 +4,7 @@ Each processing step, or frame, is broken out into a class called an Actor. They
 
 Code that wishes to use the whole stack of actors should call `Hyrax::CurationConcern.actor.` That method returns an instance of `Hyrax::ActorStack`, which is the full list of operations to perform to create or update a Work.
 
-This `ActorStack` is instantiated by an `ActorFactory`.  The default factory is: `Hyrax::ActorFactory`, but you can change it by setting `Hyrax::CurationConcern.actor_factory=`.
+This `ActorStack` is instantiated by an `ActorFactory`.  The default factory is: `Hyrax::DefaultMiddlewareStack`, but you can change it by setting `Hyrax::CurationConcern.actor_factory=`.
 
 Each of the actors in this chain should inherit from `Hyrax::AbstractFactory`, and can override `update()` or `create()` as required. In these methods they must call `next_actor.update(attributes)` or `next_actor.create(attributes)` respectively. Here's an example:
 
