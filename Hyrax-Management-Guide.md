@@ -110,10 +110,10 @@ Hyrax uses ActionMailer to send email to users. Some environments may need speci
 
 ## Fixity checking
 
-Hyrax provides a [service](https://github.com/projecthydra-labs/hyrax/blob/master/app/services/hyrax/repository_audit_service.rb) that iterates over all file sets in your repository and verifies fixities in the background. Hyrax will not run this service for you, so you should use a cronjob (or similar, e.g., the `whenever` gem) to run this on a schedule that fits your needs and your content. The code that'll need to run is:
+Hyrax provides a [service](https://github.com/samvera/hyrax/blob/master/app/services/hyrax/repository_fixity_check_service.rb) that iterates over all file sets in your repository and verifies fixities in the background. Hyrax will not run this service for you, so you should use a cronjob (or similar, e.g., the `whenever` gem) to run this on a schedule that fits your needs and your content. The code that'll need to run is:
 
 ```ruby
-Hyrax::RepositoryAuditService.audit_everything
+Hyrax::RepositoryFixityCheckService.fixity_check_everything
 ```
 ## Virus checking
 
