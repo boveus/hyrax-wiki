@@ -32,8 +32,8 @@ Since Hyrax is a Rails engine, in order to develop/test new Hyrax UI features yo
 ## Development prerequisites
 
 First off, you need to have Hyrax installed (obviously):
-* Make sure all of Hyrax's [basic prerequisites](https://github.com/projecthydra-labs/hyrax#prerequisites) are running.
-* Additional prerequisite for tests: [PhantomJS](http://phantomjs.org/).
+* Make sure all of Hyrax's [basic prerequisites](https://github.com/samvera/hyrax#prerequisites) are running.
+* Additional prerequisite for testing in Hyrax 1.x (**not used** in Hyrax >= 2.0.0.alpha): [PhantomJS](http://phantomjs.org/).
 * Git clone the Hyrax repo, use latest stable Ruby (2.3.1), run `bundle install`.
 
 ## Generate test app
