@@ -61,7 +61,7 @@ This section assumes that you have generated the test app via `rake engine_cart:
    1. `fcrepo_wrapper`: Runs FcrepoWrapper in development mode. FcrepoWrapper picks up configuration from the `.fcrepo_wrapper` file. By default ActiveFedora installs a configuration file (to `.internal_test_app/.fcrepo_wrapper`) that starts Fedora on port 8984.
    1. `rails server`: Runs the Rails server in development mode.
 
-1. Optionally, if you want to use Hyrax's Administrative functionality, you'll need to [make admin users in Hyrax](https://github.com/projecthydra-labs/hyrax/wiki/Making-Admin-Users-in-Hyrax) from within your test application directory (`<hyrax directory>\.internal_test_app`)
+1. Optionally, if you want to use Hyrax's Administrative functionality, you'll need to [make admin users in Hyrax](https://github.com/projecthydra-labs/hyrax/wiki/Making-Admin-Users-in-Hyrax)
    1. Register a new user, and then edit the `<hyrax directory>\.internal_test_app\config\role_map.yml` to include that user as a `development.admin`. For example:
        ```
        development:
