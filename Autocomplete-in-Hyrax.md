@@ -12,11 +12,11 @@ In the partial, specify the data source:
   f.input key,
   as: :multi_value,
   input_html: {
-  class: 'form-control',
-  data: { 'autocomplete-url' => "/authorities/search/loc/names",
-'autocomplete' => key }
-} ,
-required: f.object.required?(key) %>
+    class: 'form-control',
+    data: { 'autocomplete-url' => "/authorities/search/loc/names",
+      'autocomplete' => key }
+  } ,
+  required: f.object.required?(key) %>
 ```
 If you add the attribute to your view it will be active when you visit the form. 
 
@@ -73,11 +73,11 @@ Then in the partials for the input field at `/app/views/records/edit_fields/_cre
   f.input key,
   as: :multi_value,
   input_html: {
-  class: 'form-control',
-  data: { 'autocomplete-url' => "/authorities/search/loc/names",
-'autocomplete' => key }
-} ,
-required: f.object.required?(key) %>
+    class: 'form-control',
+    data: { 'autocomplete-url' => "/authorities/search/loc/names",
+      'autocomplete' => key }
+  } ,
+  required: f.object.required?(key) %>
 
 <%= f.input key, collection: name_authorities.select_active_options, label: false %>
 ```
