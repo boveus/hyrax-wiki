@@ -79,7 +79,7 @@ Then in the partials for the input field at `/app/views/records/edit_fields/_cre
   } ,
   required: f.object.required?(key) %>
 
-<%= f.input key, collection: name_authorities.select_active_options, label: false %>
+<%= f.select key, collection: name_authorities.select_active_options %>
 ```
 Create a JS file in your app to activate the dropdown:
 
