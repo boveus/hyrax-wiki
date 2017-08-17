@@ -43,7 +43,7 @@ To create your own select input with authorities you extend the `QASelectService
 
 ```ruby
 module Hyrax
-  # Provide select options for the copyright status (edm:rights) field
+  # Provide select options for the creator field
   class NameAuthorities < QaSelectService
     def initialize
       super('names')
