@@ -52,7 +52,7 @@ module Hyrax
 end
 ```
 
-You initialize the service with the name of a YAML file `names.yml` that contains a list of authorities:
+You initialize the service with the name of a YAML file `config/authorities/names.yml` that contains a list of authorities:
 
 ```yaml
 terms:
