@@ -38,7 +38,7 @@
 | Virus detection for uploaded files | install `clamav` package and follow [the instructions in Hyrax](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#virus-checking) |
 | Display usage statistics in the UI | requires [configuration](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#displaying-usage-in-the-ui) |
 | Administrative users | requires [configuration](https://github.com/samvera/hyrax/wiki/Making-Admin-Users-in-Hyrax) |
-| Citation formatting suggestions | requires configuration: enable `config.citations` in Hyrax initializer, then run `rails g hyrax:citation_config` |
+| Citation formatting suggestions | requires configuration: enable `config.citations` in Hyrax initializer |
 | Integration with Zotero | requires [configuration](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#zotero-integration) |
 | Integration w/ cloud storage providers | requires [configuration](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#integration-with-dropbox-box-etc) |
 | Background jobs | requires configuration: though jobs will automatically run via the default in-memory adapter, we recommend using an `ActiveJob` adapter like `Sidekiq` in production environments |
