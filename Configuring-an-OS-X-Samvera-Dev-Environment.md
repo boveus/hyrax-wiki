@@ -59,7 +59,7 @@ Tested on Ruby 2.3.1 and OS X 10.12.3
 1. if needed start solr, fedora, and redis:
    - solr: `solr_wrapper`
    - fedora: `fcrepo_wrapper`
-   - redis: `redis_server`
+   - redis: `redis-server`
 1. launch the application:
    - rails web server: `rails s`
    - rails console: `rails c`
