@@ -100,6 +100,18 @@ The web server provided by Rails (whether that's WEBrick, Unicorn, or another) i
 
 The database provided by default is SQLite, and you may wish to swap in something built more for scale like PostgreSQL or MySQL, both of which have been used in other production Hyrax applications.
 
+## Notifications
+
+As mentioned in the README, Hyrax (as of version 2.0.0) uses a WebSocket-based user notification system, which uses Rails' ActionCable framework. There are known [issues](https://www.phusionpassenger.com/library/config/apache/action_cable_integration/) ([upstream bug](https://github.com/phusion/passenger/issues/1202)) with the WebSocket implementation in Passenger's Apache integration, so notifications will not work with that configuration. If user notifications are important to your application, consider serving the application via other methods, whether that be Puma, Passenger + Nginx, or [Passenger Standalone via Apache reverse proxy](https://www.phusionpassenger.com/library/deploy/standalone/reverse_proxy.html).
+
+ActionCable can work with the Redis and PostgreSQL adapters (though notifications will *not* work with the `async` adapter, which is the default). See more about how to configure these adapters in the [ActionCable documentation](http://guides.rubyonrails.org/action_cable_overview.html#subscription-adapter). To enable user notifications, make sure that you have configured ActionCable to use one of the above adapters in your application's `config/cable.yml`. E.g., to use the Redis adapter in the `production` Rails environment:
+
+``` yaml
+production:
+  adapter: redis
+  url: redis://yourhost.yourdomain.edu:6379
+```
+
 ## Mailers
 
 Hyrax uses ActionMailer to send email to users. Some environments may need special configuration to enable your application to send messages. These changes are best made in one of your application's environment files. The configuration options are documented in the [ActionMailer Rails Guide](http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration).
