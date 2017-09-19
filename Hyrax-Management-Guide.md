@@ -6,6 +6,7 @@ The Hyrax Management Guide provides tips for how to manage, customize, and enhan
   * [Derivatives](#derivatives)
   * [Web server](#web-server)
   * [Database](#database)
+  * [Notifications](#notifications)
   * [Mailers](#mailers)
   * [Background workers](#background-workers)
   * [Fixity checking](#fixity-checking)
