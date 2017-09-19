@@ -103,7 +103,12 @@ The database provided by default is SQLite, and you may wish to swap in somethin
 
 ## Notifications
 
-As mentioned in the README, Hyrax (as of version 2.0.0) uses a WebSocket-based user notification system, which uses Rails' ActionCable framework. There are known [issues](https://www.phusionpassenger.com/library/config/apache/action_cable_integration/) ([upstream bug](https://github.com/phusion/passenger/issues/1202)) with the WebSocket implementation in Passenger's Apache integration, so notifications will not work with that configuration. If user notifications are important to your application, consider serving the application via other methods, whether that be Puma, Passenger + Nginx, or [Passenger Standalone via Apache reverse proxy](https://www.phusionpassenger.com/library/deploy/standalone/reverse_proxy.html).
+As mentioned in the README, Hyrax (as of version 2.0.0) uses a WebSocket-based user notification system, which uses Rails' ActionCable framework. There are known [issues](https://www.phusionpassenger.com/library/config/apache/action_cable_integration/) ([upstream bug](https://github.com/phusion/passenger/issues/1202)) with the WebSocket implementation in Passenger's Apache integration, so notifications will not work with that configuration. If user notifications are important to your application, consider serving the application via other methods, whether that be Puma, Passenger + Nginx, or [Passenger Standalone via Apache reverse proxy](https://www.phusionpassenger.com/library/deploy/standalone/reverse_proxy.html). In the meantime, you may wish to disable realtime notifications at deploy time -- to do so, add `config/features.yml` to your application:
+
+```yaml
+realtime_notifications:
+  enabled: false
+```
 
 ActionCable can work with the Redis and PostgreSQL adapters (though notifications will *not* work with the `async` adapter, which is the default). See more about how to configure these adapters in the [ActionCable documentation](http://guides.rubyonrails.org/action_cable_overview.html#subscription-adapter). To enable user notifications, make sure that you have configured ActionCable to use one of the above adapters in your application's `config/cable.yml`. E.g., to use the Redis adapter in the `production` Rails environment:
 
