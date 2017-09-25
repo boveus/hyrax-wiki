@@ -16,7 +16,7 @@ The Hyrax Management Guide provides tips for how to manage, customize, and enhan
 * [Removing a work type](#removing-a-work-type)
 * [User interface](#user-interface)
 * [Integration with Dropbox, Box, etc\.](#integration-with-dropbox-box-etc)
-* [Administrative Set relationship][#administrative-set-relationship]
+* [Administrative Set relationship](#administrative-set-relationship)
 * [Autocomplete with geonames](#geonames)
 * [Analytics and usage statistics](#analytics-and-usage-statistics)
   * [Capturing usage](#capturing-usage)
