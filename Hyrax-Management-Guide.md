@@ -16,6 +16,7 @@ The Hyrax Management Guide provides tips for how to manage, customize, and enhan
 * [Removing a work type](#removing-a-work-type)
 * [User interface](#user-interface)
 * [Integration with Dropbox, Box, etc\.](#integration-with-dropbox-box-etc)
+* [Administrative Set relationship][#administrative-set-relationship]
 * [Autocomplete with geonames](#geonames)
 * [Analytics and usage statistics](#analytics-and-usage-statistics)
   * [Capturing usage](#capturing-usage)
@@ -177,6 +178,12 @@ rails g browse_everything:install --skip-assets
 This will generate a file at _config/browse_everything_providers.yml_. Open that file and enter the API keys for the providers that you want to support in your app.  For more info on configuring browse-everything, go to the [project page](https://github.com/projecthydra/browse-everything) on github.
 
 After running the browse-everything install generator and setting the API keys for the desired providers, an extra tab will appear in your app's Upload page allowing users to pick files from those providers and submit them into your app's repository.
+
+# Administrative Set relationship
+
+By default, Administrative Sets and their member objects use the [Dublin Core Terms](http://dublincore.org/documents/dcmi-terms/) predicate `isPartOf` to express the membership relationship. Hyrax also allows use of a custom predicate for this relationship. To customize the predicate, point the Hyrax configuration option `admin_set_predicate` at another RDF term or a URI object.
+
+(Note: allowing customization is the first step towards changing the default predicate for this relation. After the 2.0.0 release, Hyrax will warn users about using `isPartOf` for this purpose and add migration tooling for production instances using `isPartOf`. The default will change in Hyrax 3.0.0.)
 
 # Geonames
 
