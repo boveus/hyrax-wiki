@@ -187,6 +187,26 @@ Just let Travis-CI handle this when you submit your PR. But if you really want t
 COVERAGE=true rspec
 ```
 
+### I'm getting weird Selenium errors when I run the test suite
+
+Sometimes you might see something like this in your error report:
+```
+  1) proxy add proxy in profile creates a proxy
+     Failure/Error: find('a.select2-choice').click
+
+     Selenium::WebDriver::Error::UnknownError:
+       unknown error: Element is not clickable at point (377, 953)
+         (Session info: headless chrome=61.0.3163.100)
+         (Driver info: chromedriver=2.31.488774 (7e15618d1bf16df8bf0ecf2914ed1964a387ba0b),platform=Mac OS X 10.12.6 x86_64)
+# ./spec/features/proxy_spec.rb:14:in `block (3 levels) in <top (required)>'
+```
+
+If this happens, it probably means your version of chromedriver is out of date.  To update, delete the cache and run `chromedriver-update`:
+```bash
+rm -rf ~/.chromedriver-helper
+chromedriver-update
+```
+
 ### Can't you simplify this?
 
 Yes. You can run everything (including the Fedora and Solr wrappers) using the default rake task, like so:
