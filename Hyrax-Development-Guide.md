@@ -113,6 +113,9 @@ fcrepo_wrapper -v -p 8986 --no-jms # separate window/tab
 ```
 
 ## Run tests
+
+### Run ruby/rails rspec tests
+
 Start Redis:
 ```
 redis-server
@@ -129,6 +132,8 @@ Run a single spec:
 rspec path/to/filel_spec.rb
 ```
 
+### Run javascript tests
+
 Run jasmine server:
 ```
 rake jasmine
@@ -139,6 +144,8 @@ rack_options:
   Host: 0.0.0.0
 ```
 in `spec/javascripts/support/jasmine.yml`
+
+### Run stylechecker
 
 Run Rubocop style checker:
 ```
