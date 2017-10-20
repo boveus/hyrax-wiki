@@ -155,6 +155,8 @@ If you need to remove a work type that you created, e.g., via `rails generate hy
 rails destroy hyrax:work MyWorkType
 ```
 
+And then manually remove the line that registers `MyWorkType` from `config/initializers/hyrax.rb`.
+
 # User interface
 
 If you encounter problems with the in-browser content editor -- e.g., the About page, and the three blocks on the homepage -- you should **remove** turbolinks support from `app/assets/javascripts/application.js` if present by deleting the following line:
