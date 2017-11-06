@@ -154,7 +154,7 @@ Note rspec's jasmine spec won't run any jasmine file with syntax errors. It does
 
 #### Debugging:
 
-There are quite a few references and tutorial on debugging javascript.  Here is one for [Firefox using FireBug](https://thecodecentral.com/2007/08/01/debug-javascript-with-firebug).
+There are quite a few references and tutorials on debugging javascript.  
 
 #### Remote:
 If you're working on a remote box, add
