@@ -116,47 +116,47 @@ fcrepo_wrapper -v -p 8986 --no-jms # separate window/tab
 
 ### Run ruby/rails rspec tests
 
-Start Redis:
+#### Start Redis:
 ```
 redis-server
 ```
 
-Run entire suite:
+#### Run entire suite:
 ```
 cd <hyrax directory>
 rake spec
 ```
 
-Run a single spec:
+#### Run a single spec:
 ```
 rspec path/to/filel_spec.rb
 ```
 
 ### Run javascript tests
 
-Run jasmine server:
+#### Run jasmine server:
 ```
 rake jasmine
 ```
 
-Run all tests:
+#### Run all tests:
 ```
 http://localhost:8888
 ```
 
-Run one test:
+#### Run one test:
 
 To run one test, change `it` in the test code to `fit`.  The f stands for focus.  Then run with the same command as for all tests.
 
-Syntax Errors:
+#### Syntax Errors:
 
 Note rspec's jasmine spec won't run any jasmine file with syntax errors. It does report the the number of specs run; pay attention to that number if you're doing js tests. 
 
-Debugging:
+#### Debugging:
 
 There are quite a few references and tutorial on debugging javascript.  Here is one for [Firefox using FireBug](https://thecodecentral.com/2007/08/01/debug-javascript-with-firebug).
 
-Remote:
+#### Remote:
 If you're working on a remote box, add
 ```
 rack_options:
@@ -166,7 +166,7 @@ in `spec/javascripts/support/jasmine.yml`
 
 ### Run stylechecker
 
-Run Rubocop style checker:
+#### Run Rubocop style checker:
 ```
 rubocop
 ```
