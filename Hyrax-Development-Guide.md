@@ -138,7 +138,26 @@ Run jasmine server:
 ```
 rake jasmine
 ```
-Access the jasmine server at port 8888. Note rspec's jasmine spec won't run any jasmine file with syntax errors. It does report the the number of specs run; pay attention to that number if you're doing js tests. Insert `debug` into your test file to do browser debugging on the test itself. If you're working on a remote box, add
+
+Run all tests:
+```
+http://localhost:8888
+```
+
+Run one test:
+
+To run one test, change `it` in the test code to `fit`.  The f stands for focus.  Then run with the same command as for all tests.
+
+Syntax Errors:
+
+Note rspec's jasmine spec won't run any jasmine file with syntax errors. It does report the the number of specs run; pay attention to that number if you're doing js tests. 
+
+Debugging:
+
+There are quite a few references and tutorial on debugging javascript.  Here is one for [Firefox using FireBug](https://thecodecentral.com/2007/08/01/debug-javascript-with-firebug).
+
+Remote:
+If you're working on a remote box, add
 ```
 rack_options:
   Host: 0.0.0.0
