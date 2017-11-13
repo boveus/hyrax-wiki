@@ -1,4 +1,4 @@
-Hyrax translates user interface strings into multiple languages, and we don't expect developers to manually translate all internationalization (i18n) strings in their pull requests. (English alone suffices.) To ensure we do not create gaps in Hyrax's translations over time, we use the `i18n-tasks` gem (using the Google Translate API) to create new translations and to add missing translations at release time.
+Hyrax translates user interface strings into multiple languages, and we don't expect developers to manually translate all internationalization (i18n) strings in their pull requests. (English alone suffices.) To ensure we do not create gaps in Hyrax's translations over time, we use the `i18n-tasks` gem (using the [Google Translate API](https://cloud.google.com/translate/)) to create new translations and to add missing translations at release time.
 
 # Setup
 
