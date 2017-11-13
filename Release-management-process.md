@@ -1,11 +1,11 @@
-1. Does the release require QA, usability testing, or an accessibility audit? Schedule that to happen before cutting the final release if needed. Lean on the community to help with QA; on the UXIG to help with usability testing; and on [Colin Fulton](https://github.com/justcolin) to help with targeted accessibility audits. Ping [Mike Giarlo](https://github.com/mjgiarlo) (serving as product owner for Hyrax) for assistance with coordination.
-1. Update all available translations ([needs documentation](https://github.com/samvera/hyrax/issues/1276) -- this is a new step. Ask [Mike Giarlo](https://github.com/mjgiarlo) if you need assistance.)
+1. Does the release require QA, usability testing, or an accessibility audit? Schedule that to happen before cutting the final release if needed. Work with [Julie Rudder](https://github.com/julesies) (Hyrax testing facilitator) to set up quality assurance testing and accessibility audits. Ping [Steve Van Tuyl](https://github.com/vantuyls) (Hyrax product owner) for assistance with coordination.
+1. [Update all available translations](https://github.com/samvera/hyrax/wiki/Translations-(internationalization)) to ensure internationalization is consistent across languages.
 1. Bump the version number in [version.rb](https://github.com/samvera/hyrax/blob/master/lib/hyrax/version.rb) to a [SemVer](http://semver.org/)-appropriate version; feel free to consult others (via Slack, samvera-tech, or a Samvera Tech call) if you're not sure what version to choose.
 1. Modify [the README](https://github.com/samvera/hyrax/blob/master/README.md) **and** [the install template](https://github.com/samvera/hyrax/blob/master/template.rb) to replace all instances of the past version with the new version.
 1. Change the tag for the installation template in the README from, e.g. (if bumping from 1.0.0 to 1.1.0), `rails new my_app -m https://raw.githubusercontent.com/samvera/hyrax/v1.0.0/template.rb` to `rails new my_app -m https://raw.githubusercontent.com/samvera/hyrax/v1.1.0/template.rb`.
 1. Add, commit, and push all your changes directly to the `master` branch of the **[upstream](https://github.com/samvera/hyrax)** repository. (If GitHub prevents you from pushing directly to `master`, submit your changes as a PR.)
 1. Release the gem to rubygems.org via `rake release`. (See below if this doesn't work.)
-1. Create [release notes in GitHub](https://github.com/samvera/hyrax/releases/new). In the new release, include at least a block with upgrade notes and a block showing the changelog -- see script [changelog.sh](https://github.com/samvera/hydra/blob/master/script/changelog.sh) for help generating changelog entries. (See [an example](https://github.com/samvera/sufia/releases/tag/v6.4.0).)
+1. Create [release notes in GitHub](https://github.com/samvera/hyrax/releases/new). In the new release, include at least a block with upgrade notes and a block showing the changelog -- see script [changelog.sh](https://github.com/samvera/hydra/blob/master/script/changelog.sh) for help generating changelog entries. (See [an example](https://github.com/samvera/hyrax/releases/tag/v2.0.0).)
 1. Update the [Samvera Stack Built-in Feature Checklist](https://wiki.duraspace.org/display/samvera/Built-in+Feature+Checklist) to indicate features that have been added, removed, or moved to a different layer of the stack.
 1. Send a release message to [samvera-tech](mailto:samvera-tech@googlegroups.com), [samvera-community](mailto:samvera-community@googlegroups.com), and [samvera-releases](mailto:samvera-releases@googlegroups.com) describing the changes (which you can copy from the GitHub release). (*This assumes you've already joined those three lists.* Do that first!) It may be helpful to base your message on [a prior example](https://groups.google.com/forum/#!topic/samvera-releases/SvQAhtIgpqA), which also contains some new text explicitly thanking contributors, which you can get from the changelog.
 
@@ -18,3 +18,7 @@ If this is your first time pushing to rubygems.org for a Samvera gem:
   1. If you have not yet, set up `~/.gem/credentials` according to [these instructions](https://rubygems.org/profile/edit).
 
 Then try again.
+
+## Help
+
+Ask [Mike Giarlo](https://github.com/mjgiarlo) if you need help with, or have questions about, any of the steps in the release management process.
