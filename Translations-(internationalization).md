@@ -10,7 +10,7 @@ Here are the steps to get up and running with `i18n-tasks`:
 
 # Update Translations
 
-When you're ready to create and update translations based on the current state of the English strings, run `i18n-tasks translate-missing --from en es zh fr it de pt-BR`.
+When you're ready to create and update translations based on the current state of the English strings, run `i18n-tasks translate-missing --from en es zh fr it de pt-BR` and then add, commit, and push your changes.
 
 # Add New Translation
 
