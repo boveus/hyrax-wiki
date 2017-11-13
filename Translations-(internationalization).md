@@ -28,4 +28,6 @@ You will need to hand-create this file.
 
 1. Copy `lib/generators/hyrax/work/templates/locale.en.yml.erb` to a new file at `lib/generators/hyrax/work/templates/locale.ar.yml.erb`.
 2. You only need to translate one word in this new file, the word "works" (as in "works of art", not the present tense conjugation of the verb "to work"). To get the translated value of the word "works", grab the existing translation from `config/locales/hyrax.ar.yml` at the path of `ar.hyrax.admin.sidebar.works`. (Or enter the translation, if you speak the language fluently!) In this case, the translation we have is أعمال.
-3. Replace the string at `ar.hyrax.select_type.<%= file_name %>.description` from `description: "<%= human_name %> works"` to `description: "<%= human_name %> أعمال"`. 
+3. Replace the string at `ar.hyrax.select_type.<%= file_name %>.description` from `description: "<%= human_name %> works"` to `description: "<%= human_name %> أعمال"`.
+
+Finally... add, commit, and push your changes, and *Bob ist Dein Onkel*.
