@@ -11,6 +11,7 @@ The Hyrax Management Guide provides tips for how to manage, customize, and enhan
   * [Background workers](#background-workers)
   * [Fixity checking](#fixity-checking)
   * [Virus checking](#virus-checking)
+* [Translations](#translations)
 * [Workflows](#workflows)
 * [Audiovisual transcoding](#audiovisual-transcoding)
 * [Removing a work type](#removing-a-work-type)
@@ -138,6 +139,10 @@ To turn on virus detection, install `clamav` on your system and add the `clamav`
 ```ruby
 gem 'clamav'
 ```
+
+# Translations
+
+Hyrax ships with a user interface that has been translated into a number of languages (seven as of Nov. 2017). If your application uses Devise for authentication and you are seeing English strings even when Hyrax is showing strings in another language, you may use the `devise-i18n` gem to translate these strings. See [the devise-i18n documentation](https://github.com/tigrish/devise-i18n#installation) for more information on how to do this.
 
 # Workflows
 
