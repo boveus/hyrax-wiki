@@ -10,7 +10,12 @@ Here are the steps to get up and running with `i18n-tasks`:
 
 # Update Translations
 
-When you're ready to create and update translations based on the current state of the English strings, run `i18n-tasks translate-missing --from en es zh fr it de pt-BR` and then add, commit, and push your changes.
+When you're ready to create and update translations based on the current state of the English strings, run the following two commands:
+
+1. `i18n-tasks translate-missing --from en es zh fr it de pt-BR`
+2. `rake i18n_sorter` (not related to the `i18n-tasks` gem, but we've found it valuable to keep our locale files in a predictable order across languages)
+
+Then add, commit, and push your changes.
 
 # Add New Translation
 
