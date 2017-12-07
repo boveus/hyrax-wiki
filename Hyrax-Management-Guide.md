@@ -11,6 +11,7 @@ The Hyrax Management Guide provides tips for how to manage, customize, and enhan
   * [Background workers](#background-workers)
   * [Fixity checking](#fixity-checking)
   * [Virus checking](#virus-checking)
+  * [Image server](#image-server)
 * [Translations](#translations)
 * [Workflows](#workflows)
 * [Audiovisual transcoding](#audiovisual-transcoding)
@@ -139,6 +140,35 @@ To turn on virus detection, install `clamav` on your system and add the `clamav`
 ```ruby
 gem 'clamav'
 ```
+
+## Image server
+
+By default, as of version 2.1.0, Hyrax generates a working [ruby IIIF ('RIIIF')](https://github.com/curationexperts/riiif) configuration into your application but will not turn on the image server or  use the [UniversalViewer](https://universalviewer.io/)-enabled work show page. To enable both, you have two options. You can either use the built-in RIIIF server or you can use your own [IIIF](http://iiif.io) image server. 
+
+### Using RIIIF
+
+To use the embedded image server, RIIIF, set `config.iiif_image_server` to `true` in `config/initializers/hyrax.rb` and restart your application. This assumes you have the RIIIF files Hyrax generates into your application. If you skipped this step earlier or missed it, run `rails g hyrax:riiif`. (Not sure if this has been done? Check to see that `config/initializers/riiif.rb` exists. If not, run the generator. If so, you should be good to go.)
+
+### Custom image server
+
+To use your own image server and avoid using RIIIF altogether, you should install Hyrax by passing the `--skip-riiif` flag to opt out of RIIIF. This applies to *new* Hyrax applications. If upgrading an existing Hyrax application, a manual, optional step is required to generate RIIIF into existing applications -- so, do not run this step if you prefer to use a custom image server instead of RIIIF. (If you change your mind later, you can always run `rails g hyrax:riiif` to pull in RIIIF as an image server.)
+
+To make Hyrax use your custom image server, you should tweak the following configuration variables in `config/initializers/hyrax.rb`:
+
+* `config.iiif_image_server` must be set to `true`
+* `config.iiif_image_url_builder` must be set to a lambda/proc that takes three arguments and returns a valid link to an image request from your image server:
+  * `file_id`, which looks like `rv042t299%2Ffiles%2F6d71677a-4f80-42f1-ae58-ed1063fd79c7` (a path to a `Hydra::PCDM::File` within a `Hydra::Works::FileSet`)
+  * `base_url`, which looks like `http://your.site.edu/`
+  * `size`, which is a valid [IIIF Image API size parameter](http://iiif.io/api/image/2.1/#size)
+* Hyrax.config.iiif_info_url_builder must be set to a lambda/proc that takes two arguments and returns a valid link to an [IIIF image information request](http://iiif.io/api/image/2.1/#image-information-request) from your image server:
+  * `file_id`, which looks like `rv042t299%2Ffiles%2F6d71677a-4f80-42f1-ae58-ed1063fd79c7` (a path to a `Hydra::PCDM::File` within a `Hydra::Works::FileSet`)
+  * `base_url`, which looks like `http://your.site.edu/`
+* `config.iiif_image_compliance_level_uri` must be set to a URI corresponding to a [IIIF Image API compliance level](http://iiif.io/api/image/2.1/#compliance-levels)
+* `config.iiif_image_size_default` must be set to a valid [IIIF Image API size parameter](http://iiif.io/api/image/2.1/#size)
+
+### Note about manifests
+
+Note that Hyrax already provides IIIF manifests for works by default, though these may be of limited utility until backed by an image server.
 
 # Translations
 
