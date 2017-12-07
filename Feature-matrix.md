@@ -35,7 +35,7 @@
 | Customizable banner image | specify a banner image in Hyrax initializer |
 | Capture usage statistics | requires [Google Analytics ID to be specified in Hyrax initializer](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#capturing-usage) |
 | Geonames integration for location-oriented metadata | requires [configuration](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#geonames) |
-| Virus detection for uploaded files | install `clamav` package and follow [the instructions in Hyrax](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#virus-checking) |
+| Virus detection for uploaded files | install `clamav` package and follow [the management guide instructions](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#virus-checking) |
 | Display usage statistics in the UI | requires [configuration](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#displaying-usage-in-the-ui) |
 | Administrative users | requires [configuration](https://github.com/samvera/hyrax/wiki/Making-Admin-Users-in-Hyrax) |
 | Citation formatting suggestions | requires configuration: enable `config.citations` in Hyrax initializer |
@@ -43,4 +43,4 @@
 | Integration w/ cloud storage providers | requires [configuration](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#integration-with-dropbox-box-etc) |
 | Background jobs | requires configuration: though jobs will automatically run via the default in-memory adapter, we recommend using an `ActiveJob` adapter like `Sidekiq` in production environments |
 | IIIF manifests | automatically enabled |
-| IIIF image server | turn on in configuration |
+| IIIF image server | follow [the management guide instructions](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#iiif) |
