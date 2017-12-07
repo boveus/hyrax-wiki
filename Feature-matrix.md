@@ -42,3 +42,5 @@
 | Integration with Zotero | requires [configuration](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#zotero-integration) |
 | Integration w/ cloud storage providers | requires [configuration](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#integration-with-dropbox-box-etc) |
 | Background jobs | requires configuration: though jobs will automatically run via the default in-memory adapter, we recommend using an `ActiveJob` adapter like `Sidekiq` in production environments |
+| IIIF manifests | automatically enabled |
+| IIIF image server | turn on in configuration |
