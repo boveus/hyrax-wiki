@@ -160,7 +160,7 @@ To make Hyrax use your custom image server, you should tweak the following confi
   * `file_id`, which looks like `rv042t299%2Ffiles%2F6d71677a-4f80-42f1-ae58-ed1063fd79c7` (a path to a `Hydra::PCDM::File` within a `Hydra::Works::FileSet`)
   * `base_url`, which looks like `http://your.site.edu/`
   * `size`, which is a valid [IIIF Image API size parameter](http://iiif.io/api/image/2.1/#size)
-* Hyrax.config.iiif_info_url_builder must be set to a lambda/proc that takes two arguments and returns a valid link to an [IIIF image information request](http://iiif.io/api/image/2.1/#image-information-request) from your image server:
+* `config.iiif_info_url_builder` must be set to a lambda/proc that takes two arguments and returns a valid link to an [IIIF image information request](http://iiif.io/api/image/2.1/#image-information-request) from your image server:
   * `file_id`, which looks like `rv042t299%2Ffiles%2F6d71677a-4f80-42f1-ae58-ed1063fd79c7` (a path to a `Hydra::PCDM::File` within a `Hydra::Works::FileSet`)
   * `base_url`, which looks like `http://your.site.edu/`
 * `config.iiif_image_compliance_level_uri` must be set to a URI corresponding to a [IIIF Image API compliance level](http://iiif.io/api/image/2.1/#compliance-levels)
