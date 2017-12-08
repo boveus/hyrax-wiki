@@ -143,13 +143,29 @@ gem 'clamav'
 
 ## Image server
 
-By default, as of version 2.1.0, Hyrax generates a working [ruby IIIF ('RIIIF')](https://github.com/curationexperts/riiif) configuration into your application but will not turn on the image server or  use the [UniversalViewer](https://universalviewer.io/)-enabled work show page. To enable both, you have two options. You can either use the built-in RIIIF server or you can use your own [IIIF](http://iiif.io) image server. 
+By default, as of version 2.1.0, Hyrax generates a working [ruby IIIF ('RIIIF')](https://github.com/curationexperts/riiif) configuration into your application but will not turn on the image server or use the [UniversalViewer](https://universalviewer.io/)-enabled work show page. To enable both, you have two options. You can either use the built-in RIIIF server or you can use your own [IIIF](http://iiif.io) image server. 
 
-### Using RIIIF
+### 1. Built-in RIIIF image server
 
 To use the embedded image server, RIIIF, set `config.iiif_image_server` to `true` in `config/initializers/hyrax.rb` and restart your application. This assumes you have the RIIIF files Hyrax generates into your application. If you skipped this step earlier or missed it, run `rails g hyrax:riiif`. (Not sure if this has been done? Check to see that `config/initializers/riiif.rb` exists. If not, run the generator. If so, you should be good to go.)
 
-### Custom image server
+#### Note about RIIIF In Production
+
+In production environments using Apache and/or Passenger, you may need to add configuration so that RIIIF can resolve URLs. See the [RIIIF README](https://github.com/curationexperts/riiif#special-note-for-passenger-and-apache-users) for guidance on this.
+
+If you have explicitly URI-decoded the RIIIF url in `config/initializers/riiif.rb` per the RIIIF README, you may encounter authorization errors. In that case, you will also need to decode the `object.id` string in the `Hyrax::IIIFAuthorizationService` by overriding the `#file_set_id_for` method, like so:
+
+```
+  def file_set_id_for(object)
+    if object.id.include? '/'
+      object.id.split('/').first
+    else
+      URI.decode(object.id).split('/').first
+    end
+  end
+```
+
+### 2. Custom image server
 
 To use your own image server and avoid using RIIIF altogether, you should install Hyrax by passing the `--skip-riiif` flag to opt out of RIIIF. This applies to *new* Hyrax applications. If upgrading an existing Hyrax application, a manual, optional step is required to generate RIIIF into existing applications -- so, do not run this step if you prefer to use a custom image server instead of RIIIF. (If you change your mind later, you can always run `rails g hyrax:riiif` to pull in RIIIF as an image server.)
 
@@ -166,9 +182,19 @@ To make Hyrax use your custom image server, you should tweak the following confi
 * `config.iiif_image_compliance_level_uri` must be set to a URI corresponding to a [IIIF Image API compliance level](http://iiif.io/api/image/2.1/#compliance-levels)
 * `config.iiif_image_size_default` must be set to a valid [IIIF Image API size parameter](http://iiif.io/api/image/2.1/#size)
 
-### Note about manifests
+### Disabling the image server
 
-Note that Hyrax already provides IIIF manifests for works by default, though these may be of limited utility until backed by an image server.
+To switch off the image server, whether you're using RIIIF or a custom server, make the following change to `config/initializers/hyrax.rb` in your application:
+
+```
+config.iiif_image_server = false
+```
+
+You should also comment out all remaining `config.iiif_*` lines to return the application to its default status.
+
+### IIIF manifests
+
+Hyrax provides IIIF manifests for all works by default, even when `config.iiif_image_server` is set to `false`. Note that these may not be very useful until backed by an image server.
 
 # Translations
 
