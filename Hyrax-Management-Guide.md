@@ -145,7 +145,7 @@ gem 'clamav'
 
 By default, as of version 2.1.0, Hyrax generates a working [ruby IIIF ('RIIIF')](https://github.com/curationexperts/riiif) configuration into your application but will not turn on the image server or use the [UniversalViewer](https://universalviewer.io/)-enabled work show page. To enable both, you have two options. You can either use the built-in RIIIF server or you can use your own [IIIF](http://iiif.io) image server. 
 
-### 1. Built-in RIIIF image server
+### Option 1: Built-in RIIIF image server
 
 To use the embedded image server, RIIIF, set `config.iiif_image_server` to `true` in `config/initializers/hyrax.rb` and restart your application. This assumes you have the RIIIF files Hyrax generates into your application. If you skipped this step earlier or missed it, run `rails g hyrax:riiif`. (Not sure if this has been done? Check to see that `config/initializers/riiif.rb` exists. If not, run the generator. If so, you should be good to go.)
 
@@ -165,7 +165,7 @@ If you have explicitly URI-decoded the RIIIF url in `config/initializers/riiif.r
   end
 ```
 
-### 2. Custom image server
+### Option 2: Custom image server
 
 To use your own image server and avoid using RIIIF altogether, you should install Hyrax by passing the `--skip-riiif` flag to opt out of RIIIF. This applies to *new* Hyrax applications. If upgrading an existing Hyrax application, a manual, optional step is required to generate RIIIF into existing applications -- so, do not run this step if you prefer to use a custom image server instead of RIIIF. (If you change your mind later, you can always run `rails g hyrax:riiif` to pull in RIIIF as an image server.)
 
