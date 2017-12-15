@@ -258,13 +258,9 @@ After registering and getting an account username, you'll need to enable the fre
 
 Hyrax provides support for capturing usage information via Google Analytics and for displaying usage stats in the UI.
 
-## Capturing usage
+## Capturing usage and download counts
 
 To enable the Google Analytics javascript snippet, make sure that `config.google_analytics_id` is set in your app within the `config/initializers/hyrax.rb` file. A Google Analytics ID typically looks like _UA-99999999-1_.
-
-## Capturing download counts
-
-The mechanism to capture download events is currently broken. See https://github.com/projecthydra-labs/hyrax/issues/968
 
 ## Displaying usage in the UI
 
