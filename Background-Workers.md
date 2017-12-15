@@ -23,4 +23,5 @@ Or, to put all of Hyrax's jobs on a single queue:
 
 ```ruby
 Hyrax::ApplicationJob.queue_as :omnibus
+Hyrax.config.ingest_queue_name = :omnibus
 ```
