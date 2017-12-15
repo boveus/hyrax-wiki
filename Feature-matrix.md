@@ -44,3 +44,4 @@
 | Background jobs | requires configuration: though jobs will automatically run via the default in-memory adapter, we recommend using an `ActiveJob` adapter like `Sidekiq` in production environments |
 | [IIIF](http://iiif.io/) manifests | automatically enabled |
 | [IIIF](http://iiif.io/) image server | follow [the management guide instructions](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#image-server) |
+| UniversalViewer on work show page | automatically enabled for image-like assets when using IIIF image server |
