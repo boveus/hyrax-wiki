@@ -5,8 +5,8 @@ Hyrax translates user interface strings into multiple languages, and we don't ex
 Here are the steps to get up and running with `i18n-tasks`:
 
 * **Install `i18n-tasks`**: The `i18n-tasks` gem is not a dependency of Hyrax, because the software does not require it (even though we maintainers do), so you can not rely on it being available via bundler. Install it manually via `gem install i18n-tasks`. Once it's done, you should be able to execute the `i18n-tasks` command (which is safe to run).
-* **Configure the gem**: Assuming you're in the Hyrax directory, you shouldn't need to do anything for this step since Hyrax does ship with `i18n-tasks` configuration at `config/i18n-tasks.conf`.
-* **Set up the Google Translate API key**: Follow the [instructions](https://github.com/glebm/i18n-tasks#google-translate) provided by the `i18n-tasks` gem. Do **not** add your API key to `config/i18n-tasks.conf`; store it with the rest of your shell config (e.g., `~/.bashrc`) as a new environment variable called `GOOGLE_TRANSLATE_API_KEY`.
+* **Configure the gem**: Assuming you're in the Hyrax directory, you shouldn't need to do anything for this step since Hyrax does ship with `i18n-tasks` configuration at `config/i18n-tasks.yml`.
+* **Set up the Google Translate API key**: Follow the [instructions](https://github.com/glebm/i18n-tasks#google-translate) provided by the `i18n-tasks` gem. Do **not** add your API key to `config/i18n-tasks.yml`; store it with the rest of your shell config (e.g., `~/.bashrc`) as a new environment variable called `GOOGLE_TRANSLATE_API_KEY`.
 
 # Update Translations
 
