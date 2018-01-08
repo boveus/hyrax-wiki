@@ -97,13 +97,20 @@ Note: You'll need separate terminal windows/tabs for each wrapper.
 
 ### Wrapper Method 1
 
+From `<hyrax directory>/.internal_test_app`, run:
+```
+rake hydra:test_server
+```
+
+### Wrapper Method 2
+
 From `<hyrax directory>/.internal_test_app`, if you have `config/solr_wrapper_test.yml` and `config/fcrepo_wrapper_test.yml` (see [Work with test app in the browser](#work-with-test-app-in-the-browser) for more info), run:
 
 ```bash
 solr_wrapper -v --config config/solr_wrapper_test.yml
 fcrepo_wrapper -v --config config/fcrepo_wrapper_test.yml # separate window/tab
 ```
-### Wrapper Method 2
+### Wrapper Method 3
 
 From `<hyrax directory>/` (not `.internal_test_app`):
 
@@ -318,7 +325,7 @@ The following steps need to be done in order to create a test app for Hyrax deve
 1. [Start servers](#start-servers-individually-for-development) with `rake hydra:server`  (e.g. solr, fedora, rails) - Stop with Ctrl-C
 1. [Start background workers](https://github.com/projecthydra-labs/hyrax#start-background-workers) (message queue) - several options for message queue
 1. Move into the test app directory with `cd .internal_test_app`
-1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) and [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rake hyrax:default_admin_set:create hyrax:workflow:load`
+1. [Create default administrative set](https://github.com/projecthydra-labs/hyrax#create-default-administrative-set) and [Load workflows](https://github.com/projecthydra-labs/hyrax#load-workflows) with `rake hyrax:default_admin_set:create`
 1. OPTIONAL: [Generate a work type](https://github.com/projecthydra-labs/hyrax#generate-a-work-type) with `rails generate hyrax:work Work` (Replace Work with the name of your work type.  Note: There are sample work types created in the test app, so this is not required.)
 
 # Regenerating the README TOC
