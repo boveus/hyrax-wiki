@@ -10,7 +10,7 @@ Here are the steps to get up and running with `i18n-tasks`:
 
 # Update Translations
 
-When you're ready to create and update translations based on the current state of the English strings, run the following  commands:
+When you're ready to create and update translations based on the current state of the English strings, run the following  commands in this order:
 
 1. **Normalize and sort English translations**: `i18n-tasks normalize en`
 2. **Add missing translations**: `i18n-tasks translate-missing --from en es zh fr it de pt-BR`
