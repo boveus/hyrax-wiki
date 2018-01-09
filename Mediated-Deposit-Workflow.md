@@ -1,6 +1,6 @@
 # Why mediated deposit?
 
-In the hydra community, there are a lot of folks who would like to be able to ingest an item and make sure it doesn't go live until the item and its metadata have been thoroughly reviewed. This is where mediated deposit comes in. In Hyrax, a user can now describe groups of steps they want to take to have an item "properly" reviewed. Hyrax uses what is called "workflows" to describe these groups of steps to review an item that was ingested.
+In the Samvera community, there are a lot of folks who would like to be able to deposit an item and make sure it doesn't go live until the item and its metadata have been thoroughly reviewed. This is where deposit workflow comes in. In Hyrax, a user can now describe groups of steps they want to take to have an item "properly" reviewed. Hyrax uses what is called "workflows" to describe these groups of steps to review an item that was ingested.
 
 # What is a workflow?
 
