@@ -254,7 +254,7 @@ But note that if you're actively working on a feature or a bug fix, you will lik
 
 ### I've pushed my branch, which passed locally, to GitHub and the build failed on Travis-CI. What gives? I need to be able to reproduce this locally to get my branch merged.
 
-The three most common situations here are:
+The most common situations here are:
 
 * **Your test application is stale.** Regenerate it.
 * **Travis-CI picked up a newer version of a dependency than you have.** Delete your local `Gemfile.lock`, run `bundle install` again, and regenerate the test application.
