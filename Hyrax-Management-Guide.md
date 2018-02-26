@@ -156,6 +156,8 @@ gem 'clamav'
 
 By default, as of version 2.1.0, Hyrax generates a working [ruby IIIF ('RIIIF')](https://github.com/curationexperts/riiif) configuration into your application but will not turn on the image server or use the [UniversalViewer](https://universalviewer.io/)-enabled work show page. To enable both, you have two options. You can either use the built-in RIIIF server or you can use your own [IIIF](http://iiif.io) image server. 
 
+Note that in order to use the UniversalViewer in Hyrax, you will need to enable the public file server (which is very likely turned off in `RAILS_ENV=production`). This is a requirement of the `pul_uv_rails` dependency that we rely upon for the UniversalViewer: see https://github.com/pulibrary/pul_uv_rails/issues/8.
+
 ### Option 1: Built-in RIIIF image server
 
 To use the embedded image server, RIIIF, set `config.iiif_image_server` to `true` in `config/initializers/hyrax.rb` and restart your application. This assumes you have the RIIIF files Hyrax generates into your application. If you skipped this step earlier or missed it, run `rails g hyrax:riiif`. (Not sure if this has been done? Check to see that `config/initializers/riiif.rb` exists. If not, run the generator. If so, you should be good to go.)
