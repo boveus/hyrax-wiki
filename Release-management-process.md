@@ -6,7 +6,7 @@
 1. Add, commit, and push all your changes directly to the `master` branch of the **[upstream](https://github.com/samvera/hyrax)** repository. (If GitHub prevents you from pushing directly to `master`, submit your changes as a PR.)
 1. Release the gem to rubygems.org via `rake release`. (See below if this doesn't work.)
 1. Create [release notes in GitHub](https://github.com/samvera/hyrax/releases/new). In the new release, include at least a block with upgrade notes and a block showing the changelog -- see script [changelog.sh](https://github.com/samvera/hydra/blob/master/script/changelog.sh) for help generating changelog entries. (See [an example](https://github.com/samvera/hyrax/releases/tag/v2.0.0).)
-1. Update the [Samvera Stack Built-in Feature Checklist](https://wiki.duraspace.org/display/samvera/Built-in+Feature+Checklist) to indicate features that have been added, removed, or moved to a different layer of the stack.
+1. Update the [Hyrax Feature Matrix](https://github.com/samvera/hyrax/wiki/Feature-matrix) to indicate features that have been added, removed, or moved to a different layer of the stack.
 1. Send a release message to [samvera-tech](mailto:samvera-tech@googlegroups.com), [samvera-community](mailto:samvera-community@googlegroups.com), and [samvera-releases](mailto:samvera-releases@googlegroups.com) describing the changes (which you can copy from the GitHub release). (*This assumes you've already joined those three lists.* Do that first!) It may be helpful to base your message on [a prior example](https://groups.google.com/forum/#!topic/samvera-releases/SvQAhtIgpqA), which also contains some new text explicitly thanking contributors, which you can get from the changelog.
 
 ## Problems running the release task
