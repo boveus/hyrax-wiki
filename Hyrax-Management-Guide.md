@@ -100,6 +100,17 @@ In Hyrax, derivatives are served from a directory on the filesystem rather than 
 
 The web server provided by Rails (whether that's WEBrick, Unicorn, or another) is not built to scale out very far, so you should consider alternatives such as Passenger with Apache httpd or nginx.
 
+### Slashes in Default Admin Set
+
+If you encounter problems with the Default Admin Set and run Passenger or Apache, you may need to set the follow options in your configuration:
+
+```
+# Apache
+AllowEncodedSlashes NoDecode
+# Passenger
+PassengerAllowEncodedSlashes on
+```
+
 ## Database
 
 The database provided by default is SQLite, and you may wish to swap in something built more for scale like PostgreSQL or MySQL, both of which have been used in other production Hyrax applications.
