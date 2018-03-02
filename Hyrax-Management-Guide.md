@@ -12,6 +12,7 @@ The Hyrax Management Guide provides tips for how to manage, customize, and enhan
   * [Fixity checking](#fixity-checking)
   * [Virus checking](#virus-checking)
   * [Image server](#image-server)
+  * [Temp directories](#temp-directories)
 * [Translations](#translations)
 * [Workflows](#workflows)
 * [Audiovisual transcoding](#audiovisual-transcoding)
@@ -208,6 +209,17 @@ You should also comment out all remaining `config.iiif_*` lines to return the ap
 ### IIIF manifests
 
 Hyrax provides IIIF manifests for all works by default, even when `config.iiif_image_server` is set to `false`. Note that these may not be very useful until backed by an image server.
+
+## Temp Directories
+
+Cleaning up Temporary Directories and Files
+Due to the asynchronous nature of the ingest pipeline, Hyrax doesn't always clean up its own temp directories and files. It is, therefore, a good idea to do some out-of-band cleanup via a periodic task (such as a cron job). For example, the following shell command will clear out any files in /tmp over 1 megabyte in size that haven't been changed in the past 4 days:
+
+```
+$ find /tmp -ctime +3 -and -size +1M -delete
+```
+
+In a production environment, specifics such as the location of the temp directory, how often to clear it, and the age/size of the files to remove are system-dependent, so a proper cleanup strategy should be implemented in consultation with sysadmins and/or devops.
 
 # Translations
 
