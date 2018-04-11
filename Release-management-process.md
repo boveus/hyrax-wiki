@@ -21,4 +21,4 @@ Then try again.
 
 ## Help
 
-Ask [Mike Giarlo](https://github.com/mjgiarlo) if you need help with, or have questions about, any of the steps in the release management process.
+Ask [Tom Johnson](https://github.com/no-reply) (Hyrax tech lead) if you need help with, or have questions about, any of the steps in the release management process.
