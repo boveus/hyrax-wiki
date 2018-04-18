@@ -4,9 +4,9 @@ Each processing step, or frame, is broken out into a class called an Actor. They
 
 Code that wishes to use the whole stack of Hyrax actors should call `Hyrax::CurationConcern.actor.` That method (by default) returns an instance of `Hyrax::DefaultMiddlewareStack`, which is the full list of operations to perform in order to create, update, or destroy a Work.
 
-This stack is instantiated by an actor factory. The default factory, as stated above, is `Hyrax::DefaultMiddlewareStack`; if you want complete control over the stack, you can swap in your own customized factory by setting `Hyrax::CurationConcern.actor_factory=` in the Hyrax initializer.
+This stack is instantiated by an actor factory. The default factory, as stated above, is `Hyrax::DefaultMiddlewareStack`; if you want complete control over the stack, you can swap in your own customized factory by setting `Hyrax::CurationConcern.actor_factory=` in the Hyrax initializer (`config/initializers/hyrax.rb`).
 
-You can also make targeted changes to Hyrax's actor stack like so:
+You can also make targeted changes to Hyrax's actor stack like so (within a `config/initializers/hyrax.rb`):
 
 ```ruby
 # Adding a new middleware
