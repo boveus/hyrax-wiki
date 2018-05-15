@@ -20,3 +20,4 @@ Welcome to the Hyrax wiki!
 * [[Portland Common Data Model Resources]]
 * [[Domain Terms tables]]
 * [[Production-Installation-Overview]]
+* [[Troubleshooting Migration from 2.0.x to 2.1.0]]
