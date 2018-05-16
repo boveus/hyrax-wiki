@@ -18,3 +18,8 @@ View Home page...
 * SOLUTION:  Verified that the `render /shared/select_work_type_modal` was in stable-2.0 but is not in hyrax 2.1.0.  So this was not our customization.  I removed that line from our copy of `_masthead.html.erb`
 
 ---
+
+### Error on overridden `views/hyrax/my/works/index.html.erb`
+
+* FAILURE: Encountered when running our spec tests: `undefined local variable or method 'create_work_presenter'` ... `Did you mean?  @create_work_presenter`
+* SOLUTION: Change references from `create_work_presenter` in overridden `views/hyrax/my/works/index.html.erb` to `@create_work_presenter` 
