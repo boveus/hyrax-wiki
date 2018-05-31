@@ -12,6 +12,8 @@ PermissionTemplates had a database migration changing column named `admin_set_id
 
 ### Error on overridden Home page
 
+**This issue was encountered on release candidates, but fixed prior to the final Hyrax 2.1.0 release.**
+
 View Home page...
 
 * FAILURE: `undefined local variable or method 'create_work_presenter' in file /app/views/_masthead.html.erb where line #1`
@@ -20,6 +22,8 @@ View Home page...
 ---
 
 ### Error on overridden `views/hyrax/my/works/index.html.erb`
+
+**This issue was encountered on release candidates, but fixed prior to the final Hyrax 2.1.0 release.**
 
 * FAILURE: Encountered when running our spec tests: `undefined local variable or method 'create_work_presenter'` ... `Did you mean?  @create_work_presenter`
 * SOLUTION: Change references from `create_work_presenter` in overridden `views/hyrax/my/works/index.html.erb` to `@create_work_presenter` 
