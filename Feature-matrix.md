@@ -42,6 +42,6 @@
 | Integration with Zotero | requires [configuration](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#zotero-integration) | 1.0.0
 | Integration w/ cloud storage providers | requires [configuration](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#integration-with-dropbox-box-etc) | 1.0.0
 | Background jobs | requires configuration: though jobs will automatically run via the default in-memory adapter, we recommend using an `ActiveJob` adapter like `Sidekiq` in production environments | 1.0.0
-| [IIIF](http://iiif.io/) manifests | automatically enabled | 1.0.0
-| [IIIF](http://iiif.io/) image server | follow [the management guide instructions](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#image-server) | 1.0.0
-| UniversalViewer on work show page | automatically enabled for image-like assets when using IIIF image server | 1.0.0
+| [IIIF](http://iiif.io/) manifests | automatically enabled | 2.0.0
+| [IIIF](http://iiif.io/) image server | follow [the management guide instructions](https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#image-server) | 2.0.0
+| UniversalViewer on work show page | automatically enabled for image-like assets when using IIIF image server | 2.0.0
