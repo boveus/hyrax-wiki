@@ -13,6 +13,7 @@ The Hyrax Management Guide provides tips for how to manage, customize, and enhan
   * [Virus checking](#virus-checking)
   * [Image server](#image-server)
   * [Temp directories](#temp-directories)
+  * [Capistrano concerns](#capistrano-concerns)
 * [Translations](#translations)
 * [Workflows](#workflows)
 * [Audiovisual transcoding](#audiovisual-transcoding)
@@ -155,7 +156,7 @@ gem 'clamav'
 
 ## Image server
 
-By default, as of version 2.1.0, Hyrax generates a working [ruby IIIF ('RIIIF')](https://github.com/curationexperts/riiif) configuration into your application but will not turn on the image server or use the [UniversalViewer](https://universalviewer.io/)-enabled work show page. To enable both, you have two options. You can either use the built-in RIIIF server or you can use your own [IIIF](http://iiif.io) image server. 
+By default, as of version 2.1.0, Hyrax generates a working [ruby IIIF ('RIIIF')](https://github.com/curationexperts/riiif) configuration into your application but will not turn on the image server or use the [UniversalViewer](https://universalviewer.io/)-enabled work show page. To enable both, you have two options. You can either use the built-in RIIIF server or you can use your own [IIIF](http://iiif.io) image server.
 
 Note that in order to use the UniversalViewer in Hyrax, you will need to enable the public file server (which is very likely turned off in `RAILS_ENV=production`). This is a requirement of the `pul_uv_rails` dependency that we rely upon for the UniversalViewer: see https://github.com/pulibrary/pul_uv_rails/issues/8.
 
@@ -221,6 +222,25 @@ $ find /tmp -ctime +3 -and -size +1M -delete
 
 In a production environment, specifics such as the location of the temp directory, how often to clear it, and the age/size of the files to remove are system-dependent, so a proper cleanup strategy should be implemented in consultation with sysadmins and/or devops.
 
+## Capistrano concerns
+
+If you are deploying to a Hyrax production environment using Capistrano, you may need to modify the `config/environments/production.rb` file to account for where temporary files are stored.  The following configuration changes will store the derivatives, cached files, and uploaded files to a directory outside of the release directory used by Capistrano.  This will prevent issues related to thumbnails and other assets disappearing between deployments.
+
+```ruby
+# Location on local file system where derivatives will be stored
+# If you use a multi-server architecture, this MUST be a shared volume
+Hyrax.config.derivatives_path = Rails.root.join('..', '..', 'shared', 'derivatives')
+
+# Temporary paths to hold uploads before they are ingested into FCrepo
+# These must be lambdas that return a Pathname. Can be configured separately
+Hyrax.config.upload_path = -> { Rails.root + '..' + '..' + 'shared' + 'uploads' }
+Hyrax.config.cache_path = -> { Rails.root + '..' + '..' + 'shared' + 'uploads' + 'cache' }
+
+# Location on local file system where uploaded files will be staged
+# prior to being ingested into the repository or having derivatives generated.
+# If you use a multi-server architecture, this MUST be a shared volume.
+Hyrax.config.working_path = Rails.root.join('..', '..', 'shared', 'uploads')
+```
 # Translations
 
 Hyrax ships with a user interface that has been translated into a number of languages (seven as of Nov. 2017). If your application uses Devise for authentication and you are seeing English strings even when Hyrax is showing strings in another language, you may use the `devise-i18n` gem to translate these strings. See [the devise-i18n documentation](https://github.com/tigrish/devise-i18n#installation) for more information on how to do this.
